@@ -154,6 +154,11 @@ Hay estilos de marca para archivo de tienda/categorías, producto (galería, var
 - El tema **no procesa formularios propios**: el envío sigue en el plugin que ya uses. Si la página está hecha con Elementor, su contenido se muestra igual dentro de “Escribinos”; vaciá el contenido si preferís solo los datos de contacto.
 - Verificado en Chromium (1360 y 390 px) con markup de muestra; **no probado con el formulario real**. Blog: todavía no existe, queda para cuando se publique.
 
+## Header y footer de escritorio
+- **Header:** buscador como píldora con etiqueta (desde 1100 px), más aire entre enlaces, submenús con borde sutil y altura que se compacta al bajar (80 → 60 px). Sigue oscureciéndose junto con el hero encendido en la portada.
+- **Footer:** nueva franja superior oscura con textura de capas y la invitación “¿Querés algo a tu medida?” con botones de WhatsApp y email; título/texto editables en Personalizar > Fan Deco > Footer (título vacío la oculta; si no hay WhatsApp ni email tampoco se muestra). Redes como píldoras y enlaces con micro-desplazamiento.
+- Verificado en Chromium (1360, 900 y 390 px) con markup de muestra; **no probado con tus menús reales ni con el submenú desplegable de WordPress**.
+
 ## Qué está verificado y qué no
 **Verificado aquí (sin WordPress real; el entorno no puede descargar WordPress/WooCommerce):**
 - Sintaxis PHP de los 41 archivos (`php -l`, PHP 8.3).

@@ -30,8 +30,28 @@ if ( fandeco_has_woocommerce() ) {
 	$cats  = is_wp_error( $terms ) ? array() : $terms;
 }
 ?>
+<?php
+$cta_title = trim( (string) fandeco_option( 'footer_cta_title', '¿Querés algo a tu medida?' ) );
+$cta_text  = trim( (string) fandeco_option( 'footer_cta_text', 'Contanos tu idea y la diseñamos e imprimimos en 3D.' ) );
+$cta_wa    = $whatsapp ? 'https://wa.me/' . preg_replace( '/\D+/', '', $whatsapp ) . '?text=' . rawurlencode( (string) fandeco_option( 'whatsapp_message', 'Hola, quiero consultar por un producto' ) ) : '';
+$cta_mail  = sanitize_email( $email );
+?>
 <footer class="fd-footer">
-	<div class="fd-container">
+	<?php if ( '' !== $cta_title && ( $cta_wa || $cta_mail ) ) : ?>
+		<div class="fd-footer__cta">
+			<div class="fd-container fd-footer__cta-inner">
+				<div>
+					<p class="fd-footer__cta-title"><?php echo esc_html( $cta_title ); ?></p>
+					<?php if ( '' !== $cta_text ) : ?><p class="fd-footer__cta-text"><?php echo esc_html( $cta_text ); ?></p><?php endif; ?>
+				</div>
+				<div class="fd-footer__cta-actions">
+					<?php if ( $cta_wa ) : ?><a class="fd-btn fd-btn--light" href="<?php echo esc_url( $cta_wa ); ?>" target="_blank" rel="noopener"><?php echo fandeco_icon( 'chat' ); // phpcs:ignore WordPress.Security.EscapeOutput ?> <?php esc_html_e( 'Escribinos por WhatsApp', 'fan-deco-studio' ); ?></a><?php endif; ?>
+					<?php if ( $cta_mail ) : ?><a class="fd-btn fd-btn--ghost-light" href="<?php echo esc_url( 'mailto:' . $cta_mail ); ?>"><?php esc_html_e( 'Enviar un email', 'fan-deco-studio' ); ?></a><?php endif; ?>
+				</div>
+			</div>
+		</div>
+	<?php endif; ?>
+	<div class="fd-container fd-footer__main">
 		<div class="fd-footer__grid">
 			<div class="fd-footer__brand">
 				<?php echo fandeco_logo( 'light' ); // phpcs:ignore WordPress.Security.EscapeOutput ?>

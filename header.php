@@ -57,6 +57,7 @@ $sticky       = (bool) fandeco_option( 'sticky_header', true );
 		<div class="fd-header__actions">
 			<button type="button" class="fd-icon-btn" data-fd-search-toggle aria-expanded="false" aria-controls="fd-search-panel" aria-label="<?php esc_attr_e( 'Buscar', 'fan-deco-studio' ); ?>">
 				<?php echo fandeco_icon( 'search' ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
+				<span class="fd-search-label" aria-hidden="true"><?php esc_html_e( 'Buscar', 'fan-deco-studio' ); ?></span>
 			</button>
 			<?php if ( fandeco_has_woocommerce() ) : ?>
 				<a class="fd-icon-btn fd-account-link" href="<?php echo esc_url( wc_get_page_permalink( 'myaccount' ) ); ?>" aria-label="<?php esc_attr_e( 'Mi cuenta', 'fan-deco-studio' ); ?>">

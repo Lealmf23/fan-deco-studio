@@ -74,6 +74,8 @@ add_action(
 
 		// Footer.
 		$wp_customize->add_section( 'fandeco_footer', array( 'title' => __( 'Footer', 'fan-deco-studio' ), 'panel' => 'fandeco' ) );
+		$text( 'fandeco_footer', 'footer_cta_title', __( 'Franja superior: título (vacío = ocultar la franja)', 'fan-deco-studio' ), 'text', 'sanitize_text_field', '¿Querés algo a tu medida?' );
+		$text( 'fandeco_footer', 'footer_cta_text', __( 'Franja superior: texto', 'fan-deco-studio' ), 'textarea', 'sanitize_textarea_field', 'Contanos tu idea y la diseñamos e imprimimos en 3D.' );
 		$text( 'fandeco_footer', 'footer_about', __( 'Texto de presentación', 'fan-deco-studio' ), 'textarea', 'sanitize_textarea_field', 'Diseñamos y fabricamos objetos decorativos con impresión 3D.' );
 		$text( 'fandeco_footer', 'payment_methods', __( 'Métodos de pago (uno por línea)', 'fan-deco-studio' ), 'textarea', 'sanitize_textarea_field' );
 		$text( 'fandeco_footer', 'shipping_info', __( 'Información de envíos', 'fan-deco-studio' ), 'textarea', 'sanitize_textarea_field' );

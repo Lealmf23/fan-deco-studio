@@ -109,10 +109,12 @@ foreach ( array( 'header.php', 'footer.php' ) as $tpl ) {
 		check( str_contains( $out, 'fd-mobile-search' ) && str_contains( $out, 'name="post_type" value="product"' ), 'header: buscador móvil de productos' );
 		check( str_contains( $out, 'fd-drawer-search' ) && str_contains( $out, 'fd-menu fd-menu--mobile' ) && str_contains( $out, 'fd-drawer__extras' ), 'header: menú a pantalla completa con buscador, menú móvil y accesos' );
 		check( str_contains( $out, 'fd-search-hint' ) && str_contains( $out, 'fd-chips' ), 'header: panel de búsqueda con atajos a categorías' );
+		check( str_contains( $out, 'fd-search-label' ), 'header: buscador con etiqueta visible en escritorio' );
 		$header_out = $out;
 	} else {
 		check( str_contains( $out, 'class="fd-tabbar"' ) && substr_count( $out, 'class="fd-tab' ) >= 4, 'footer: barra inferior móvil con 4 accesos' );
 		check( str_contains( $out, 'fd-tab-cart' ), 'footer: carrito con fragmento propio (no pisa el del header)' );
+		check( str_contains( $out, 'fd-footer__cta' ) && str_contains( $out, 'wa.me/' ) , 'footer: franja de invitación con WhatsApp' );
 		$footer_out = $out;
 	}
 }
