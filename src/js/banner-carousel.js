@@ -37,29 +37,53 @@ export function initBannerCarousels() {
 			return b;
 		} );
 
+		const split = () => root.classList.contains( 'fd-bancar--split' ) && window.matchMedia( '(min-width: 1024px)' ).matches;
 		const layout = () => {
+			const side = split(); // texto a la izquierda: las fotos se abren solo hacia la derecha
 			slides.forEach( ( li, i ) => {
-				let d = i - index;
-				if ( d > n / 2 ) {
-					d -= n;
-				} else if ( d < -n / 2 ) {
-					d += n;
+				let x;
+				let s;
+				let r;
+				let z;
+				let o;
+				let before = false;
+				if ( side ) {
+					const k = ( ( i - index ) % n + n ) % n; // 0 = frente; 1, 2… = detrás hacia la derecha
+					if ( k === 0 ) {
+						x = 0; s = 1; r = 0; z = 20; o = 1;
+					} else if ( n >= 4 && k === n - 1 ) { // la que acaba de salir se va hacia la izquierda y se desvanece
+						x = -0.22; s = 0.92; r = -4; z = 10; o = 0; before = true;
+					} else if ( k <= 2 ) {
+						x = k * 0.5; s = 1 - k * 0.09; r = k * 3.2; z = 20 - k; o = k === 1 ? 0.96 : 0.7;
+					} else {
+						x = 1.3; s = 0.8; r = 8; z = 5; o = 0;
+					}
+				} else {
+					let d = i - index;
+					if ( d > n / 2 ) {
+						d -= n;
+					} else if ( d < -n / 2 ) {
+						d += n;
+					}
+					const a = Math.abs( d );
+					x = d * 0.58; s = Math.max( 0.6, 1 - a * 0.1 ); r = d * 3.2; z = 20 - a;
+					o = a > 2 ? 0 : a === 0 ? 1 : a === 1 ? 0.96 : 0.7;
+					before = d < 0;
 				}
-				const a = Math.abs( d );
-				const visible = a <= 2;
-				li.style.setProperty( '--x', String( d * 0.58 ) );
-				li.style.setProperty( '--s', String( Math.max( 0.6, 1 - a * 0.1 ) ) );
-				li.style.setProperty( '--r', `${ d * 3.2 }deg` );
-				li.style.setProperty( '--z', String( 20 - a ) );
-				li.style.setProperty( '--o', visible ? String( a === 0 ? 1 : a === 1 ? 0.96 : 0.7 ) : '0' );
-				li.classList.toggle( 'is-active', d === 0 );
-				li.classList.toggle( 'is-before', d < 0 );
+				li.style.setProperty( '--x', String( x ) );
+				li.style.setProperty( '--s', String( s ) );
+				li.style.setProperty( '--r', `${ r }deg` );
+				li.style.setProperty( '--z', String( z ) );
+				li.style.setProperty( '--o', String( o ) );
+				const active = ( ( i - index ) % n + n ) % n === 0;
+				li.classList.toggle( 'is-active', active );
+				li.classList.toggle( 'is-before', before );
 				// Solo el enlace queda fuera del teclado; la tarjeta sigue respondiendo al toque para traerla al frente.
 				const link = li.querySelector( '.fd-bancar__link' );
 				if ( link ) {
-					link.toggleAttribute( 'inert', d !== 0 );
+					link.toggleAttribute( 'inert', ! active );
 				}
-				li.setAttribute( 'aria-hidden', d === 0 ? 'false' : 'true' );
+				li.setAttribute( 'aria-hidden', active ? 'false' : 'true' );
 			} );
 			dots.forEach( ( b, i ) => {
 				if ( i === index ) {
@@ -153,6 +177,7 @@ export function initBannerCarousels() {
 		root.addEventListener( 'focusout', () => { focus = false; play(); } );
 		document.addEventListener( 'visibilitychange', play );
 		reduce.addEventListener( 'change', play );
+		window.matchMedia( '(min-width: 1024px)' ).addEventListener( 'change', layout );
 
 		controls.hidden = false;
 		root.classList.add( 'is-ready' );

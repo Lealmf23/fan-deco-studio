@@ -18,13 +18,13 @@
     "isDynamicEntry": true
   },
   "src/js/banner-carousel.js": {
-    "file": "assets/banner-carousel-DWaerkEW.js",
+    "file": "assets/banner-carousel-q5yc_fmd.js",
     "name": "banner-carousel",
     "src": "src/js/banner-carousel.js",
     "isDynamicEntry": true
   },
   "src/js/main.js": {
-    "file": "assets/main-XnTpc3Nz.js",
+    "file": "assets/main-B0xgEaLg.js",
     "name": "main",
     "src": "src/js/main.js",
     "isEntry": true,
@@ -37,7 +37,7 @@
       "src/js/animations.js"
     ],
     "css": [
-      "assets/main-B7F8JSTi.css"
+      "assets/main-C8j6AcsQ.css"
     ],
     "assets": [
       "assets/dm-sans-latin-wght-normal-Xz1IZZA0.woff2",

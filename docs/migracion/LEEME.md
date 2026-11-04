@@ -9,7 +9,7 @@ Estos archivos usan **tus textos actuales** y los bloques del tema. Se pegan en 
 4. Con el tema nuevo **activo** (o con el modo de solución de problemas) podés editar cada bloque con el panel derecho; el Editor de código es solo para pegar.
 
 ## Archivos
-- `portada.html`: Home. Título principal, **pila de banners** (tus 4 imágenes: lámpara naranja 1152, calendario 1153, veladores 1150, mates de fútbol 1151), "Elegí tu próxima favorita", categorías, banner de mascotas y "Tu idea entra, sale realidad".
+- `portada.html`: Home. **Pila de banners con el título principal a la izquierda** (en escritorio) (tus 4 imágenes: lámpara naranja 1152, calendario 1153, veladores 1150, mates de fútbol 1151), "Elegí tu próxima favorita", categorías, banner de mascotas y "Tu idea entra, sale realidad".
 - `tu-mascota-en-3d.html`: página de mascotas con tus textos.
 
 ## Lo que hay que completar a mano

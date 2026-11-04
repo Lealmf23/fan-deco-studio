@@ -23,9 +23,7 @@ if ( fandeco_has_woocommerce() ) {
 	}
 }
 ?>
-<!-- wp:fandeco/section-heading {"eyebrow":"DISEÑO + IMPRESIÓN 3D + PERSONALIZACIÓN","title":"**Hacemos** *tus ideas* **realidad.**","description":"Objetos personalizados, deco y regalos únicos diseñados y fabricados especialmente para vos.","align":"center","level":1} /-->
-
-<!-- wp:fandeco/banner-carousel /-->
+<!-- wp:fandeco/banner-carousel {"eyebrow":"DISEÑO + IMPRESIÓN 3D + PERSONALIZACIÓN","title":"**Hacemos** *tus ideas* **realidad.**","description":"Objetos personalizados, deco y regalos únicos diseñados y fabricados especialmente para vos.","level":1} /-->
 
 <!-- wp:fandeco/marquee /-->
 

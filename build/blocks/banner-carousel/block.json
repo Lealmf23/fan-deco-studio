@@ -5,9 +5,37 @@
   "title": "Fan Deco: Pila de banners",
   "category": "fandeco",
   "icon": "images-alt2",
-  "description": "Pila de capas: la foto activa al frente y las demás apiladas detrás como capas de una impresión 3D. Flechas, puntos, pausa, deslizamiento táctil y teclado.",
+  "description": "Pila de capas con texto opcional: en escritorio el texto va a la izquierda y las fotos a la derecha; en móvil, el texto arriba y las fotos abajo. Flechas, puntos, pausa, deslizamiento táctil y teclado.",
   "textdomain": "fan-deco-studio",
   "attributes": {
+    "eyebrow": {
+      "type": "string",
+      "default": ""
+    },
+    "title": {
+      "type": "string",
+      "default": ""
+    },
+    "description": {
+      "type": "string",
+      "default": ""
+    },
+    "buttonText": {
+      "type": "string",
+      "default": ""
+    },
+    "buttonUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "level": {
+      "type": "integer",
+      "enum": [
+        1,
+        2
+      ],
+      "default": 1
+    },
     "slides": {
       "type": "array",
       "default": []

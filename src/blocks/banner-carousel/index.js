@@ -1,10 +1,16 @@
 import { __ } from '@wordpress/i18n';
-import { registerFandecoBlock, Repeater, ImageField, PanelBody, SelectControl, TextControl, ToggleControl } from '../shared/index.js';
+import { registerFandecoBlock, Repeater, ImageField, ButtonFields, TextFields, PanelBody, SelectControl, TextControl, ToggleControl } from '../shared/index.js';
 import metadata from './block.json';
 
 registerFandecoBlock( metadata, ( { attributes, setAttributes } ) => (
 	<>
-		<PanelBody title={ __( 'Banners', 'fan-deco-studio' ) }>
+		<PanelBody title={ __( 'Texto (opcional)', 'fan-deco-studio' ) }>
+			<p className="description">{ __( 'Con texto, en escritorio queda a la izquierda y las fotos a la derecha; en móvil, el texto arriba. Sin texto, solo las fotos centradas.', 'fan-deco-studio' ) }</p>
+			<TextFields attributes={ attributes } setAttributes={ setAttributes } />
+			<ButtonFields attributes={ attributes } setAttributes={ setAttributes } />
+			<SelectControl label={ __( 'Nivel del título', 'fan-deco-studio' ) } value={ String( attributes.level ) } options={ [ { value: '1', label: __( 'H1 (título principal de la página; usalo una sola vez)', 'fan-deco-studio' ) }, { value: '2', label: 'H2' } ] } onChange={ ( v ) => setAttributes( { level: Number( v ) } ) } />
+		</PanelBody>
+		<PanelBody title={ __( 'Banners', 'fan-deco-studio' ) } initialOpen={ false }>
 			<p className="description">{ __( 'Cada banner es una imagen. Si el texto ya está dentro de la imagen, escribilo también en "Descripción" para lectores de pantalla y buscadores.', 'fan-deco-studio' ) }</p>
 			<Repeater
 				items={ attributes.slides }

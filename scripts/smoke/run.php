@@ -41,6 +41,10 @@ check( 3 === substr_count( $bc, 'fd-bancar__slide' ) - substr_count( $bc, 'fd-ba
 check( str_contains( $bc, 'aria-roledescription="carrusel"' ) && str_contains( $bc, 'aria-label="1 de 3"' ) && str_contains( $bc, 'data-fd-bancar-prev' ) && str_contains( $bc, 'data-fd-bancar-pause' ), 'banner-carousel: pila accesible, con flechas y pausa' );
 check( ! str_contains( $bc, '<script>' ) && ! str_contains( $bc, 'javascript:' ), 'banner-carousel: alt saneado y URL javascript: descartada' );
 check( str_contains( $bc, '<a class="fd-bancar__link" href="/categoria/lamparas">' ) && 1 === substr_count( $bc, 'fd-bancar__link"' ), 'banner-carousel: enlace solo donde se definió (el de javascript: se descarta)' );
+$bct = fd_render_block( 'banner-carousel', array( 'eyebrow' => 'Diseño', 'title' => '**Hacemos** *tus ideas*', 'description' => 'Texto <b>x</b>', 'buttonText' => 'Ver', 'buttonUrl' => '/shop/', 'level' => 1, 'slides' => array( array( 'imageId' => 1, 'alt' => 'Uno' ), array( 'imageId' => 2, 'alt' => 'Dos' ) ) ) );
+check( str_contains( $bct, 'fd-bancar--split' ) && str_contains( $bct, '<h1 class="fd-bancar__title"' ) && str_contains( $bct, '<em>tus ideas</em>' ) && str_contains( $bct, 'href="/shop/"' ) && ! str_contains( $bct, '<b>' ), 'banner-carousel: texto a la izquierda (modo dividido), H1, cursiva y botón; sin HTML ajeno' );
+check( ! str_contains( $bc, 'fd-bancar--split' ) && ! str_contains( $bc, 'fd-bancar__text' ), 'banner-carousel: sin texto no hay columna de texto' );
+check( str_contains( fd_render_block( 'banner-carousel', array( 'title' => 'x', 'level' => 9, 'slides' => array( array( 'imageId' => 1 ) ) ) ), '<h1 ' ), 'banner-carousel: nivel de título inválido cae a H1' );
 $bc1 = fd_render_block( 'banner-carousel', array( 'slides' => array( array( 'imageId' => 1, 'alt' => 'Uno' ) ), 'autoplay' => true ) );
 check( ! str_contains( $bc1, 'data-fd-bancar-prev' ) && str_contains( $bc1, 'data-autoplay="0"' ), 'banner-carousel: con un solo banner no hay controles ni avance' );
 check( ! str_contains( fd_render_block( 'banner-carousel', array( 'slides' => array() ) ), '<section' ), 'banner-carousel: sin banners no imprime el carrusel (solo un aviso para quien edita)' );
@@ -161,8 +165,7 @@ foreach ( array( 'header.php', 'footer.php' ) as $tpl ) {
 }
 
 if ( ! empty( $opts['html'] ) ) {
-	$home  = fd_render_block( 'section-heading', array( 'eyebrow' => 'DISEÑO + IMPRESIÓN 3D + PERSONALIZACIÓN', 'title' => '**Hacemos** *tus ideas* **realidad.**', 'description' => 'Objetos personalizados, deco y regalos únicos diseñados y fabricados especialmente para vos.', 'level' => 1 ) );
-	$home .= fd_render_block( 'banner-carousel', array( 'slides' => array( array( 'imageId' => 1, 'alt' => 'Lámpara naranja' ), array( 'imageId' => 2, 'alt' => 'Calendario' ), array( 'imageId' => 3, 'alt' => 'Veladores' ), array( 'imageId' => 4, 'alt' => 'Mates de fútbol' ) ) ) );
+	$home  = fd_render_block( 'banner-carousel', array( 'eyebrow' => 'DISEÑO + IMPRESIÓN 3D + PERSONALIZACIÓN', 'title' => '**Hacemos** *tus ideas* **realidad.**', 'description' => 'Objetos personalizados, deco y regalos únicos diseñados y fabricados especialmente para vos.', 'buttonText' => 'Ver la tienda', 'buttonUrl' => '/shop/', 'slides' => array( array( 'imageId' => 1, 'alt' => 'Lámpara naranja' ), array( 'imageId' => 2, 'alt' => 'Calendario' ), array( 'imageId' => 3, 'alt' => 'Veladores' ), array( 'imageId' => 4, 'alt' => 'Mates de fútbol' ) ) ) );
 	$home .= fd_render_block( 'marquee', array() );
 	$home .= fd_render_block( 'benefits', array( 'variant' => 'strip' ) );
 	$home .= fd_render_block( 'section-heading', array( 'eyebrow' => 'PARA CADA ESTILO', 'title' => 'Elegí tu próxima *favorita.*', 'description' => 'Pequeños objetos que hacen grande la diferencia.', 'align' => 'center' ) );

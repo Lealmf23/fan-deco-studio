@@ -3,13 +3,13 @@
    Se carga después de las secciones y antes de mobile.css.
    Marca de edición en los bloques: **negrita** y *cursiva*.
    ===================================================================== */
-.fd-hero__title, .fd-section-heading__title, .fd-banner__title, .fd-process__title {
+.fd-hero__title, .fd-section-heading__title, .fd-banner__title, .fd-process__title, .fd-bancar__title {
 	display: flex; flex-direction: column; align-items: flex-start;
 	font-family: var(--font-sans); font-weight: 400; line-height: 0.92; letter-spacing: -0.05em;
 }
 .fd-section-heading--center .fd-section-heading__title { align-items: center; }
-.fd-hero__title strong, .fd-section-heading__title strong, .fd-banner__title strong, .fd-process__title strong { font-weight: 700; }
-.fd-hero__title em, .fd-section-heading__title em, .fd-banner__title em, .fd-process__title em {
+.fd-hero__title strong, .fd-section-heading__title strong, .fd-banner__title strong, .fd-process__title strong, .fd-bancar__title strong { font-weight: 700; }
+.fd-hero__title em, .fd-section-heading__title em, .fd-banner__title em, .fd-process__title em, .fd-bancar__title em {
 	margin-block: 0.04em; font-family: var(--font-serif); font-style: italic; font-weight: 500;
 	font-size: 1.08em; line-height: 0.88; letter-spacing: -0.04em; color: var(--color-fd-olive);
 }
@@ -25,3 +25,12 @@
 .fd-section-heading--center .fd-eyebrow { justify-content: center; }
 .fd-section-heading--center .fd-eyebrow::before { display: none; }
 .fd-section-heading__desc { color: var(--color-fd-olive); }
+/* Texto del carrusel: centrado en móvil, a la izquierda en escritorio. */
+.fd-bancar__title { align-items: center; }
+.fd-bancar__text .fd-eyebrow { justify-content: center; }
+.fd-bancar__text .fd-eyebrow::before { display: none; }
+@media (min-width: 1024px) {
+	.fd-bancar--split .fd-bancar__title { align-items: flex-start; }
+	.fd-bancar--split .fd-bancar__text .fd-eyebrow { justify-content: flex-start; }
+	.fd-bancar--split .fd-bancar__text .fd-eyebrow::before { display: block; }
+}

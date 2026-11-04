@@ -29,12 +29,26 @@ if ( ! $slides ) {
 	}
 	return;
 }
+$eyebrow  = sanitize_text_field( (string) ( $attributes['eyebrow'] ?? '' ) );
+$title    = sanitize_text_field( (string) ( $attributes['title'] ?? '' ) );
+$desc     = sanitize_textarea_field( (string) ( $attributes['description'] ?? '' ) );
+$btn      = fandeco_button( (string) ( $attributes['buttonText'] ?? '' ), (string) ( $attributes['buttonUrl'] ?? '' ), 'primary', 'fd-btn--lg' );
+$level    = 2 === (int) ( $attributes['level'] ?? 1 ) ? 2 : 1;
+$has_text = '' !== $title || '' !== $desc || '' !== $eyebrow;
 $total    = count( $slides );
 $autoplay = ! empty( $attributes['autoplay'] ) && $total > 1;
 $interval = max( 3, min( 8, (int) ( $attributes['interval'] ?? 5 ) ) );
 ?>
-<section <?php echo fandeco_block_attrs( 'bancar', $attributes ); // phpcs:ignore WordPress.Security.EscapeOutput ?> data-fd-bancar data-autoplay="<?php echo $autoplay ? '1' : '0'; ?>" data-interval="<?php echo (int) $interval; ?>" role="region" aria-roledescription="<?php esc_attr_e( 'carrusel', 'fan-deco-studio' ); ?>" aria-label="<?php esc_attr_e( 'Banners destacados', 'fan-deco-studio' ); ?>">
-	<div class="fd-container">
+<section <?php echo fandeco_block_attrs( 'bancar', $attributes, $has_text ? 'fd-bancar--split' : '' ); // phpcs:ignore WordPress.Security.EscapeOutput ?> data-fd-bancar data-autoplay="<?php echo $autoplay ? '1' : '0'; ?>" data-interval="<?php echo (int) $interval; ?>" role="region" aria-roledescription="<?php esc_attr_e( 'carrusel', 'fan-deco-studio' ); ?>" aria-label="<?php esc_attr_e( 'Banners destacados', 'fan-deco-studio' ); ?>">
+	<div class="fd-container fd-bancar__layout">
+		<?php if ( $has_text ) : ?>
+			<div class="fd-bancar__text">
+				<?php if ( $eyebrow ) : ?><p class="fd-eyebrow" data-fd-reveal><?php echo esc_html( $eyebrow ); ?></p><?php endif; ?>
+				<?php if ( $title ) : ?><h<?php echo (int) $level; ?> class="fd-bancar__title" data-fd-reveal><?php echo fandeco_title_html( $title ); // phpcs:ignore WordPress.Security.EscapeOutput -- escapado en la función. ?></h<?php echo (int) $level; ?>><?php endif; ?>
+				<?php if ( $desc ) : ?><p class="fd-bancar__desc" data-fd-reveal><?php echo esc_html( $desc ); ?></p><?php endif; ?>
+				<?php if ( $btn ) : ?><div class="fd-bancar__cta" data-fd-reveal><?php echo $btn; // phpcs:ignore WordPress.Security.EscapeOutput ?></div><?php endif; ?>
+			</div>
+		<?php endif; ?>
 		<div class="fd-bancar__frame" data-fd-reveal>
 			<ul class="fd-bancar__track" data-fd-bancar-track role="list">
 				<?php foreach ( $slides as $i => $slide ) : ?>
