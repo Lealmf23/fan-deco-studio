@@ -1,0 +1,26 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "fandeco/editorial-banner",
+	"title": "Fan Deco: Banner editorial",
+	"category": "fandeco",
+	"icon": "align-pull-left",
+	"description": "Sección editorial con imagen, texto y botón. Incluye un punto de montaje opcional para el futuro configurador 3D.",
+	"textdomain": "fan-deco-studio",
+	"attributes": {
+		"eyebrow": { "type": "string", "default": "" },
+		"title": { "type": "string", "default": "Título del banner" },
+		"description": { "type": "string", "default": "" },
+		"imageId": { "type": "integer", "default": 0 },
+		"imagePosition": { "type": "string", "enum": [ "left", "right" ], "default": "right" },
+		"variant": { "type": "string", "enum": [ "light", "dark", "wine" ], "default": "light" },
+		"badge": { "type": "string", "default": "" },
+		"buttonText": { "type": "string", "default": "" },
+		"buttonUrl": { "type": "string", "default": "" },
+		"mount": { "type": "string", "enum": [ "", "configurator" ], "default": "" },
+		"animate": { "type": "boolean", "default": true }
+	},
+	"supports": { "html": false, "align": [ "full" ], "spacing": { "margin": [ "top", "bottom" ] } },
+	"editorScript": "file:./index.js",
+	"render": "file:./render.php"
+}

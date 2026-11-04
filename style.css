@@ -1,0 +1,16 @@
+/*
+Theme Name: Fan Deco Studio
+Theme URI: https://fandeco.com.ar
+Author: Fan Deco
+Description: Tema independiente (sin tema padre, sin Elementor) para la tienda Fan Deco. Diseño editorial, bloques Gutenberg propios y WooCommerce nativo.
+Version: 0.1.0
+Requires at least: 6.5
+Tested up to: 6.7
+Requires PHP: 8.0
+License: GNU General Public License v2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: fan-deco-studio
+Tags: e-commerce, custom-colors, custom-logo, custom-menu, featured-images, block-patterns, translation-ready, accessibility-ready
+WC requires at least: 8.0
+*/
+/* Los estilos reales se compilan con Vite (src/css) hacia dist/. Este archivo solo declara el tema. */

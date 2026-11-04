@@ -1,0 +1,26 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "fandeco/hero",
+	"title": "Fan Deco: Hero",
+	"category": "fandeco",
+	"icon": "cover-image",
+	"description": "Portada editorial con imagen grande, título y botón.",
+	"keywords": [ "portada", "hero", "banner" ],
+	"textdomain": "fan-deco-studio",
+	"attributes": {
+		"eyebrow": { "type": "string", "default": "Impresión 3D" },
+		"title": { "type": "string", "default": "Diseñamos lo que imaginás" },
+		"description": { "type": "string", "default": "Lámparas, decoración y regalos únicos, impresos en 3D. Colores, formas y estilos que se adaptan a vos." },
+		"desktopImageId": { "type": "integer", "default": 0 },
+		"mobileImageId": { "type": "integer", "default": 0 },
+		"buttonText": { "type": "string", "default": "Descubrí Fan Deco" },
+		"buttonUrl": { "type": "string", "default": "" },
+		"align": { "type": "string", "enum": [ "left", "center" ], "default": "left" },
+		"variant": { "type": "string", "enum": [ "split", "split-reverse", "overlay" ], "default": "split" },
+		"animate": { "type": "boolean", "default": true }
+	},
+	"supports": { "html": false, "align": [ "full" ], "spacing": { "margin": [ "top", "bottom" ] } },
+	"editorScript": "file:./index.js",
+	"render": "file:./render.php"
+}

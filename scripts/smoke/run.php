@@ -1,0 +1,93 @@
+<?php
+/**
+ * Uso: php scripts/smoke/run.php [--html=ruta.html --css=... --js=...]
+ * Renderiza todos los bloques y plantillas con stubs y verifica invariantes básicos.
+ */
+require __DIR__ . '/bootstrap.php';
+
+$opts = getopt( '', array( 'html::', 'css::', 'js::', 'images::' ) );
+$GLOBALS['fd_css'] = $opts['css'] ?? '';
+$GLOBALS['fd_js']  = $opts['js'] ?? '';
+$GLOBALS['fd_img'] = array();
+if ( ! empty( $opts['images'] ) ) {
+	foreach ( glob( $opts['images'] . '/*' ) as $i => $f ) { $GLOBALS['fd_img'][ $i + 1 ] = $f; }
+}
+
+$fail = 0;
+function check( bool $cond, string $msg ): void {
+	global $fail;
+	echo ( $cond ? "  ok   " : "  FAIL " ) . $msg . "\n";
+	if ( ! $cond ) { $fail++; }
+}
+
+echo "Bloques\n";
+$hero = fd_render_block( 'hero' );
+check( str_contains( $hero, '<h1' ) && str_contains( $hero, 'Diseñamos lo que imaginás' ), 'hero: h1 con título por defecto' );
+check( str_contains( $hero, 'href="/shop/"' ), 'hero: botón cae a la URL de la tienda si no se define' );
+check( str_contains( $hero, 'fd-media-placeholder' ), 'hero: placeholder sin imagen (no inventa fotos)' );
+$xss = fd_render_block( 'hero', array( 'title' => '<script>alert(1)</script>Hola', 'buttonUrl' => 'javascript:alert(1)', 'variant' => 'evil"><x', 'desktopImageId' => 0 ) );
+check( ! str_contains( $xss, '<script>' ), 'hero: título saneado/escapado' );
+check( ! str_contains( $xss, 'javascript:' ), 'hero: URL javascript: descartada' );
+check( ! str_contains( $xss, 'evil' ), 'hero: variante fuera de la lista cae al valor por defecto' );
+
+$cats = fd_render_block( 'category-grid', array( 'showDescription' => true, 'showCount' => true ) );
+check( substr_count( $cats, 'fd-cat-grid__item' ) === 4, 'category-grid: 4 categorías' );
+check( str_contains( $cats, 'Mascotas' ) && str_contains( $cats, 'href="/categoria/mascotas"' ), 'category-grid: enlaces a categorías' );
+
+$prods = fd_render_block( 'featured-products' );
+check( substr_count( $prods, 'fd-product-card"' ) === 4 || substr_count( $prods, 'class="fd-product-card"' ) === 4, 'featured-products: 4 tarjetas' );
+check( str_contains( $prods, 'data-fd-carousel' ), 'featured-products: carrusel por defecto' );
+check( str_contains( $prods, 'ajax_add_to_cart' ), 'featured-products: AJAX add to cart en simples' );
+check( str_contains( $prods, 'Elegir opciones' ), 'featured-products: variable enlaza a elegir opciones' );
+check( str_contains( $prods, '>+2<' ), 'featured-products: chips de variación con "+n"' );
+check( str_contains( $prods, 'Sin stock' ) && str_contains( $prods, 'Oferta' ), 'featured-products: etiquetas reales (oferta/sin stock)' );
+$manual = fd_render_block( 'featured-products', array( 'source' => 'manual', 'productIds' => array( 2, 1 ), 'layout' => 'grid' ) );
+check( strpos( $manual, 'prueba B' ) < strpos( $manual, 'prueba A' ), 'featured-products: respeta el orden manual' );
+check( ! str_contains( $manual, 'data-fd-carousel' ), 'featured-products: layout grilla' );
+
+$banner = fd_render_block( 'editorial-banner', array( 'title' => 'Tu mascota', 'mount' => 'configurator', 'badge' => 'Próximamente' ) );
+check( str_contains( $banner, 'data-fd-mount="configurator"' ) && str_contains( $banner, 'Próximamente' ), 'editorial-banner: punto de montaje + etiqueta honesta' );
+$benefits = fd_render_block( 'benefits' );
+check( str_contains( $benefits, '10% OFF' ) && substr_count( $benefits, 'fd-benefit"' ) === 3, 'benefits: ítems por defecto' );
+$steps = fd_render_block( 'process-steps' );
+check( substr_count( $steps, 'class="fd-step"' ) === 4 && str_contains( $steps, '01' ), 'process-steps: 4 etapas numeradas' );
+$bad = fd_render_block( 'benefits', array( 'items' => array( array( 'icon' => 'no-existe', 'title' => 'X', 'text' => '' ), 'string-suelto' ) ) );
+check( substr_count( $bad, 'fd-benefit"' ) === 1, 'benefits: ítems inválidos ignorados, icono desconocido tolerado' );
+$head = fd_render_block( 'section-heading', array( 'title' => 'Hola', 'level' => 3, 'linkText' => 'Ver', 'linkUrl' => '/x' ) );
+check( str_contains( $head, '<h3' ), 'section-heading: nivel configurable' );
+
+echo "Plantillas\n";
+foreach ( array( 'header.php', 'footer.php' ) as $tpl ) {
+	ob_start();
+	include FANDECO_DIR . '/' . $tpl;
+	$out = ob_get_clean();
+	check( strlen( $out ) > 500, "$tpl renderiza sin errores" );
+	if ( 'header.php' === $tpl ) {
+		check( str_contains( $out, 'fd-cart-count' ) && str_contains( $out, 'aria-controls="fd-drawer"' ), 'header: carrito con contador y botón de menú accesible' );
+		check( str_contains( $out, 'fd-logo__fan' ), 'header: logo tipográfico de reserva (fan / DECO)' );
+		$header_out = $out;
+	} else {
+		$footer_out = $out;
+	}
+}
+
+if ( ! empty( $opts['html'] ) ) {
+	$home = '';
+	foreach ( array( 'hero', 'benefits' ) as $b ) { $home .= fd_render_block( $b, 'hero' === $b ? array( 'desktopImageId' => 1, 'mobileImageId' => 2 ) : array() ); }
+	$home .= fd_render_block( 'section-heading', array( 'eyebrow' => 'Explorá', 'title' => 'Comprá por categoría' ) );
+	$home .= fd_render_block( 'category-grid', array( 'showDescription' => false ) );
+	$home .= fd_render_block( 'section-heading', array( 'eyebrow' => 'Selección', 'title' => 'Productos destacados', 'linkText' => 'Ver toda la tienda', 'linkUrl' => '/shop/' ) );
+	$home .= fd_render_block( 'featured-products' );
+	$home .= fd_render_block( 'editorial-banner', array( 'eyebrow' => 'Personalizados', 'title' => 'Tu mascota, para siempre', 'description' => 'Convertimos a tu compañero en una pieza única, impresa en 3D y llena de detalles.', 'buttonText' => 'Ver mascotas', 'buttonUrl' => '/mascotas', 'variant' => 'wine', 'imagePosition' => 'left', 'imageId' => 3 ) );
+	$home .= fd_render_block( 'editorial-banner', array( 'eyebrow' => 'Personalizador 3D', 'badge' => 'Próximamente', 'title' => 'Diseñá tu pieza en 3D', 'description' => 'Estamos preparando un configurador para ver tu producto en 360°, cambiar colores y acabados.', 'variant' => 'dark', 'mount' => 'configurator' ) );
+	$home .= fd_render_block( 'section-heading', array( 'eyebrow' => 'Cómo trabajamos', 'title' => 'Del diseño a tu casa', 'align' => 'center' ) );
+	$home .= fd_render_block( 'process-steps' );
+	$GLOBALS['fd_mods'] = array( 'fandeco_announcement' => '10% OFF con transferencia bancaria', 'fandeco_email' => 'hola@example.com', 'fandeco_social_instagram' => 'https://instagram.com/x', 'fandeco_payment_methods' => "Mercado Pago\nTransferencia", 'fandeco_shipping_info' => 'Texto de envíos de ejemplo', 'fandeco_footer_about' => 'Diseñamos y fabricamos objetos decorativos con impresión 3D.' );
+	ob_start(); include FANDECO_DIR . '/header.php'; $h = ob_get_clean();
+	ob_start(); echo '<main id="main" class="fd-main fd-home" tabindex="-1">' . $home . '</main>'; include FANDECO_DIR . '/footer.php'; $f = ob_get_clean();
+	file_put_contents( $opts['html'], $h . $f );
+	echo "HTML: {$opts['html']}\n";
+}
+
+echo $fail ? "\n$fail verificación(es) fallaron\n" : "\nTodas las verificaciones pasaron\n";
+exit( $fail ? 1 : 0 );

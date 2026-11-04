@@ -1,0 +1,37 @@
+{
+  "node_modules/@fontsource-variable/fraunces/files/fraunces-latin-wght-normal.woff2": {
+    "file": "assets/fraunces-latin-wght-normal-ukD16Tqj.woff2",
+    "src": "node_modules/@fontsource-variable/fraunces/files/fraunces-latin-wght-normal.woff2"
+  },
+  "node_modules/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2": {
+    "file": "assets/inter-latin-wght-normal-Dx4kXJAl.woff2",
+    "src": "node_modules/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2"
+  },
+  "node_modules/@fontsource/caveat/files/caveat-latin-700-normal.woff2": {
+    "file": "assets/caveat-latin-700-normal-D8_1Nw6V.woff2",
+    "src": "node_modules/@fontsource/caveat/files/caveat-latin-700-normal.woff2"
+  },
+  "src/js/animations.js": {
+    "file": "assets/animations-RJ5bHDDU.js",
+    "name": "animations",
+    "src": "src/js/animations.js",
+    "isDynamicEntry": true
+  },
+  "src/js/main.js": {
+    "file": "assets/main-BLw5hiHF.js",
+    "name": "main",
+    "src": "src/js/main.js",
+    "isEntry": true,
+    "dynamicImports": [
+      "src/js/animations.js"
+    ],
+    "css": [
+      "assets/main-Yxro9fv1.css"
+    ],
+    "assets": [
+      "assets/inter-latin-wght-normal-Dx4kXJAl.woff2",
+      "assets/fraunces-latin-wght-normal-ukD16Tqj.woff2",
+      "assets/caveat-latin-700-normal-D8_1Nw6V.woff2"
+    ]
+  }
+}

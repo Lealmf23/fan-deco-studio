@@ -1,0 +1,13 @@
+/* Fan Deco Studio — entrada CSS (Tailwind v4 + tokens + componentes). */
+@import "tailwindcss";
+@import "./fonts.css";
+@import "./tokens.css";
+@import "./base.css";
+@import "./components.css";
+@import "./home.css";
+@import "./woocommerce.css";
+
+/* No escanear artefactos compilados ni dependencias. */
+@source not "../../dist";
+@source not "../../build";
+@source not "../../release";
