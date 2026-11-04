@@ -30,7 +30,7 @@ Tema WordPress independiente (sin tema padre, sin Elementor) para la tienda Fan 
 `dist/` y `build/` están versionados para que el tema sea instalable directamente desde el repo; regenerarlos con `npm run build` tras cada cambio.
 
 ## Arquitectura
-- **Frontend**: Vite + Tailwind CSS v4 (CSS-first; los tokens están en `src/css/tokens.css` con `@theme`). JS crítico ≈ 4.5 kB (menú, buscador, carrusel, feedback del carrito). **GSAP** está en un chunk aparte que solo se descarga si la página tiene elementos animables y el usuario no prefiere reducir movimiento. Fuente autoalojada (Bricolage Grotesque; subset latino).
+- **Frontend**: Vite + Tailwind CSS v4 (CSS-first; los tokens están en `src/css/tokens.css` con `@theme`). JS crítico ≈ 4.5 kB (menú, buscador, carrusel, feedback del carrito). **GSAP** está en un chunk aparte que solo se descarga si la página tiene elementos animables y el usuario no prefiere reducir movimiento. Fuente autoalojada (DM Sans; subset latino) y Georgia del sistema para la cursiva de los títulos.
 - **Render**: 100 % PHP del lado del servidor (SEO). React **no** se usa en el MVP: solo hay un punto de montaje (`[data-fd-mount="configurator"]`) en el bloque *Banner editorial*.
 - **Bloques** (`src/blocks/*` → `build/blocks/*`): `fandeco/hero`, `category-grid`, `featured-products`, `editorial-banner`, `benefits`, `process-steps`, `section-heading`. Todos son dinámicos (`render.php`), con `block.json`, valores por defecto, saneamiento/lista blanca en el render, vista previa fiel en el editor (ServerSideRender) y controles en la barra lateral.
 - **Contenido editable**: bloques (textos, imágenes, enlaces, orden), Customizer (footer/contacto/redes), menús, y categorías/productos de WooCommerce.
