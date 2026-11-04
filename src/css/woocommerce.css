@@ -265,3 +265,4 @@
 .fd-installments .fd-pay-badge { margin-left: 0.25rem; }
 .fd-installments--loop { font-size: 0.8125rem; margin: 0; }
 .fd-installments [hidden] { display: none; }
+.woocommerce ul.products li.product span.onsale { position: absolute; z-index: 3; top: 0.75rem; left: 0.75rem; }
