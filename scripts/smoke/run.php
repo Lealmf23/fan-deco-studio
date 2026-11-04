@@ -114,7 +114,7 @@ foreach ( array( 'header.php', 'footer.php' ) as $tpl ) {
 	} else {
 		check( str_contains( $out, 'class="fd-tabbar"' ) && substr_count( $out, 'class="fd-tab' ) >= 4, 'footer: barra inferior móvil con 4 accesos' );
 		check( str_contains( $out, 'fd-tab-cart' ), 'footer: carrito con fragmento propio (no pisa el del header)' );
-		check( str_contains( $out, 'fd-footer__cta' ) && str_contains( $out, 'wa.me/' ) , 'footer: franja de invitación con WhatsApp' );
+		check( str_contains( $out, 'fd-footer__cta' ) && str_contains( $out, 'mailto:hola@example.com' ) && ! str_contains( $out, 'Escribinos por WhatsApp</a>' ), 'footer: franja de invitación con email (sin WhatsApp no muestra su botón)' );
 		$footer_out = $out;
 	}
 }
