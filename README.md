@@ -60,6 +60,14 @@ El SEO vive en un **plugin propio** (`plugins/fan-deco-core/`, ZIP en `release/f
 - No se tocan permalinks ni redirecciones. Sitemaps y robots.txt: los gestiona AIOSEO/WordPress.
 - **No ejecutar el importador en el sitio real todavía** (falta la tabla `aioseo_terms`; ver `docs/MIGRACION.md`). **Pendiente validar** en staging: Rich Results Test (producto/migas), Search Console, Lighthouse y que AIOSEO no emita duplicados.
 
+## Home: dirección “encendé la luz”
+- **Idea central:** el hero es una habitación al atardecer y el visitante **enciende la lámpara**: un interruptor (accesible, `role="switch"`) pasa toda la portada —fondo, titular, botón, header y barra superior— de día a noche con la foto encendida. Lo dispara el visitante (no hay animación automática) y respeta “reducir movimiento”. **Requiere dos fotos reales** con el mismo encuadre (apagada y encendida), cargadas en el bloque Hero (*Imágenes → Imagen con la luz encendida*); sin la foto encendida **no hay interruptor** (no se simula). Opción “empezar con la luz encendida”.
+- **Textura:** líneas horizontales finas como las capas de una impresión 3D, solo en secciones oscuras.
+- **Bloques** (todos con opciones en el editor): *Hero → Inmersiva*; *Beneficios → Franja con divisores*; *Categorías → Mosaico* (una grande y varias chicas, con el título sobre la imagen); *Destacados → Editorial* (título y enlace fijos a la izquierda, carrusel a la derecha); *Proceso → Índice* (sobre azul, numerado porque sí es una secuencia); *Banner → Inmersivo*. El patrón **Fan Deco: Portada completa** los usa a todos.
+- **Footer:** isotipo “fan / DECO” gigante (solo si no hay un logo cargado en Identidad del sitio; si lo hay, no se muestra para no sustituir el logo oficial).
+- **Móvil:** el hero inmersivo es foto a todo el ancho con el titular abajo; el resto conserva el estilo tipo app descrito más abajo.
+- **Verificado:** marcado de cada variante y del interruptor (pruebas de render) y, en Chromium, el cambio día/noche, teclado, header oscuro, “reducir movimiento” y ausencia de desborde en desktop y móvil. Las imágenes de las capturas son ilustraciones de marcador. **Falta:** probar con tus fotos reales y en WordPress (editor de bloques).
+
 ## Dirección visual de la tienda
 - **Tipografía:** una sola familia, *Bricolage Grotesque* (variable, autoalojada), para títulos y texto; el "fan" manuscrito del logo queda como único contraste. Títulos grandes y apretados.
 - **Listados:** sin cajas blancas ni sombras. Cada pieza va en una ventana de esquinas suaves con un resplandor cálido que se intensifica al pasar el mouse; texto alineado a la izquierda debajo; botón de compra circular con ícono (el texto queda para lectores de pantalla); columnas desfasadas en desktop. Filtros por categoría reales de WooCommerce.

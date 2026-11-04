@@ -20,7 +20,7 @@ if ( ! fandeco_has_woocommerce() ) {
 }
 
 $source = fandeco_enum( $attributes['source'] ?? '', array( 'featured', 'latest', 'sale', 'category', 'manual' ), 'featured' );
-$layout = fandeco_enum( $attributes['layout'] ?? '', array( 'grid', 'carousel' ), 'carousel' );
+$layout = fandeco_enum( $attributes['layout'] ?? '', array( 'grid', 'carousel', 'editorial' ), 'carousel' );
 $count  = max( 1, min( 12, absint( $attributes['count'] ?? 8 ) ) );
 $args   = array(
 	'status'     => 'publish',
@@ -70,8 +70,26 @@ if ( ! $products ) {
 }
 $show_cart = ! empty( $attributes['showAddToCart'] );
 ?>
-<section <?php echo fandeco_block_attrs( 'featured-products', $attributes, "fd-featured--{$layout}" ); // phpcs:ignore WordPress.Security.EscapeOutput ?>>
-	<div class="fd-container">
+<?php
+$f_title = sanitize_text_field( $attributes['title'] ?? '' );
+$f_desc  = sanitize_textarea_field( $attributes['description'] ?? '' );
+$f_link  = (string) ( $attributes['linkUrl'] ?? '' );
+$f_ltxt  = trim( (string) ( $attributes['linkText'] ?? '' ) );
+$editorial = 'editorial' === $layout;
+if ( $editorial ) {
+	$layout = 'carousel';
+}
+?>
+<section <?php echo fandeco_block_attrs( 'featured-products', $attributes, 'fd-featured--' . ( $editorial ? 'editorial' : $layout ) ); // phpcs:ignore WordPress.Security.EscapeOutput ?>>
+	<div class="fd-container<?php echo $editorial ? ' fd-featured__split' : ''; ?>">
+		<?php if ( $editorial ) : ?>
+			<div class="fd-featured__side">
+				<?php if ( $f_title ) : ?><h2 class="fd-featured__title" data-fd-reveal><?php echo esc_html( $f_title ); ?></h2><?php endif; ?>
+				<?php if ( $f_desc ) : ?><p class="fd-featured__desc" data-fd-reveal><?php echo esc_html( $f_desc ); ?></p><?php endif; ?>
+				<?php if ( $f_link && $f_ltxt ) : ?><a class="fd-link-arrow" href="<?php echo esc_url( $f_link ); ?>" data-fd-reveal><?php echo esc_html( $f_ltxt ); ?> <?php echo fandeco_icon( 'arrow-right' ); // phpcs:ignore WordPress.Security.EscapeOutput ?></a><?php endif; ?>
+			</div>
+			<div class="fd-featured__main">
+		<?php endif; ?>
 		<?php if ( 'carousel' === $layout ) : ?>
 		<div class="fd-carousel" data-fd-carousel>
 			<div class="fd-carousel__controls">
@@ -91,5 +109,6 @@ $show_cart = ! empty( $attributes['showAddToCart'] );
 		<?php if ( 'carousel' === $layout ) : ?>
 		</div>
 		<?php endif; ?>
+		<?php if ( $editorial ) : ?></div><?php endif; ?>
 	</div>
 </section>

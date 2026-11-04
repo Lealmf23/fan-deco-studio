@@ -35,6 +35,14 @@
     "animate": {
       "type": "boolean",
       "default": true
+    },
+    "layout": {
+      "type": "string",
+      "enum": [
+        "grid",
+        "mosaic"
+      ],
+      "default": "grid"
     }
   },
   "supports": {

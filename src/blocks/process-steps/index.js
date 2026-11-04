@@ -4,6 +4,13 @@ import metadata from './block.json';
 
 registerFandecoBlock( metadata, ( { attributes, setAttributes } ) => (
 	<PanelBody title={ __( 'Etapas', 'fan-deco-studio' ) }>
+		<SelectControl label={ __( 'Estilo', 'fan-deco-studio' ) } value={ attributes.variant } options={ [ { value: 'columns', label: __( 'Columnas', 'fan-deco-studio' ) }, { value: 'index', label: __( 'Índice (fondo azul con líneas de capa)', 'fan-deco-studio' ) } ] } onChange={ ( variant ) => setAttributes( { variant } ) } />
+		{ attributes.variant === 'index' && (
+			<>
+				<TextControl label={ __( 'Título', 'fan-deco-studio' ) } value={ attributes.title } onChange={ ( title ) => setAttributes( { title } ) } />
+				<TextareaControl label={ __( 'Descripción', 'fan-deco-studio' ) } value={ attributes.description } onChange={ ( description ) => setAttributes( { description } ) } />
+			</>
+		) }
 		<Repeater
 			items={ attributes.items }
 			onChange={ ( items ) => setAttributes( { items } ) }

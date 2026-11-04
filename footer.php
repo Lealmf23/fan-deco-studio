@@ -121,6 +121,9 @@ if ( fandeco_has_woocommerce() ) {
 			<!-- Suscripción a novedades: funcionalidad futura (no implementada en el MVP). -->
 		</div>
 	</div>
+<?php if ( ! get_theme_mod( 'custom_logo' ) ) : ?>
+	<div class="fd-footer__wordmark" aria-hidden="true"><span class="fd-wm-fan">fan</span><span class="fd-wm-deco">DECO</span></div>
+<?php endif; ?>
 </footer>
 <?php if ( $whatsapp && fandeco_option( 'whatsapp_float', false ) ) : ?>
 	<a class="fd-whatsapp" href="<?php echo esc_url( 'https://wa.me/' . $whatsapp . '?text=' . rawurlencode( (string) fandeco_option( 'whatsapp_message', 'Hola, quiero consultar por un producto' ) ) ); ?>" target="_blank" rel="noopener" aria-label="<?php esc_attr_e( 'Escribinos por WhatsApp', 'fan-deco-studio' ); ?>">

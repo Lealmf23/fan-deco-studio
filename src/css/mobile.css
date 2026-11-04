@@ -51,6 +51,26 @@
 	.fd-hero .fd-btn--lg { min-height: 2.75rem; padding-inline: 1.25rem; font-size: 0.9375rem; background: var(--color-fd-blue); }
 	.fd-hero .fd-eyebrow { margin-bottom: 0.4rem; font-size: 0.8125rem; }
 
+	/* Hero inmersivo en móvil: foto a todo el ancho, texto abajo; con la luz encendida se vuelve noche */
+	.fd-hero--immersive { padding: 0; }
+	.fd-hero--immersive .fd-hero__inner { min-height: min(32rem, 78svh); padding: 1.5rem var(--spacing-fd-gutter) 1.75rem; border-radius: 0; background: none; }
+	.fd-hero--immersive .fd-hero__content { max-width: none; }
+	.fd-hero--immersive .fd-hero__media { inset: 0; width: auto; }
+	.fd-hero--immersive .fd-hero__media picture, .fd-hero--immersive .fd-hero__img, .fd-hero--immersive .fd-hero__lit { object-position: 72% center; }
+	.fd-hero--immersive .fd-hero__media::after { background: linear-gradient(to top, rgb(247 245 240 / 0.96) 0%, rgb(247 245 240 / 0.7) 38%, transparent 70%); }
+	.fd-hero--immersive.is-lit .fd-hero__media::after { background: linear-gradient(to top, rgb(15 29 51 / 0.95) 0%, rgb(15 29 51 / 0.65) 40%, transparent 72%); }
+	.fd-hero--immersive .fd-hero__title { font-size: clamp(2.75rem, 13vw, 3.5rem); line-height: 0.92; letter-spacing: -0.05em; }
+	.fd-hero--immersive .fd-hero__desc { display: block; margin-top: 0.75rem; font-size: 0.9375rem; -webkit-line-clamp: unset; }
+	.fd-hero--immersive .fd-hero__actions { margin-top: 1.1rem; gap: 0.6rem 0.75rem; }
+	.fd-hero--immersive .fd-btn--lg { min-height: 3rem; padding-inline: 1.25rem; font-size: 0.9375rem; }
+	.fd-hero--immersive.is-lit .fd-btn--primary { background: #f2b84b; color: var(--fd-night); }
+	.fd-hero-switch { min-height: 3rem; padding: 0.35rem 0.9rem 0.35rem 0.4rem; font-size: 0.8125rem; }
+	.fd-hero-switch__track { width: 2.6rem; height: 1.55rem; }
+	.fd-hero-switch__thumb { width: 1.15rem; height: 1.15rem; }
+	.fd-hero-switch[aria-checked="true"] .fd-hero-switch__thumb { transform: translateX(1.05rem); }
+	.fd-process--index .fd-step__title { font-size: 1.5rem; }
+	.fd-banner--immersive .fd-banner__card { min-height: 26rem; }
+
 	/* Secciones más compactas */
 	.fd-section { padding-block: 1.25rem; }
 	.fd-section-heading { padding-bottom: 0.5rem; }

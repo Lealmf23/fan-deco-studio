@@ -8,7 +8,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-$variant  = fandeco_enum( $attributes['variant'] ?? '', array( 'light', 'dark', 'wine' ), 'light' );
+$variant  = fandeco_enum( $attributes['variant'] ?? '', array( 'light', 'dark', 'wine', 'immersive' ), 'light' );
 $position = fandeco_enum( $attributes['imagePosition'] ?? '', array( 'left', 'right' ), 'right' );
 $mount    = fandeco_enum( $attributes['mount'] ?? '', array( '', 'configurator' ), '' );
 $eyebrow  = sanitize_text_field( $attributes['eyebrow'] ?? '' );
@@ -21,6 +21,7 @@ $image    = fandeco_attachment_image(
 	array( 'loading' => 'lazy', 'decoding' => 'async', 'sizes' => '(max-width: 767px) 100vw, 50vw', 'alt' => '' )
 );
 $btn_var = 'light' === $variant ? 'primary' : 'light';
+$image_large = 'immersive' === $variant ? fandeco_attachment_image( absint( $attributes['imageId'] ?? 0 ), 'fandeco-hero', array( 'loading' => 'lazy', 'decoding' => 'async', 'sizes' => '100vw', 'alt' => '' ) ) : '';
 ?>
 <section <?php echo fandeco_block_attrs( 'editorial-banner', $attributes, "fd-banner--{$variant} fd-banner--img-{$position}" ); // phpcs:ignore WordPress.Security.EscapeOutput ?>>
 	<div class="fd-container">
@@ -34,7 +35,9 @@ $btn_var = 'light' === $variant ? 'primary' : 'light';
 				<?php if ( $btn ) : ?><div data-fd-reveal><?php echo $btn; // phpcs:ignore WordPress.Security.EscapeOutput ?></div><?php endif; ?>
 			</div>
 			<div class="fd-banner__media" data-fd-reveal="media">
-				<?php if ( $image ) : ?>
+				<?php if ( $image_large ) : ?>
+					<?php echo $image_large; // phpcs:ignore WordPress.Security.EscapeOutput ?>
+				<?php elseif ( $image ) : ?>
 					<?php echo $image; // phpcs:ignore WordPress.Security.EscapeOutput ?>
 				<?php else : ?>
 					<div class="fd-media-placeholder" aria-hidden="true"></div>

@@ -37,7 +37,8 @@
       "enum": [
         "light",
         "dark",
-        "wine"
+        "wine",
+        "immersive"
       ],
       "default": "light"
     },

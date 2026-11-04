@@ -4,6 +4,7 @@ import metadata from './block.json';
 
 registerFandecoBlock( metadata, ( { attributes, setAttributes } ) => (
 	<PanelBody title={ __( 'Beneficios', 'fan-deco-studio' ) }>
+		<SelectControl label={ __( 'Estilo', 'fan-deco-studio' ) } value={ attributes.variant } options={ [ { value: 'cards', label: __( 'Tarjetas', 'fan-deco-studio' ) }, { value: 'strip', label: __( 'Franja con divisores', 'fan-deco-studio' ) } ] } onChange={ ( variant ) => setAttributes( { variant } ) } />
 		<p className="description">{ __( 'Texto editorial: el descuento real se configura en WooCommerce/pasarela de pago. Este bloque no cambia precios.', 'fan-deco-studio' ) }</p>
 		<Repeater
 			items={ attributes.items }

@@ -11,15 +11,58 @@
 		"items": {
 			"type": "array",
 			"default": [
-				{ "icon": "design", "title": "Diseño", "text": "Modelamos cada pieza pensando en forma, luz y detalle." },
-				{ "icon": "test", "title": "Prueba", "text": "Probamos y ajustamos el diseño antes de producirlo." },
-				{ "icon": "print", "title": "Fabricación", "text": "Imprimimos la pieza en 3D con el color y el acabado elegidos." },
-				{ "icon": "package", "title": "Envío", "text": "Embalamos con cuidado y lo enviamos a tu casa." }
+				{
+					"icon": "design",
+					"title": "Diseño",
+					"text": "Modelamos cada pieza pensando en forma, luz y detalle."
+				},
+				{
+					"icon": "test",
+					"title": "Prueba",
+					"text": "Probamos y ajustamos el diseño antes de producirlo."
+				},
+				{
+					"icon": "print",
+					"title": "Fabricación",
+					"text": "Imprimimos la pieza en 3D con el color y el acabado elegidos."
+				},
+				{
+					"icon": "package",
+					"title": "Envío",
+					"text": "Embalamos con cuidado y lo enviamos a tu casa."
+				}
 			]
 		},
-		"animate": { "type": "boolean", "default": true }
+		"animate": {
+			"type": "boolean",
+			"default": true
+		},
+		"variant": {
+			"type": "string",
+			"enum": [
+				"columns",
+				"index"
+			],
+			"default": "columns"
+		},
+		"title": {
+			"type": "string",
+			"default": ""
+		},
+		"description": {
+			"type": "string",
+			"default": ""
+		}
 	},
-	"supports": { "html": false, "spacing": { "margin": [ "top", "bottom" ] } },
+	"supports": {
+		"html": false,
+		"spacing": {
+			"margin": [
+				"top",
+				"bottom"
+			]
+		}
+	},
 	"editorScript": "file:./index.js",
 	"render": "file:./render.php"
 }

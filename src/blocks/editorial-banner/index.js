@@ -12,7 +12,7 @@ registerFandecoBlock( metadata, ( { attributes, setAttributes } ) => (
 		<PanelBody title={ __( 'Imagen y diseño', 'fan-deco-studio' ) } initialOpen={ false }>
 			<ImageField label={ __( 'Imagen', 'fan-deco-studio' ) } value={ attributes.imageId } onChange={ ( imageId ) => setAttributes( { imageId } ) } />
 			<SelectControl label={ __( 'Posición de la imagen', 'fan-deco-studio' ) } value={ attributes.imagePosition } options={ [ { value: 'right', label: __( 'Derecha', 'fan-deco-studio' ) }, { value: 'left', label: __( 'Izquierda', 'fan-deco-studio' ) } ] } onChange={ ( imagePosition ) => setAttributes( { imagePosition } ) } />
-			<SelectControl label={ __( 'Estilo', 'fan-deco-studio' ) } value={ attributes.variant } options={ [ { value: 'light', label: __( 'Claro', 'fan-deco-studio' ) }, { value: 'dark', label: __( 'Azul profundo', 'fan-deco-studio' ) }, { value: 'wine', label: __( 'Bordó', 'fan-deco-studio' ) } ] } onChange={ ( variant ) => setAttributes( { variant } ) } />
+			<SelectControl label={ __( 'Estilo', 'fan-deco-studio' ) } value={ attributes.variant } options={ [ { value: 'light', label: __( 'Claro', 'fan-deco-studio' ) }, { value: 'dark', label: __( 'Azul profundo', 'fan-deco-studio' ) }, { value: 'wine', label: __( 'Bordó', 'fan-deco-studio' ) }, { value: 'immersive', label: __( 'Inmersivo: imagen de fondo con texto encima', 'fan-deco-studio' ) } ] } onChange={ ( variant ) => setAttributes( { variant } ) } />
 		</PanelBody>
 		<PanelBody title={ __( 'Punto de montaje (avanzado)', 'fan-deco-studio' ) } initialOpen={ false }>
 			<SelectControl

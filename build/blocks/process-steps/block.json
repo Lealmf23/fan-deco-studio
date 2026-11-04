@@ -36,6 +36,22 @@
     "animate": {
       "type": "boolean",
       "default": true
+    },
+    "variant": {
+      "type": "string",
+      "enum": [
+        "columns",
+        "index"
+      ],
+      "default": "columns"
+    },
+    "title": {
+      "type": "string",
+      "default": ""
+    },
+    "description": {
+      "type": "string",
+      "default": ""
     }
   },
   "supports": {

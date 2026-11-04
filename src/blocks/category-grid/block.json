@@ -8,13 +8,52 @@
 	"description": "Categorías de WooCommerce con su imagen, título, descripción opcional y enlace.",
 	"textdomain": "fan-deco-studio",
 	"attributes": {
-		"categoryIds": { "type": "array", "items": { "type": "integer" }, "default": [] },
-		"columns": { "type": "integer", "enum": [ 2, 3, 4 ], "default": 4 },
-		"showDescription": { "type": "boolean", "default": false },
-		"showCount": { "type": "boolean", "default": false },
-		"animate": { "type": "boolean", "default": true }
+		"categoryIds": {
+			"type": "array",
+			"items": {
+				"type": "integer"
+			},
+			"default": []
+		},
+		"columns": {
+			"type": "integer",
+			"enum": [
+				2,
+				3,
+				4
+			],
+			"default": 4
+		},
+		"showDescription": {
+			"type": "boolean",
+			"default": false
+		},
+		"showCount": {
+			"type": "boolean",
+			"default": false
+		},
+		"animate": {
+			"type": "boolean",
+			"default": true
+		},
+		"layout": {
+			"type": "string",
+			"enum": [
+				"grid",
+				"mosaic"
+			],
+			"default": "grid"
+		}
 	},
-	"supports": { "html": false, "spacing": { "margin": [ "top", "bottom" ] } },
+	"supports": {
+		"html": false,
+		"spacing": {
+			"margin": [
+				"top",
+				"bottom"
+			]
+		}
+	},
 	"editorScript": "file:./index.js",
 	"render": "file:./render.php"
 }

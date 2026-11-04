@@ -23,6 +23,7 @@ function Controls( { attributes, setAttributes } ) {
 				/>
 			) }
 			<p className="description">{ __( 'Si no elegís ninguna, se muestran las primeras categorías principales con productos.', 'fan-deco-studio' ) }</p>
+			<SelectControl label={ __( 'Disposición', 'fan-deco-studio' ) } value={ attributes.layout } options={ [ { value: 'grid', label: __( 'Grilla pareja', 'fan-deco-studio' ) }, { value: 'mosaic', label: __( 'Mosaico (una grande y varias chicas)', 'fan-deco-studio' ) } ] } onChange={ ( layout ) => setAttributes( { layout } ) } />
 			<SelectControl label={ __( 'Columnas (desktop)', 'fan-deco-studio' ) } value={ String( attributes.columns ) } options={ [ '2', '3', '4' ].map( ( v ) => ( { value: v, label: v } ) ) } onChange={ ( v ) => setAttributes( { columns: Number( v ) } ) } />
 			<ToggleControl label={ __( 'Mostrar descripción', 'fan-deco-studio' ) } checked={ attributes.showDescription } onChange={ ( showDescription ) => setAttributes( { showDescription } ) } />
 			<ToggleControl label={ __( 'Mostrar cantidad de productos', 'fan-deco-studio' ) } checked={ attributes.showCount } onChange={ ( showCount ) => setAttributes( { showCount } ) } />

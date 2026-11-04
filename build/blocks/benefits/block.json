@@ -31,6 +31,14 @@
     "animate": {
       "type": "boolean",
       "default": true
+    },
+    "variant": {
+      "type": "string",
+      "enum": [
+        "cards",
+        "strip"
+      ],
+      "default": "cards"
     }
   },
   "supports": {

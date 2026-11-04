@@ -54,13 +54,22 @@
       "enum": [
         "split",
         "split-reverse",
-        "overlay"
+        "overlay",
+        "immersive"
       ],
       "default": "split"
     },
     "animate": {
       "type": "boolean",
       "default": true
+    },
+    "imageLitId": {
+      "type": "integer",
+      "default": 0
+    },
+    "startLit": {
+      "type": "boolean",
+      "default": false
     }
   },
   "supports": {

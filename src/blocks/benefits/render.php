@@ -29,7 +29,7 @@ if ( ! $items ) {
 	return;
 }
 ?>
-<section <?php echo fandeco_block_attrs( 'benefits', $attributes ); // phpcs:ignore WordPress.Security.EscapeOutput ?>>
+<section <?php echo fandeco_block_attrs( 'benefits', $attributes, 'fd-benefits--' . fandeco_enum( $attributes['variant'] ?? '', array( 'cards', 'strip' ), 'cards' ) ); // phpcs:ignore WordPress.Security.EscapeOutput ?>>
 	<div class="fd-container">
 		<ul class="fd-benefits__list">
 			<?php foreach ( $items as $item ) : ?>

@@ -11,14 +11,45 @@
 		"items": {
 			"type": "array",
 			"default": [
-				{ "icon": "bank", "title": "10% OFF", "text": "con transferencia bancaria" },
-				{ "icon": "palette", "title": "A tu medida", "text": "Colores, formas y estilos que se adaptan a vos." },
-				{ "icon": "print", "title": "Diseño propio", "text": "Objetos decorativos diseñados e impresos en 3D por Fan Deco." }
+				{
+					"icon": "bank",
+					"title": "10% OFF",
+					"text": "con transferencia bancaria"
+				},
+				{
+					"icon": "palette",
+					"title": "A tu medida",
+					"text": "Colores, formas y estilos que se adaptan a vos."
+				},
+				{
+					"icon": "print",
+					"title": "Diseño propio",
+					"text": "Objetos decorativos diseñados e impresos en 3D por Fan Deco."
+				}
 			]
 		},
-		"animate": { "type": "boolean", "default": true }
+		"animate": {
+			"type": "boolean",
+			"default": true
+		},
+		"variant": {
+			"type": "string",
+			"enum": [
+				"cards",
+				"strip"
+			],
+			"default": "cards"
+		}
 	},
-	"supports": { "html": false, "spacing": { "margin": [ "top", "bottom" ] } },
+	"supports": {
+		"html": false,
+		"spacing": {
+			"margin": [
+				"top",
+				"bottom"
+			]
+		}
+	},
 	"editorScript": "file:./index.js",
 	"render": "file:./render.php"
 }

@@ -38,7 +38,8 @@
       "type": "string",
       "enum": [
         "grid",
-        "carousel"
+        "carousel",
+        "editorial"
       ],
       "default": "carousel"
     },
@@ -49,6 +50,22 @@
     "animate": {
       "type": "boolean",
       "default": true
+    },
+    "title": {
+      "type": "string",
+      "default": ""
+    },
+    "description": {
+      "type": "string",
+      "default": ""
+    },
+    "linkText": {
+      "type": "string",
+      "default": ""
+    },
+    "linkUrl": {
+      "type": "string",
+      "default": ""
     }
   },
   "supports": {

@@ -41,7 +41,8 @@ if ( is_wp_error( $terms ) || ! $terms ) {
 $show_desc  = ! empty( $attributes['showDescription'] );
 $show_count = ! empty( $attributes['showCount'] );
 ?>
-<section <?php echo fandeco_block_attrs( 'category-grid', $attributes, 'fd-cols-' . $cols ); // phpcs:ignore WordPress.Security.EscapeOutput ?>>
+<section <?php $layout = fandeco_enum( $attributes['layout'] ?? '', array( 'grid', 'mosaic' ), 'grid' );
+echo fandeco_block_attrs( 'category-grid', $attributes, 'fd-cols-' . $cols . ' fd-cats--' . $layout . ' fd-cats--n' . count( $terms ) ); // phpcs:ignore WordPress.Security.EscapeOutput ?>>
 	<div class="fd-container">
 		<ul class="fd-cat-grid">
 			<?php

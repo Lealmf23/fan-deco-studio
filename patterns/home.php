@@ -23,22 +23,18 @@ if ( fandeco_has_woocommerce() ) {
 	}
 }
 ?>
-<!-- wp:fandeco/hero {"buttonUrl":<?php echo wp_json_encode( esc_url_raw( $fd_shop ) ); ?>} /-->
+<!-- wp:fandeco/hero {"variant":"immersive","buttonUrl":<?php echo wp_json_encode( esc_url_raw( $fd_shop ) ); ?>} /-->
 
-<!-- wp:fandeco/benefits /-->
+<!-- wp:fandeco/benefits {"variant":"strip"} /-->
 
 <!-- wp:fandeco/section-heading {"title":"Comprá por categoría","linkText":"Ver todo","linkUrl":<?php echo wp_json_encode( esc_url_raw( $fd_shop ) ); ?>} /-->
 
-<!-- wp:fandeco/category-grid /-->
+<!-- wp:fandeco/category-grid {"layout":"mosaic"} /-->
 
-<!-- wp:fandeco/section-heading {"title":"Productos destacados","linkText":"Ver toda la tienda","linkUrl":<?php echo wp_json_encode( esc_url_raw( $fd_shop ) ); ?>} /-->
+<!-- wp:fandeco/featured-products {"layout":"editorial","title":"Productos destacados","description":"Piezas impresas en 3D, en los colores y estilos que elijas.","linkText":"Ver toda la tienda","linkUrl":<?php echo wp_json_encode( esc_url_raw( $fd_shop ) ); ?>} /-->
 
-<!-- wp:fandeco/featured-products /-->
-
-<!-- wp:fandeco/editorial-banner {"eyebrow":"Personalizados","title":"Tu mascota, para siempre","description":"Convertimos a tu compañero en una pieza única, impresa en 3D y llena de detalles.","buttonText":"Ver mascotas","buttonUrl":<?php echo wp_json_encode( esc_url_raw( $fd_pets ) ); ?>,"variant":"wine","imagePosition":"left"} /-->
+<!-- wp:fandeco/editorial-banner {"eyebrow":"Personalizados","title":"Tu mascota, para siempre","description":"Convertimos a tu compañero en una pieza única, impresa en 3D y llena de detalles.","buttonText":"Ver mascotas","buttonUrl":<?php echo wp_json_encode( esc_url_raw( $fd_pets ) ); ?>,"variant":"immersive"} /-->
 
 <!-- wp:fandeco/editorial-banner {"eyebrow":"Personalizador 3D","badge":"Próximamente","title":"Diseñá tu pieza en 3D","description":"Estamos preparando un configurador para ver tu producto en 360°, cambiar colores y acabados.","variant":"dark","mount":"configurator"} /-->
 
-<!-- wp:fandeco/section-heading {"title":"Del diseño a tu casa","align":"center"} /-->
-
-<!-- wp:fandeco/process-steps /-->
+<!-- wp:fandeco/process-steps {"variant":"index","title":"Del diseño a tu casa","description":"Cuatro etapas, de la idea al envío."} /-->
