@@ -39,7 +39,8 @@ check( substr_count( $prods, 'fd-product-card"' ) === 4 || substr_count( $prods,
 check( str_contains( $prods, 'data-fd-carousel' ), 'featured-products: carrusel por defecto' );
 check( str_contains( $prods, 'ajax_add_to_cart' ), 'featured-products: AJAX add to cart en simples' );
 check( str_contains( $prods, 'Elegir opciones' ), 'featured-products: variable enlaza a elegir opciones' );
-check( str_contains( $prods, '>+2<' ), 'featured-products: chips de variación con "+n"' );
+check( str_contains( $prods, '>+1<' ), 'featured-products: puntos de variación con "+n" (máx. 5)' );
+check( str_contains( $prods, 'fd-product-card__window' ) && str_contains( $prods, 'fd-product-card__add' ), 'featured-products: ventana de producto y botón de compra' );
 check( str_contains( $prods, 'Sin stock' ) && str_contains( $prods, 'Oferta' ), 'featured-products: etiquetas reales (oferta/sin stock)' );
 $manual = fd_render_block( 'featured-products', array( 'source' => 'manual', 'productIds' => array( 2, 1 ), 'layout' => 'grid' ) );
 check( strpos( $manual, 'prueba B' ) < strpos( $manual, 'prueba A' ), 'featured-products: respeta el orden manual' );

@@ -13,6 +13,7 @@
 @import "./components.css";
 @import "./home.css";
 @import "./woocommerce.css";
+@import "./shop.css";
 
 /* No escanear artefactos compilados ni dependencias. */
 @source not "../../dist";

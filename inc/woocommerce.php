@@ -130,3 +130,124 @@ add_filter(
 	10,
 	2
 );
+
+/* ---- Tarjeta de producto del tema en los listados de WooCommerce ----
+ * Se reemplazan los ganchos de WooCommerce que arman cada ítem por UNA tarjeta del tema. El botón de compra
+ * sigue saliendo de woocommerce_template_loop_add_to_cart() (con su filtro `woocommerce_loop_add_to_cart_link`),
+ * para no romper plugins de seguimiento/AJAX que dependen de ese marcado.
+ */
+add_action(
+	'init',
+	static function () {
+		remove_action( 'woocommerce_before_shop_loop_item', 'woocommerce_template_loop_product_link_open', 10 );
+		remove_action( 'woocommerce_before_shop_loop_item_title', 'woocommerce_show_product_loop_sale_flash', 10 );
+		remove_action( 'woocommerce_before_shop_loop_item_title', 'woocommerce_template_loop_product_thumbnail', 10 );
+		remove_action( 'woocommerce_shop_loop_item_title', 'woocommerce_template_loop_product_title', 10 );
+		remove_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_rating', 5 );
+		remove_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_price', 10 );
+		remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_product_link_close', 5 );
+		remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart', 10 );
+		// La tarjeta ya incluye las cuotas del plugin Fan Deco Core: se evita mostrarlas dos veces.
+		if ( class_exists( 'FanDeco_Installments' ) ) {
+			remove_action( 'woocommerce_after_shop_loop_item_title', array( 'FanDeco_Installments', 'render_loop' ), 11 );
+		}
+		add_action( 'woocommerce_before_shop_loop_item', 'fandeco_loop_card', 10 );
+		// En la ficha, la etiqueta "Oferta" va junto a la categoría (ver más abajo), no flotando sobre la galería.
+		remove_action( 'woocommerce_before_single_product_summary', 'woocommerce_show_product_sale_flash', 10 );
+	},
+	30
+);
+
+function fandeco_loop_card(): void {
+	global $product;
+	if ( $product instanceof WC_Product ) {
+		get_template_part( 'template-parts/components/product-card', null, array( 'product' => $product, 'show_cart' => true ) );
+	}
+}
+
+/** Botón de compra del listado (salida oficial de WooCommerce) para un producto concreto. */
+function fandeco_loop_add_to_cart_html( WC_Product $product ): string {
+	if ( ! function_exists( 'woocommerce_template_loop_add_to_cart' ) ) {
+		return '';
+	}
+	$previous           = $GLOBALS['product'] ?? null;
+	$GLOBALS['product'] = $product; // la función de WooCommerce lee el producto global
+	ob_start();
+	woocommerce_template_loop_add_to_cart();
+	$html = (string) ob_get_clean();
+	$GLOBALS['product'] = $previous;
+	return $html;
+}
+
+/* ---- Categorías reales como filtros de la tienda ---- */
+add_action(
+	'woocommerce_before_shop_loop',
+	static function () {
+		$terms = get_terms(
+			array(
+				'taxonomy'   => 'product_cat',
+				'parent'     => 0,
+				'hide_empty' => true,
+				'exclude'    => (int) get_option( 'default_product_cat' ),
+				'orderby'    => 'menu_order',
+			)
+		);
+		if ( is_wp_error( $terms ) || count( $terms ) < 2 ) {
+			return;
+		}
+		$current = is_product_category() ? (int) get_queried_object_id() : 0;
+		echo '<nav class="fd-shop-cats" aria-label="' . esc_attr__( 'Categorías', 'fan-deco-studio' ) . '"><ul>';
+		printf(
+			'<li><a href="%s"%s>%s</a></li>',
+			esc_url( wc_get_page_permalink( 'shop' ) ),
+			$current ? '' : ' aria-current="page"',
+			esc_html__( 'Todo', 'fan-deco-studio' )
+		);
+		foreach ( $terms as $term ) {
+			$link = get_term_link( $term );
+			if ( is_wp_error( $link ) ) {
+				continue;
+			}
+			printf(
+				'<li><a href="%s"%s>%s</a></li>',
+				esc_url( $link ),
+				( $current === (int) $term->term_id ) ? ' aria-current="page"' : '',
+				esc_html( $term->name )
+			);
+		}
+		echo '</ul></nav>';
+	},
+	5
+);
+
+/* ---- Ficha de producto: categoría sobre el título (dato real) ---- */
+add_action(
+	'woocommerce_single_product_summary',
+	static function () {
+		global $product;
+		if ( ! $product instanceof WC_Product ) {
+			return;
+		}
+		echo '<div class="fd-product-flags">';
+		if ( $product->is_on_sale() && $product->is_in_stock() ) {
+			echo '<span class="fd-product-flag">' . esc_html__( 'Oferta', 'fan-deco-studio' ) . '</span>';
+		}
+		$terms = get_the_terms( $product->get_id(), 'product_cat' );
+		if ( ! $terms || is_wp_error( $terms ) ) {
+			echo '</div>';
+			return;
+		}
+		foreach ( $terms as $term ) {
+			if ( (int) $term->term_id === (int) get_option( 'default_product_cat' ) ) {
+				continue;
+			}
+			$link = get_term_link( $term );
+			if ( ! is_wp_error( $link ) ) {
+				printf( '<a class="fd-product-cat" href="%s">%s</a>', esc_url( $link ), esc_html( $term->name ) );
+			}
+			break;
+		}
+		echo '</div>';
+	},
+	4
+);

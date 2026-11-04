@@ -17,8 +17,8 @@
 		"typography": {
 			"fluid": true,
 			"fontFamilies": [
-				{ "slug": "sans", "name": "Inter", "fontFamily": "'Inter Variable', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" },
-				{ "slug": "display", "name": "Fraunces", "fontFamily": "'Fraunces Variable', Georgia, 'Times New Roman', serif" }
+				{ "slug": "sans", "name": "Bricolage Grotesque", "fontFamily": "'Bricolage Grotesque Variable', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" },
+				{ "slug": "display", "name": "Bricolage Grotesque (títulos)", "fontFamily": "'Bricolage Grotesque Variable', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" }
 			]
 		}
 	},

@@ -30,7 +30,7 @@ Tema WordPress independiente (sin tema padre, sin Elementor) para la tienda Fan 
 `dist/` y `build/` están versionados para que el tema sea instalable directamente desde el repo; regenerarlos con `npm run build` tras cada cambio.
 
 ## Arquitectura
-- **Frontend**: Vite + Tailwind CSS v4 (CSS-first; los tokens están en `src/css/tokens.css` con `@theme`). JS crítico ≈ 4.5 kB (menú, buscador, carrusel, feedback del carrito). **GSAP** está en un chunk aparte que solo se descarga si la página tiene elementos animables y el usuario no prefiere reducir movimiento. Fuentes autoalojadas (Inter, Fraunces; subset latino).
+- **Frontend**: Vite + Tailwind CSS v4 (CSS-first; los tokens están en `src/css/tokens.css` con `@theme`). JS crítico ≈ 4.5 kB (menú, buscador, carrusel, feedback del carrito). **GSAP** está en un chunk aparte que solo se descarga si la página tiene elementos animables y el usuario no prefiere reducir movimiento. Fuente autoalojada (Bricolage Grotesque; subset latino).
 - **Render**: 100 % PHP del lado del servidor (SEO). React **no** se usa en el MVP: solo hay un punto de montaje (`[data-fd-mount="configurator"]`) en el bloque *Banner editorial*.
 - **Bloques** (`src/blocks/*` → `build/blocks/*`): `fandeco/hero`, `category-grid`, `featured-products`, `editorial-banner`, `benefits`, `process-steps`, `section-heading`. Todos son dinámicos (`render.php`), con `block.json`, valores por defecto, saneamiento/lista blanca en el render, vista previa fiel en el editor (ServerSideRender) y controles en la barra lateral.
 - **Contenido editable**: bloques (textos, imágenes, enlaces, orden), Customizer (footer/contacto/redes), menús, y categorías/productos de WooCommerce.
@@ -59,6 +59,13 @@ El SEO vive en un **plugin propio** (`plugins/fan-deco-core/`, ZIP en `release/f
 - Imágenes de producto sin alt reciben el nombre del producto como respaldo.
 - No se tocan permalinks ni redirecciones. Sitemaps y robots.txt: los gestiona AIOSEO/WordPress.
 - **No ejecutar el importador en el sitio real todavía** (falta la tabla `aioseo_terms`; ver `docs/MIGRACION.md`). **Pendiente validar** en staging: Rich Results Test (producto/migas), Search Console, Lighthouse y que AIOSEO no emita duplicados.
+
+## Dirección visual de la tienda
+- **Tipografía:** una sola familia, *Bricolage Grotesque* (variable, autoalojada), para títulos y texto; el "fan" manuscrito del logo queda como único contraste. Títulos grandes y apretados.
+- **Listados:** sin cajas blancas ni sombras. Cada pieza va en una ventana de esquinas suaves con un resplandor cálido que se intensifica al pasar el mouse; texto alineado a la izquierda debajo; botón de compra circular con ícono (el texto queda para lectores de pantalla); columnas desfasadas en desktop. Filtros por categoría reales de WooCommerce.
+- **Ficha:** miniaturas en columna lateral, imagen principal grande y fija, categoría y etiqueta "Oferta" sobre el título, cuotas y transferencia en una pieza con íconos, selectores de color más grandes.
+- **Los listados usan la tarjeta del tema** mediante ganchos de WooCommerce; el botón de compra sale de `woocommerce_template_loop_add_to_cart()` para no romper plugins de seguimiento (PixelYourSite, Google for WooCommerce). Verificar en staging que los eventos *add_to_cart* de listados sigan llegando.
+- Etiquetas en mayúsculas con tracking eliminadas; el color y el estilo editorial siguen la paleta del brief.
 
 ## Descuento por transferencia (plugin Fan Deco Core)
 WooCommerce → **Descuento por transferencia**. Vos definís: activar/desactivar, **porcentaje**, texto, **métodos de pago** que lo reciben (por defecto transferencia bancaria `bacs`) y **a qué productos aplica: todos, ciertas categorías (incluye subcategorías) o ciertos productos** (las variaciones cuentan por su producto padre).

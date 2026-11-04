@@ -133,6 +133,7 @@ function wc_attribute_taxonomy_id_by_name( $n ) { return array( 'pa_color' => 1,
 function wc_get_attribute( $id ) { return (object) array( 'type' => array( 1 => 'color', 2 => 'color', 3 => 'button', 4 => 'select' )[ $id ] ); }
 function wc_attribute_label( $n ) { return array( 'pa_color' => 'Color', 'pa_tamano' => 'Tamaño' )[ $n ] ?? $n; }
 function sanitize_hex_color( $c ) { return preg_match( '/^#[0-9a-f]{6}$/i', (string) $c ) ? $c : ''; }
+function woocommerce_template_loop_add_to_cart() { global $product; $v = $product instanceof WC_Product_Variable; echo '<a href="' . esc_url( $product->add_to_cart_url() ) . '" class="button ' . ( $v ? 'product_type_variable' : 'product_type_simple add_to_cart_button ajax_add_to_cart' ) . '" data-product_id="' . $product->get_id() . '" rel="nofollow">' . esc_html( $product->add_to_cart_text() ) . '</a>'; }
 function is_wp_error( $x ) { return false; }
 function get_term( $id ) { return (object) array( 'slug' => 'lamparas', 'name' => 'Lámparas' ); }
 

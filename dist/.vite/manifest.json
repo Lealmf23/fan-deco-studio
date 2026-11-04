@@ -1,11 +1,7 @@
 {
-  "node_modules/@fontsource-variable/fraunces/files/fraunces-latin-wght-normal.woff2": {
-    "file": "assets/fraunces-latin-wght-normal-ukD16Tqj.woff2",
-    "src": "node_modules/@fontsource-variable/fraunces/files/fraunces-latin-wght-normal.woff2"
-  },
-  "node_modules/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2": {
-    "file": "assets/inter-latin-wght-normal-Dx4kXJAl.woff2",
-    "src": "node_modules/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2"
+  "node_modules/@fontsource-variable/bricolage-grotesque/files/bricolage-grotesque-latin-wght-normal.woff2": {
+    "file": "assets/bricolage-grotesque-latin-wght-normal-DLoelf7F.woff2",
+    "src": "node_modules/@fontsource-variable/bricolage-grotesque/files/bricolage-grotesque-latin-wght-normal.woff2"
   },
   "node_modules/@fontsource/caveat/files/caveat-latin-700-normal.woff2": {
     "file": "assets/caveat-latin-700-normal-D8_1Nw6V.woff2",
@@ -18,7 +14,7 @@
     "isDynamicEntry": true
   },
   "src/js/main.js": {
-    "file": "assets/main-Cb52IvVf.js",
+    "file": "assets/main-CdclLyJ0.js",
     "name": "main",
     "src": "src/js/main.js",
     "isEntry": true,
@@ -28,11 +24,10 @@
       "src/js/animations.js"
     ],
     "css": [
-      "assets/main-iHzQB_cQ.css"
+      "assets/main-DoN6dHvZ.css"
     ],
     "assets": [
-      "assets/inter-latin-wght-normal-Dx4kXJAl.woff2",
-      "assets/fraunces-latin-wght-normal-ukD16Tqj.woff2",
+      "assets/bricolage-grotesque-latin-wght-normal-DLoelf7F.woff2",
       "assets/caveat-latin-700-normal-D8_1Nw6V.woff2"
     ]
   },

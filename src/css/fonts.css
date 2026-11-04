@@ -1,17 +1,10 @@
-/* Fuentes autoalojadas (subset latino: cubre español completo). Sin llamadas a Google Fonts. */
+/* Fuente autoalojada (subset latino: cubre español completo). Una sola familia para títulos y texto. Sin llamadas a Google Fonts. */
 @font-face {
-	font-family: "Inter Variable";
+	font-family: "Bricolage Grotesque Variable";
 	font-style: normal;
 	font-display: swap;
-	font-weight: 100 900;
-	src: url("../../node_modules/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2") format("woff2-variations");
-}
-@font-face {
-	font-family: "Fraunces Variable";
-	font-style: normal;
-	font-display: swap;
-	font-weight: 100 900;
-	src: url("../../node_modules/@fontsource-variable/fraunces/files/fraunces-latin-wght-normal.woff2") format("woff2-variations");
+	font-weight: 200 800;
+	src: url("../../node_modules/@fontsource-variable/bricolage-grotesque/files/bricolage-grotesque-latin-wght-normal.woff2") format("woff2-variations");
 }
 /* Solo para el logotipo de reserva ("fan"); se reemplaza al subir el logo oficial. */
 @font-face {

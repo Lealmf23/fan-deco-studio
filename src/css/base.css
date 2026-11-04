@@ -31,9 +31,9 @@
 	h1, h2, h3, h4 {
 		font-family: var(--font-display);
 		color: var(--color-fd-blue);
-		line-height: 1.1;
-		letter-spacing: -0.015em;
-		font-weight: 500;
+		line-height: 1.05;
+		letter-spacing: -0.03em;
+		font-weight: 560;
 		text-wrap: balance;
 	}
 	a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
