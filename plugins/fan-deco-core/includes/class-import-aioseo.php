@@ -157,6 +157,24 @@ final class FanDeco_Import_AIOSEO {
 		exit;
 	}
 
+	/** Diagnóstico de SOLO LECTURA: tablas aioseo_* con sus columnas y cantidad de filas (sin mostrar datos). */
+	public static function diagnostics(): array {
+		global $wpdb;
+		$out    = array();
+		$tables = (array) $wpdb->get_col( $wpdb->prepare( 'SHOW TABLES LIKE %s', '%' . $wpdb->esc_like( 'aioseo' ) . '%' ) ); // phpcs:ignore WordPress.DB
+		foreach ( $tables as $table ) {
+			if ( ! preg_match( '/^[A-Za-z0-9_]+$/', (string) $table ) ) {
+				continue;
+			}
+			$out[] = array(
+				'table'   => $table,
+				'rows'    => (int) $wpdb->get_var( "SELECT COUNT(*) FROM `{$table}`" ), // phpcs:ignore WordPress.DB
+				'columns' => array_map( 'strval', (array) $wpdb->get_col( "DESC `{$table}`", 0 ) ), // phpcs:ignore WordPress.DB
+			);
+		}
+		return $out;
+	}
+
 	public static function render_section(): void {
 		$key    = 'fdc_import_result_' . get_current_user_id();
 		$result = get_transient( $key );
@@ -175,6 +193,11 @@ final class FanDeco_Import_AIOSEO {
 				<?php if ( $result['samples'] ) : ?><pre style="white-space:pre-wrap"><?php echo esc_html( wp_json_encode( $result['samples'], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE ) ); ?></pre><?php endif; ?>
 			</div>
 		<?php endif; ?>
+		<details style="margin:1em 0"><summary><strong>Diagnóstico de tablas de AIOSEO</strong> (solo lectura: nombres de tablas, columnas y cantidad de filas)</summary>
+			<?php foreach ( self::diagnostics() as $d ) : ?>
+				<p><code><?php echo esc_html( $d['table'] ); ?></code> — <?php echo (int) $d['rows']; ?> filas<br><small><?php echo esc_html( implode( ', ', $d['columns'] ) ); ?></small></p>
+			<?php endforeach; ?>
+		</details>
 		<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
 			<input type="hidden" name="action" value="fdc_import_aioseo">
 			<?php wp_nonce_field( 'fdc_import_aioseo' ); ?>

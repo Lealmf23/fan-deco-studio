@@ -25,9 +25,13 @@ add_action(
 				),
 			)
 		);
-		add_theme_support( 'wc-product-gallery-zoom' );
-		add_theme_support( 'wc-product-gallery-lightbox' );
-		add_theme_support( 'wc-product-gallery-slider' );
+		// Galería: 'native' = zoom/lightbox/slider de WooCommerce; 'external' = no activar ninguno, para que
+		// un snippet/plugin existente (p. ej. `fandeco-product-gallery`) sea el ÚNICO sistema de navegación.
+		if ( 'external' !== get_theme_mod( 'fandeco_gallery_mode', 'native' ) ) {
+			add_theme_support( 'wc-product-gallery-zoom' );
+			add_theme_support( 'wc-product-gallery-lightbox' );
+			add_theme_support( 'wc-product-gallery-slider' );
+		}
 	}
 );
 

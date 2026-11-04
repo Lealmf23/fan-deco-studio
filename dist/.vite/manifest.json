@@ -18,16 +18,17 @@
     "isDynamicEntry": true
   },
   "src/js/main.js": {
-    "file": "assets/main-oQw-FBB_.js",
+    "file": "assets/main-CqF4iDE9.js",
     "name": "main",
     "src": "src/js/main.js",
     "isEntry": true,
     "dynamicImports": [
       "src/js/swatches.js",
+      "src/js/variations.js",
       "src/js/animations.js"
     ],
     "css": [
-      "assets/main-BkHst6Tb.css"
+      "assets/main-N_Awtemf.css"
     ],
     "assets": [
       "assets/inter-latin-wght-normal-Dx4kXJAl.woff2",
@@ -39,6 +40,12 @@
     "file": "assets/swatches-DYOGxgem.js",
     "name": "swatches",
     "src": "src/js/swatches.js",
+    "isDynamicEntry": true
+  },
+  "src/js/variations.js": {
+    "file": "assets/variations-C83Ql8I9.js",
+    "name": "variations",
+    "src": "src/js/variations.js",
     "isDynamicEntry": true
   }
 }

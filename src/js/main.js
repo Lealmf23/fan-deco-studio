@@ -9,12 +9,19 @@ function boot() {
 	initCarousels();
 	initCartFeedback();
 	loadSwatches();
+	loadVariationEvents();
 	loadAnimations();
 }
 
 function loadSwatches() {
 	if ( document.querySelector( '[data-fd-swatches]' ) ) {
 		import( './swatches.js' ).then( ( m ) => m.initSwatches() );
+	}
+}
+
+function loadVariationEvents() {
+	if ( document.querySelector( '.variations_form' ) ) {
+		import( './variations.js' ).then( ( m ) => m.initVariationEvents() );
 	}
 }
 
