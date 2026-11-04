@@ -1,5 +1,12 @@
 /* Fan Deco Studio — entrada CSS (Tailwind v4 + tokens + componentes). */
-@import "tailwindcss";
+/*
+ * Tailwind SIN Preflight: el reinicio global de Preflight (listas, botones, encabezados, imágenes) puede romper
+ * marcado de terceros que depende de los estilos por defecto del navegador (shortcode del configurador de
+ * chapitas, cuotas, WPForms, Elementor). El reinicio del tema está acotado a sus propios componentes (base.css).
+ */
+@layer theme, base, components, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
 @import "./fonts.css";
 @import "./tokens.css";
 @import "./base.css";

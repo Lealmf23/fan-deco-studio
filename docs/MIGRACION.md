@@ -30,6 +30,35 @@ No se modifica la página 838. En staging: crear una página nueva “Inicio (nu
 - Plantillas y páginas de Elementor (incluida **Tu mascota en 3D, 1229**: puede usar widgets/JS propios).
 - Checkout, Mercado Pago, Andreani y descuentos por método de pago.
 
+## 0b. Auditoría profunda (hallazgos y qué se hizo con cada uno)
+**Checkout clásico confirmado:** Carrito (69) = `[woocommerce_cart]`, Checkout (70) = `[woocommerce_checkout]`, enlaces `/%postname%/`. **Decisión: mantener el checkout clásico en la primera versión** (no migrar a Bloques a la vez que se cambia de tema): Mercado Pago, Andreani y el plugin de descuentos dependen de él. El tema estiliza el flujo clásico sin tocar su estructura ni sus hooks. Nota: el Checkout (70) figura como página de Elementor; el tema **siempre** usa su contenedor normal en carrito/checkout/Mi cuenta (no la rama de ancho completo de Elementor). En staging conviene dejar esa página solo con el shortcode.
+
+**Funciones propias que NO deben perderse (Code Snippets activos):**
+| Fragmento | Qué es | Decisión | Compatibilidad con el nuevo tema |
+|---|---|---|---|
+| `configurador_chapita` (~32 KB) | Configurador por shortcode | **Conservar tal cual** | El tema ya **no usa el reinicio global de Tailwind** (Preflight) para no pisar su marcado/estilos; el estilo se acota a los componentes del tema. Probar en staging (JS, estilos, carrito) |
+| `precio_con_cuotas` (~16 KB; 3 pagos, 10 % de referencia) | Cuotas + descuento por transferencia en precio | **Conservar** | Las tarjetas y la ficha de producto usan `get_price_html()` y los hooks estándar de WooCommerce, así que el fragmento debería seguir actuando; verificar posición y estilos. La regla real del descuento **no está confirmada** (es solo un valor de referencia) |
+| `fandeco-product-gallery` | Comportamiento propio de galería | **Revisar para integrar** | El tema deja el marcado estándar de galería de WooCommerce (`.woocommerce-product-gallery`); si el fragmento depende de clases de Blocksy/Elementor, habrá que adaptarlo |
+| `Fan Deco - Product Schema WooCommerce` | JSON-LD de productos | **Auditar duplicados** | WooCommerce ya emite schema de Producto; AIOSEO también puede. Usar `seo:snapshot`/`seo:diff` (detectan `Product x2`) antes de decidir cuál queda |
+
+**Elementor (23 elementos: 13 páginas + 10 de biblioteca):** Home 838, Contacto 547, Servicios 751, Tu mascota en 3D 1229, Checkout 70, plantilla de producto «Chapitas Nombres» 1085, plantilla de producto general 1104 y sección «FanDeco - Título Editorial» 1134 (más borradores). **Elementor no se puede desactivar al instalar el tema.** Mientras esté activo, sus **plantillas de producto (1085, 1104) pueden seguir reemplazando la ficha de producto** según sus condiciones de visualización, y entonces los selectores y la ficha del tema no se verían en esos productos. Plan: (1) leer las condiciones de 1085/1104 (WPVibe), (2) en staging pasarlas a borrador una por vez y comprobar la ficha del tema, (3) migrar contenido de Home/Contacto/Servicios/1229 a bloques/páginas nuevas, (4) recién entonces retirar Elementor.
+
+**SEO:** hay 237 registros en `wp_aioseo_posts` pero **no existe `wp_aioseo_terms`**: **no ejecutar el importador todavía**. Se endureció: nunca aplica sin una simulación previa (válida 1 h), no importa categorías si la tabla falta, y la pantalla lo advierte. Mientras tanto AIOSEO sigue activo y Fan Deco Core no imprime nada. Pendiente: averiguar dónde guarda AIOSEO 5.0.4 los datos de categorías/etiquetas (pegar `SHOW TABLES LIKE '%aioseo%'` y un `DESCRIBE`).
+
+**Pagos y envíos (parcial):** habilitados Transferencia bancaria (`bacs`) y Mercado Pago Basic; existen ajustes guardados de otros métodos de Mercado Pago y de Andreani sin confirmar si están habilitados. Pendiente retomar cuando el servidor permita consultas (hubo un HTTP 429: **espaciar las consultas** de auditoría).
+
+**Analítica:** hay configuración de Site Kit, MonsterInsights y PixelYourSite; sin confirmar duplicados. No desactivar ninguno sin comparar. `npm run seo:snapshot` ahora registra qué etiquetas se cargan (GA4 `gtag`, GTM, Meta Pixel, Pinterest) y avisa si una se carga más de una vez en una misma página.
+
+### Prioridades
+| Prioridad | Acción | Estado |
+|---|---|---|
+| Alta | Preservar configurador de chapitas y cuotas | Compatibilidad preparada (sin Preflight); **pendiente probar en staging** |
+| Alta | Mantener checkout clásico; probar Mercado Pago y Andreani | Checkout clásico estilizado; **pendiente probar pagos/envíos** |
+| Alta | No ejecutar la migración de AIOSEO todavía | Importador bloqueado sin simulación; AIOSEO sigue activo |
+| Media | Migrar plantillas de producto de Elementor | Pendiente (necesita sus condiciones) |
+| Media | Integrar galería personalizada y selectores de variaciones | Selectores hechos; galería pendiente de ver el código del fragmento |
+| Media | Revisar etiquetas duplicadas de Analytics | Herramienta lista; falta correrla en staging |
+
 ## 1. Decisión por plugin
 
 | Grupo | Plugin | Decisión | Nota |
@@ -51,7 +80,7 @@ No se modifica la página 838. En staging: crear una página nueva “Inicio (nu
 3. **Ajustes del Personalizador de Blocksy** (logo, colores, menús, widgets, CSS adicional) no se heredan. Logo y menús hay que reasignarlos; el CSS adicional hay que revisarlo.
 4. **Code Snippets** que usen hooks `blocksy_*` dejarán de ejecutarse; los de WooCommerce siguen funcionando.
 5. **Plantillas de WooCommerce sobrescritas** en el tema de respaldo (`blocksy-wpvibe-backup`) o en un hijo: revisar si existen (`/woocommerce/` dentro del tema).
-6. **Carrito/Checkout:** WooCommerce 11 usa por defecto los **bloques** de Carrito/Checkout. Los estilos del tema cubren el checkout clásico a fondo y los bloques solo de forma básica. Verificar cuál usa el sitio y si *Payment Gateway Based Fees* y Andreani funcionan con ese tipo.
+6. **Carrito/Checkout:** el sitio usa el **checkout clásico** (confirmado). Los estilos del tema cubren ese flujo a fondo; los bloques de WooCommerce solo de forma básica. No migrar a bloques en este hito.
 7. **Bloques en WordPress 7.x:** el editor usa ServerSideRender para la vista previa; confirmar que funciona en WP 7.1.4 al instalar.
 8. Permalinks, productos, pedidos y clientes no cambian al cambiar de tema.
 

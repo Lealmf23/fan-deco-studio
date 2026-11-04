@@ -249,3 +249,7 @@
 .fd-dot { width: 1rem; height: 1rem; padding: 0 !important; border-radius: 50%; border: 1px solid rgb(22 41 69 / 0.25) !important; background: var(--fd-swatch); }
 .fd-swatch--button.is-unavailable { overflow: hidden; }
 .fd-swatch--button.is-unavailable::after { inset: 50% 0 auto; }
+
+/* Sin Preflight: los enlaces de tarjetas/listados no deben subrayarse por defecto */
+.woocommerce ul.products li.product a:not(.button), .woocommerce ul.products li.product a:not(.button):hover { text-decoration: none; color: inherit; }
+.woocommerce-MyAccount-navigation a, .woocommerce-pagination a, .fd-breadcrumb a { text-decoration: none; }

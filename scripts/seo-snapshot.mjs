@@ -45,7 +45,54 @@ export function extract( html ) {
 		ogImage: metaContent( 'property', 'og:image' ),
 		h1: ( html.match( /<h1[\s>]/gi ) || [] ).length,
 		jsonld: ( html.match( /application\/ld\+json/gi ) || [] ).length,
+		schemaTypes: schemaTypes( html ),
+		tags: trackingTags( html ),
 	};
+}
+
+/** Tipos de schema.org (JSON-LD) con su cantidad de apariciones, p. ej. { Product: 2, BreadcrumbList: 1 }. */
+export function schemaTypes( html ) {
+	const counts = {};
+	const visit = ( node ) => {
+		if ( Array.isArray( node ) ) return node.forEach( visit );
+		if ( ! node || typeof node !== 'object' ) return;
+		const t = node[ '@type' ];
+		( Array.isArray( t ) ? t : t ? [ t ] : [] ).forEach( ( x ) => { counts[ x ] = ( counts[ x ] || 0 ) + 1; } );
+		Object.values( node ).forEach( visit );
+	};
+	for ( const m of html.matchAll( /<script[^>]*application\/ld\+json[^>]*>([\s\S]*?)<\/script>/gi ) ) {
+		try { visit( JSON.parse( m[ 1 ] ) ); } catch { counts.__JSON_INVALIDO = ( counts.__JSON_INVALIDO || 0 ) + 1; }
+	}
+	return counts;
+}
+
+/** Etiquetas de analítica/marketing cargadas y cuántas veces (para detectar duplicados). */
+export function trackingTags( html ) {
+	const tally = ( re ) => {
+		const o = {};
+		for ( const m of html.matchAll( re ) ) o[ m[ 1 ] ] = ( o[ m[ 1 ] ] || 0 ) + 1;
+		return o;
+	};
+	return {
+		gtagScript: tally( /googletagmanager\.com\/gtag\/js\?id=([A-Za-z0-9-]+)/g ),
+		gtagConfig: tally( /gtag\(\s*['"]config['"]\s*,\s*['"]([A-Za-z0-9-]+)['"]/g ),
+		gtm: tally( /googletagmanager\.com\/gtm\.js\?id=(GTM-[A-Z0-9]+)/g ),
+		metaPixel: tally( /fbq\(\s*['"]init['"]\s*,\s*['"](\d+)['"]/g ),
+		pinterest: tally( /pintrk\(\s*['"]load['"]\s*,\s*['"](\d+)['"]/g ),
+	};
+}
+
+/** Avisos de duplicados dentro de UNA página. */
+export function duplicateWarnings( info ) {
+	const w = [];
+	for ( const [ type, n ] of Object.entries( info.schemaTypes || {} ) ) {
+		if ( n > 1 && [ 'Product', 'Organization', 'WebSite', 'BreadcrumbList' ].includes( type ) ) w.push( `schema ${ type } x${ n }` );
+		if ( type === '__JSON_INVALIDO' ) w.push( 'JSON-LD inválido' );
+	}
+	for ( const [ kind, ids ] of Object.entries( info.tags || {} ) ) {
+		for ( const [ id, n ] of Object.entries( ids ) ) if ( n > 1 ) w.push( `${ kind } ${ id } x${ n }` );
+	}
+	return w;
 }
 
 const isList = source.endsWith( '.txt' );
@@ -61,6 +108,7 @@ async function worker() {
 		try {
 			const r = await get( url );
 			result[ url ] = r.status >= 300 ? { status: r.status, location: r.location } : { status: r.status, ...extract( r.text ) };
+			if ( result[ url ].schemaTypes ) result[ url ].duplicados = duplicateWarnings( result[ url ] );
 		} catch ( e ) {
 			result[ url ] = { error: String( e.message ) };
 		}
@@ -68,4 +116,9 @@ async function worker() {
 }
 await Promise.all( Array.from( { length: 3 }, worker ) );
 writeFileSync( out, JSON.stringify( result, null, 2 ) );
+const dup = Object.entries( result ).filter( ( [ , v ] ) => v.duplicados?.length );
+if ( dup.length ) {
+	console.error( `\nAVISO: ${ dup.length } página(s) con posibles duplicados:` );
+	dup.slice( 0, 20 ).forEach( ( [ u, v ] ) => console.error( `  ${ u }: ${ v.duplicados.join( ', ' ) }` ) );
+}
 console.error( `Guardado en ${ out }` );

@@ -14,7 +14,9 @@ get_header();
 	while ( have_posts() ) :
 		the_post();
 		// Páginas hechas con Elementor (durante la migración): ancho completo, sin título ni contenedor del tema.
-		if ( 'builder' === get_post_meta( get_the_ID(), '_elementor_edit_mode', true ) ) {
+		// Excepción: carrito/checkout/Mi cuenta (checkout clásico) siempre usan el contenedor del tema, aunque hoy estén hechas con Elementor.
+		$fd_wc_page = fandeco_has_woocommerce() && ( is_cart() || is_checkout() || is_account_page() );
+		if ( ! $fd_wc_page && 'builder' === get_post_meta( get_the_ID(), '_elementor_edit_mode', true ) ) {
 			?>
 			<article <?php post_class( 'fd-elementor-page' ); ?>><?php the_content(); ?></article>
 			<?php

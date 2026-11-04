@@ -1,4 +1,11 @@
 @layer base {
+	*, *::before, *::after { box-sizing: border-box; }
+	/* Reinicio acotado: solo dentro de los componentes del tema (especificidad 0 con :where). */
+	:where(.fd-header, .fd-footer, .fd-drawer, .fd-section, .fd-announcement) :where(h1, h2, h3, h4, h5, h6, p, figure, blockquote) { margin: 0; }
+	:where(.fd-header, .fd-footer, .fd-drawer, .fd-section) :where(ul, ol) { margin: 0; padding: 0; list-style: none; }
+	:where(.fd-header, .fd-footer, .fd-drawer, .fd-section) :where(img, svg, picture, video) { display: block; }
+	:where(.fd-header, .fd-footer, .fd-drawer, .fd-section) :where(button, input, select, textarea) { font: inherit; color: inherit; }
+	:where(.fd-header, .fd-footer, .fd-drawer, .fd-section) :where(button) { background: none; border: 0; padding: 0; }
 	html {
 		scroll-behavior: smooth;
 		-webkit-text-size-adjust: 100%;

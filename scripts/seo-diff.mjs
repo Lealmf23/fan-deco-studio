@@ -15,17 +15,22 @@ const toPath = ( u ) => { try { return new URL( u ).pathname; } catch { return u
 const Bp = Object.fromEntries( Object.entries( B ).map( ( [ u, v ] ) => [ toPath( u ), v ] ) );
 
 const fields = [ 'title', 'description', 'canonical', 'robots', 'h1' ];
+const typesOf = ( v ) => JSON.stringify( Object.fromEntries( Object.entries( v.schemaTypes || {} ).sort() ) );
 let problems = 0;
 for ( const [ url, a ] of Object.entries( A ) ) {
 	const path = toPath( url );
 	const b = Bp[ path ];
 	if ( ! b ) { console.log( `FALTA   ${ path }` ); problems++; continue; }
 	if ( b.status !== a.status ) { console.log( `ESTADO  ${ path }: ${ a.status } → ${ b.status }` ); problems++; continue; }
+	if ( a.schemaTypes && typesOf( a ) !== typesOf( b ) ) { console.log( `SCHEMA  ${ path }\n   antes:   ${ typesOf( a ) }\n   después: ${ typesOf( b ) }` ); problems++; }
 	for ( const f of fields ) {
 		const av = f === 'canonical' ? toPath( a[ f ] ?? '' ) : String( a[ f ] ?? '' );
 		const bv = f === 'canonical' ? toPath( b[ f ] ?? '' ) : norm( b[ f ] ?? '' );
 		if ( av !== bv ) { console.log( `${ f.toUpperCase().padEnd( 7 ) } ${ path }\n   antes:   ${ av }\n   después: ${ bv }` ); problems++; }
 	}
+}
+for ( const [ url, b ] of Object.entries( B ) ) {
+	if ( b.duplicados?.length ) { console.log( `DUPLICADO ${ toPath( url ) }: ${ b.duplicados.join( ', ' ) }` ); problems++; }
 }
 console.log( problems ? `\n${ problems } diferencia(s). Revisá cada una antes de lanzar.` : '\nSin diferencias SEO on-page.' );
 process.exit( problems ? 1 : 0 );

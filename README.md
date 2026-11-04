@@ -58,7 +58,12 @@ El SEO vive en un **plugin propio** (`plugins/fan-deco-core/`, ZIP en `release/f
 - Rendimiento: imagen del hero con `fetchpriority=high` y sin lazy; resto `loading=lazy` con `width/height` (sin saltos de diseño); fuentes autoalojadas con `font-display: swap` y preload de la fuente del cuerpo; JS crítico ≈ 4,5 kB; se quitan generator/emoji/wlwmanifest/rsd.
 - Imágenes de producto sin alt reciben el nombre del producto como respaldo.
 - No se tocan permalinks ni redirecciones. Sitemaps y robots.txt: los gestiona AIOSEO/WordPress.
-- **Pendiente validar** en staging: Rich Results Test (producto/migas), Search Console, Lighthouse y que AIOSEO no emita duplicados.
+- **No ejecutar el importador en el sitio real todavía** (falta la tabla `aioseo_terms`; ver `docs/MIGRACION.md`). **Pendiente validar** en staging: Rich Results Test (producto/migas), Search Console, Lighthouse y que AIOSEO no emita duplicados.
+
+## Compatibilidad con funciones propias del sitio
+- **Sin Preflight de Tailwind:** el reinicio de estilos está acotado a los componentes del tema (header, footer, secciones), para no alterar el marcado de shortcodes y snippets existentes (configurador de chapitas, cuotas) ni de WPForms/Elementor.
+- **Checkout clásico** (shortcodes) estilizado sin cambiar su estructura; carrito/checkout/Mi cuenta usan siempre el contenedor del tema.
+- Detalle de snippets, plantillas de Elementor y prioridades: **[docs/MIGRACION.md](docs/MIGRACION.md)**.
 
 ## Selectores visuales de variaciones
 Atributos globales de tipo **color** (círculos) y **button** (botones con texto) se muestran como selectores visuales; el `<select>` original de WooCommerce se conserva oculto y es la fuente de verdad (precio, stock e imagen los sigue calculando WooCommerce). Accesibles (radiogroup, teclado), con combinaciones no disponibles tachadas. Color por término: campo propio → datos heredados de Blocksy → nombre conocido → botón con texto. No depende de Blocksy. Atributos personalizados (no globales) y de tipo *select* no se modifican.

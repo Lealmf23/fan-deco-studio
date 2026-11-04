@@ -141,7 +141,18 @@ final class FanDeco_Import_AIOSEO {
 		check_admin_referer( 'fdc_import_aioseo' );
 		$dry       = ! isset( $_POST['fdc_apply'] );
 		$overwrite = ! empty( $_POST['fdc_overwrite'] );
-		set_transient( 'fdc_import_result_' . get_current_user_id(), array( 'dry' => $dry ) + self::run( $dry, $overwrite ), 300 );
+		$guard     = 'fdc_import_simulated_' . get_current_user_id();
+		$blocked   = false;
+		if ( ! $dry && ! get_transient( $guard ) ) {
+			// Seguridad: no se aplica nada sin haber simulado en la última hora.
+			$dry     = true;
+			$blocked = true;
+		}
+		$result = array( 'dry' => $dry, 'blocked' => $blocked ) + self::run( $dry, $overwrite );
+		if ( $dry && ! $blocked ) {
+			set_transient( $guard, 1, HOUR_IN_SECONDS );
+		}
+		set_transient( 'fdc_import_result_' . get_current_user_id(), $result, 300 );
 		wp_safe_redirect( admin_url( 'options-general.php?page=fandeco-seo#fdc-import' ) );
 		exit;
 	}
@@ -152,9 +163,11 @@ final class FanDeco_Import_AIOSEO {
 		delete_transient( $key );
 		?>
 		<h2 id="fdc-import">Importar desde AIOSEO</h2>
+		<div class="notice notice-warning inline"><p><strong>No ejecutar todavía en el sitio real.</strong> En la auditoría de Fan Deco existe <code>wp_aioseo_posts</code> (237 registros) pero <strong>no</strong> <code>wp_aioseo_terms</code>; el importador no importa categorías y los datos de términos de AIOSEO 5.x podrían estar en otro lugar. Mantener AIOSEO activo durante la primera migración.</p></div>
 		<p class="description"><strong>Antes de desactivar AIOSEO:</strong> 1) hacé una copia de la base de datos; 2) ejecutá primero la <em>simulación</em>; 3) comparás títulos y descripciones antes/después (ver README: <code>npm run seo:snapshot</code>). Las plantillas globales de AIOSEO (formato de títulos por tipo de contenido) <u>no</u> se importan: copiálas manualmente arriba en “Títulos y descripciones”. Los campos ya completados aquí no se pisan salvo que lo indiques.</p>
 		<?php if ( is_array( $result ) ) : ?>
 			<div class="notice notice-info inline">
+				<?php if ( ! empty( $result['blocked'] ) ) : ?><p><strong>No se aplicó nada:</strong> primero hay que ejecutar y revisar una simulación (válida por 1 hora). Se ejecutó una simulación ahora; revisá el resultado y volvé a pulsar “Importar ahora”.</p><?php endif; ?>
 				<p><strong><?php echo ! empty( $result['dry'] ) ? 'Simulación (no se guardó nada)' : 'Importación aplicada'; ?>:</strong>
 					<?php echo (int) $result['posts']; ?> contenidos, <?php echo (int) $result['terms']; ?> términos, <?php echo (int) $result['skipped']; ?> campos omitidos por existir ya.</p>
 				<?php foreach ( $result['notes'] as $n ) { echo '<p>' . esc_html( $n ) . '</p>'; } ?>
