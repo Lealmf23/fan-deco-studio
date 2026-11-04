@@ -7,6 +7,8 @@ Tema WordPress independiente (sin tema padre, sin Elementor) para la tienda Fan 
 ## Requisitos
 - Desarrollo: Node 20+ y npm. Producción: WordPress 6.5+, PHP 8.0+ (objetivo 8.2; confirmar la versión real en Hostinger), WooCommerce 8+. **No** se necesita Node en el servidor.
 
+> Antes de instalar, leer **[docs/MIGRACION.md](docs/MIGRACION.md)** (auditoría del sitio actual, riesgos al salir de Blocksy/Elementor y checklist de pruebas).
+
 ## Instalación (sitio)
 1. `npm install && npm run package` → genera `release/fan-deco-studio.zip` (también viene incluido en el repo).
 2. En **staging**: Apariencia → Temas → Añadir nuevo → Subir tema → activar. No activar primero en producción. Blocksy y Elementor no se tocan.
@@ -47,7 +49,7 @@ El SEO vive en un **plugin propio** (`plugins/fan-deco-core/`, ZIP en `release/f
   4. Desactivar AIOSEO **en staging**, y `npm run seo:snapshot -- https://staging…/sitemap.xml despues.json`.
   5. `npm run seo:diff -- antes.json despues.json` → debe quedar sin diferencias (o solo las deseadas). Recién entonces repetir en producción.
 - **No verificado:** todo el plugin se probó solo con `php -l` y pruebas unitarias de la lógica pura (variables, conversión de etiquetas AIOSEO, reglas de redirección). El panel de ajustes, los metaboxes, las salidas en `<head>` y el importador **no se ejecutaron en WordPress real**; el esquema de tablas de AIOSEO se asumió (tablas `aioseo_posts`/`aioseo_terms`, columnas comprobadas en ejecución) y puede requerir ajustes.
-- **Fuera de este hito (hoja de ruta del “super plugin”):** migas visibles, schema de FAQ/LocalBusiness, 404 monitor, analítica/píxeles con consentimiento, botón de WhatsApp, feeds de productos (Google Merchant/Meta), campos personalizados de producto, etc. Se agregan como módulos del mismo plugin.
+- **Fuera de este hito (hoja de ruta):** migas visibles, schema de FAQ/LocalBusiness, monitor de 404, botón de WhatsApp, campos personalizados de producto. **No** se replicarán feeds ni analítica: Google for WooCommerce, Pinterest, MonsterInsights/Site Kit/PixelYourSite ya existen en el sitio (ver `docs/MIGRACION.md`, que además trae la decisión por plugin, riesgos y checklist de staging).
 
 ## SEO del tema (respaldo)
 - **Convive con AIOSEO**: si AIOSEO, Yoast, Rank Math, SEOPress o TSF están activos, el tema no imprime ningún metadato propio (filtro `fandeco_seo_plugin_active` para forzarlo). Sin plugin SEO, `inc/seo.php` imprime meta description, Open Graph/Twitter y JSON-LD (Organization + WebSite con SearchAction en portada; BreadcrumbList en contenido).
@@ -75,6 +77,7 @@ Hay estilos de marca para archivo de tienda/categorías, producto (galería, var
 - Mercado Pago, Andreani, variaciones, cupones, impuestos, stock: **no probados**; el tema no toca esa lógica, pero hay que testear en staging.
 - Compatibilidad con AIOSEO (el tema usa `title-tag` y no imprime metadatos SEO propios), Core Web Vitals, accesibilidad con lectores de pantalla.
 - Traducciones JS (`languages/` vacío).
+- Swatches de variaciones (hoy Blocksy Companion probablemente los aporta): pendiente de construir.
 
 ## Contenido por defecto (revisar antes de publicar)
 Los textos del hero/mascotas/proceso son los del brief. Los beneficios por defecto incluyen **“10% OFF con transferencia bancaria”** como texto editorial (no aplica ni modifica ningún descuento). No se incluyen productos, precios ni imágenes de demostración: sin imagen se muestra un degradé de marca.
