@@ -31,13 +31,13 @@
 @media (min-width: 640px) and (max-width: 1023px) { .woocommerce-account .u-columns { grid-template-columns: 1fr 1fr; } }
 .woocommerce-account .u-column1, .woocommerce-account .u-column2 { float: none; width: auto; }
 .woocommerce-account .u-column1 > h2, .woocommerce-account .u-column2 > h2 { margin: 0 0 1rem; font-size: 1.5rem; letter-spacing: -0.03em; }
-.woocommerce-account form.login, .woocommerce-account form.register, .woocommerce-account form.lost_reset_password { margin: 0; padding: 1.75rem; border: 0; border-radius: 1.5rem; background: #fff; box-shadow: 0 1px 0 var(--color-fd-line), 0 24px 40px -32px rgb(22 41 69 / 0.35); }
+.woocommerce-account form.login, .woocommerce-account form.register, .woocommerce-account form.lost_reset_password { margin: 0; padding: 1.75rem; border: 0; border-radius: 1.5rem; background: #fff; box-shadow: 0 1px 0 var(--color-fd-line), 0 24px 40px -32px rgb(41 40 36 / 0.35); }
 .woocommerce-account form.register { background: var(--color-fd-sand); box-shadow: none; }
 .woocommerce-account form .form-row { margin-bottom: 1rem; }
 .woocommerce-account form .form-row label { margin-bottom: 0.35rem; font-size: 0.875rem; font-weight: 600; color: var(--color-fd-blue); }
 .woocommerce-account form .form-row .required { color: var(--color-fd-wine); text-decoration: none; }
 .woocommerce-account .woocommerce form .form-row input.input-text, .woocommerce-account .woocommerce form .form-row select, .woocommerce-account .woocommerce form .form-row textarea { min-height: 3.25rem; padding: 0.6rem 1rem; border: 1.5px solid var(--color-fd-line); border-radius: 0.9rem; background: #fff; font-size: 1rem; transition: border-color var(--duration-fd-fast), box-shadow var(--duration-fd-fast); }
-.woocommerce-account .woocommerce form .form-row input.input-text:focus, .woocommerce-account .woocommerce form .form-row select:focus, .woocommerce-account .woocommerce form .form-row textarea:focus { outline: 0; border-color: var(--color-fd-blue); box-shadow: 0 0 0 4px rgb(22 41 69 / 0.1); }
+.woocommerce-account .woocommerce form .form-row input.input-text:focus, .woocommerce-account .woocommerce form .form-row select:focus, .woocommerce-account .woocommerce form .form-row textarea:focus { outline: 0; border-color: var(--color-fd-blue); box-shadow: 0 0 0 4px rgb(41 40 36 / 0.1); }
 .woocommerce-account .password-input { position: relative; display: block; }
 .woocommerce-account .show-password-input { position: absolute; top: 50%; right: 0.9rem; transform: translateY(-50%); width: 1.5rem; height: 1.5rem; padding: 0; border: 0; background: none; color: var(--color-fd-muted); cursor: pointer; }
 .woocommerce-account .woocommerce-form-login__rememberme { display: inline-flex; align-items: center; gap: 0.5rem; margin: 0.25rem 0 0; font-size: 0.9375rem; font-weight: 500; }
@@ -73,7 +73,7 @@
 .woocommerce-account .woocommerce-MyAccount-content > p:nth-of-type(2) { max-width: 36rem; color: var(--color-fd-muted); }
 .fd-account-cards { display: grid; gap: 0.9rem; margin-top: 1.75rem; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); }
 .fd-account-card { display: grid; gap: 0.25rem; align-content: start; padding: 1.25rem; border-radius: 1.25rem; background: #fff; box-shadow: 0 1px 0 var(--color-fd-line); text-decoration: none; color: var(--color-fd-ink); transition: transform var(--duration-fd-base) var(--ease-fd), box-shadow var(--duration-fd-base); }
-.fd-account-card:hover { transform: translateY(-3px); box-shadow: 0 1px 0 var(--color-fd-line), 0 18px 30px -22px rgb(22 41 69 / 0.45); }
+.fd-account-card:hover { transform: translateY(-3px); box-shadow: 0 1px 0 var(--color-fd-line), 0 18px 30px -22px rgb(41 40 36 / 0.45); }
 .fd-account-card__icon { display: grid; place-items: center; width: 2.75rem; height: 2.75rem; margin-bottom: 0.6rem; border-radius: 50%; background: var(--color-fd-cream); color: var(--color-fd-wine); }
 .fd-account-card strong { font-size: 1.125rem; letter-spacing: -0.02em; color: var(--color-fd-blue); }
 .fd-account-card span:last-child { font-size: 0.875rem; color: var(--color-fd-muted); }

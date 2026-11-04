@@ -1,14 +1,14 @@
 /* =====================================================================
    Página de Contacto: hero oscuro con líneas de capa + lista de medios + formulario existente.
    ===================================================================== */
-.fd-contact__hero { background-color: var(--fd-night); background-image: var(--fd-layers); color: #f7f5f0; padding-block: clamp(3.5rem, 9vw, 7rem) clamp(2.5rem, 6vw, 4.5rem); }
+.fd-contact__hero { background-color: var(--fd-night); background-image: var(--fd-layers); color: #f5f2ed; padding-block: clamp(3.5rem, 9vw, 7rem) clamp(2.5rem, 6vw, 4.5rem); }
 .fd-contact__hero .fd-eyebrow { color: var(--color-fd-steel); }
-.fd-contact__title { margin: 0; font-size: clamp(3rem, 9vw, 7rem); line-height: 0.92; letter-spacing: -0.05em; color: #f7f5f0; }
-.fd-contact__lead { max-width: 34rem; margin: 1.25rem 0 0; font-size: 1.125rem; line-height: 1.55; color: rgb(247 245 240 / 0.75); }
+.fd-contact__title { margin: 0; font-size: clamp(3rem, 9vw, 7rem); line-height: 0.92; letter-spacing: -0.05em; color: #f5f2ed; }
+.fd-contact__lead { max-width: 34rem; margin: 1.25rem 0 0; font-size: 1.125rem; line-height: 1.55; color: rgb(245 242 237 / 0.75); }
 
 .fd-contact__body { padding-block: clamp(2rem, 5vw, 4rem) clamp(3rem, 7vw, 6rem); }
-.fd-contact__list { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr)); gap: 0; margin: 0 0 clamp(2.5rem, 6vw, 4.5rem); padding: 0; list-style: none; border-top: 1px solid var(--color-fd-line, rgb(22 41 69 / 0.15)); }
-.fd-contact__item { display: grid; grid-template-columns: auto 1fr; align-items: center; column-gap: 0.9rem; row-gap: 0.15rem; padding: 1.5rem 1.5rem 1.5rem 0; border-bottom: 1px solid var(--color-fd-line, rgb(22 41 69 / 0.15)); }
+.fd-contact__list { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr)); gap: 0; margin: 0 0 clamp(2.5rem, 6vw, 4.5rem); padding: 0; list-style: none; border-top: 1px solid var(--color-fd-line, rgb(41 40 36 / 0.15)); }
+.fd-contact__item { display: grid; grid-template-columns: auto 1fr; align-items: center; column-gap: 0.9rem; row-gap: 0.15rem; padding: 1.5rem 1.5rem 1.5rem 0; border-bottom: 1px solid var(--color-fd-line, rgb(41 40 36 / 0.15)); }
 .fd-contact__icon { grid-row: span 2; display: grid; place-items: center; width: 2.75rem; height: 2.75rem; border-radius: 50%; background: var(--color-fd-sand); color: var(--color-fd-wine); }
 .fd-contact__icon svg { width: 1.35rem; height: 1.35rem; }
 .fd-contact__label { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-fd-muted); }

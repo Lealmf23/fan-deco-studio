@@ -5,7 +5,7 @@
    ===================================================================== */
 
 :root {
-	--fd-night: #162945;
+	--fd-night: #292824;
 	--fd-layers: repeating-linear-gradient(to bottom, transparent 0, transparent 9px, rgb(255 255 255 / 0.05) 9px, rgb(255 255 255 / 0.05) 10px);
 }
 
@@ -16,26 +16,26 @@
 .fd-hero--immersive .fd-hero__media picture, .fd-hero--immersive .fd-hero__img, .fd-hero--immersive .fd-hero__lit { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .fd-hero--immersive .fd-hero__lit { opacity: 0; transition: opacity 1000ms var(--ease-fd); }
 .fd-hero--immersive.is-lit .fd-hero__lit { opacity: 1; }
-.fd-hero--immersive .fd-hero__media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to right, rgb(247 245 240 / 0.94) 0%, rgb(247 245 240 / 0.6) 36%, transparent 64%); transition: opacity 900ms var(--ease-fd); }
+.fd-hero--immersive .fd-hero__media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to right, rgb(245 242 237 / 0.94) 0%, rgb(245 242 237 / 0.6) 36%, transparent 64%); transition: opacity 900ms var(--ease-fd); }
 .fd-hero--immersive.is-lit .fd-hero__media::after { background: linear-gradient(to right, rgb(15 29 51 / 0.9) 0%, rgb(15 29 51 / 0.5) 38%, transparent 66%); }
 .fd-hero--immersive .fd-hero__content { position: relative; z-index: 2; max-width: 44rem; }
 .fd-hero--immersive .fd-hero__title { font-size: clamp(3.75rem, 8.2vw, 9.25rem); line-height: 0.9; letter-spacing: -0.055em; font-weight: 600; transition: color 800ms var(--ease-fd); }
 .fd-hero--immersive .fd-hero__desc { max-width: 30rem; font-size: 1.25rem; transition: color 800ms var(--ease-fd); }
 .fd-hero--immersive .fd-eyebrow { transition: color 800ms var(--ease-fd); }
 .fd-hero--immersive.is-lit { background: var(--fd-night); }
-.fd-hero--immersive.is-lit .fd-hero__title { color: #f7f5f0; }
-.fd-hero--immersive.is-lit .fd-hero__desc { color: rgb(247 245 240 / 0.82); }
+.fd-hero--immersive.is-lit .fd-hero__title { color: #f5f2ed; }
+.fd-hero--immersive.is-lit .fd-hero__desc { color: rgb(245 242 237 / 0.82); }
 .fd-hero--immersive.is-lit .fd-eyebrow { color: #f2b84b; }
 .fd-hero--immersive .fd-hero__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.5rem; }
 .fd-hero--immersive.is-lit .fd-btn--primary { background: #f2b84b; color: var(--fd-night); }
 
-.fd-hero-switch { display: inline-flex; align-items: center; gap: 0.75rem; min-height: 3.5rem; padding: 0.5rem 1.25rem 0.5rem 0.6rem; border: 1.5px solid rgb(22 41 69 / 0.25); border-radius: 999px; background: rgb(255 255 255 / 0.55); backdrop-filter: blur(10px); color: var(--color-fd-blue); font: 600 0.9375rem/1 var(--font-sans); cursor: pointer; transition: background-color 500ms, color 500ms, border-color 500ms; }
+.fd-hero-switch { display: inline-flex; align-items: center; gap: 0.75rem; min-height: 3.5rem; padding: 0.5rem 1.25rem 0.5rem 0.6rem; border: 1.5px solid rgb(41 40 36 / 0.25); border-radius: 999px; background: rgb(255 255 255 / 0.55); backdrop-filter: blur(10px); color: var(--color-fd-blue); font: 600 0.9375rem/1 var(--font-sans); cursor: pointer; transition: background-color 500ms, color 500ms, border-color 500ms; }
 .fd-hero-switch:hover { background: rgb(255 255 255 / 0.85); }
 .fd-hero-switch__track { position: relative; width: 3.1rem; height: 1.8rem; border-radius: 999px; background: var(--color-fd-line); transition: background-color 400ms; }
 .fd-hero-switch__thumb { position: absolute; top: 0.2rem; left: 0.2rem; width: 1.4rem; height: 1.4rem; border-radius: 50%; background: #fff; box-shadow: 0 1px 4px rgb(0 0 0 / 0.35); transition: transform 400ms var(--ease-fd), background-color 400ms; }
 .fd-hero-switch[aria-checked="true"] .fd-hero-switch__track { background: #f2b84b; }
 .fd-hero-switch[aria-checked="true"] .fd-hero-switch__thumb { transform: translateX(1.3rem); background: #fff8e1; }
-.fd-hero--immersive.is-lit .fd-hero-switch { border-color: rgb(247 245 240 / 0.35); background: rgb(247 245 240 / 0.08); color: #f7f5f0; }
+.fd-hero--immersive.is-lit .fd-hero-switch { border-color: rgb(245 242 237 / 0.35); background: rgb(245 242 237 / 0.08); color: #f5f2ed; }
 @media (prefers-reduced-motion: reduce) { .fd-hero--immersive, .fd-hero--immersive * { transition: none !important; } }
 
 /* ---------- Beneficios en franja ---------- */
@@ -104,7 +104,7 @@
 .fd-banner--immersive .fd-banner__card { position: relative; display: grid; align-items: end; min-height: min(34rem, 80svh); color: #fff; background: var(--color-fd-blue); isolation: isolate; }
 .fd-banner--immersive .fd-banner__media { position: absolute; inset: 0; z-index: -2; min-height: 0; }
 .fd-banner--immersive .fd-banner__media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.fd-banner--immersive .fd-banner__card::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(to right, rgb(104 34 66 / 0.88) 0%, rgb(104 34 66 / 0.45) 42%, transparent 70%); }
+.fd-banner--immersive .fd-banner__card::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(to right, rgb(98 101 69 / 0.88) 0%, rgb(98 101 69 / 0.45) 42%, transparent 70%); }
 .fd-banner--immersive .fd-banner__content { max-width: 36rem; padding: clamp(1.75rem, 5vw, 4.5rem); }
 .fd-banner--immersive .fd-banner__title { color: #fff; font-size: clamp(2.5rem, 4.4vw, 4.75rem); line-height: 0.95; letter-spacing: -0.045em; }
 .fd-banner--immersive .fd-eyebrow { color: rgb(255 255 255 / 0.8); }
@@ -128,10 +128,10 @@
 }
 
 /* ---------- La noche es de toda la portada: header y barra superior se oscurecen mientras el hero está encendido y arriba ---------- */
-body:has(.fd-hero--immersive.is-lit) .fd-header:not(.is-scrolled) { background: var(--fd-night); color: #f7f5f0; box-shadow: none; transition: background-color 800ms var(--ease-fd); }
-body:has(.fd-hero--immersive.is-lit) .fd-header:not(.is-scrolled) :is(.fd-header__brand, .fd-nav .fd-menu a, .fd-icon-btn) { color: #f7f5f0; }
-body:has(.fd-hero--immersive.is-lit) .fd-header:not(.is-scrolled) .fd-icon-btn:hover { background: rgb(247 245 240 / 0.12); }
-body:has(.fd-hero--immersive.is-lit) .fd-announcement { background: #0a1424; transition: background-color 800ms var(--ease-fd); }
+body:has(.fd-hero--immersive.is-lit) .fd-header:not(.is-scrolled) { background: var(--fd-night); color: #f5f2ed; box-shadow: none; transition: background-color 800ms var(--ease-fd); }
+body:has(.fd-hero--immersive.is-lit) .fd-header:not(.is-scrolled) :is(.fd-header__brand, .fd-nav .fd-menu a, .fd-icon-btn) { color: #f5f2ed; }
+body:has(.fd-hero--immersive.is-lit) .fd-header:not(.is-scrolled) .fd-icon-btn:hover { background: rgb(245 242 237 / 0.12); }
+body:has(.fd-hero--immersive.is-lit) .fd-announcement { background: #1a1915; transition: background-color 800ms var(--ease-fd); }
 
 /* El footer se pega al cierre de la home (sin franja crema entre dos fondos oscuros) */
 .fd-home + .fd-footer { margin-top: 0; }

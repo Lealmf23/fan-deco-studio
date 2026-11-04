@@ -3,22 +3,24 @@
  * Mantener los colores sincronizados con theme.json (paleta del editor).
  */
 @theme static {
-	/* Color de marca */
-	--color-fd-blue: #162945;
-	--color-fd-steel: #83a1b9;
-	--color-fd-wine: #682242;
-	--color-fd-cream: #f7f5f0;
+	/* Color de marca (identidad actual del sitio: verde oliva, carbón y crema) */
+	--color-fd-olive: #74784e; /* acento de títulos grandes en cursiva (para texto chico se usa --color-fd-wine) */
+	--color-fd-blue: #292824;
+	--color-fd-steel: #a6aa86;
+	--color-fd-wine: #626545;
+	--color-fd-cream: #f5f2ed;
 	--color-fd-white: #ffffff;
-	--color-fd-ink: #292d33;
+	--color-fd-ink: #292824;
 	/* Derivados (propuestas de diseño, no colores oficiales) */
-	--color-fd-line: #e3dfd6;
-	--color-fd-muted: #5d6470;
-	--color-fd-wine-dark: #521a34;
-	--color-fd-sand: #efebe2;
+	--color-fd-line: #e2dfd3;
+	--color-fd-muted: #6c6a5f;
+	--color-fd-wine-dark: #4d5036;
+	--color-fd-sand: #e9e6dc;
 
 	/* Tipografía */
-	--font-sans: "Bricolage Grotesque Variable", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-	--font-display: "Bricolage Grotesque Variable", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+	--font-sans: "DM Sans Variable", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+	--font-display: "DM Sans Variable", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+	--font-serif: Georgia, "Times New Roman", serif;
 	--font-script: "Caveat", "Segoe Script", cursive;
 
 	/* Radios */
@@ -30,8 +32,8 @@
 	--radius-fd-window: 1.5rem;
 
 	/* Sombras */
-	--shadow-fd-card: 0 1px 2px rgb(22 41 69 / 0.05), 0 8px 24px -12px rgb(22 41 69 / 0.15);
-	--shadow-fd-lift: 0 2px 4px rgb(22 41 69 / 0.06), 0 18px 40px -16px rgb(22 41 69 / 0.28);
+	--shadow-fd-card: 0 1px 2px rgb(41 40 36 / 0.05), 0 8px 24px -12px rgb(41 40 36 / 0.15);
+	--shadow-fd-lift: 0 2px 4px rgb(41 40 36 / 0.06), 0 18px 40px -16px rgb(41 40 36 / 0.28);
 
 	/* Movimiento */
 	--ease-fd: cubic-bezier(0.22, 1, 0.36, 1);

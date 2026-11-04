@@ -23,7 +23,7 @@ if ( '' === $title ) {
 	<div class="fd-container fd-section-heading__inner">
 		<div class="fd-section-heading__text">
 			<?php if ( $eyebrow ) : ?><p class="fd-eyebrow" data-fd-reveal><?php echo esc_html( $eyebrow ); ?></p><?php endif; ?>
-			<h<?php echo (int) $level; ?> class="fd-section-heading__title" data-fd-reveal><?php echo esc_html( $title ); ?></h<?php echo (int) $level; ?>>
+			<h<?php echo (int) $level; ?> class="fd-section-heading__title" data-fd-reveal><?php echo fandeco_title_html( $title ); // phpcs:ignore WordPress.Security.EscapeOutput -- escapado en la función. ?></h<?php echo (int) $level; ?>>
 			<?php if ( $desc ) : ?><p class="fd-section-heading__desc" data-fd-reveal><?php echo esc_html( $desc ); ?></p><?php endif; ?>
 		</div>
 		<?php if ( $link && $link_tx ) : ?>

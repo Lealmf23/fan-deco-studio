@@ -47,7 +47,7 @@
 .fd-product-card__add .button, .fd-product-card__add a, .woocommerce .fd-product-card__add a.button, .woocommerce-page .fd-product-card__add a.button {
 	position: relative; display: grid; place-items: center; width: 3rem; height: 3rem; min-height: 0; padding: 0; margin: 0;
 	border: 0; border-radius: 50%; background: #fff; color: var(--color-fd-blue); font-size: 0; line-height: 0; overflow: hidden;
-	box-shadow: 0 6px 18px -8px rgb(22 41 69 / 0.45); transition: background-color var(--duration-fd-fast), color var(--duration-fd-fast), transform var(--duration-fd-base) var(--ease-fd);
+	box-shadow: 0 6px 18px -8px rgb(41 40 36 / 0.45); transition: background-color var(--duration-fd-fast), color var(--duration-fd-fast), transform var(--duration-fd-base) var(--ease-fd);
 }
 .fd-product-card__add .button::before, .woocommerce .fd-product-card__add a.button::before {
 	content: ""; width: 1.35rem; height: 1.35rem; background: currentColor;
@@ -201,4 +201,4 @@
 /* ---- Barra fija de compra (solo móvil) ---- */
 .fd-buybar { display: none; }
 form.cart.is-attention { animation: fd-attention 1.1s var(--ease-fd); }
-@keyframes fd-attention { 0%, 100% { box-shadow: 0 0 0 0 transparent; } 30% { box-shadow: 0 0 0 6px rgb(104 34 66 / 0.18); border-radius: 1rem; } }
+@keyframes fd-attention { 0%, 100% { box-shadow: 0 0 0 0 transparent; } 30% { box-shadow: 0 0 0 6px rgb(98 101 69 / 0.18); border-radius: 1rem; } }

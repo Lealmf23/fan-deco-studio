@@ -125,7 +125,7 @@ export function TextFields( { attributes, setAttributes, description = true, eye
 	return (
 		<>
 			{ eyebrow && <TextControl label={ __( 'Sobretítulo (eyebrow)', TEXT_DOMAIN ) } value={ attributes.eyebrow } onChange={ ( v ) => setAttributes( { eyebrow: v } ) } /> }
-			<TextControl label={ __( 'Título', TEXT_DOMAIN ) } value={ attributes.title } onChange={ ( v ) => setAttributes( { title: v } ) } />
+			<TextControl label={ __( 'Título', TEXT_DOMAIN ) } help={ __( 'Estilo: **negrita** y *cursiva* (serif en oliva). Ej.: **Hacemos** *tus ideas* **realidad.**', TEXT_DOMAIN ) } value={ attributes.title } onChange={ ( v ) => setAttributes( { title: v } ) } />
 			{ description && <TextareaControl label={ __( 'Descripción', TEXT_DOMAIN ) } value={ attributes.description } onChange={ ( v ) => setAttributes( { description: v } ) } /> }
 		</>
 	);

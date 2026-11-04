@@ -30,7 +30,7 @@
 	border-radius: 999px; border: 0; background: transparent; color: inherit; cursor: pointer;
 	transition: background-color var(--duration-fd-fast);
 }
-.fd-icon-btn:hover { background: rgb(22 41 69 / 0.07); }
+.fd-icon-btn:hover { background: rgb(41 40 36 / 0.07); }
 .fd-icon-btn--ring { border: 1.5px solid var(--color-fd-line); background: #fff; color: var(--color-fd-blue); }
 
 /* ========== Barra superior ========== */
@@ -42,7 +42,7 @@
 .fd-header.is-sticky { position: sticky; top: 0; z-index: 60; backdrop-filter: saturate(1.4) blur(12px); }
 .admin-bar .fd-header.is-sticky { top: 32px; }
 @media (max-width: 782px) { .admin-bar .fd-header.is-sticky { top: 46px; } }
-.fd-header.is-scrolled { box-shadow: 0 1px 0 var(--color-fd-line), 0 10px 30px -20px rgb(22 41 69 / 0.4); background: color-mix(in srgb, var(--color-fd-cream) 97%, transparent); }
+.fd-header.is-scrolled { box-shadow: 0 1px 0 var(--color-fd-line), 0 10px 30px -20px rgb(41 40 36 / 0.4); background: color-mix(in srgb, var(--color-fd-cream) 97%, transparent); }
 .fd-header__inner { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; min-height: 4.5rem; }
 .fd-header__brand { text-decoration: none; color: var(--color-fd-blue); }
 .fd-header__actions { display: flex; align-items: center; gap: 0.15rem; }
@@ -77,7 +77,7 @@ html:not(.js) .fd-nav { display: block; }
 /* ========== Menú móvil (drawer) ========== */
 .fd-drawer { position: fixed; inset: 0; z-index: 100; visibility: hidden; transition: visibility 0s linear var(--duration-fd-base); }
 .fd-drawer[data-open="true"] { visibility: visible; transition-delay: 0s; }
-.fd-drawer__backdrop { position: absolute; inset: 0; background: rgb(22 41 69 / 0.55); opacity: 0; transition: opacity var(--duration-fd-base); }
+.fd-drawer__backdrop { position: absolute; inset: 0; background: rgb(41 40 36 / 0.55); opacity: 0; transition: opacity var(--duration-fd-base); }
 .fd-drawer[data-open="true"] .fd-drawer__backdrop { opacity: 1; }
 .fd-drawer__panel { position: absolute; z-index: 1; top: 0; bottom: 0; left: 0; width: min(88vw, 24rem); display: flex; flex-direction: column; padding: 1rem 1.5rem 2rem; background: var(--color-fd-blue); color: #fff; overflow-y: auto; transform: translateX(-100%); transition: transform var(--duration-fd-base) var(--ease-fd); }
 .fd-drawer[data-open="true"] .fd-drawer__panel { transform: none; }

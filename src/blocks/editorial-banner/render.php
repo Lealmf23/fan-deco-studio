@@ -29,7 +29,7 @@ $image_large = 'immersive' === $variant ? fandeco_attachment_image( absint( $att
 			<div class="fd-banner__content">
 				<?php if ( $badge ) : ?><p class="fd-badge" data-fd-reveal><?php echo esc_html( $badge ); ?></p><?php endif; ?>
 				<?php if ( $eyebrow ) : ?><p class="fd-eyebrow" data-fd-reveal><?php echo esc_html( $eyebrow ); ?></p><?php endif; ?>
-				<?php if ( $title ) : ?><h2 class="fd-banner__title" data-fd-reveal><?php echo esc_html( $title ); ?></h2><?php endif; ?>
+				<?php if ( $title ) : ?><h2 class="fd-banner__title" data-fd-reveal><?php echo fandeco_title_html( $title ); // phpcs:ignore WordPress.Security.EscapeOutput -- escapado en la función. ?></h2><?php endif; ?>
 				<?php if ( $desc ) : ?><p class="fd-banner__desc" data-fd-reveal><?php echo esc_html( $desc ); ?></p><?php endif; ?>
 				<?php $btn = fandeco_button( (string) ( $attributes['buttonText'] ?? '' ), (string) ( $attributes['buttonUrl'] ?? '' ), $btn_var ); ?>
 				<?php if ( $btn ) : ?><div data-fd-reveal><?php echo $btn; // phpcs:ignore WordPress.Security.EscapeOutput ?></div><?php endif; ?>

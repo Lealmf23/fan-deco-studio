@@ -273,3 +273,15 @@ function fandeco_contact_methods(): array {
 	}
 	return $out;
 }
+
+
+/**
+ * Título con dos estilos: **negrita** y *cursiva* (serif en color oliva). Todo lo demás se escapa.
+ * Ejemplo: "**Hacemos** *tus ideas* **realidad.**"
+ */
+function fandeco_title_html( string $text ): string {
+	$html = esc_html( sanitize_text_field( $text ) );
+	$html = preg_replace( '/\*\*(.+?)\*\*/u', '<strong>$1</strong>', $html ) ?? $html;
+	$html = preg_replace( '/\*(.+?)\*/u', '<em>$1</em>', $html ) ?? $html;
+	return $html;
+}

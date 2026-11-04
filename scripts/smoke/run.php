@@ -47,6 +47,13 @@ check( ! str_contains( fd_render_block( 'banner-carousel', array( 'slides' => ar
 check( str_contains( fd_render_block( 'section-heading', array( 'title' => 'Hola', 'level' => 1 ) ), '<h1 ' ), 'section-heading: admite H1 (título principal de la página)' );
 check( str_contains( fd_render_block( 'section-heading', array( 'title' => 'Hola', 'level' => 7 ) ), '<h2 ' ), 'section-heading: nivel inválido cae a H2' );
 
+$mq = fd_render_block( 'marquee', array( 'items' => "DISEÑO\n<b>COLOR</b>\n\nHECHO PARA VOS", 'speed' => 999 ) );
+check( 6 === substr_count( $mq, '<span>' ) && 6 === substr_count( $mq, '<span class="is-dup">' ) && ! str_contains( $mq, '<b>' ) && str_contains( $mq, '--fd-marquee-speed:90s' ), 'marquee: ítems saneados, sin líneas vacías y velocidad acotada' );
+check( str_contains( $mq, 'aria-hidden="true"' ) && str_contains( $mq, 'aria-label="DISEÑO, COLOR, HECHO PARA VOS"' ), 'marquee: contenido repetido oculto a lectores de pantalla y nombre accesible' );
+check( '' === trim( fd_render_block( 'marquee', array( 'items' => " \n " ) ) ), 'marquee: sin ítems no imprime nada' );
+check( '<strong>Hacemos</strong> <em>tus ideas</em>' === fandeco_title_html( '**Hacemos** *tus ideas*' ) && ! str_contains( fandeco_title_html( '<script>x</script> *a*' ), '<script>' ), 'títulos: **negrita** y *cursiva* con el resto escapado' );
+check( str_contains( fd_render_block( 'section-heading', array( 'title' => 'Elegí tu próxima *favorita.*' ) ), '<em>favorita.</em>' ), 'section-heading: título con cursiva' );
+
 $hero_lit = fd_render_block( 'hero', array( 'variant' => 'immersive', 'desktopImageId' => 21, 'imageLitId' => 22 ) );
 check( str_contains( $hero_lit, 'data-fd-hero-switch' ) && str_contains( $hero_lit, 'role="switch"' ) && str_contains( $hero_lit, 'fd-hero__lit' ), 'hero: con foto encendida hay interruptor accesible y capa de luz' );
 check( ! str_contains( $hero_lit, 'class="fd-hero fd-hero--immersive" ' ) && ! str_contains( $hero_lit, ' is-lit' ), 'hero: arranca apagado por defecto' );
@@ -154,9 +161,11 @@ foreach ( array( 'header.php', 'footer.php' ) as $tpl ) {
 }
 
 if ( ! empty( $opts['html'] ) ) {
-	$home  = fd_render_block( 'hero', array( 'variant' => 'immersive', 'desktopImageId' => 21, 'imageLitId' => 22, 'startLit' => ! empty( $opts['lit'] ) ) );
+	$home  = fd_render_block( 'section-heading', array( 'eyebrow' => 'DISEÑO + IMPRESIÓN 3D + PERSONALIZACIÓN', 'title' => '**Hacemos** *tus ideas* **realidad.**', 'description' => 'Objetos personalizados, deco y regalos únicos diseñados y fabricados especialmente para vos.', 'level' => 1 ) );
+	$home .= fd_render_block( 'banner-carousel', array( 'slides' => array( array( 'imageId' => 1, 'alt' => 'Lámpara naranja' ), array( 'imageId' => 2, 'alt' => 'Calendario' ), array( 'imageId' => 3, 'alt' => 'Veladores' ), array( 'imageId' => 4, 'alt' => 'Mates de fútbol' ) ) ) );
+	$home .= fd_render_block( 'marquee', array() );
 	$home .= fd_render_block( 'benefits', array( 'variant' => 'strip' ) );
-	$home .= fd_render_block( 'section-heading', array( 'title' => 'Comprá por categoría', 'linkText' => 'Ver todo', 'linkUrl' => '/shop/' ) );
+	$home .= fd_render_block( 'section-heading', array( 'eyebrow' => 'PARA CADA ESTILO', 'title' => 'Elegí tu próxima *favorita.*', 'description' => 'Pequeños objetos que hacen grande la diferencia.', 'align' => 'center' ) );
 	$home .= fd_render_block( 'category-grid', array( 'layout' => 'mosaic' ) );
 	$home .= fd_render_block( 'featured-products', array( 'layout' => 'editorial', 'title' => 'Productos destacados', 'description' => 'Piezas impresas en 3D, en los colores y estilos que elijas.', 'linkText' => 'Ver toda la tienda', 'linkUrl' => '/shop/' ) );
 	$home .= fd_render_block( 'editorial-banner', array( 'eyebrow' => 'Personalizados', 'title' => 'Tu mascota, para siempre', 'description' => 'Convertimos a tu compañero en una pieza única, impresa en 3D y llena de detalles.', 'buttonText' => 'Ver mascotas', 'buttonUrl' => '/mascotas', 'variant' => 'immersive', 'imageId' => 23 ) );

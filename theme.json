@@ -3,31 +3,88 @@
 	"version": 3,
 	"settings": {
 		"appearanceTools": true,
-		"layout": { "contentSize": "720px", "wideSize": "1280px" },
+		"layout": {
+			"contentSize": "720px",
+			"wideSize": "1280px"
+		},
 		"color": {
 			"palette": [
-				{ "slug": "azul-profundo", "name": "Azul profundo", "color": "#162945" },
-				{ "slug": "azul-grisaceo", "name": "Azul grisáceo", "color": "#83A1B9" },
-				{ "slug": "bordo", "name": "Bordó", "color": "#682242" },
-				{ "slug": "blanco-calido", "name": "Blanco cálido", "color": "#F7F5F0" },
-				{ "slug": "blanco", "name": "Blanco", "color": "#FFFFFF" },
-				{ "slug": "gris-oscuro", "name": "Gris oscuro", "color": "#292D33" }
+				{
+					"slug": "carbon",
+					"name": "Carbón",
+					"color": "#292824"
+				},
+				{
+					"slug": "oliva",
+					"name": "Oliva",
+					"color": "#626545"
+				},
+				{
+					"slug": "oliva-claro",
+					"name": "Oliva claro",
+					"color": "#74784E"
+				},
+				{
+					"slug": "crema",
+					"name": "Crema",
+					"color": "#F5F2ED"
+				},
+				{
+					"slug": "arena",
+					"name": "Arena",
+					"color": "#E2DFD3"
+				},
+				{
+					"slug": "blanco",
+					"name": "Blanco",
+					"color": "#FFFFFF"
+				}
 			]
 		},
 		"typography": {
 			"fluid": true,
 			"fontFamilies": [
-				{ "slug": "sans", "name": "Bricolage Grotesque", "fontFamily": "'Bricolage Grotesque Variable', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" },
-				{ "slug": "display", "name": "Bricolage Grotesque (títulos)", "fontFamily": "'Bricolage Grotesque Variable', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" }
+				{
+					"slug": "sans",
+					"name": "DM Sans",
+					"fontFamily": "'DM Sans Variable', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif"
+				},
+				{
+					"slug": "display",
+					"name": "DM Sans (títulos)",
+					"fontFamily": "'DM Sans Variable', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif"
+				},
+				{
+					"slug": "serif",
+					"name": "Georgia (cursiva de títulos)",
+					"fontFamily": "Georgia, 'Times New Roman', serif"
+				}
 			]
 		}
 	},
 	"styles": {
-		"color": { "background": "#F7F5F0", "text": "#292D33" },
-		"typography": { "fontFamily": "var(--wp--preset--font-family--sans)", "lineHeight": "1.6" },
+		"color": {
+			"background": "#F5F2ED",
+			"text": "#292824"
+		},
+		"typography": {
+			"fontFamily": "var(--wp--preset--font-family--sans)",
+			"lineHeight": "1.6"
+		},
 		"elements": {
-			"heading": { "color": { "text": "#162945" }, "typography": { "fontFamily": "var(--wp--preset--font-family--display)" } },
-			"link": { "color": { "text": "#682242" } }
+			"heading": {
+				"color": {
+					"text": "#292824"
+				},
+				"typography": {
+					"fontFamily": "var(--wp--preset--font-family--display)"
+				}
+			},
+			"link": {
+				"color": {
+					"text": "#626545"
+				}
+			}
 		}
 	}
 }

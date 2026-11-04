@@ -17,7 +17,8 @@ Estos archivos usan **tus textos actuales** y los bloques del tema. Se pegan en 
 - **Banner de mascotas:** podés agregar `"imageId":NÚMERO` con la foto (el número está en la dirección de la imagen en Medios: `post=NÚMERO`).
 - **Texto de los banners:** si el texto está dentro de la imagen, completá la "descripción" de cada banner (accesibilidad y buscadores). Hoy llevan solo el nombre del archivo.
 - **"Algunas de nuestras mascotas":** la galería de fotos no está incluida; agregala con el bloque Galería de WordPress.
-- **Franja de mensajes que se desplaza** ("DISEÑO ✦ COLOR ✦ PERSONALIDAD ✦ HECHO PARA VOS"): no incluida (pendiente de decidir).
+- **Franja de mensajes** ("DISEÑO ✦ COLOR ✦ PERSONALIDAD ✦ HECHO PARA VOS"): incluida en la portada con el bloque `fandeco/marquee`.
+- **Títulos:** `**negrita**` y `*cursiva*` dentro del texto dan el estilo de dos tipografías (DM Sans + Georgia cursiva en oliva).
 
 ## Detalles de texto
 - Corregí "WhatAppp" por "WhatsApp" en el botón de mascotas. El resto de los textos es el tuyo; "Señando con 50%" quedó tal cual.

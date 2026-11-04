@@ -6,7 +6,7 @@
 .fd-quickview { display: none; }
 @media (hover: hover) and (min-width: 768px) {
 	.fd-product-card__window { position: relative; }
-	.fd-quickview { position: absolute; z-index: 3; left: 50%; bottom: 0.9rem; display: inline-flex; align-items: center; gap: 0.45rem; padding: 0.55rem 1rem; border: 0; border-radius: 999px; background: rgb(255 255 255 / 0.95); color: var(--color-fd-blue); font: 600 0.8125rem/1 var(--font-sans); cursor: pointer; opacity: 0; transform: translate(-50%, 0.5rem); transition: opacity 200ms var(--ease-fd), transform 250ms var(--ease-fd); box-shadow: 0 10px 24px -12px rgb(22 41 69 / 0.5); }
+	.fd-quickview { position: absolute; z-index: 3; left: 50%; bottom: 0.9rem; display: inline-flex; align-items: center; gap: 0.45rem; padding: 0.55rem 1rem; border: 0; border-radius: 999px; background: rgb(255 255 255 / 0.95); color: var(--color-fd-blue); font: 600 0.8125rem/1 var(--font-sans); cursor: pointer; opacity: 0; transform: translate(-50%, 0.5rem); transition: opacity 200ms var(--ease-fd), transform 250ms var(--ease-fd); box-shadow: 0 10px 24px -12px rgb(41 40 36 / 0.5); }
 	.fd-quickview svg { width: 1.05rem; height: 1.05rem; }
 	.fd-product-card:hover .fd-quickview, .fd-product-card:focus-within .fd-quickview { opacity: 1; transform: translate(-50%, 0); }
 	.fd-quickview:hover { background: var(--color-fd-blue); color: #fff; }
@@ -67,7 +67,7 @@
 
 /* ---------- Barra de compra flotante en escritorio ---------- */
 @media (min-width: 768px) {
-	.fd-buybar { position: fixed; z-index: 70; left: 50%; bottom: 1.25rem; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; width: min(44rem, calc(100vw - 3rem)); padding: 0.7rem 0.7rem 0.7rem 1.5rem; border-radius: 999px; background: rgb(255 255 255 / 0.96); backdrop-filter: blur(10px); box-shadow: 0 20px 50px -20px rgb(22 41 69 / 0.55), 0 0 0 1px var(--color-fd-line); transform: translateX(-50%); animation: fd-buybar-in 300ms var(--ease-fd); }
+	.fd-buybar { position: fixed; z-index: 70; left: 50%; bottom: 1.25rem; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; width: min(44rem, calc(100vw - 3rem)); padding: 0.7rem 0.7rem 0.7rem 1.5rem; border-radius: 999px; background: rgb(255 255 255 / 0.96); backdrop-filter: blur(10px); box-shadow: 0 20px 50px -20px rgb(41 40 36 / 0.55), 0 0 0 1px var(--color-fd-line); transform: translateX(-50%); animation: fd-buybar-in 300ms var(--ease-fd); }
 	.fd-buybar[hidden] { display: none; }
 	.fd-buybar__info { display: grid; min-width: 0; line-height: 1.2; }
 	.fd-buybar__name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 0.9375rem; font-weight: 600; color: var(--color-fd-blue); }

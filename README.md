@@ -82,7 +82,7 @@ Rediseño **solo con CSS y dos añadidos por ganchos oficiales** (`woocommerce_b
 - **Verificado:** marcado de cada variante y del interruptor (pruebas de render) y, en Chromium, el cambio día/noche, teclado, header oscuro, “reducir movimiento” y ausencia de desborde en desktop y móvil. Las imágenes de las capturas son ilustraciones de marcador. **Falta:** probar con tus fotos reales y en WordPress (editor de bloques).
 
 ## Dirección visual de la tienda
-- **Tipografía:** una sola familia, *Bricolage Grotesque* (variable, autoalojada), para títulos y texto; el "fan" manuscrito del logo queda como único contraste. Títulos grandes y apretados.
+- **Tipografía:** *DM Sans* (variable, autoalojada) para títulos y texto, y *Georgia* (fuente del sistema) en cursiva mediana para la palabra destacada de cada título; el "fan" manuscrito del logotipo de reserva usa Caveat.
 - **Listados:** sin cajas blancas ni sombras. Cada pieza va en una ventana de esquinas suaves con un resplandor cálido que se intensifica al pasar el mouse; texto alineado a la izquierda debajo; botón de compra circular con ícono (el texto queda para lectores de pantalla); columnas desfasadas en desktop. Filtros por categoría reales de WooCommerce.
 - **Ficha:** miniaturas en columna lateral, imagen principal grande y fija, categoría y etiqueta "Oferta" sobre el título, cuotas y transferencia en una pieza con íconos, selectores de color más grandes.
 - **Los listados usan la tarjeta del tema** mediante ganchos de WooCommerce; el botón de compra sale de `woocommerce_template_loop_add_to_cart()` para no romper plugins de seguimiento (PixelYourSite, Google for WooCommerce). Verificar en staging que los eventos *add_to_cart* de listados sigan llegando.
@@ -180,10 +180,15 @@ Según los ajustes del sitio real (leídos en modo solo lectura), Blocksy Pro te
 ## Carrusel de banners y migración desde Elementor
 - **Bloque `fandeco/banner-carousel`:** carrusel compacto de imágenes con enlace opcional. Muestra 3 a la vez en escritorio, 2 en tablet y 1 con el siguiente asomando en móvil; no recorta las imágenes (pensado para banners cuadrados con el texto dentro). Flechas, puntos, botón de pausa, deslizamiento táctil y teclado. El avance automático se detiene al pasar el cursor, al enfocar, con la pestaña oculta, si el usuario pausa y con “reducir movimiento”. Reemplaza al hero grande en la portada por defecto (el bloque Hero sigue disponible).
 - `fandeco/section-heading` admite **H1** (título principal de la página; usarlo una sola vez).
-- **Paleta:** el tema usa solo la paleta de marca (#162945, #83A1B9, #682242, #F7F5F0, #FFFFFF, #292D33) y derivados neutros. Se alinearon dos tonos propios (azul más oscuro y crema cálido) a esa paleta. Quedan colores funcionales fuera de la paleta: verde para el precio con transferencia y mensajes de éxito, y ámbar para el resplandor de las lámparas.
+- **Paleta (identidad actual del sitio):** carbón #292824, oliva #626545 (botones, enlaces y texto chico), oliva claro #74784E (palabra en cursiva de los títulos y textos grandes), crema #F5F2ED, arena #E2DFD3 y blanco. Salen de la configuración real de Blocksy y de las variables del CSS actual (`--fandeco-*`). Quedan colores funcionales fuera de la paleta: verde para el precio con transferencia y los mensajes de éxito, y ámbar para el resplandor de las lámparas. Todo el color se cambia desde `src/css/tokens.css`.
 - **Compatibilidad al desactivar Elementor:** Elementor guarda una copia del texto de cada página en el contenido normal de WordPress. Las páginas legales (que son solo HTML) se muestran con el contenedor del tema cuando Elementor no está activo. Las páginas con diseño propio (Home, Mascotas) se reconstruyen con bloques: ver `docs/migracion/`.
 - Hallazgos del sitio real (solo lectura): Contacto (547) y Servicios (751) contienen texto de ejemplo del demo de Blocksy y están publicadas; la política de privacidad (1331) empieza en la sección 6 (faltan las secciones 1 a 5); Contacto usa `[blocksy_posts]`, un shortcode de Blocksy que dejaría de funcionar.
 - Verificado en Chromium (1360, 820 y 390 px, y con movimiento reducido) con markup de muestra; **no probado en el editor de bloques de un WordPress real**.
+
+## Estilo de títulos y franja de mensajes
+- **Títulos en dos tipografías:** en los bloques se escribe `**negrita**` y `*cursiva*`. Ejemplo: `**Hacemos** *tus ideas* **realidad.**` se ve como en el sitio actual (palabras en DM Sans y la destacada en Georgia cursiva oliva, cada parte en su línea). Vale para los títulos del encabezado de sección, banner editorial, pasos y hero. Cualquier otro carácter se escapa.
+- **Bloque `fandeco/marquee`:** franja carbón con palabras en mayúsculas espaciadas separadas por ✦, que se desplazan en bucle solo con CSS; se pausa al pasar el cursor y queda quieta (una sola vez cada palabra) con “reducir movimiento”.
+- Verificado en Chromium con markup de muestra; **no probado en el editor de bloques de un WordPress real**.
 
 ## Qué está verificado y qué no
 **Verificado aquí (sin WordPress real; el entorno no puede descargar WordPress/WooCommerce):**

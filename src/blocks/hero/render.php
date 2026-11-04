@@ -27,7 +27,7 @@ $picture = fandeco_picture( absint( $attributes['desktopImageId'] ?? 0 ), absint
 	<div class="fd-hero__inner fd-container">
 		<div class="fd-hero__content">
 			<?php if ( $eyebrow ) : ?><p class="fd-eyebrow" data-fd-reveal><?php echo esc_html( $eyebrow ); ?></p><?php endif; ?>
-			<?php if ( $title ) : ?><h1 class="fd-hero__title" data-fd-reveal><?php echo esc_html( $title ); ?></h1><?php endif; ?>
+			<?php if ( $title ) : ?><h1 class="fd-hero__title" data-fd-reveal><?php echo fandeco_title_html( $title ); // phpcs:ignore WordPress.Security.EscapeOutput -- escapado en la función. ?></h1><?php endif; ?>
 			<?php if ( $desc ) : ?><p class="fd-hero__desc" data-fd-reveal><?php echo esc_html( $desc ); ?></p><?php endif; ?>
 			<?php $btn = fandeco_button( (string) ( $attributes['buttonText'] ?? '' ), $btn_url, 'primary', 'fd-btn--lg' ); ?>
 			<?php if ( $btn || $has_lit ) : ?>

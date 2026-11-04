@@ -35,7 +35,7 @@ $p_desc  = sanitize_textarea_field( $attributes['description'] ?? '' );
 	<div class="fd-container<?php echo 'index' === $variant ? ' fd-process__split' : ''; ?>">
 		<?php if ( 'index' === $variant && ( $p_title || $p_desc ) ) : ?>
 			<div class="fd-process__side">
-				<?php if ( $p_title ) : ?><h2 class="fd-process__title" data-fd-reveal><?php echo esc_html( $p_title ); ?></h2><?php endif; ?>
+				<?php if ( $p_title ) : ?><h2 class="fd-process__title" data-fd-reveal><?php echo fandeco_title_html( $p_title ); // phpcs:ignore WordPress.Security.EscapeOutput -- escapado en la función. ?></h2><?php endif; ?>
 				<?php if ( $p_desc ) : ?><p class="fd-process__desc" data-fd-reveal><?php echo esc_html( $p_desc ); ?></p><?php endif; ?>
 			</div>
 		<?php endif; ?>

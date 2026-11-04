@@ -3,9 +3,9 @@
     "file": "assets/store-api-0ZdP6MvG.js",
     "name": "store-api"
   },
-  "node_modules/@fontsource-variable/bricolage-grotesque/files/bricolage-grotesque-latin-wght-normal.woff2": {
-    "file": "assets/bricolage-grotesque-latin-wght-normal-DLoelf7F.woff2",
-    "src": "node_modules/@fontsource-variable/bricolage-grotesque/files/bricolage-grotesque-latin-wght-normal.woff2"
+  "node_modules/@fontsource-variable/dm-sans/files/dm-sans-latin-wght-normal.woff2": {
+    "file": "assets/dm-sans-latin-wght-normal-Xz1IZZA0.woff2",
+    "src": "node_modules/@fontsource-variable/dm-sans/files/dm-sans-latin-wght-normal.woff2"
   },
   "node_modules/@fontsource/caveat/files/caveat-latin-700-normal.woff2": {
     "file": "assets/caveat-latin-700-normal-D8_1Nw6V.woff2",
@@ -24,7 +24,7 @@
     "isDynamicEntry": true
   },
   "src/js/main.js": {
-    "file": "assets/main-BeadO-jV.js",
+    "file": "assets/main-DzqeYhP9.js",
     "name": "main",
     "src": "src/js/main.js",
     "isEntry": true,
@@ -37,10 +37,10 @@
       "src/js/animations.js"
     ],
     "css": [
-      "assets/main-D_FXblZV.css"
+      "assets/main-CVARY4NB.css"
     ],
     "assets": [
-      "assets/bricolage-grotesque-latin-wght-normal-DLoelf7F.woff2",
+      "assets/dm-sans-latin-wght-normal-Xz1IZZA0.woff2",
       "assets/caveat-latin-700-normal-D8_1Nw6V.woff2"
     ]
   },

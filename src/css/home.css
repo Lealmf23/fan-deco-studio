@@ -26,7 +26,7 @@
 /* Variante overlay: imagen de fondo, texto encima */
 .fd-hero--overlay .fd-hero__inner { position: relative; display: grid; align-items: end; min-height: min(80svh, 40rem); padding: clamp(1.5rem, 5vw, 4rem); border-radius: var(--radius-fd-xl); overflow: hidden; color: #fff; isolation: isolate; background: var(--color-fd-blue); }
 .fd-hero--overlay .fd-hero__media { position: absolute; inset: 0; z-index: -2; aspect-ratio: auto; max-height: none; border-radius: 0; order: 0; }
-.fd-hero--overlay .fd-hero__inner::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(to top, rgb(22 41 69 / 0.78), rgb(22 41 69 / 0.1) 65%); }
+.fd-hero--overlay .fd-hero__inner::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(to top, rgb(41 40 36 / 0.78), rgb(41 40 36 / 0.1) 65%); }
 .fd-hero--overlay .fd-hero__title, .fd-hero--overlay .fd-hero__desc, .fd-hero--overlay .fd-eyebrow { color: #fff; }
 .fd-hero--overlay .fd-hero__content { max-width: 40rem; }
 .fd-hero--overlay.fd-hero--align-center .fd-hero__content { margin-inline: auto; }

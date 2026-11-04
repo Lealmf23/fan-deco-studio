@@ -77,7 +77,7 @@ add_action(
 			return;
 		}
 		foreach ( fandeco_manifest() as $key => $item ) {
-			if ( isset( $item['file'] ) && str_contains( $key, 'bricolage-grotesque-latin-wght-normal' ) ) {
+			if ( isset( $item['file'] ) && str_contains( $key, 'dm-sans-latin-wght-normal' ) ) {
 				printf(
 					'<link rel="preload" href="%s" as="font" type="font/woff2" crossorigin>' . "\n",
 					esc_url( FANDECO_URI . '/dist/' . $item['file'] )
