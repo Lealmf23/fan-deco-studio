@@ -142,6 +142,14 @@ check( str_contains( file_get_contents( FANDECO_DIR . '/template-parts/component
 $pg = file_get_contents( FANDECO_DIR . '/page.php' );
 check( str_contains( $pg, 'Elementor' ) && str_contains( $pg, "Plugin' )" ) && str_contains( $pg, '$fd_elementor_on &&' ) && str_contains( $pg, "stripos( (string) get_post_field( 'post_content'" ), 'page.php: páginas de Elementor se ven bien si Elementor se desactiva y no duplican el H1' );
 
+$missing = array();
+foreach ( glob( FANDECO_DIR . '/src/blocks/*/block.json' ) ?: array() as $bj ) {
+	$meta = json_decode( (string) file_get_contents( $bj ), true );
+	$dir  = basename( dirname( $bj ) );
+	if ( empty( $meta['editorScript'] ) || ! is_file( FANDECO_DIR . '/build/blocks/' . $dir . '/index.js' ) ) { $missing[] = $dir; }
+}
+check( ! $missing, 'bloques: todos declaran editorScript y tienen su index.js compilado (aparecen en el insertor del editor)' . ( $missing ? ' - faltan: ' . implode( ', ', $missing ) : '' ) );
+
 echo "Plantillas\n";
 foreach ( array( 'header.php', 'footer.php' ) as $tpl ) {
 	ob_start();
