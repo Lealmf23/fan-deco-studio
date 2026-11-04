@@ -17,6 +17,7 @@ function boot() {
 	initBuybar();
 	initHeroLight();
 	loadSearch();
+	loadShopUi();
 	loadSwatches();
 	loadVariationEvents();
 	loadAnimations();
@@ -31,6 +32,13 @@ function loadSearch() {
 		}
 	};
 	document.addEventListener( 'focusin', onFocus );
+}
+
+/** Vista rápida y panel del carrito: solo si la página los tiene (se imprimen únicamente con WooCommerce). */
+function loadShopUi() {
+	if ( document.querySelector( '[data-fd-qv], [data-fd-cartpanel]' ) ) {
+		import( './shop-ui.js' ).then( ( m ) => m.initShopUi() );
+	}
 }
 
 function loadSwatches() {

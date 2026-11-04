@@ -168,6 +168,15 @@ Hay estilos de marca para archivo de tienda/categorías, producto (galería, var
 - Las páginas que contienen bloques `fandeco/*` se muestran **a ancho completo**, sin título ni contenedor (`page.php`). `docs/portada-prueba.html` tiene el contenido de la portada completa para pegar en el **Editor de código** de una página en borrador y verla con la Vista previa en vivo del tema, sin activarlo.
 - Limitación: la Vista previa en vivo carga todos los plugins activos (Elementor, Blocksy, snippets); para aislarlos se usa el modo de solución de problemas de Health Check. **No verificado en un WordPress real.**
 
+## Funciones que reemplazan a Blocksy Pro
+Según los ajustes del sitio real (leídos en modo solo lectura), Blocksy Pro tenía activadas: carrito flotante, vista rápida, lista de deseos, compartir, galería avanzada, muestras de variaciones, pestañas personalizadas, ventana al agregar al carrito, lista de espera y productos sugeridos (más Mega Menu y Code Snippets). La lista de deseos y el mega menú no tienen datos de uso, así que no se reemplazan.
+- **Vista rápida:** botón “Vista rápida” al pasar el cursor sobre la tarjeta (solo dispositivos con cursor). Diálogo nativo con foto, precio, descripción corta y botón de compra (solo productos simples con stock; los variables llevan a “Elegir opciones”). Datos desde la Store API; no se inserta HTML de la API.
+- **Panel “Agregado al carrito”:** tras agregar desde un listado o la vista rápida, muestra el producto, el subtotal y los botones Finalizar compra / Ver carrito / Seguir comprando. En la ficha de producto (envío normal del formulario) se mantiene el aviso estándar de WooCommerce.
+- **Compartir** en la ficha: WhatsApp, Facebook, Pinterest, email y copiar enlace (solo enlaces, sin scripts de terceros).
+- **Barra flotante de compra en escritorio:** la misma de móvil, como píldora centrada abajo cuando el botón real sale de pantalla.
+- Pendientes: pestañas personalizadas por producto y lista de espera (envía emails, requiere decisión); revisar la extensión Code Snippets de Blocksy antes de desactivarlo.
+- Verificado en Chromium con la API simulada; **no probado con WooCommerce real** (el evento `added_to_cart` y el botón AJAX dependen del script de WooCommerce).
+
 ## Qué está verificado y qué no
 **Verificado aquí (sin WordPress real; el entorno no puede descargar WordPress/WooCommerce):**
 - Sintaxis PHP de los 41 archivos (`php -l`, PHP 8.3).

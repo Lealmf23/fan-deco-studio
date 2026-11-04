@@ -99,6 +99,18 @@ check( ! is_dir( FANDECO_DIR . '/woocommerce' ), 'tema: no sobrescribe plantilla
 
 check( str_contains( file_get_contents( FANDECO_DIR . '/page.php' ), "<!-- wp:fandeco/" ) && str_contains( file_get_contents( FANDECO_DIR . '/docs/portada-prueba.html' ), 'wp:fandeco/hero' ), 'page.php: páginas con bloques Fan Deco a ancho completo y contenido de prueba disponible' );
 
+echo "Vista rápida, panel del carrito y compartir\n";
+if ( ! function_exists( 'is_cart' ) ) { function is_cart() { return false; } }
+if ( ! function_exists( 'is_checkout' ) ) { function is_checkout() { return false; } }
+if ( ! function_exists( 'wc_get_checkout_url' ) ) { function wc_get_checkout_url() { return '/finalizar-compra/'; } }
+ob_start(); fandeco_print_shop_dialogs(); $dlg = ob_get_clean();
+check( str_contains( $dlg, 'data-fd-qv' ) && str_contains( $dlg, 'data-fd-cartpanel' ) && str_contains( $dlg, '/finalizar-compra/' ) && 2 === substr_count( $dlg, '<dialog' ), 'diálogos: vista rápida y panel del carrito con enlaces al checkout' );
+check( 3 <= substr_count( $dlg, 'aria-label=' ), 'diálogos: con nombre accesible y botones de cierre' );
+$sh = fandeco_share_links( 'https://fandeco.com.ar/p/lampara?a=1&b=2', 'Lámpara "Cúpula" & luz' );
+check( str_starts_with( $sh['whatsapp'][1], 'https://wa.me/?text=' ) && ! str_contains( $sh['whatsapp'][1], ' ' ) && str_contains( $sh['facebook'][1], rawurlencode( 'https://fandeco.com.ar/p/lampara?a=1&b=2' ) ), 'compartir: enlaces codificados (sin espacios ni caracteres crudos)' );
+check( str_starts_with( $sh['email'][1], 'mailto:?subject=' ) && ! str_contains( $sh['email'][1], '"' ), 'compartir: email con asunto codificado' );
+check( str_contains( file_get_contents( FANDECO_DIR . '/template-parts/components/product-card.php' ), 'data-fd-quickview' ), 'tarjeta: botón de vista rápida con nombre accesible' );
+
 echo "Plantillas\n";
 foreach ( array( 'header.php', 'footer.php' ) as $tpl ) {
 	ob_start();

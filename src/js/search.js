@@ -3,34 +3,10 @@
  * (Store API: /wc/store/v1/products). Combobox accesible (ARIA), teclado completo, sin dependencias.
  * Si la API no responde, no pasa nada: el formulario sigue buscando normalmente.
  */
+import { apiUrl as storeUrl, decode, formatMoney } from './store-api.js';
+
 const MIN_CHARS = 2;
 const DELAY = 220;
-
-function apiUrl( query ) {
-	const link = document.querySelector( 'link[rel="https://api.w.org/"]' );
-	const root = link ? link.href : '/wp-json/';
-	const url = new URL( root + 'wc/store/v1/products', window.location.href );
-	url.searchParams.set( 'search', query );
-	url.searchParams.set( 'per_page', '5' );
-	return url;
-}
-
-const decode = ( html ) => {
-	const t = document.createElement( 'textarea' );
-	t.innerHTML = String( html || '' );
-	return t.value;
-};
-
-function price( prices ) {
-	if ( ! prices || prices.price === undefined ) {
-		return '';
-	}
-	const minor = Number( prices.currency_minor_unit ?? 2 );
-	const value = Number( prices.price ) / 10 ** minor;
-	const parts = value.toFixed( minor ).split( '.' );
-	parts[ 0 ] = parts[ 0 ].replace( /\B(?=(\d{3})+(?!\d))/g, prices.currency_thousand_separator ?? '.' );
-	return `${ decode( prices.currency_prefix ?? prices.currency_symbol ?? '' ) }${ parts.join( prices.currency_decimal_separator ?? ',' ) }${ decode( prices.currency_suffix ?? '' ) }`;
-}
 
 export function initSearch() {
 	let uid = 0;
@@ -105,7 +81,7 @@ export function initSearch() {
 				name.textContent = decode( pr.name );
 				const pri = document.createElement( 'span' );
 				pri.className = 'fd-live__price';
-				pri.textContent = price( pr.prices );
+				pri.textContent = formatMoney( pr.prices && pr.prices.price, pr.prices );
 				a.append( name, pri );
 				box.append( a );
 				options.push( a );
@@ -138,7 +114,7 @@ export function initSearch() {
 			}
 			controller = new AbortController();
 			try {
-				const res = await fetch( apiUrl( q ), { signal: controller.signal, headers: { Accept: 'application/json' } } );
+				const res = await fetch( storeUrl( 'products', { search: q, per_page: 5 } ), { signal: controller.signal, headers: { Accept: 'application/json' } } );
 				if ( ! res.ok ) {
 					return close();
 				}

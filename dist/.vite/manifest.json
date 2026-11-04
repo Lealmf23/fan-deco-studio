@@ -1,4 +1,8 @@
 {
+  "_store-api-0ZdP6MvG.js": {
+    "file": "assets/store-api-0ZdP6MvG.js",
+    "name": "store-api"
+  },
   "node_modules/@fontsource-variable/bricolage-grotesque/files/bricolage-grotesque-latin-wght-normal.woff2": {
     "file": "assets/bricolage-grotesque-latin-wght-normal-DLoelf7F.woff2",
     "src": "node_modules/@fontsource-variable/bricolage-grotesque/files/bricolage-grotesque-latin-wght-normal.woff2"
@@ -14,18 +18,19 @@
     "isDynamicEntry": true
   },
   "src/js/main.js": {
-    "file": "assets/main-D0rkjcBS.js",
+    "file": "assets/main-Cc4lejcE.js",
     "name": "main",
     "src": "src/js/main.js",
     "isEntry": true,
     "dynamicImports": [
       "src/js/search.js",
+      "src/js/shop-ui.js",
       "src/js/swatches.js",
       "src/js/variations.js",
       "src/js/animations.js"
     ],
     "css": [
-      "assets/main-6Rd81nR4.css"
+      "assets/main-Ym19GRAT.css"
     ],
     "assets": [
       "assets/bricolage-grotesque-latin-wght-normal-DLoelf7F.woff2",
@@ -33,10 +38,22 @@
     ]
   },
   "src/js/search.js": {
-    "file": "assets/search-DPLDpQqA.js",
+    "file": "assets/search-DGp3wUWo.js",
     "name": "search",
     "src": "src/js/search.js",
-    "isDynamicEntry": true
+    "isDynamicEntry": true,
+    "imports": [
+      "_store-api-0ZdP6MvG.js"
+    ]
+  },
+  "src/js/shop-ui.js": {
+    "file": "assets/shop-ui-Cr10-t8k.js",
+    "name": "shop-ui",
+    "src": "src/js/shop-ui.js",
+    "isDynamicEntry": true,
+    "imports": [
+      "_store-api-0ZdP6MvG.js"
+    ]
   },
   "src/js/swatches.js": {
     "file": "assets/swatches-DYOGxgem.js",

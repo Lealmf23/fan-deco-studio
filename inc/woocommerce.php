@@ -364,3 +364,66 @@ add_action(
 	},
 	20
 );
+
+
+/* ---- Vista rápida y panel "Agregado al carrito" (diálogos nativos; los llena shop-ui.js con la Store API) ---- */
+function fandeco_print_shop_dialogs(): void {
+	{
+		if ( ! fandeco_has_woocommerce() || is_cart() || is_checkout() ) {
+			return;
+		}
+		?>
+		<dialog class="fd-qv" data-fd-qv aria-label="<?php esc_attr_e( 'Vista rápida del producto', 'fan-deco-studio' ); ?>">
+			<button type="button" class="fd-qv__close" data-fd-dialog-close aria-label="<?php esc_attr_e( 'Cerrar', 'fan-deco-studio' ); ?>"><?php echo fandeco_icon( 'close' ); // phpcs:ignore WordPress.Security.EscapeOutput ?></button>
+			<div class="fd-qv__body" data-fd-qv-body></div>
+		</dialog>
+		<dialog class="fd-cartpanel" data-fd-cartpanel aria-label="<?php esc_attr_e( 'Producto agregado al carrito', 'fan-deco-studio' ); ?>">
+			<div class="fd-cartpanel__head">
+				<p class="fd-cartpanel__title"><?php echo fandeco_icon( 'check' ); // phpcs:ignore WordPress.Security.EscapeOutput ?> <?php esc_html_e( 'Agregado al carrito', 'fan-deco-studio' ); ?></p>
+				<button type="button" class="fd-qv__close" data-fd-dialog-close aria-label="<?php esc_attr_e( 'Cerrar', 'fan-deco-studio' ); ?>"><?php echo fandeco_icon( 'close' ); // phpcs:ignore WordPress.Security.EscapeOutput ?></button>
+			</div>
+			<div class="fd-cartpanel__items" data-fd-cartpanel-items></div>
+			<p class="fd-cartpanel__sum"><span><?php esc_html_e( 'Subtotal del carrito', 'fan-deco-studio' ); ?></span> <strong data-fd-cartpanel-total></strong></p>
+			<div class="fd-cartpanel__actions">
+				<a class="fd-btn fd-btn--primary" href="<?php echo esc_url( wc_get_checkout_url() ); ?>"><?php esc_html_e( 'Finalizar compra', 'fan-deco-studio' ); ?></a>
+				<a class="fd-btn fd-btn--outline" href="<?php echo esc_url( wc_get_cart_url() ); ?>"><?php esc_html_e( 'Ver carrito', 'fan-deco-studio' ); ?></a>
+				<button type="button" class="fd-cartpanel__more" data-fd-dialog-close><?php esc_html_e( 'Seguir comprando', 'fan-deco-studio' ); ?></button>
+			</div>
+		</dialog>
+		<?php
+	}
+}
+add_action( 'wp_footer', 'fandeco_print_shop_dialogs', 5 );
+
+/**
+ * Enlaces para compartir un producto. Solo enlaces (sin scripts de terceros). Devuelve [clave => [etiqueta, url]].
+ *
+ * @return array<string,array{0:string,1:string}>
+ */
+function fandeco_share_links( string $url, string $title ): array {
+	$u = rawurlencode( $url );
+	$t = rawurlencode( $title );
+	return array(
+		'whatsapp'  => array( 'WhatsApp', 'https://wa.me/?text=' . $t . '%20' . $u ),
+		'facebook'  => array( 'Facebook', 'https://www.facebook.com/sharer/sharer.php?u=' . $u ),
+		'pinterest' => array( 'Pinterest', 'https://pinterest.com/pin/create/button/?url=' . $u . '&description=' . $t ),
+		'email'     => array( 'Email', 'mailto:?subject=' . $t . '&body=' . $u ),
+	);
+}
+
+function fandeco_print_share(): void {
+	{
+		global $product;
+		if ( ! $product instanceof WC_Product ) {
+			return;
+		}
+		$url   = get_permalink( $product->get_id() );
+		$links = fandeco_share_links( (string) $url, $product->get_name() );
+		echo '<div class="fd-share" data-fd-share data-url="' . esc_url( $url ) . '" data-title="' . esc_attr( $product->get_name() ) . '"><span class="fd-share__label">' . fandeco_icon( 'share' ) . esc_html__( 'Compartir', 'fan-deco-studio' ) . '</span><ul>'; // phpcs:ignore WordPress.Security.EscapeOutput
+		foreach ( $links as $label_url ) {
+			printf( '<li><a href="%s" target="_blank" rel="noopener noreferrer">%s</a></li>', esc_url( $label_url[1] ), esc_html( $label_url[0] ) );
+		}
+		echo '<li><button type="button" data-fd-share-copy>' . fandeco_icon( 'link' ) . '<span>' . esc_html__( 'Copiar enlace', 'fan-deco-studio' ) . '</span></button></li></ul></div>'; // phpcs:ignore WordPress.Security.EscapeOutput
+	}
+}
+add_action( 'woocommerce_share', 'fandeco_print_share', 40 );

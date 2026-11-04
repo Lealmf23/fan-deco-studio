@@ -51,6 +51,7 @@ $max_dots  = 5;
 				<?php endif; ?>
 			</ul>
 		<?php endif; ?>
+		<button type="button" class="fd-quickview" data-fd-quickview="<?php echo (int) $product->get_id(); ?>" data-href="<?php echo esc_url( $link ); ?>" aria-haspopup="dialog" aria-label="<?php echo esc_attr( sprintf( /* translators: %s: nombre del producto */ __( 'Vista rápida: %s', 'fan-deco-studio' ), $product->get_name() ) ); ?>"><?php echo fandeco_icon( 'eye' ); // phpcs:ignore WordPress.Security.EscapeOutput ?><span><?php esc_html_e( 'Vista rápida', 'fan-deco-studio' ); ?></span></button>
 	</div>
 		<?php if ( $show_cart ) : ?>
 			<div class="fd-product-card__add"><?php echo fandeco_loop_add_to_cart_html( $product ); // phpcs:ignore WordPress.Security.EscapeOutput -- salida oficial de WooCommerce. ?></div>
