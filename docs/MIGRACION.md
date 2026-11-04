@@ -38,7 +38,7 @@ No se modifica la página 838. En staging: crear una página nueva “Inicio (nu
 |---|---|---|---|
 | `configurador_chapita` (~32 KB) | Configurador por shortcode | **Conservar tal cual** | El tema ya **no usa el reinicio global de Tailwind** (Preflight) para no pisar su marcado/estilos; el estilo se acota a los componentes del tema. Probar en staging (JS, estilos, carrito) |
 | `precio_con_cuotas` (~16 KB; 3 pagos, 10 % de referencia) | Cuotas + descuento por transferencia en precio | **Conservar** | Las tarjetas y la ficha de producto usan `get_price_html()` y los hooks estándar de WooCommerce, así que el fragmento debería seguir actuando; verificar posición y estilos. La regla real del descuento **no está confirmada** (es solo un valor de referencia) |
-| `fandeco-product-gallery` | Comportamiento propio de galería | **Revisar para integrar** | El tema deja el marcado estándar de galería de WooCommerce (`.woocommerce-product-gallery`); si el fragmento depende de clases de Blocksy/Elementor, habrá que adaptarlo |
+| `fandeco-product-gallery` | Aspecto personalizado de la galería (solo visual) | **No integrar**: lo reemplaza el estilo del tema | Dejarlo desactivado en staging |
 | `Fan Deco - Product Schema WooCommerce` | JSON-LD de productos | **Auditar duplicados** | WooCommerce ya emite schema de Producto; AIOSEO también puede. Usar `seo:snapshot`/`seo:diff` (detectan `Product x2`) antes de decidir cuál queda |
 
 **Elementor (23 elementos: 13 páginas + 10 de biblioteca):** Home 838, Contacto 547, Servicios 751, Tu mascota en 3D 1229, Checkout 70, plantilla de producto «Chapitas Nombres» 1085, plantilla de producto general 1104 y sección «FanDeco - Título Editorial» 1134 (más borradores). **Elementor no se puede desactivar al instalar el tema.** Mientras esté activo, sus **plantillas de producto (1085, 1104) pueden seguir reemplazando la ficha de producto** según sus condiciones de visualización, y entonces los selectores y la ficha del tema no se verían en esos productos. Plan: (1) leer las condiciones de 1085/1104 (WPVibe), (2) en staging pasarlas a borrador una por vez y comprobar la ficha del tema, (3) migrar contenido de Home/Contacto/Servicios/1229 a bloques/páginas nuevas, (4) recién entonces retirar Elementor.
@@ -52,12 +52,12 @@ No se modifica la página 838. En staging: crear una página nueva “Inicio (nu
 ### Decisiones sobre las “cuotas”, el descuento y la galería (auditoría técnica adicional)
 - **Descuento por transferencia nativo (nuevo):** ahora existe en el plugin Fan Deco Core (WooCommerce → Descuento por transferencia) y reemplazaría al plugin “Payment Gateway Based Fees and Discounts”. **Plan seguro:** en staging dejar el plugin actual desactivado, activar el nativo, comparar totales con pedidos de prueba por transferencia (con y sin cupón, con envío, con y sin impuestos, producto simple y variable), y recién después retirar el plugin viejo en producción. Nunca activar ambos a la vez. El snippet `precio_con_cuotas` debe leer el porcentaje vigente para no mostrar uno distinto.
 - **Precio y cuotas (visual):** el tema **no calcula ni muestra** cuotas ni el descuento y no duplica el del snippet `precio_con_cuotas`. Lo que sí aporta es el evento DOM **`fandeco:variation`** (se dispara cuando WooCommerce encuentra o resetea una variación; trae `variationId`, `price`, `regularPrice`, `inStock`, `form`) para que el snippet actual —o un componente futuro— recalcule las cuotas al cambiar de variación sin depender de jQuery. Probado con una simulación. **Para construir un componente de cuotas propio hace falta** el código de `precio_con_cuotas` y las reglas reales (cuotas, redondeo, qué métodos, si el 10 % aplica sobre el precio con o sin envío/impuestos). Hasta entonces, el snippet sigue siendo la fuente.
-- **Galería (sin dos sistemas a la vez):** Personalizar → Fan Deco Studio → **Tienda → Galería de producto**. *Nativa* (por defecto) activa zoom/lightbox/slider de WooCommerce; *Externa* no activa ninguno para que el JavaScript de `fandeco-product-gallery` sea el único. Probar ambas en staging y quedarse con una; no se sabe aún si ese JS espera el slider de WooCommerce o de Blocksy.
+- **Galería:** el snippet `fandeco-product-gallery` solo daba el aspecto visual; el tema usa la galería nativa de WooCommerce (zoom, lightbox, slider) estilizada por CSS, así que **no se integra ese JavaScript**. Para evitar que corran dos sistemas, en las pruebas de staging dejar ese snippet **desactivado** (no borrarlo hasta validar la ficha de producto) y ajustar el aspecto en `src/css/woocommerce.css` si falta algo.
 - **Configurador de chapitas:** el shortcode no se toca; el tema solo evita estilos globales que lo afecten (sin Preflight). Compatibilidad funcional **sin validar** hasta probarlo en staging.
 - **Importador de AIOSEO:** agregado un **diagnóstico de solo lectura** (nombres de tablas `aioseo_*`, columnas y filas) en Ajustes → Fan Deco SEO → Importar. Con esa salida se adapta el importador a AIOSEO 5.0.4 antes de usarlo.
 
 ### Qué necesito para el próximo paso (todo de solo lectura, espaciando las consultas)
-1. Código de `precio_con_cuotas`, `fandeco-product-gallery` y (si querés integrarlo) `configurador_chapita`.
+1. Código de `precio_con_cuotas` y (si querés integrarlo) `configurador_chapita`.
 2. Condiciones de visualización de las plantillas Elementor 1085 y 1104.
 3. Reglas del plugin de descuentos por método de pago (para confirmar que el nativo reproduce lo mismo: base, impuestos, cupones, productos incluidos) y métodos/zonas de Andreani.
 4. Etiquetas GA4, Google Ads y Meta efectivamente cargadas (`npm run seo:snapshot` sobre staging lo muestra).
@@ -70,7 +70,7 @@ No se modifica la página 838. En staging: crear una página nueva “Inicio (nu
 | Alta | Mantener checkout clásico; probar Mercado Pago y Andreani | Checkout clásico estilizado; **pendiente probar pagos/envíos** |
 | Alta | No ejecutar la migración de AIOSEO todavía | Importador bloqueado sin simulación; AIOSEO sigue activo |
 | Media | Migrar plantillas de producto de Elementor | Pendiente (necesita sus condiciones) |
-| Media | Integrar galería personalizada y selectores de variaciones | Selectores hechos; galería pendiente de ver el código del fragmento |
+| Media | Selectores de variaciones y galería | Selectores hechos; galería nativa con estilo del tema (el snippet visual se deja desactivado en staging) |
 | Media | Revisar etiquetas duplicadas de Analytics | Herramienta lista; falta correrla en staging |
 
 ## 1. Decisión por plugin

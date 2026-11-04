@@ -75,7 +75,7 @@ WooCommerce → **Descuento por transferencia**. Vos definís: activar/desactiva
 - Detalle de snippets, plantillas de Elementor y prioridades: **[docs/MIGRACION.md](docs/MIGRACION.md)**.
 
 ## Precio/cuotas y galería
-El tema no calcula cuotas ni descuentos. Emite el evento **`fandeco:variation`** (detalle: `variationId`, `price`, `regularPrice`, `inStock`, `form`) para que un componente de precio reaccione a las variaciones. La galería tiene un modo *Nativa/Externa* en Personalizar → Fan Deco Studio → Tienda para no ejecutar dos sistemas de navegación a la vez. Detalle en `docs/MIGRACION.md`.
+El tema no calcula cuotas ni descuentos. Emite el evento **`fandeco:variation`** (detalle: `variationId`, `price`, `regularPrice`, `inStock`, `form`) para que un componente de precio reaccione a las variaciones. La galería de producto es la nativa de WooCommerce (zoom, lightbox, slider) con el estilo del tema. Detalle en `docs/MIGRACION.md`.
 
 ## Selectores visuales de variaciones
 Atributos globales de tipo **color** (círculos) y **button** (botones con texto) se muestran como selectores visuales; el `<select>` original de WooCommerce se conserva oculto y es la fuente de verdad (precio, stock e imagen los sigue calculando WooCommerce). Accesibles (radiogroup, teclado), con combinaciones no disponibles tachadas. Color por término: campo propio → datos heredados de Blocksy → nombre conocido → botón con texto. No depende de Blocksy. Atributos personalizados (no globales) y de tipo *select* no se modifican.

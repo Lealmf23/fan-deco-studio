@@ -55,29 +55,6 @@ add_action(
 		$text( 'fandeco_brand', 'announcement', __( 'Barra superior (texto opcional)', 'fan-deco-studio' ) );
 		$text( 'fandeco_brand', 'announcement_url', __( 'Barra superior: enlace (opcional)', 'fan-deco-studio' ), 'url', 'esc_url_raw' );
 
-		// Tienda.
-		$wp_customize->add_section( 'fandeco_shop', array( 'title' => __( 'Tienda', 'fan-deco-studio' ), 'panel' => 'fandeco' ) );
-		$wp_customize->add_setting(
-			'fandeco_gallery_mode',
-			array(
-				'default'           => 'native',
-				'sanitize_callback' => static fn( $v ) => in_array( $v, array( 'native', 'external' ), true ) ? $v : 'native',
-			)
-		);
-		$wp_customize->add_control(
-			'fandeco_gallery_mode',
-			array(
-				'section'     => 'fandeco_shop',
-				'label'       => __( 'Galería de producto', 'fan-deco-studio' ),
-				'description' => __( 'Evita que corran dos sistemas de navegación a la vez. “Nativa”: zoom, lightbox y slider de WooCommerce. “Externa”: el tema no activa ninguno y la galería la maneja un snippet/plugin (p. ej. el JavaScript de galería existente). Probar en staging.', 'fan-deco-studio' ),
-				'type'        => 'select',
-				'choices'     => array(
-					'native'   => __( 'Nativa de WooCommerce', 'fan-deco-studio' ),
-					'external' => __( 'Externa (snippet/plugin)', 'fan-deco-studio' ),
-				),
-			)
-		);
-
 		// Contacto.
 		$wp_customize->add_section( 'fandeco_contact', array( 'title' => __( 'Contacto', 'fan-deco-studio' ), 'panel' => 'fandeco' ) );
 		$text( 'fandeco_contact', 'email', __( 'Email', 'fan-deco-studio' ), 'email', 'sanitize_email' );
