@@ -27,7 +27,14 @@ export function initAnimations() {
 				ease: 'power3.out',
 				stagger: 0.09,
 				overwrite: true,
-				clearProps: 'transform',
+				onComplete: () => {
+					// Estado final: se limpian los estilos de GSAP y se marca el elemento, para que la regla CSS
+					// del estado inicial (opacity 0 + desplazamiento) deje de aplicarse.
+					batch.forEach( ( el ) => {
+						el.setAttribute( 'data-fd-revealed', '' );
+						gsap.set( el, { clearProps: 'opacity,transform' } );
+					} );
+				},
 			} );
 		},
 	} );

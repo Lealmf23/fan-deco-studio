@@ -119,3 +119,4 @@ body.fd-no-scroll { overflow: hidden; }
 /* ========== Animación (estado inicial solo con JS + sin reduced-motion; ver src/js/animations.js) ========== */
 .fd-anim [data-fd-animate="true"] [data-fd-reveal] { opacity: 0; transform: translateY(24px); }
 .fd-anim [data-fd-animate="true"] [data-fd-reveal="media"] { transform: scale(1.04); }
+.fd-anim [data-fd-animate="true"] [data-fd-reveal][data-fd-revealed] { opacity: 1; transform: none; }

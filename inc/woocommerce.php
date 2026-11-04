@@ -55,10 +55,25 @@ function fandeco_cart_link_html(): string {
 	);
 }
 
+/** Carrito de la barra inferior móvil (ícono + texto + contador). Fragmento propio. */
+function fandeco_tab_cart_html( bool $current = false ): string {
+	$count = fandeco_cart_count();
+	return sprintf(
+		'<a class="fd-tab fd-tab-cart" href="%1$s"%2$s>%3$s<span class="fd-tab__label">%4$s</span><span class="fd-cart-count" data-count="%5$d"%6$s>%5$d</span></a>',
+		esc_url( wc_get_cart_url() ),
+		$current ? ' aria-current="page"' : '',
+		fandeco_icon( 'bag' ),
+		esc_html__( 'Carrito', 'fan-deco-studio' ),
+		$count,
+		$count > 0 ? '' : ' hidden'
+	);
+}
+
 add_filter(
 	'woocommerce_add_to_cart_fragments',
 	static function ( array $fragments ): array {
 		$fragments['a.fd-cart-link'] = fandeco_cart_link_html();
+		$fragments['a.fd-tab-cart']  = fandeco_tab_cart_html( is_cart() );
 		return $fragments;
 	}
 );

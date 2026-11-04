@@ -122,6 +122,36 @@ if ( fandeco_has_woocommerce() ) {
 		</div>
 	</div>
 </footer>
+<nav class="fd-tabbar" aria-label="<?php esc_attr_e( 'Navegación rápida', 'fan-deco-studio' ); ?>">
+	<?php
+	$fd_wc    = fandeco_has_woocommerce();
+	$fd_tabs  = array(
+		array( 'home', __( 'Inicio', 'fan-deco-studio' ), home_url( '/' ), is_front_page() ),
+	);
+	if ( $fd_wc ) {
+		$fd_tabs[] = array( 'grid', __( 'Tienda', 'fan-deco-studio' ), wc_get_page_permalink( 'shop' ), is_shop() || is_product_taxonomy() );
+	}
+	foreach ( $fd_tabs as $fd_tab ) {
+		printf(
+			'<a class="fd-tab" href="%1$s"%2$s>%3$s<span class="fd-tab__label">%4$s</span></a>',
+			esc_url( $fd_tab[2] ),
+			$fd_tab[3] ? ' aria-current="page"' : '',
+			fandeco_icon( $fd_tab[0] ), // phpcs:ignore WordPress.Security.EscapeOutput
+			esc_html( $fd_tab[1] )
+		);
+	}
+	if ( $fd_wc ) {
+		echo fandeco_tab_cart_html( is_cart() ); // phpcs:ignore WordPress.Security.EscapeOutput -- escapado en la función.
+		printf(
+			'<a class="fd-tab" href="%1$s"%2$s>%3$s<span class="fd-tab__label">%4$s</span></a>',
+			esc_url( wc_get_page_permalink( 'myaccount' ) ),
+			is_account_page() ? ' aria-current="page"' : '',
+			fandeco_icon( 'user' ), // phpcs:ignore WordPress.Security.EscapeOutput
+			esc_html__( 'Cuenta', 'fan-deco-studio' )
+		);
+	}
+	?>
+</nav>
 <?php wp_footer(); ?>
 </body>
 </html>

@@ -38,10 +38,23 @@ $max_dots  = 5;
 				<?php endforeach; ?>
 			</ul>
 		<?php endif; ?>
+		<?php
+		$fd_dots = array_values( array_filter( $options, static fn( $o ) => ! empty( $o['color'] ) ) );
+		if ( $fd_dots ) : // solo variaciones de color; se muestran como puntos dentro de la imagen
+			?>
+			<ul class="fd-product-card__options" aria-label="<?php esc_attr_e( 'Colores disponibles', 'fan-deco-studio' ); ?>">
+				<?php foreach ( array_slice( $fd_dots, 0, $max_dots ) as $option ) : ?>
+					<li class="fd-dot" style="--fd-swatch:<?php echo esc_attr( $option['color'] ); ?>" title="<?php echo esc_attr( $option['name'] ); ?>"><span class="screen-reader-text"><?php echo esc_html( $option['name'] ); ?></span></li>
+				<?php endforeach; ?>
+				<?php if ( count( $fd_dots ) > $max_dots ) : ?>
+					<li class="fd-dots-more">+<?php echo (int) ( count( $fd_dots ) - $max_dots ); ?></li>
+				<?php endif; ?>
+			</ul>
+		<?php endif; ?>
+	</div>
 		<?php if ( $show_cart ) : ?>
 			<div class="fd-product-card__add"><?php echo fandeco_loop_add_to_cart_html( $product ); // phpcs:ignore WordPress.Security.EscapeOutput -- salida oficial de WooCommerce. ?></div>
 		<?php endif; ?>
-	</div>
 	<div class="fd-product-card__body">
 		<h3 class="fd-product-card__title"><a href="<?php echo esc_url( $link ); ?>"><?php echo esc_html( $product->get_name() ); ?></a></h3>
 		<div class="fd-product-card__price"><?php echo wp_kses_post( $product->get_price_html() ); ?></div>
@@ -50,19 +63,5 @@ $max_dots  = 5;
 			echo fandeco_installments_html( $product, 'loop' ); // phpcs:ignore WordPress.Security.EscapeOutput -- escapado en el plugin.
 		}
 		?>
-		<?php if ( $options ) : ?>
-			<ul class="fd-product-card__options" aria-label="<?php esc_attr_e( 'Variaciones disponibles', 'fan-deco-studio' ); ?>">
-				<?php foreach ( array_slice( $options, 0, $max_dots ) as $option ) : ?>
-					<?php if ( $option['color'] ) : ?>
-						<li class="fd-dot" style="--fd-swatch:<?php echo esc_attr( $option['color'] ); ?>" title="<?php echo esc_attr( $option['name'] ); ?>"><span class="screen-reader-text"><?php echo esc_html( $option['name'] ); ?></span></li>
-					<?php else : ?>
-						<li><?php echo esc_html( $option['name'] ); ?></li>
-					<?php endif; ?>
-				<?php endforeach; ?>
-				<?php if ( count( $options ) > $max_dots ) : ?>
-					<li>+<?php echo (int) ( count( $options ) - $max_dots ); ?></li>
-				<?php endif; ?>
-			</ul>
-		<?php endif; ?>
 	</div>
 </article>

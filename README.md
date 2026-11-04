@@ -67,6 +67,14 @@ El SEO vive en un **plugin propio** (`plugins/fan-deco-core/`, ZIP en `release/f
 - **Los listados usan la tarjeta del tema** mediante ganchos de WooCommerce; el botón de compra sale de `woocommerce_template_loop_add_to_cart()` para no romper plugins de seguimiento (PixelYourSite, Google for WooCommerce). Verificar en staging que los eventos *add_to_cart* de listados sigan llegando.
 - Etiquetas en mayúsculas con tracking eliminadas; el color y el estilo editorial siguen la paleta del brief.
 
+## Experiencia móvil (tipo app, hasta 767 px)
+- **Barra inferior fija** (Inicio, Tienda, Carrito con contador, Cuenta) y **buscador de productos siempre visible**; el header queda con logo y menú. En la ficha de producto, el carrito vuelve al header y la barra se oculta; también se oculta en carrito y checkout.
+- **Home:** hero en tarjeta (texto a la izquierda, imagen a la derecha), categorías en una fila horizontal con ícono, productos destacados en carrusel con botón “+” junto al precio.
+- **Listados:** tarjetas compactas; los colores disponibles aparecen como puntos sobre la imagen.
+- **Ficha:** foto a pantalla completa con miniaturas flotando a la derecha, y una hoja blanca con esquinas redondeadas con título, precio, cuotas, selectores y botón grande de compra.
+- Detalles: el contador del carrito de la barra inferior usa su propio fragmento de WooCommerce (`a.fd-tab-cart`) para no interferir con el del header. Se verificó en Chromium con emulación móvil sobre markup de muestra; **falta probar en iPhone/Android reales y con WooCommerce real**.
+- Corregido durante esta revisión: las animaciones de aparición dejaban los elementos desplazados 24 px de forma permanente (el CSS reaplicaba el estado inicial); y textos para lectores de pantalla dentro de carruseles ensanchaban la página en móvil.
+
 ## Descuento por transferencia (plugin Fan Deco Core)
 WooCommerce → **Descuento por transferencia**. Vos definís: activar/desactivar, **porcentaje**, texto, **métodos de pago** que lo reciben (por defecto transferencia bancaria `bacs`) y **a qué productos aplica: todos, ciertas categorías (incluye subcategorías) o ciertos productos** (las variaciones cuentan por su producto padre).
 - **Cómo se calcula:** porcentaje × suma de los productos elegibles **después de cupones y sin envío ni otros cargos**. Se registra como un cargo negativo estándar de WooCommerce: aparece en carrito/checkout, pedido, emails y reportes. Se recalcula al cambiar de método de pago. Solo aplica en el checkout (en el carrito todavía no hay método elegido).

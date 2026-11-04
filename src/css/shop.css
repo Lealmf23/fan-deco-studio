@@ -28,7 +28,10 @@
 .fd-product-card:hover .fd-product-card__media img { transform: scale(1.04); }
 .fd-product-card__badges { position: absolute; z-index: 2; top: 0.9rem; left: 0.9rem; display: flex; gap: 0.35rem; margin: 0; padding: 0; list-style: none; white-space: nowrap; }
 .fd-product-card__badges li { padding: 0.3rem 0.8rem; border-radius: 999px; background: var(--color-fd-wine); color: #fff; }
-.fd-product-card__add { position: absolute; z-index: 2; right: 1rem; bottom: 1rem; }
+.fd-product-card__window { grid-row: 1; grid-column: 1; }
+.fd-product-card__body { grid-row: 2; grid-column: 1; }
+/* El botón se ubica sobre la ventana (esquina inferior derecha) con grid; en móvil baja junto al precio */
+.fd-product-card__add { grid-row: 1; grid-column: 1; justify-self: end; align-self: end; margin: 0 1rem 1rem 0; z-index: 2; position: relative; }
 .fd-product-card__body { display: grid; gap: 0.3rem; padding-inline: 0.25rem; }
 .fd-product-card__title { margin: 0; font-size: 1.125rem; font-weight: 600; letter-spacing: -0.015em; line-height: 1.2; }
 .fd-product-card__title a { text-decoration: none; }
@@ -36,8 +39,8 @@
 .fd-product-card__price { font-size: 1rem; font-weight: 500; color: var(--color-fd-ink); }
 .fd-product-card__price del { margin-right: 0.4rem; color: var(--color-fd-muted); font-weight: 400; }
 .fd-product-card__price ins { text-decoration: none; color: var(--color-fd-wine); font-weight: 600; }
-.fd-product-card__options { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem; margin: 0.35rem 0 0; padding: 0; list-style: none; }
-.fd-product-card__options li:not(.fd-dot) { padding: 0; border: 0; font-size: 0.8125rem; color: var(--color-fd-muted); }
+.fd-product-card__options { position: absolute; z-index: 2; left: 0.9rem; bottom: 0.9rem; display: flex; align-items: center; gap: 0.35rem; margin: 0; padding: 0.4rem 0.6rem; list-style: none; border-radius: 999px; background: rgb(255 255 255 / 0.85); backdrop-filter: blur(6px); }
+.fd-product-card__options .fd-dots-more { font-size: 0.75rem; font-weight: 600; color: var(--color-fd-muted); }
 .fd-product-card__options .fd-dot { width: 0.95rem; height: 0.95rem; }
 
 /* Botón de compra: círculo con icono (el texto queda para lectores de pantalla) */
@@ -145,3 +148,6 @@
 /* Cuotas: la línea se acomoda en pantallas angostas */
 .fd-installments p { flex-wrap: wrap; row-gap: 0.15rem; padding-block: 0.5rem; }
 .fd-installments .fd-pay-badge { flex: none; white-space: nowrap; }
+
+/* Los textos para lectores de pantalla (posición absoluta) deben quedar contenidos y recortados por carruseles/listados */
+.fd-product-card, .fd-product-grid__item, .woocommerce ul.products > li { position: relative; }

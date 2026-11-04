@@ -39,7 +39,8 @@ check( substr_count( $prods, 'fd-product-card"' ) === 4 || substr_count( $prods,
 check( str_contains( $prods, 'data-fd-carousel' ), 'featured-products: carrusel por defecto' );
 check( str_contains( $prods, 'ajax_add_to_cart' ), 'featured-products: AJAX add to cart en simples' );
 check( str_contains( $prods, 'Elegir opciones' ), 'featured-products: variable enlaza a elegir opciones' );
-check( str_contains( $prods, '>+1<' ), 'featured-products: puntos de variación con "+n" (máx. 5)' );
+check( str_contains( $prods, 'fd-product-card__options' ) && str_contains( $prods, 'class="fd-dot"' ), 'featured-products: puntos de color dentro de la imagen' );
+check( ! str_contains( $prods, '<li>negro</li>' ), 'featured-products: ya no hay chips de texto bajo el precio' );
 check( str_contains( $prods, 'fd-product-card__window' ) && str_contains( $prods, 'fd-product-card__add' ), 'featured-products: ventana de producto y botón de compra' );
 check( str_contains( $prods, 'Sin stock' ) && str_contains( $prods, 'Oferta' ), 'featured-products: etiquetas reales (oferta/sin stock)' );
 $manual = fd_render_block( 'featured-products', array( 'source' => 'manual', 'productIds' => array( 2, 1 ), 'layout' => 'grid' ) );
@@ -84,8 +85,11 @@ foreach ( array( 'header.php', 'footer.php' ) as $tpl ) {
 	if ( 'header.php' === $tpl ) {
 		check( str_contains( $out, 'fd-cart-count' ) && str_contains( $out, 'aria-controls="fd-drawer"' ), 'header: carrito con contador y botón de menú accesible' );
 		check( str_contains( $out, 'fd-logo__fan' ), 'header: logo tipográfico de reserva (fan / DECO)' );
+		check( str_contains( $out, 'fd-mobile-search' ) && str_contains( $out, 'name="post_type" value="product"' ), 'header: buscador móvil de productos' );
 		$header_out = $out;
 	} else {
+		check( str_contains( $out, 'class="fd-tabbar"' ) && substr_count( $out, 'class="fd-tab' ) >= 4, 'footer: barra inferior móvil con 4 accesos' );
+		check( str_contains( $out, 'fd-tab-cart' ), 'footer: carrito con fragmento propio (no pisa el del header)' );
 		$footer_out = $out;
 	}
 }

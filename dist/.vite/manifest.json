@@ -8,13 +8,13 @@
     "src": "node_modules/@fontsource/caveat/files/caveat-latin-700-normal.woff2"
   },
   "src/js/animations.js": {
-    "file": "assets/animations-RJ5bHDDU.js",
+    "file": "assets/animations-ecsRb2s9.js",
     "name": "animations",
     "src": "src/js/animations.js",
     "isDynamicEntry": true
   },
   "src/js/main.js": {
-    "file": "assets/main-CdclLyJ0.js",
+    "file": "assets/main-z5_DYiJb.js",
     "name": "main",
     "src": "src/js/main.js",
     "isEntry": true,
@@ -24,7 +24,7 @@
       "src/js/animations.js"
     ],
     "css": [
-      "assets/main-DoN6dHvZ.css"
+      "assets/main-pP1hovHB.css"
     ],
     "assets": [
       "assets/bricolage-grotesque-latin-wght-normal-DLoelf7F.woff2",

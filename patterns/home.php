@@ -27,11 +27,11 @@ if ( fandeco_has_woocommerce() ) {
 
 <!-- wp:fandeco/benefits /-->
 
-<!-- wp:fandeco/section-heading {"eyebrow":"Explorá","title":"Comprá por categoría"} /-->
+<!-- wp:fandeco/section-heading {"title":"Comprá por categoría","linkText":"Ver todo","linkUrl":<?php echo wp_json_encode( esc_url_raw( $fd_shop ) ); ?>} /-->
 
 <!-- wp:fandeco/category-grid /-->
 
-<!-- wp:fandeco/section-heading {"eyebrow":"Selección","title":"Productos destacados","linkText":"Ver toda la tienda","linkUrl":<?php echo wp_json_encode( esc_url_raw( $fd_shop ) ); ?>} /-->
+<!-- wp:fandeco/section-heading {"title":"Productos destacados","linkText":"Ver toda la tienda","linkUrl":<?php echo wp_json_encode( esc_url_raw( $fd_shop ) ); ?>} /-->
 
 <!-- wp:fandeco/featured-products /-->
 
@@ -39,6 +39,6 @@ if ( fandeco_has_woocommerce() ) {
 
 <!-- wp:fandeco/editorial-banner {"eyebrow":"Personalizador 3D","badge":"Próximamente","title":"Diseñá tu pieza en 3D","description":"Estamos preparando un configurador para ver tu producto en 360°, cambiar colores y acabados.","variant":"dark","mount":"configurator"} /-->
 
-<!-- wp:fandeco/section-heading {"eyebrow":"Cómo trabajamos","title":"Del diseño a tu casa","align":"center"} /-->
+<!-- wp:fandeco/section-heading {"title":"Del diseño a tu casa","align":"center"} /-->
 
 <!-- wp:fandeco/process-steps /-->
