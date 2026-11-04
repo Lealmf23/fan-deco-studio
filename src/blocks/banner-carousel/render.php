@@ -1,6 +1,6 @@
 <?php
 /**
- * Render del bloque fandeco/banner-carousel: carrusel compacto de banners con scroll-snap nativo.
+ * Render del bloque fandeco/banner-carousel: pila de capas (las fotos se apilan como capas de una impresión 3D).
  *
  * @var array $attributes
  * @package FanDecoStudio
@@ -36,7 +36,7 @@ $interval = max( 3, min( 8, (int) ( $attributes['interval'] ?? 5 ) ) );
 <section <?php echo fandeco_block_attrs( 'bancar', $attributes ); // phpcs:ignore WordPress.Security.EscapeOutput ?> data-fd-bancar data-autoplay="<?php echo $autoplay ? '1' : '0'; ?>" data-interval="<?php echo (int) $interval; ?>" role="region" aria-roledescription="<?php esc_attr_e( 'carrusel', 'fan-deco-studio' ); ?>" aria-label="<?php esc_attr_e( 'Banners destacados', 'fan-deco-studio' ); ?>">
 	<div class="fd-container">
 		<div class="fd-bancar__frame" data-fd-reveal>
-			<ul class="fd-bancar__track" data-fd-bancar-track role="list" tabindex="0">
+			<ul class="fd-bancar__track" data-fd-bancar-track role="list">
 				<?php foreach ( $slides as $i => $slide ) : ?>
 					<?php
 					$img = fandeco_attachment_image(
@@ -46,7 +46,7 @@ $interval = max( 3, min( 8, (int) ( $attributes['interval'] ?? 5 ) ) );
 							'alt'      => $slide['alt'],
 							'loading'  => 0 === $i ? 'eager' : 'lazy',
 							'decoding' => 'async',
-							'sizes'    => '(max-width: 639px) 86vw, (max-width: 1023px) 46vw, 31vw',
+							'sizes'    => '(max-width: 639px) 74vw, 34rem',
 						)
 					);
 					if ( ! $img ) {

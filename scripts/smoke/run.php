@@ -38,7 +38,7 @@ $bc = fd_render_block( 'banner-carousel', array( 'slides' => array(
 	array( 'imageId' => 3, 'alt' => '<script>x</script>', 'url' => 'javascript:alert(1)' ),
 ) ) );
 check( 3 === substr_count( $bc, 'fd-bancar__slide' ) - substr_count( $bc, 'fd-bancar__slide-' ), 'banner-carousel: descarta banners sin imagen válida (3 de 5)' );
-check( str_contains( $bc, 'aria-roledescription="carrusel"' ) && str_contains( $bc, 'aria-label="1 de 3"' ) && str_contains( $bc, 'data-fd-bancar-prev' ) && str_contains( $bc, 'data-fd-bancar-pause' ), 'banner-carousel: accesible, con flechas y pausa' );
+check( str_contains( $bc, 'aria-roledescription="carrusel"' ) && str_contains( $bc, 'aria-label="1 de 3"' ) && str_contains( $bc, 'data-fd-bancar-prev' ) && str_contains( $bc, 'data-fd-bancar-pause' ), 'banner-carousel: pila accesible, con flechas y pausa' );
 check( ! str_contains( $bc, '<script>' ) && ! str_contains( $bc, 'javascript:' ), 'banner-carousel: alt saneado y URL javascript: descartada' );
 check( str_contains( $bc, '<a class="fd-bancar__link" href="/categoria/lamparas">' ) && 1 === substr_count( $bc, 'fd-bancar__link"' ), 'banner-carousel: enlace solo donde se definió (el de javascript: se descarta)' );
 $bc1 = fd_render_block( 'banner-carousel', array( 'slides' => array( array( 'imageId' => 1, 'alt' => 'Uno' ) ), 'autoplay' => true ) );

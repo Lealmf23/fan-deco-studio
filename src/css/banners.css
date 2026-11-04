@@ -1,26 +1,43 @@
 /* =====================================================================
-   Carrusel de banners compacto: 3 a la vez en escritorio, 2 en tablet, 1 con el siguiente asomando en móvil.
-   Las imágenes no se recortan (cuadradas, con el texto dentro); el alto lo define el ancho.
+   Pila de capas: las fotos se apilan como las capas de una impresión 3D.
+   La activa (al frente) va limpia; las de atrás asoman más chicas, inclinadas y con rayas de capa.
+   Sin JavaScript (o con una sola foto) se muestran en una grilla simple.
    ===================================================================== */
-.fd-bancar { padding-block: clamp(1.25rem, 3vw, 2.5rem); }
+.fd-bancar { padding-block: clamp(1.5rem, 3.5vw, 3rem); }
 .fd-bancar__frame { position: relative; }
-.fd-bancar__track {
-	--fd-gap: 1rem; --fd-n: 1.12;
-	display: flex; gap: var(--fd-gap); margin: 0; padding: 0; list-style: none;
-	overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain;
-	-webkit-overflow-scrolling: touch;
-}
-.fd-bancar__track::-webkit-scrollbar { display: none; }
-.fd-bancar__track:focus-visible { outline: 2px solid var(--color-fd-wine); outline-offset: 4px; border-radius: 1.5rem; }
-.fd-bancar__slide { flex: 0 0 calc((100% - var(--fd-gap) * (var(--fd-n) - 1)) / var(--fd-n)); scroll-snap-align: start; overflow: hidden; border-radius: 1.5rem; background: var(--color-fd-sand); }
-.fd-bancar__slide img { display: block; width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: cover; transition: transform 600ms var(--ease-fd); }
+.fd-bancar__track { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); gap: 1rem; margin: 0; padding: 0; list-style: none; }
+.fd-bancar__slide { position: relative; overflow: hidden; border-radius: 1.5rem; background: var(--color-fd-sand); }
+.fd-bancar__slide img { display: block; width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: cover; -webkit-user-drag: none; }
 .fd-bancar__link { display: block; }
 .fd-bancar__link:focus-visible { outline: 3px solid var(--color-fd-wine); outline-offset: -3px; border-radius: 1.5rem; }
-@media (hover: hover) { .fd-bancar__link:hover img { transform: scale(1.03); } }
-@media (min-width: 640px) { .fd-bancar__track { --fd-n: 2; } }
-@media (min-width: 1024px) { .fd-bancar__track { --fd-n: 3; --fd-gap: 1.25rem; } }
 
-.fd-bancar__controls { display: flex; align-items: center; justify-content: center; gap: 0.75rem; margin-top: 1.1rem; }
+/* --- Modo pila (cuando el JS está listo) --- */
+.fd-bancar.is-ready { overflow-x: clip; } /* las tarjetas de los extremos llegan al borde de la pantalla sin generar scroll horizontal */
+.fd-bancar.is-ready .fd-bancar__frame { touch-action: pan-y; }
+.fd-bancar.is-ready .fd-bancar__track { --card: min(32rem, 74vw); display: block; position: relative; height: calc(var(--card) + 2.75rem); margin-inline: auto; user-select: none; }
+.fd-bancar.is-ready .fd-bancar__slide {
+	--x: 0; --s: 1; --r: 0deg; --z: 20; --o: 1;
+	position: absolute; top: 0; left: 50%; z-index: var(--z);
+	width: var(--card); aspect-ratio: 1 / 1; margin-left: calc(var(--card) / -2);
+	opacity: var(--o); transform: translateX(calc(var(--x) * 100%)) scale(var(--s)) rotate(var(--r)); transform-origin: 50% 70%;
+	/* borde en escalones: las capas apiladas debajo de cada foto */
+	box-shadow: 0 0.5rem 0 -0.25rem #d8d5c6, 0 1rem 0 -0.5rem #cbc8b7, 0 1.5rem 0 -0.75rem #bdbaa7, 0 2.2rem 2.6rem -1.2rem rgb(41 40 36 / 0.45);
+	transition: transform 700ms var(--ease-fd), opacity 500ms var(--ease-fd);
+	cursor: pointer;
+}
+.fd-bancar.is-ready .fd-bancar__slide.is-active { cursor: default; }
+.fd-bancar.is-ready .fd-bancar__slide img { height: 100%; transition: filter 700ms var(--ease-fd); filter: saturate(0.55) contrast(0.96); }
+.fd-bancar.is-ready .fd-bancar__slide.is-active img { filter: none; }
+/* Rayas de capa: se ven en las fotos "todavía imprimiéndose" y se disuelven al llegar al frente. */
+.fd-bancar.is-ready .fd-bancar__slide::after {
+	content: ""; position: absolute; inset: 0; pointer-events: none;
+	background: repeating-linear-gradient(to bottom, transparent 0, transparent 5px, rgb(245 242 237 / 0.5) 5px, rgb(245 242 237 / 0.5) 6px);
+	opacity: 1; transition: opacity 700ms var(--ease-fd);
+}
+.fd-bancar.is-ready .fd-bancar__slide.is-active::after { opacity: 0; }
+
+/* --- Controles --- */
+.fd-bancar__controls { display: flex; align-items: center; justify-content: center; gap: 0.75rem; margin-top: 0.5rem; }
 .fd-bancar__controls[hidden] { display: none; }
 .fd-bancar__arrow, .fd-bancar__pause { display: grid; place-items: center; width: 2.5rem; height: 2.5rem; padding: 0; border: 1.5px solid var(--color-fd-line); border-radius: 50%; background: #fff; color: var(--color-fd-blue); cursor: pointer; transition: background-color 200ms, color 200ms, border-color 200ms; }
 .fd-bancar__arrow svg { width: 1.2rem; height: 1.2rem; }
@@ -31,9 +48,8 @@
 .fd-bancar__dot { width: 0.65rem; height: 0.65rem; padding: 0; border: 0; border-radius: 999px; background: color-mix(in srgb, var(--color-fd-blue) 22%, transparent); cursor: pointer; transition: width 250ms var(--ease-fd), background-color 250ms; }
 .fd-bancar__dot[aria-current="true"] { width: 1.6rem; background: var(--color-fd-wine); }
 .fd-bancar__arrow:focus-visible, .fd-bancar__pause:focus-visible, .fd-bancar__dot:focus-visible { outline: 2px solid var(--color-fd-wine); outline-offset: 2px; }
-@media (max-width: 639px) {
-	.fd-bancar__arrow { display: none; }
-	.fd-bancar__track { margin-inline: calc(var(--spacing-fd-gutter) * -1); padding-inline: var(--spacing-fd-gutter); scroll-padding-inline: var(--spacing-fd-gutter); }
+@media (max-width: 639px) { .fd-bancar__arrow { display: none; } }
+@media (prefers-reduced-motion: reduce) {
+	.fd-bancar.is-ready .fd-bancar__slide, .fd-bancar.is-ready .fd-bancar__slide img, .fd-bancar.is-ready .fd-bancar__slide::after, .fd-bancar__dot { transition: none; }
 }
-@media (prefers-reduced-motion: reduce) { .fd-bancar__slide img, .fd-bancar__dot { transition: none; } }
 html:not(.js) .fd-bancar__controls { display: none; }
