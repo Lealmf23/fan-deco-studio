@@ -5,7 +5,7 @@
    ===================================================================== */
 
 :root {
-	--fd-night: #0f1d33;
+	--fd-night: #162945;
 	--fd-layers: repeating-linear-gradient(to bottom, transparent 0, transparent 9px, rgb(255 255 255 / 0.05) 9px, rgb(255 255 255 / 0.05) 10px);
 }
 
@@ -23,8 +23,8 @@
 .fd-hero--immersive .fd-hero__desc { max-width: 30rem; font-size: 1.25rem; transition: color 800ms var(--ease-fd); }
 .fd-hero--immersive .fd-eyebrow { transition: color 800ms var(--ease-fd); }
 .fd-hero--immersive.is-lit { background: var(--fd-night); }
-.fd-hero--immersive.is-lit .fd-hero__title { color: #fff6e6; }
-.fd-hero--immersive.is-lit .fd-hero__desc { color: rgb(255 246 230 / 0.82); }
+.fd-hero--immersive.is-lit .fd-hero__title { color: #f7f5f0; }
+.fd-hero--immersive.is-lit .fd-hero__desc { color: rgb(247 245 240 / 0.82); }
 .fd-hero--immersive.is-lit .fd-eyebrow { color: #f2b84b; }
 .fd-hero--immersive .fd-hero__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.5rem; }
 .fd-hero--immersive.is-lit .fd-btn--primary { background: #f2b84b; color: var(--fd-night); }
@@ -35,7 +35,7 @@
 .fd-hero-switch__thumb { position: absolute; top: 0.2rem; left: 0.2rem; width: 1.4rem; height: 1.4rem; border-radius: 50%; background: #fff; box-shadow: 0 1px 4px rgb(0 0 0 / 0.35); transition: transform 400ms var(--ease-fd), background-color 400ms; }
 .fd-hero-switch[aria-checked="true"] .fd-hero-switch__track { background: #f2b84b; }
 .fd-hero-switch[aria-checked="true"] .fd-hero-switch__thumb { transform: translateX(1.3rem); background: #fff8e1; }
-.fd-hero--immersive.is-lit .fd-hero-switch { border-color: rgb(255 246 230 / 0.35); background: rgb(255 246 230 / 0.08); color: #fff6e6; }
+.fd-hero--immersive.is-lit .fd-hero-switch { border-color: rgb(247 245 240 / 0.35); background: rgb(247 245 240 / 0.08); color: #f7f5f0; }
 @media (prefers-reduced-motion: reduce) { .fd-hero--immersive, .fd-hero--immersive * { transition: none !important; } }
 
 /* ---------- Beneficios en franja ---------- */
@@ -128,9 +128,9 @@
 }
 
 /* ---------- La noche es de toda la portada: header y barra superior se oscurecen mientras el hero está encendido y arriba ---------- */
-body:has(.fd-hero--immersive.is-lit) .fd-header:not(.is-scrolled) { background: var(--fd-night); color: #fff6e6; box-shadow: none; transition: background-color 800ms var(--ease-fd); }
-body:has(.fd-hero--immersive.is-lit) .fd-header:not(.is-scrolled) :is(.fd-header__brand, .fd-nav .fd-menu a, .fd-icon-btn) { color: #fff6e6; }
-body:has(.fd-hero--immersive.is-lit) .fd-header:not(.is-scrolled) .fd-icon-btn:hover { background: rgb(255 246 230 / 0.12); }
+body:has(.fd-hero--immersive.is-lit) .fd-header:not(.is-scrolled) { background: var(--fd-night); color: #f7f5f0; box-shadow: none; transition: background-color 800ms var(--ease-fd); }
+body:has(.fd-hero--immersive.is-lit) .fd-header:not(.is-scrolled) :is(.fd-header__brand, .fd-nav .fd-menu a, .fd-icon-btn) { color: #f7f5f0; }
+body:has(.fd-hero--immersive.is-lit) .fd-header:not(.is-scrolled) .fd-icon-btn:hover { background: rgb(247 245 240 / 0.12); }
 body:has(.fd-hero--immersive.is-lit) .fd-announcement { background: #0a1424; transition: background-color 800ms var(--ease-fd); }
 
 /* El footer se pega al cierre de la home (sin franja crema entre dos fondos oscuros) */

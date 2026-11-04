@@ -17,20 +17,27 @@
     "src": "src/js/animations.js",
     "isDynamicEntry": true
   },
+  "src/js/banner-carousel.js": {
+    "file": "assets/banner-carousel-DfuKrIB8.js",
+    "name": "banner-carousel",
+    "src": "src/js/banner-carousel.js",
+    "isDynamicEntry": true
+  },
   "src/js/main.js": {
-    "file": "assets/main-Cc4lejcE.js",
+    "file": "assets/main-BeadO-jV.js",
     "name": "main",
     "src": "src/js/main.js",
     "isEntry": true,
     "dynamicImports": [
       "src/js/search.js",
+      "src/js/banner-carousel.js",
       "src/js/shop-ui.js",
       "src/js/swatches.js",
       "src/js/variations.js",
       "src/js/animations.js"
     ],
     "css": [
-      "assets/main-Ym19GRAT.css"
+      "assets/main-D_FXblZV.css"
     ],
     "assets": [
       "assets/bricolage-grotesque-latin-wght-normal-DLoelf7F.woff2",

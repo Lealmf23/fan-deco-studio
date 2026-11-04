@@ -8,16 +8,57 @@
 	"description": "Título de sección con sobretítulo, descripción y enlace opcional.",
 	"textdomain": "fan-deco-studio",
 	"attributes": {
-		"eyebrow": { "type": "string", "default": "" },
-		"title": { "type": "string", "default": "Título de la sección" },
-		"description": { "type": "string", "default": "" },
-		"align": { "type": "string", "enum": [ "left", "center" ], "default": "left" },
-		"level": { "type": "integer", "enum": [ 2, 3 ], "default": 2 },
-		"linkText": { "type": "string", "default": "" },
-		"linkUrl": { "type": "string", "default": "" },
-		"animate": { "type": "boolean", "default": true }
+		"eyebrow": {
+			"type": "string",
+			"default": ""
+		},
+		"title": {
+			"type": "string",
+			"default": "Título de la sección"
+		},
+		"description": {
+			"type": "string",
+			"default": ""
+		},
+		"align": {
+			"type": "string",
+			"enum": [
+				"left",
+				"center"
+			],
+			"default": "left"
+		},
+		"level": {
+			"type": "integer",
+			"enum": [
+				1,
+				2,
+				3
+			],
+			"default": 2
+		},
+		"linkText": {
+			"type": "string",
+			"default": ""
+		},
+		"linkUrl": {
+			"type": "string",
+			"default": ""
+		},
+		"animate": {
+			"type": "boolean",
+			"default": true
+		}
 	},
-	"supports": { "html": false, "spacing": { "margin": [ "top", "bottom" ] } },
+	"supports": {
+		"html": false,
+		"spacing": {
+			"margin": [
+				"top",
+				"bottom"
+			]
+		}
+	},
 	"editorScript": "file:./index.js",
 	"render": "file:./render.php"
 }

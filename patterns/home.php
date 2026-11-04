@@ -2,7 +2,7 @@
 /**
  * Title: Fan Deco: Portada completa
  * Slug: fan-deco-studio/home
- * Description: Hero, beneficios, categorías, productos destacados, mascotas, configurador 3D (próximamente) y proceso.
+ * Description: Título principal, carrusel de banners, beneficios, categorías, productos destacados, mascotas, configurador 3D (próximamente) y proceso.
  * Categories: fandeco
  * Keywords: home, portada, inicio
  * Viewport Width: 1400
@@ -23,7 +23,9 @@ if ( fandeco_has_woocommerce() ) {
 	}
 }
 ?>
-<!-- wp:fandeco/hero {"variant":"immersive","buttonUrl":<?php echo wp_json_encode( esc_url_raw( $fd_shop ) ); ?>} /-->
+<!-- wp:fandeco/section-heading {"eyebrow":"DISEÑO + IMPRESIÓN 3D + PERSONALIZACIÓN","title":"Hacemos tus ideas realidad.","description":"Objetos personalizados, deco y regalos únicos diseñados y fabricados especialmente para vos.","align":"center","level":1} /-->
+
+<!-- wp:fandeco/banner-carousel /-->
 
 <!-- wp:fandeco/benefits {"variant":"strip"} /-->
 

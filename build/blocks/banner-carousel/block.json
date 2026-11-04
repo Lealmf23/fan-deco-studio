@@ -1,0 +1,33 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "fandeco/banner-carousel",
+  "title": "Fan Deco: Carrusel de banners",
+  "category": "fandeco",
+  "icon": "images-alt2",
+  "description": "Carrusel compacto de banners (imágenes con enlace opcional). Muestra varios a la vez según el ancho de pantalla, con flechas, puntos, pausa y deslizamiento táctil.",
+  "textdomain": "fan-deco-studio",
+  "attributes": {
+    "slides": {
+      "type": "array",
+      "default": []
+    },
+    "autoplay": {
+      "type": "boolean",
+      "default": true
+    },
+    "interval": {
+      "type": "integer",
+      "default": 5
+    },
+    "animate": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "supports": {
+    "html": false,
+    "align": false
+  },
+  "render": "file:./render.php"
+}

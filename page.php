@@ -23,7 +23,9 @@ get_header();
 			<?php
 			continue;
 		}
-		if ( ! $fd_wc_page && 'builder' === get_post_meta( get_the_ID(), '_elementor_edit_mode', true ) ) {
+		// Solo mientras Elementor esté activo: si se desactiva, la página conserva su texto en el contenido normal y se muestra con el contenedor del tema.
+		$fd_elementor_on = class_exists( '\\Elementor\\Plugin' );
+		if ( ! $fd_wc_page && $fd_elementor_on && 'builder' === get_post_meta( get_the_ID(), '_elementor_edit_mode', true ) ) {
 			?>
 			<article <?php post_class( 'fd-elementor-page' ); ?>><?php the_content(); ?></article>
 			<?php
@@ -31,7 +33,9 @@ get_header();
 		}
 		?>
 		<article <?php post_class( 'fd-container fd-prose-wrap' ); ?>>
-			<header class="fd-page-head"><h1 class="fd-page-title"><?php the_title(); ?></h1></header>
+			<?php if ( false === stripos( (string) get_post_field( 'post_content', get_the_ID() ), '<h1' ) ) : // evita dos H1 si el contenido ya trae el suyo. ?>
+				<header class="fd-page-head"><h1 class="fd-page-title"><?php the_title(); ?></h1></header>
+			<?php endif; ?>
 			<div class="fd-prose"><?php the_content(); ?></div>
 		</article>
 	<?php endwhile; ?>

@@ -9,7 +9,7 @@
 defined( 'ABSPATH' ) || exit;
 
 $align   = fandeco_enum( $attributes['align'] ?? '', array( 'left', 'center' ), 'left' );
-$level   = 3 === (int) ( $attributes['level'] ?? 2 ) ? 3 : 2;
+$level   = in_array( (int) ( $attributes['level'] ?? 2 ), array( 1, 3 ), true ) ? (int) $attributes['level'] : 2;
 $eyebrow = sanitize_text_field( $attributes['eyebrow'] ?? '' );
 $title   = sanitize_text_field( $attributes['title'] ?? '' );
 $desc    = sanitize_textarea_field( $attributes['description'] ?? '' );

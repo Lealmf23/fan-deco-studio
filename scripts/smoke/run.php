@@ -30,6 +30,23 @@ check( ! str_contains( $xss, '<script>' ), 'hero: título saneado/escapado' );
 check( ! str_contains( $xss, 'javascript:' ), 'hero: URL javascript: descartada' );
 check( ! str_contains( $xss, 'evil' ), 'hero: variante fuera de la lista cae al valor por defecto' );
 
+$bc = fd_render_block( 'banner-carousel', array( 'slides' => array(
+	array( 'imageId' => 1, 'alt' => 'Lámpara naranja', 'url' => '/categoria/lamparas' ),
+	array( 'imageId' => 2, 'alt' => 'Calendario' ),
+	array( 'imageId' => 0, 'alt' => 'sin imagen' ),
+	array( 'imageId' => 999, 'alt' => 'imagen inexistente' ),
+	array( 'imageId' => 3, 'alt' => '<script>x</script>', 'url' => 'javascript:alert(1)' ),
+) ) );
+check( 3 === substr_count( $bc, 'fd-bancar__slide' ) - substr_count( $bc, 'fd-bancar__slide-' ), 'banner-carousel: descarta banners sin imagen válida (3 de 5)' );
+check( str_contains( $bc, 'aria-roledescription="carrusel"' ) && str_contains( $bc, 'aria-label="1 de 3"' ) && str_contains( $bc, 'data-fd-bancar-prev' ) && str_contains( $bc, 'data-fd-bancar-pause' ), 'banner-carousel: accesible, con flechas y pausa' );
+check( ! str_contains( $bc, '<script>' ) && ! str_contains( $bc, 'javascript:' ), 'banner-carousel: alt saneado y URL javascript: descartada' );
+check( str_contains( $bc, '<a class="fd-bancar__link" href="/categoria/lamparas">' ) && 1 === substr_count( $bc, 'fd-bancar__link"' ), 'banner-carousel: enlace solo donde se definió (el de javascript: se descarta)' );
+$bc1 = fd_render_block( 'banner-carousel', array( 'slides' => array( array( 'imageId' => 1, 'alt' => 'Uno' ) ), 'autoplay' => true ) );
+check( ! str_contains( $bc1, 'data-fd-bancar-prev' ) && str_contains( $bc1, 'data-autoplay="0"' ), 'banner-carousel: con un solo banner no hay controles ni avance' );
+check( ! str_contains( fd_render_block( 'banner-carousel', array( 'slides' => array() ) ), '<section' ), 'banner-carousel: sin banners no imprime el carrusel (solo un aviso para quien edita)' );
+check( str_contains( fd_render_block( 'section-heading', array( 'title' => 'Hola', 'level' => 1 ) ), '<h1 ' ), 'section-heading: admite H1 (título principal de la página)' );
+check( str_contains( fd_render_block( 'section-heading', array( 'title' => 'Hola', 'level' => 7 ) ), '<h2 ' ), 'section-heading: nivel inválido cae a H2' );
+
 $hero_lit = fd_render_block( 'hero', array( 'variant' => 'immersive', 'desktopImageId' => 21, 'imageLitId' => 22 ) );
 check( str_contains( $hero_lit, 'data-fd-hero-switch' ) && str_contains( $hero_lit, 'role="switch"' ) && str_contains( $hero_lit, 'fd-hero__lit' ), 'hero: con foto encendida hay interruptor accesible y capa de luz' );
 check( ! str_contains( $hero_lit, 'class="fd-hero fd-hero--immersive" ' ) && ! str_contains( $hero_lit, ' is-lit' ), 'hero: arranca apagado por defecto' );
@@ -110,6 +127,9 @@ $sh = fandeco_share_links( 'https://fandeco.com.ar/p/lampara?a=1&b=2', 'Lámpara
 check( str_starts_with( $sh['whatsapp'][1], 'https://wa.me/?text=' ) && ! str_contains( $sh['whatsapp'][1], ' ' ) && str_contains( $sh['facebook'][1], rawurlencode( 'https://fandeco.com.ar/p/lampara?a=1&b=2' ) ), 'compartir: enlaces codificados (sin espacios ni caracteres crudos)' );
 check( str_starts_with( $sh['email'][1], 'mailto:?subject=' ) && ! str_contains( $sh['email'][1], '"' ), 'compartir: email con asunto codificado' );
 check( str_contains( file_get_contents( FANDECO_DIR . '/template-parts/components/product-card.php' ), 'data-fd-quickview' ), 'tarjeta: botón de vista rápida con nombre accesible' );
+
+$pg = file_get_contents( FANDECO_DIR . '/page.php' );
+check( str_contains( $pg, 'Elementor' ) && str_contains( $pg, "Plugin' )" ) && str_contains( $pg, '$fd_elementor_on &&' ) && str_contains( $pg, "stripos( (string) get_post_field( 'post_content'" ), 'page.php: páginas de Elementor se ven bien si Elementor se desactiva y no duplican el H1' );
 
 echo "Plantillas\n";
 foreach ( array( 'header.php', 'footer.php' ) as $tpl ) {

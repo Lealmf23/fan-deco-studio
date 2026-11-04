@@ -177,6 +177,14 @@ Según los ajustes del sitio real (leídos en modo solo lectura), Blocksy Pro te
 - Pendientes: pestañas personalizadas por producto y lista de espera (envía emails, requiere decisión); revisar la extensión Code Snippets de Blocksy antes de desactivarlo.
 - Verificado en Chromium con la API simulada; **no probado con WooCommerce real** (el evento `added_to_cart` y el botón AJAX dependen del script de WooCommerce).
 
+## Carrusel de banners y migración desde Elementor
+- **Bloque `fandeco/banner-carousel`:** carrusel compacto de imágenes con enlace opcional. Muestra 3 a la vez en escritorio, 2 en tablet y 1 con el siguiente asomando en móvil; no recorta las imágenes (pensado para banners cuadrados con el texto dentro). Flechas, puntos, botón de pausa, deslizamiento táctil y teclado. El avance automático se detiene al pasar el cursor, al enfocar, con la pestaña oculta, si el usuario pausa y con “reducir movimiento”. Reemplaza al hero grande en la portada por defecto (el bloque Hero sigue disponible).
+- `fandeco/section-heading` admite **H1** (título principal de la página; usarlo una sola vez).
+- **Paleta:** el tema usa solo la paleta de marca (#162945, #83A1B9, #682242, #F7F5F0, #FFFFFF, #292D33) y derivados neutros. Se alinearon dos tonos propios (azul más oscuro y crema cálido) a esa paleta. Quedan colores funcionales fuera de la paleta: verde para el precio con transferencia y mensajes de éxito, y ámbar para el resplandor de las lámparas.
+- **Compatibilidad al desactivar Elementor:** Elementor guarda una copia del texto de cada página en el contenido normal de WordPress. Las páginas legales (que son solo HTML) se muestran con el contenedor del tema cuando Elementor no está activo. Las páginas con diseño propio (Home, Mascotas) se reconstruyen con bloques: ver `docs/migracion/`.
+- Hallazgos del sitio real (solo lectura): Contacto (547) y Servicios (751) contienen texto de ejemplo del demo de Blocksy y están publicadas; la política de privacidad (1331) empieza en la sección 6 (faltan las secciones 1 a 5); Contacto usa `[blocksy_posts]`, un shortcode de Blocksy que dejaría de funcionar.
+- Verificado en Chromium (1360, 820 y 390 px, y con movimiento reducido) con markup de muestra; **no probado en el editor de bloques de un WordPress real**.
+
 ## Qué está verificado y qué no
 **Verificado aquí (sin WordPress real; el entorno no puede descargar WordPress/WooCommerce):**
 - Sintaxis PHP de los 41 archivos (`php -l`, PHP 8.3).

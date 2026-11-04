@@ -18,6 +18,7 @@ function boot() {
 	initHeroLight();
 	loadSearch();
 	loadShopUi();
+	loadBannerCarousel();
 	loadSwatches();
 	loadVariationEvents();
 	loadAnimations();
@@ -32,6 +33,13 @@ function loadSearch() {
 		}
 	};
 	document.addEventListener( 'focusin', onFocus );
+}
+
+/** Carrusel de banners: solo si la página lo tiene. */
+function loadBannerCarousel() {
+	if ( document.querySelector( '[data-fd-bancar]' ) ) {
+		import( './banner-carousel.js' ).then( ( m ) => m.initBannerCarousels() );
+	}
 }
 
 /** Vista rápida y panel del carrito: solo si la página los tiene (se imprimen únicamente con WooCommerce). */

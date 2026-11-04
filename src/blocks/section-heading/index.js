@@ -11,7 +11,7 @@ registerFandecoBlock( metadata, ( { attributes, setAttributes } ) => (
 		</PanelBody>
 		<PanelBody title={ __( 'Diseño', 'fan-deco-studio' ) } initialOpen={ false }>
 			<SelectControl label={ __( 'Alineación', 'fan-deco-studio' ) } value={ attributes.align } options={ [ { value: 'left', label: __( 'Izquierda', 'fan-deco-studio' ) }, { value: 'center', label: __( 'Centrada', 'fan-deco-studio' ) } ] } onChange={ ( align ) => setAttributes( { align } ) } />
-			<SelectControl label={ __( 'Nivel de encabezado', 'fan-deco-studio' ) } value={ String( attributes.level ) } options={ [ { value: '2', label: 'H2' }, { value: '3', label: 'H3' } ] } onChange={ ( v ) => setAttributes( { level: Number( v ) } ) } />
+			<SelectControl label={ __( 'Nivel de encabezado', 'fan-deco-studio' ) } value={ String( attributes.level ) } options={ [ { value: '1', label: __( 'H1 (título principal de la página; usalo una sola vez)', 'fan-deco-studio' ) }, { value: '2', label: 'H2' }, { value: '3', label: 'H3' } ] } onChange={ ( v ) => setAttributes( { level: Number( v ) } ) } />
 		</PanelBody>
 	</>
 ) );

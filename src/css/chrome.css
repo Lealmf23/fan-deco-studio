@@ -23,18 +23,18 @@
 /* ---------- Footer ---------- */
 .fd-footer { padding-top: 0; }
 .fd-footer__main { padding-top: clamp(3rem, 6vw, 5rem); }
-.fd-footer__cta { background-color: var(--fd-night, #0f1d33); background-image: var(--fd-layers); border-bottom: 1px solid rgb(255 255 255 / 0.1); }
+.fd-footer__cta { background-color: var(--fd-night, #162945); background-image: var(--fd-layers); border-bottom: 1px solid rgb(255 255 255 / 0.1); }
 .fd-footer__cta-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.5rem 3rem; padding-block: clamp(2.5rem, 5vw, 4rem); }
-.fd-footer__cta-title { margin: 0; font-family: var(--font-display); font-size: clamp(2rem, 4.5vw, 3.5rem); font-weight: 700; line-height: 1; letter-spacing: -0.045em; color: #fff6e6; }
-.fd-footer__cta-text { max-width: 30rem; margin: 0.75rem 0 0; color: rgb(255 246 230 / 0.72); }
+.fd-footer__cta-title { margin: 0; font-family: var(--font-display); font-size: clamp(2rem, 4.5vw, 3.5rem); font-weight: 700; line-height: 1; letter-spacing: -0.045em; color: #f7f5f0; }
+.fd-footer__cta-text { max-width: 30rem; margin: 0.75rem 0 0; color: rgb(247 245 240 / 0.72); }
 .fd-footer__cta-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
 .fd-footer__cta-actions .fd-btn { display: inline-flex; align-items: center; gap: 0.5rem; }
 .fd-footer__cta-actions .fd-btn svg { width: 1.15rem; height: 1.15rem; }
 .fd-footer a.fd-btn--light { color: var(--color-fd-blue); }
-.fd-footer a.fd-btn--light:hover { color: var(--color-fd-blue); text-decoration: none; background: #fff6e6; }
-.fd-btn--ghost-light { background: transparent; color: #fff6e6; border: 1px solid rgb(255 246 230 / 0.4); }
+.fd-footer a.fd-btn--light:hover { color: var(--color-fd-blue); text-decoration: none; background: #f7f5f0; }
+.fd-btn--ghost-light { background: transparent; color: #f7f5f0; border: 1px solid rgb(247 245 240 / 0.4); }
 .fd-footer a.fd-btn--ghost-light:hover { color: #fff; border-color: #fff; text-decoration: none; }
-.fd-footer__title { color: #fff6e6; }
+.fd-footer__title { color: #f7f5f0; }
 .fd-footer__list a { display: inline-block; transition: transform 200ms var(--ease-fd), color 200ms; }
 .fd-footer__list a:hover { transform: translateX(3px); text-decoration: none; }
 .fd-footer__social a { padding: 0.35rem 0.85rem; border: 1px solid rgb(255 255 255 / 0.25); border-radius: 999px; font-size: 0.875rem; }
