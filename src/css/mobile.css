@@ -100,6 +100,7 @@
 	.woocommerce div.product div.images .flex-control-thumbs { position: absolute; z-index: 3; top: 1rem; right: 1rem; width: 3.5rem; grid-auto-flow: row; grid-auto-columns: auto; grid-template-columns: 1fr; gap: 0.5rem; padding: 0; overflow: visible; }
 	.woocommerce div.product div.images .flex-control-thumbs img { border: 2px solid #fff; border-radius: 0.9rem; box-shadow: 0 6px 16px -8px rgb(22 41 69 / 0.5); opacity: 0.85; }
 	.woocommerce div.product div.images .flex-control-thumbs img.flex-active { opacity: 1; border-color: var(--color-fd-wine); }
+	.woocommerce div.product div.images .fd-light-switch { left: 1rem; bottom: 3.25rem; }
 	.woocommerce div.product div.summary {
 		position: relative; z-index: 2; margin: -1.75rem 0 0; padding: 1.5rem var(--spacing-fd-gutter) 2rem;
 		border-radius: 1.75rem 1.75rem 0 0; background: #fff; box-shadow: 0 -12px 30px -18px rgb(22 41 69 / 0.35);

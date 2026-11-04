@@ -84,6 +84,13 @@ WooCommerce → **Descuento por transferencia**. Vos definís: activar/desactiva
 - **Verificado:** lógica de cálculo y gancho con carrito/sesión simulados (25 pruebas). **No verificado en WooCommerce real:** que el total recalculado y el pedido guardado coincidan con lo mostrado, el comportamiento con Mercado Pago/Andreani y con cupones reales, y la pantalla de ajustes.
 - Las cuotas y el precio con transferencia de la ficha salen de *Precio y cuotas* y leen este mismo porcentaje, por lo que no pueden quedar desfasados (siempre que se use ese módulo en lugar del snippet `precio_con_cuotas`).
 
+## Interruptor de luz para luminarias (plugin Fan Deco Core)
+En la ficha de una lámpara, un interruptor **Luz apagada / encendida** alterna entre dos **fotos reales** (fundido suave, resplandor alrededor; respeta “reducir movimiento”; accesible por teclado, `role="switch"`).
+- **Carga:** en el producto, pestaña *General* → **Foto encendida** (la foto principal es la apagada; usar el mismo encuadre y tamaño). Opcional por **variación** (p. ej. una por color) en cada variación. Sin foto encendida no aparece el interruptor: no se simula la luz.
+- **Variaciones:** al elegir una variación se usa su foto encendida; si no tiene pero comparte la foto principal, se usa la del producto; si tiene foto propia y no tiene encendida, el interruptor se oculta (para no mostrar una foto equivocada).
+- **Alcance:** usa los ganchos de la galería de WooCommerce (`woocommerce_single_product_image_thumbnail_html` y `woocommerce_product_thumbnails`); si una plantilla de producto de Elementor reemplaza la galería, el interruptor no aparece hasta migrar esa plantilla. El JS/CSS solo se cargan en productos que tienen foto encendida.
+- **Verificado:** marcado, datos de variación y guardado (permisos, nonce, validación) con stubs, y comportamiento en navegador con una simulación de variaciones (11 pruebas). **No verificado en WooCommerce real:** convivencia con zoom/lightbox/slider de la galería, el selector de fotos del administrador (biblioteca de medios) y el guardado desde la pantalla de variaciones.
+
 ## Precio y cuotas (plugin Fan Deco Core)
 WooCommerce → **Precio y cuotas**. Reemplaza al snippet `precio_con_cuotas` (que existe porque WooCommerce no muestra en la ficha el cálculo de las cuotas sin interés de Mercado Pago). Muestra **“N cuotas sin interés de $X”** (precio de la ficha ÷ N) y **“$Y con transferencia · 10% OFF”**, y se actualiza solo al elegir una variación (rango de precios con “Desde”).
 - **Solo visual:** no cambia precios ni cobra; las cuotas reales las define Mercado Pago (la cantidad configurada acá debe coincidir con la de Mercado Pago). Importe mínimo opcional.

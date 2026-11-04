@@ -151,3 +151,6 @@
 
 /* Los textos para lectores de pantalla (posición absoluta) deben quedar contenidos y recortados por carruseles/listados */
 .fd-product-card, .fd-product-grid__item, .woocommerce ul.products > li { position: relative; }
+
+/* Interruptor de luz (plugin Fan Deco Core): sobre la imagen principal, no sobre las miniaturas */
+@media (min-width: 1024px) { .woocommerce div.product div.images .fd-light-switch { left: calc(5rem + 2rem); bottom: 1.25rem; } }

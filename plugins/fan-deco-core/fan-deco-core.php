@@ -42,6 +42,7 @@ require_once FANDECO_CORE_DIR . 'includes/class-transfer-calc.php';
 require_once FANDECO_CORE_DIR . 'includes/class-transfer-discount.php';
 require_once FANDECO_CORE_DIR . 'includes/class-installments-calc.php';
 require_once FANDECO_CORE_DIR . 'includes/class-installments.php';
+require_once FANDECO_CORE_DIR . 'includes/class-lights.php';
 
 add_action(
 	'plugins_loaded',
@@ -55,6 +56,7 @@ add_action(
 		if ( class_exists( 'WooCommerce' ) ) {
 			FanDeco_Transfer_Discount::init();
 			FanDeco_Installments::init();
+			FanDeco_Lights::init();
 		}
 	}
 );
