@@ -122,6 +122,11 @@ if ( fandeco_has_woocommerce() ) {
 		</div>
 	</div>
 </footer>
+<?php if ( $whatsapp && fandeco_option( 'whatsapp_float', false ) ) : ?>
+	<a class="fd-whatsapp" href="<?php echo esc_url( 'https://wa.me/' . $whatsapp . '?text=' . rawurlencode( (string) fandeco_option( 'whatsapp_message', 'Hola, quiero consultar por un producto' ) ) ); ?>" target="_blank" rel="noopener" aria-label="<?php esc_attr_e( 'Escribinos por WhatsApp', 'fan-deco-studio' ); ?>">
+		<svg class="fd-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 20.5l1.7-5.4A8.5 8.5 0 1 1 21 11.5z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1.5-1.5-2-1-1 .8a4 4 0 0 1-2-2l.8-1-1-2z"/></svg>
+	</a>
+<?php endif; ?>
 <nav class="fd-tabbar" aria-label="<?php esc_attr_e( 'Navegación rápida', 'fan-deco-studio' ); ?>">
 	<?php
 	$fd_wc    = fandeco_has_woocommerce();

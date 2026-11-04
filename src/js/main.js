@@ -2,12 +2,18 @@ import '../css/main.css';
 import { initHeader } from './header.js';
 import { initCarousels } from './carousel.js';
 import { initCartFeedback } from './cart.js';
+import { initTicker } from './ticker.js';
+import { initQuantity } from './quantity.js';
+import { initBuybar } from './buybar.js';
 
 /** Nota: el JS crítico es mínimo y sin dependencias. GSAP se carga bajo demanda (ver animations.js). */
 function boot() {
 	initHeader();
 	initCarousels();
 	initCartFeedback();
+	initTicker();
+	initQuantity();
+	initBuybar();
 	loadSwatches();
 	loadVariationEvents();
 	loadAnimations();

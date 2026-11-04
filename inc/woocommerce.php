@@ -266,3 +266,21 @@ add_action(
 	},
 	4
 );
+
+/* ---- Barra fija de compra (móvil) al pie de la ficha: nombre, precio y botón; el JS la muestra cuando el botón real sale de pantalla ---- */
+add_action(
+	'woocommerce_after_single_product',
+	static function () {
+		global $product;
+		if ( ! $product instanceof WC_Product || ! $product->is_purchasable() ) {
+			return;
+		}
+		printf(
+			'<div class="fd-buybar" data-fd-buybar hidden><div class="fd-buybar__info"><strong class="fd-buybar__name">%1$s</strong><span class="fd-buybar__price" data-fd-buybar-price>%2$s</span><span class="fd-buybar__transfer" data-fd-buybar-transfer hidden></span></div><button type="button" class="fd-btn fd-btn--primary fd-buybar__btn" data-fd-buybar-add>%3$s</button></div>',
+			esc_html( $product->get_name() ),
+			wp_kses_post( $product->get_price_html() ),
+			esc_html__( 'Agregar', 'fan-deco-studio' )
+		);
+	},
+	20
+);

@@ -52,13 +52,16 @@ add_action(
 		);
 		$wp_customize->add_setting( 'fandeco_sticky_header', array( 'default' => true, 'sanitize_callback' => 'rest_sanitize_boolean' ) );
 		$wp_customize->add_control( 'fandeco_sticky_header', array( 'section' => 'fandeco_brand', 'label' => __( 'Header fijo al hacer scroll', 'fan-deco-studio' ), 'type' => 'checkbox' ) );
-		$text( 'fandeco_brand', 'announcement', __( 'Barra superior (texto opcional)', 'fan-deco-studio' ) );
+		$text( 'fandeco_brand', 'announcement', __( 'Barra superior: mensajes (uno por línea; si hay varios, rotan)', 'fan-deco-studio' ), 'textarea', 'sanitize_textarea_field' );
 		$text( 'fandeco_brand', 'announcement_url', __( 'Barra superior: enlace (opcional)', 'fan-deco-studio' ), 'url', 'esc_url_raw' );
 
 		// Contacto.
 		$wp_customize->add_section( 'fandeco_contact', array( 'title' => __( 'Contacto', 'fan-deco-studio' ), 'panel' => 'fandeco' ) );
 		$text( 'fandeco_contact', 'email', __( 'Email', 'fan-deco-studio' ), 'email', 'sanitize_email' );
 		$text( 'fandeco_contact', 'phone', __( 'Teléfono', 'fan-deco-studio' ) );
+		$wp_customize->add_setting( 'fandeco_whatsapp_float', array( 'default' => false, 'sanitize_callback' => 'rest_sanitize_boolean' ) );
+		$wp_customize->add_control( 'fandeco_whatsapp_float', array( 'section' => 'fandeco_contact', 'label' => __( 'Mostrar botón flotante de WhatsApp (requiere el número de abajo)', 'fan-deco-studio' ), 'type' => 'checkbox' ) );
+		$text( 'fandeco_contact', 'whatsapp_message', __( 'Mensaje inicial de WhatsApp', 'fan-deco-studio' ), 'text', 'sanitize_text_field', 'Hola, quiero consultar por un producto' );
 		$text( 'fandeco_contact', 'whatsapp', __( 'WhatsApp (solo números, con código de país)', 'fan-deco-studio' ), 'text', static fn( $v ) => preg_replace( '/\D+/', '', (string) $v ) );
 		$text( 'fandeco_contact', 'address', __( 'Ubicación', 'fan-deco-studio' ), 'text', 'sanitize_text_field', 'Palermo, Buenos Aires, Argentina' );
 		$text( 'fandeco_contact', 'hours', __( 'Horarios de atención', 'fan-deco-studio' ) );

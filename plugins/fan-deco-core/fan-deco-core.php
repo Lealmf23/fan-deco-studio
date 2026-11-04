@@ -43,6 +43,8 @@ require_once FANDECO_CORE_DIR . 'includes/class-transfer-discount.php';
 require_once FANDECO_CORE_DIR . 'includes/class-installments-calc.php';
 require_once FANDECO_CORE_DIR . 'includes/class-installments.php';
 require_once FANDECO_CORE_DIR . 'includes/class-lights.php';
+require_once FANDECO_CORE_DIR . 'includes/class-pinfo-parse.php';
+require_once FANDECO_CORE_DIR . 'includes/class-product-info.php';
 
 add_action(
 	'plugins_loaded',
@@ -57,6 +59,7 @@ add_action(
 			FanDeco_Transfer_Discount::init();
 			FanDeco_Installments::init();
 			FanDeco_Lights::init();
+			FanDeco_Product_Info::init();
 		}
 	}
 );

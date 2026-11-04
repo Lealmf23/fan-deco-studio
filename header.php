@@ -7,7 +7,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-$announcement = (string) fandeco_option( 'announcement', '' );
+$announcement = array_values( array_filter( array_map( 'trim', preg_split( '/\R/', (string) fandeco_option( 'announcement', '' ) ) ?: array() ) ) );
 $ann_url      = (string) fandeco_option( 'announcement_url', '' );
 $sticky       = (bool) fandeco_option( 'sticky_header', true );
 ?>
@@ -22,13 +22,15 @@ $sticky       = (bool) fandeco_option( 'sticky_header', true );
 <?php wp_body_open(); ?>
 <a class="fd-skip-link" href="#main"><?php esc_html_e( 'Saltar al contenido', 'fan-deco-studio' ); ?></a>
 
-<?php if ( '' !== $announcement ) : ?>
-	<div class="fd-announcement">
-		<?php if ( $ann_url ) : ?>
-			<a href="<?php echo esc_url( $ann_url ); ?>"><?php echo esc_html( $announcement ); ?></a>
-		<?php else : ?>
-			<p><?php echo esc_html( $announcement ); ?></p>
-		<?php endif; ?>
+<?php if ( $announcement ) : ?>
+	<div class="fd-announcement"<?php echo count( $announcement ) > 1 ? ' data-fd-ticker' : ''; ?>>
+		<?php foreach ( $announcement as $i => $msg ) : ?>
+			<?php if ( $ann_url ) : ?>
+				<a class="fd-announcement__msg<?php echo 0 === $i ? ' is-active' : ''; ?>" href="<?php echo esc_url( $ann_url ); ?>"><?php echo esc_html( $msg ); ?></a>
+			<?php else : ?>
+				<p class="fd-announcement__msg<?php echo 0 === $i ? ' is-active' : ''; ?>"><?php echo esc_html( $msg ); ?></p>
+			<?php endif; ?>
+		<?php endforeach; ?>
 	</div>
 <?php endif; ?>
 

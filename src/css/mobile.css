@@ -120,3 +120,23 @@
 	.woocommerce div.product .woocommerce-tabs, .woocommerce div.product .related, .woocommerce div.product .upsells { padding-inline: 0; margin-top: 0; }
 	body.single-product .woocommerce div.product .woocommerce-tabs, body.single-product .woocommerce div.product section.related { margin-inline: 0; padding: 1.25rem var(--spacing-fd-gutter) 0; background: var(--color-fd-cream); }
 }
+
+@media (max-width: 767px) {
+	/* WhatsApp flotante: por encima de la barra inferior / la barra de compra */
+	.fd-whatsapp { bottom: calc(5.25rem + env(safe-area-inset-bottom)); width: 3.25rem; height: 3.25rem; }
+	body.single-product .fd-whatsapp { bottom: calc(6rem + env(safe-area-inset-bottom)); }
+	body.single-product { padding-bottom: calc(5rem + env(safe-area-inset-bottom)); }
+
+	/* Barra fija de compra */
+	.fd-buybar { position: fixed; z-index: 80; left: 0; right: 0; bottom: 0; display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.7rem var(--spacing-fd-gutter) calc(0.7rem + env(safe-area-inset-bottom)); background: color-mix(in srgb, #fff 96%, transparent); backdrop-filter: blur(14px); border-top: 1px solid var(--color-fd-line); box-shadow: 0 -12px 30px -20px rgb(22 41 69 / 0.4); }
+	.fd-buybar[hidden] { display: none; }
+	.fd-buybar__info { display: grid; min-width: 0; line-height: 1.2; }
+	.fd-buybar__name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 0.875rem; font-weight: 600; color: var(--color-fd-blue); }
+	.fd-buybar__price { font-size: 1.125rem; font-weight: 700; color: var(--color-fd-wine); }
+	.fd-buybar__price del { font-size: 0.8125rem; font-weight: 400; color: var(--color-fd-muted); }
+	.fd-buybar__price ins { text-decoration: none; }
+	.fd-buybar__transfer { font-size: 0.8125rem; font-weight: 600; color: #2f7a4b; }
+	.fd-buybar__btn { flex: none; min-height: 3rem; padding-inline: 1.6rem; }
+	.fd-pinfo-cards { grid-template-columns: 1fr; }
+	.fd-pinfo-specs td { text-align: right; }
+}
