@@ -135,3 +135,20 @@ function fandeco_variation_options( WC_Product $product ): array {
 	}
 	return $out;
 }
+
+// Barra de herramientas del archivo: resultado + orden en una fila.
+add_action( 'woocommerce_before_shop_loop', static fn() => print( '<div class="fd-shop-toolbar">' ), 15 );
+add_action( 'woocommerce_before_shop_loop', static fn() => print( '</div>' ), 35 );
+
+// Texto alternativo de respaldo en imágenes de producto sin alt (accesibilidad + SEO de imágenes).
+add_filter(
+	'wp_get_attachment_image_attributes',
+	static function ( array $attr, WP_Post $attachment ): array {
+		if ( empty( $attr['alt'] ) && 'product' === get_post_type( $attachment->post_parent ) ) {
+			$attr['alt'] = get_the_title( $attachment->post_parent );
+		}
+		return $attr;
+	},
+	10,
+	2
+);

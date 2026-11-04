@@ -36,6 +36,18 @@ Tema WordPress independiente (sin tema padre, sin Elementor) para la tienda Fan 
 - **Decisión: Tailwind v4** (en lugar de `tailwind.config.js`): la configuración vive en CSS. Los componentes `fd-*` están escritos en CSS con tokens; las utilidades de Tailwind están disponibles para plantillas nuevas.
 - **WooCommerce**: `add_theme_support( 'woocommerce' )` + galería (zoom/lightbox/slider), wrappers vía hooks oficiales, fragmentos del carrito (contador), plantilla `woocommerce.php` con `woocommerce_content()`. No se sobrescriben plantillas internas de WooCommerce.
 
+## SEO
+- **Convive con AIOSEO**: si AIOSEO, Yoast, Rank Math, SEOPress o TSF están activos, el tema no imprime ningún metadato propio (filtro `fandeco_seo_plugin_active` para forzarlo). Sin plugin SEO, `inc/seo.php` imprime meta description, Open Graph/Twitter y JSON-LD (Organization + WebSite con SearchAction en portada; BreadcrumbList en contenido).
+- No duplica lo que ya generan WordPress/WooCommerce: `<title>` (`title-tag`), canonical, schema de **Producto** y migas de WooCommerce, robots/noindex de carrito/checkout/cuenta.
+- HTML semántico (`header`/`nav`/`main`/`footer`, `article`, listas), un único `<h1>` por página (la portada agrega uno oculto si se quita el hero), jerarquía h1→h2→h3 en bloques, enlaces de salto, `lang` según el idioma del sitio (es-AR).
+- Rendimiento: imagen del hero con `fetchpriority=high` y sin lazy; resto `loading=lazy` con `width/height` (sin saltos de diseño); fuentes autoalojadas con `font-display: swap` y preload de la fuente del cuerpo; JS crítico ≈ 4,5 kB; se quitan generator/emoji/wlwmanifest/rsd.
+- Imágenes de producto sin alt reciben el nombre del producto como respaldo.
+- No se tocan permalinks ni redirecciones. Sitemaps y robots.txt: los gestiona AIOSEO/WordPress.
+- **Pendiente validar** en staging: Rich Results Test (producto/migas), Search Console, Lighthouse y que AIOSEO no emita duplicados.
+
+## Estilos de WooCommerce
+Hay estilos de marca para archivo de tienda/categorías, producto (galería, variaciones, pestañas, relacionados), carrito, checkout (2 columnas en desktop), pedido recibido y Mi cuenta (login/registro, direcciones, pedidos), más ajustes básicos para los bloques de Carrito/Checkout de WooCommerce. Se revisaron en Chromium sobre markup típico de WooCommerce (no sobre WooCommerce real) a 375 y 1280 px; falta confirmarlos con WooCommerce, pasarelas y plugins reales.
+
 ## Qué está verificado y qué no
 **Verificado aquí (sin WordPress real; el entorno no puede descargar WordPress/WooCommerce):**
 - Sintaxis PHP de los 41 archivos (`php -l`, PHP 8.3).
@@ -46,7 +58,7 @@ Tema WordPress independiente (sin tema padre, sin Elementor) para la tienda Fan 
 **NO verificado (requiere WordPress + WooCommerce en staging):**
 - Activación del tema, carga del editor y registro real de bloques; vista previa ServerSideRender; el selector de categorías/productos del editor (usa REST `product_cat` y `/wp/v2/product`).
 - Datos reales de WooCommerce en bloques, AJAX add-to-cart, fragmentos del contador del carrito.
-- Estilos de tienda, producto, carrito, checkout y Mi cuenta (son una primera capa; el Carrito/Checkout por **bloques** de WooCommerce usa sus propios estilos).
+- Estilos de tienda/producto/carrito/checkout/cuenta con WooCommerce real (solo se probó con markup de muestra; el Carrito/Checkout por **bloques** usa sus propios estilos).
 - Mercado Pago, Andreani, variaciones, cupones, impuestos, stock: **no probados**; el tema no toca esa lógica, pero hay que testear en staging.
 - Compatibilidad con AIOSEO (el tema usa `title-tag` y no imprime metadatos SEO propios), Core Web Vitals, accesibilidad con lectores de pantalla.
 - Traducciones JS (`languages/` vacío).
