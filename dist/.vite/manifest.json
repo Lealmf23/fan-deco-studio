@@ -14,7 +14,7 @@
     "isDynamicEntry": true
   },
   "src/js/main.js": {
-    "file": "assets/main-BdJ7MNzT.js",
+    "file": "assets/main-D0rkjcBS.js",
     "name": "main",
     "src": "src/js/main.js",
     "isEntry": true,
@@ -25,7 +25,7 @@
       "src/js/animations.js"
     ],
     "css": [
-      "assets/main-BGkAVcdS.css"
+      "assets/main-6Rd81nR4.css"
     ],
     "assets": [
       "assets/bricolage-grotesque-latin-wght-normal-DLoelf7F.woff2",

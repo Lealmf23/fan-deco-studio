@@ -159,6 +159,11 @@ Hay estilos de marca para archivo de tienda/categorías, producto (galería, var
 - **Footer:** nueva franja superior oscura con textura de capas y la invitación “¿Querés algo a tu medida?” con botones de WhatsApp y email; título/texto editables en Personalizar > Fan Deco > Footer (título vacío la oculta; si no hay WhatsApp ni email tampoco se muestra). Redes como píldoras y enlaces con micro-desplazamiento.
 - Verificado en Chromium (1360, 900 y 390 px) con markup de muestra; **no probado con tus menús reales ni con el submenú desplegable de WordPress**.
 
+## Estados vacíos
+- **Con diseño propio:** carrito vacío, búsqueda o categoría sin productos (con categorías sugeridas), 404, Mi cuenta sin pedidos/descargas (ícono + texto + botón a la tienda) y “sin valoraciones” en la ficha. Los bloques de la portada sin contenido se ocultan al público y muestran un aviso solo a quienes pueden editar.
+- **Sin cambios a propósito:** “Productos relacionados” no deja hueco cuando no hay (WooCommerce no imprime la sección) y las direcciones sin cargar siguen usando el texto estándar de WooCommerce.
+- Verificado en Chromium con el marcado de WooCommerce reproducido a mano; **los selectores de Mi cuenta dependen de la versión de WooCommerce y deben revisarse en staging**.
+
 ## Qué está verificado y qué no
 **Verificado aquí (sin WordPress real; el entorno no puede descargar WordPress/WooCommerce):**
 - Sintaxis PHP de los 41 archivos (`php -l`, PHP 8.3).

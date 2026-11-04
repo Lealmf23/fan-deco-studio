@@ -76,3 +76,14 @@
 	.fd-404__search { flex-direction: column; }
 	.fd-404__search .fd-btn { width: 100%; }
 }
+
+/* ---------- Estados vacíos de Mi cuenta (sin pedidos / sin descargas) y de reseñas ---------- */
+.woocommerce-MyAccount-content .woocommerce-Message--info,
+.woocommerce-MyAccount-content > .woocommerce-info:only-child { display: flex; flex-direction: column-reverse; align-items: center; gap: 1.5rem; padding: 3rem 1rem; border: 0; border-radius: 0; background: none; text-align: center; font-size: clamp(1.4rem, 2.4vw, 2rem); font-weight: 600; letter-spacing: -0.035em; color: var(--color-fd-blue); }
+.woocommerce-MyAccount-content .woocommerce-Message--info::before,
+.woocommerce-MyAccount-content > .woocommerce-info:only-child::before { content: ""; position: static; order: 2; display: block; width: 4.5rem; height: 4.5rem; border-radius: 50%; background: var(--color-fd-sand) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23162945' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z'/%3E%3Cpath d='m3.3 7 8.7 5 8.7-5M12 22V12'/%3E%3C/svg%3E") center / 2rem no-repeat; font-size: 0; }
+.woocommerce-MyAccount-content .woocommerce-Message--info .button,
+.woocommerce-MyAccount-content > .woocommerce-info:only-child .button { float: none; margin: 0; font-size: 1rem; letter-spacing: 0; }
+
+.woocommerce-noreviews, .woocommerce-verification-required { display: block; padding: 1.5rem 0; color: var(--color-fd-muted); font-size: 1rem; }
+.woocommerce-noreviews { font-family: var(--font-display); font-size: 1.25rem; font-weight: 600; letter-spacing: -0.02em; color: var(--color-fd-blue); }
