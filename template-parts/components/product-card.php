@@ -39,6 +39,11 @@ $max_chips = 4;
 	<div class="fd-product-card__body">
 		<h3 class="fd-product-card__title"><a href="<?php echo esc_url( $link ); ?>"><?php echo esc_html( $product->get_name() ); ?></a></h3>
 		<div class="fd-product-card__price"><?php echo wp_kses_post( $product->get_price_html() ); ?></div>
+		<?php
+		if ( function_exists( 'fandeco_installments_html' ) ) { // plugin Fan Deco Core (solo si está activado en sus ajustes)
+			echo fandeco_installments_html( $product, 'loop' ); // phpcs:ignore WordPress.Security.EscapeOutput -- escapado en el plugin.
+		}
+		?>
 		<?php if ( $options ) : ?>
 			<ul class="fd-product-card__options" aria-label="<?php esc_attr_e( 'Variaciones disponibles', 'fan-deco-studio' ); ?>">
 				<?php foreach ( array_slice( $options, 0, $max_chips ) as $option ) : ?>

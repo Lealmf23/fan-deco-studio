@@ -67,7 +67,15 @@ WooCommerce → **Descuento por transferencia**. Vos definís: activar/desactiva
 - **Impuestos:** por defecto el cargo es gravado cuando WooCommerce tiene impuestos activos (reduce también el IVA incluido en el precio). **Confirmar con el contador** y probar un pedido real.
 - **Alcance:** checkout **clásico** (shortcode). No cubre el Checkout por bloques. Los productos en oferta entran en el descuento; los cupones se descuentan antes.
 - **Verificado:** lógica de cálculo y gancho con carrito/sesión simulados (25 pruebas). **No verificado en WooCommerce real:** que el total recalculado y el pedido guardado coincidan con lo mostrado, el comportamiento con Mercado Pago/Andreani y con cupones reales, y la pantalla de ajustes.
-- El snippet `precio_con_cuotas` muestra un 10 % fijo: si cambiás el porcentaje acá, hay que actualizarlo allá (el valor vigente está en `FanDeco_Transfer_Discount::percent()`), o se muestran precios distintos.
+- Las cuotas y el precio con transferencia de la ficha salen de *Precio y cuotas* y leen este mismo porcentaje, por lo que no pueden quedar desfasados (siempre que se use ese módulo en lugar del snippet `precio_con_cuotas`).
+
+## Precio y cuotas (plugin Fan Deco Core)
+WooCommerce → **Precio y cuotas**. Reemplaza al snippet `precio_con_cuotas` (que existe porque WooCommerce no muestra en la ficha el cálculo de las cuotas sin interés de Mercado Pago). Muestra **“N cuotas sin interés de $X”** (precio de la ficha ÷ N) y **“$Y con transferencia · 10% OFF”**, y se actualiza solo al elegir una variación (rango de precios con “Desde”).
+- **Solo visual:** no cambia precios ni cobra; las cuotas reales las define Mercado Pago (la cantidad configurada acá debe coincidir con la de Mercado Pago). Importe mínimo opcional.
+- **Una sola fuente del %:** el precio con transferencia usa el porcentaje y el alcance (todos/categorías/productos, incluso variaciones puntuales) del módulo *Descuento por transferencia*, y solo se muestra si ese descuento está activo. Con impuestos activos y cargo no gravado se oculta para no mostrar un precio distinto al cobrado.
+- **Dónde:** debajo del precio en la ficha, opcionalmente en listados/tarjetas, y con el shortcode `[fandeco_cuotas]` para plantillas de Elementor.
+- **Al activarlo, desactivar el snippet `precio_con_cuotas`** (si no, el cálculo aparece dos veces). Viene desactivado.
+- **Verificado:** cálculo, HTML por escenario y comportamiento en navegador con una simulación de WooCommerce (24 pruebas). **No verificado en WooCommerce real:** posición/estilo en la ficha real y en las plantillas de Elementor, y coincidencia con lo que muestra Mercado Pago al pagar.
 
 ## Compatibilidad con funciones propias del sitio
 - **Sin Preflight de Tailwind:** el reinicio de estilos está acotado a los componentes del tema (header, footer, secciones), para no alterar el marcado de shortcodes y snippets existentes (configurador de chapitas, cuotas) ni de WPForms/Elementor.

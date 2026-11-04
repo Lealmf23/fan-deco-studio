@@ -256,3 +256,12 @@
 
 /* Etiqueta "X% OFF" junto al método de pago (plugin Fan Deco Core) */
 .fd-pay-badge { display: inline-block; margin-left: 0.5rem; padding: 0.15rem 0.6rem; border-radius: 999px; background: var(--color-fd-wine); color: #fff; font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; vertical-align: middle; }
+
+/* Precio y cuotas (plugin Fan Deco Core) */
+.fd-installments { display: grid; gap: 0.25rem; margin: 0.5rem 0 1rem; font-size: 0.9375rem; color: var(--color-fd-ink); }
+.fd-installments p { margin: 0; }
+.fd-installments strong { color: var(--color-fd-blue); }
+.fd-installments__transfer strong { color: var(--color-fd-wine); }
+.fd-installments .fd-pay-badge { margin-left: 0.25rem; }
+.fd-installments--loop { font-size: 0.8125rem; margin: 0; }
+.fd-installments [hidden] { display: none; }

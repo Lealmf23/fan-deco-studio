@@ -67,6 +67,45 @@ final class FanDeco_Transfer_Discount {
 		return false;
 	}
 
+	/** ¿El descuento está efectivamente activo (habilitado, % > 0 y sin superposición con otro plugin)? */
+	public static function is_active(): bool {
+		return self::should_apply( self::options() );
+	}
+
+	/** ¿Mostrar el precio con transferencia es coherente con lo que se cobrará? (con impuestos activos exige cargo gravado) */
+	public static function display_consistent(): bool {
+		$o = self::options();
+		return ! function_exists( 'wc_tax_enabled' ) || ! wc_tax_enabled() || (bool) $o['taxable'];
+	}
+
+	/**
+	 * Línea normalizada de un producto para evaluar elegibilidad.
+	 *
+	 * @return array{product_id:int,parent_id:int,categories:int[],total:float}
+	 */
+	public static function product_line( $product, float $total ): array {
+		$parent = $product->get_parent_id() ? (int) $product->get_parent_id() : (int) $product->get_id();
+		$cats   = array();
+		foreach ( (array) wc_get_product_term_ids( $parent, 'product_cat' ) as $term_id ) {
+			$cats[] = (int) $term_id;
+			foreach ( (array) get_ancestors( (int) $term_id, 'product_cat', 'taxonomy' ) as $anc ) {
+				$cats[] = (int) $anc; // una subcategoría también cuenta para su categoría padre
+			}
+		}
+		return array(
+			'product_id' => (int) $product->get_id(),
+			'parent_id'  => $parent,
+			'categories' => array_values( array_unique( $cats ) ),
+			'total'      => $total,
+		);
+	}
+
+	/** ¿Este producto recibiría el descuento? (según el alcance configurado; no mira el método de pago) */
+	public static function product_eligible( $product ): bool {
+		$o = self::options();
+		return FanDeco_Transfer_Calc::line_eligible( self::product_line( $product, 0.0 ), (string) $o['scope'], (array) $o['categories'], (array) $o['products'] );
+	}
+
 	private static function should_apply( array $o ): bool {
 		if ( ! $o['enabled'] || FanDeco_Transfer_Calc::clamp_percent( $o['percent'] ) <= 0 ) {
 			return false;
@@ -102,20 +141,7 @@ final class FanDeco_Transfer_Discount {
 			if ( ! $product instanceof WC_Product ) {
 				continue;
 			}
-			$parent = $product->get_parent_id() ? (int) $product->get_parent_id() : (int) $product->get_id();
-			$cats   = array();
-			foreach ( (array) wc_get_product_term_ids( $parent, 'product_cat' ) as $term_id ) {
-				$cats[] = (int) $term_id;
-				foreach ( (array) get_ancestors( (int) $term_id, 'product_cat', 'taxonomy' ) as $anc ) {
-					$cats[] = (int) $anc; // una subcategoría también cuenta para su categoría padre
-				}
-			}
-			$lines[] = array(
-				'product_id' => (int) $product->get_id(),
-				'parent_id'  => $parent,
-				'categories' => array_values( array_unique( $cats ) ),
-				'total'      => (float) ( $item['line_total'] ?? 0 ), // con cupones, sin impuestos, sin envío
-			);
+			$lines[] = self::product_line( $product, (float) ( $item['line_total'] ?? 0 ) ); // con cupones, sin impuestos, sin envío
 		}
 		$amount = FanDeco_Transfer_Calc::amount(
 			$lines,

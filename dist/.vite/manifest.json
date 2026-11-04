@@ -18,7 +18,7 @@
     "isDynamicEntry": true
   },
   "src/js/main.js": {
-    "file": "assets/main-BInM9jur.js",
+    "file": "assets/main-DHeVC5Yd.js",
     "name": "main",
     "src": "src/js/main.js",
     "isEntry": true,
@@ -28,7 +28,7 @@
       "src/js/animations.js"
     ],
     "css": [
-      "assets/main-BphCX3gn.css"
+      "assets/main-CEZtsTKl.css"
     ],
     "assets": [
       "assets/inter-latin-wght-normal-Dx4kXJAl.woff2",
