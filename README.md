@@ -36,7 +36,20 @@ Tema WordPress independiente (sin tema padre, sin Elementor) para la tienda Fan 
 - **Decisión: Tailwind v4** (en lugar de `tailwind.config.js`): la configuración vive en CSS. Los componentes `fd-*` están escritos en CSS con tokens; las utilidades de Tailwind están disponibles para plantillas nuevas.
 - **WooCommerce**: `add_theme_support( 'woocommerce' )` + galería (zoom/lightbox/slider), wrappers vía hooks oficiales, fragmentos del carrito (contador), plantilla `woocommerce.php` con `woocommerce_content()`. No se sobrescriben plantillas internas de WooCommerce.
 
-## SEO
+## Plugin Fan Deco Core (reemplazo de AIOSEO)
+El SEO vive en un **plugin propio** (`plugins/fan-deco-core/`, ZIP en `release/fan-deco-core.zip`) para que no dependa del tema. Instalarlo en staging junto al tema.
+- **Incluye:** títulos por plantilla (`%title% %sep% %sitename%`…) y sobrescritura por contenido/categoría, meta descripción, robots (noindex/nofollow), canonical (también en categorías y paginados), Open Graph/Twitter, JSON-LD (Organization, WebSite+búsqueda, WebPage/CollectionPage, BreadcrumbList; el schema de **Producto** sigue siendo de WooCommerce), verificación de Search Console/Bing/Pinterest/Facebook, sitemap nativo de WordPress ajustado (excluye noindex, etiquetas y autores) y reglas de `robots.txt`, gestor de redirecciones 301/302/307/308 (solo destinos del propio sitio) e **importador de AIOSEO** (con simulación).
+- **Convivencia:** mientras AIOSEO (o Yoast/Rank Math/SEOPress) esté activo, el plugin no imprime nada en el frontend; el tema también cede ante el plugin. Ajustes en *Ajustes → Fan Deco SEO*.
+- **Migración segura (orden recomendado, en staging):**
+  1. `npm run seo:snapshot -- https://fandeco.com.ar/sitemap.xml antes.json` (captura título, descripción, canonical, robots y h1 del sitio actual).
+  2. Copia de la base de datos. Instalar tema + plugin. En *Fan Deco SEO* copiar a mano las plantillas globales de títulos de AIOSEO y la portada.
+  3. *Importar desde AIOSEO → Simular*, revisar, luego *Importar ahora*.
+  4. Desactivar AIOSEO **en staging**, y `npm run seo:snapshot -- https://staging…/sitemap.xml despues.json`.
+  5. `npm run seo:diff -- antes.json despues.json` → debe quedar sin diferencias (o solo las deseadas). Recién entonces repetir en producción.
+- **No verificado:** todo el plugin se probó solo con `php -l` y pruebas unitarias de la lógica pura (variables, conversión de etiquetas AIOSEO, reglas de redirección). El panel de ajustes, los metaboxes, las salidas en `<head>` y el importador **no se ejecutaron en WordPress real**; el esquema de tablas de AIOSEO se asumió (tablas `aioseo_posts`/`aioseo_terms`, columnas comprobadas en ejecución) y puede requerir ajustes.
+- **Fuera de este hito (hoja de ruta del “super plugin”):** migas visibles, schema de FAQ/LocalBusiness, 404 monitor, analítica/píxeles con consentimiento, botón de WhatsApp, feeds de productos (Google Merchant/Meta), campos personalizados de producto, etc. Se agregan como módulos del mismo plugin.
+
+## SEO del tema (respaldo)
 - **Convive con AIOSEO**: si AIOSEO, Yoast, Rank Math, SEOPress o TSF están activos, el tema no imprime ningún metadato propio (filtro `fandeco_seo_plugin_active` para forzarlo). Sin plugin SEO, `inc/seo.php` imprime meta description, Open Graph/Twitter y JSON-LD (Organization + WebSite con SearchAction en portada; BreadcrumbList en contenido).
 - No duplica lo que ya generan WordPress/WooCommerce: `<title>` (`title-tag`), canonical, schema de **Producto** y migas de WooCommerce, robots/noindex de carrito/checkout/cuenta.
 - HTML semántico (`header`/`nav`/`main`/`footer`, `article`, listas), un único `<h1>` por página (la portada agrega uno oculto si se quita el hero), jerarquía h1→h2→h3 en bloques, enlaces de salto, `lang` según el idioma del sitio (es-AR).

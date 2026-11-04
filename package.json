@@ -4,7 +4,9 @@
   "private": true,
   "description": "Tema WordPress + WooCommerce para Fan Deco",
   "type": "module",
-  "engines": { "node": ">=20" },
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "dev": "vite",
     "build:front": "vite build",
@@ -13,7 +15,9 @@
     "dev:blocks": "wp-scripts start --webpack-src-dir=src/blocks --output-path=build/blocks",
     "lint:php": "node scripts/lint-php.mjs",
     "test": "node scripts/smoke-test.mjs",
-    "package": "npm run build && node scripts/package.mjs"
+    "package": "npm run build && node scripts/package.mjs",
+    "seo:snapshot": "node scripts/seo-snapshot.mjs",
+    "seo:diff": "node scripts/seo-diff.mjs"
   },
   "dependencies": {
     "gsap": "^3.12.5"

@@ -32,3 +32,18 @@ const out = `release/${ THEME }.zip`;
 rmSync( out, { force: true } );
 zip.writeZip( out );
 console.log( `OK: ${ out } (${ zip.getEntries().length } archivos, ${ ( statSync( out ).size / 1024 ).toFixed( 0 ) } kB)` );
+
+// ---- Plugin Fan Deco Core ----
+const PLUGIN = 'fan-deco-core';
+const pzip = new AdmZip();
+( function addDir( dir ) {
+	for ( const n of readdirSync( dir ) ) {
+		const path = join( dir, n );
+		if ( statSync( path ).isDirectory() ) addDir( path );
+		else if ( ! n.endsWith( '.DS_Store' ) ) pzip.addLocalFile( path, `${ PLUGIN }/${ dir.replace( `plugins/${ PLUGIN }`, '' ).replace( /^[\\/]/, '' ).replace( /\\/g, '/' ) }`.replace( /\/$/, '' ) );
+	}
+} )( `plugins/${ PLUGIN }` );
+const pout = `release/${ PLUGIN }.zip`;
+rmSync( pout, { force: true } );
+pzip.writeZip( pout );
+console.log( `OK: ${ pout } (${ pzip.getEntries().length } archivos)` );

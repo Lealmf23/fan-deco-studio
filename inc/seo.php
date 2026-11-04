@@ -12,7 +12,7 @@ defined( 'ABSPATH' ) || exit;
 
 /** ¿Hay un plugin SEO que se ocupa de metadatos? */
 function fandeco_seo_plugin_active(): bool {
-	$active = defined( 'AIOSEO_VERSION' ) || function_exists( 'aioseo' )
+	$active = defined( 'FANDECO_CORE_VERSION' ) || defined( 'AIOSEO_VERSION' ) || function_exists( 'aioseo' )
 		|| defined( 'WPSEO_VERSION' ) || defined( 'RANK_MATH_VERSION' ) || defined( 'SEOPRESS_VERSION' ) || defined( 'THE_SEO_FRAMEWORK_VERSION' );
 	return (bool) apply_filters( 'fandeco_seo_plugin_active', $active );
 }
