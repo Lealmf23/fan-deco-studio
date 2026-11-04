@@ -60,6 +60,15 @@ El SEO vive en un **plugin propio** (`plugins/fan-deco-core/`, ZIP en `release/f
 - No se tocan permalinks ni redirecciones. Sitemaps y robots.txt: los gestiona AIOSEO/WordPress.
 - **No ejecutar el importador en el sitio real todavía** (falta la tabla `aioseo_terms`; ver `docs/MIGRACION.md`). **Pendiente validar** en staging: Rich Results Test (producto/migas), Search Console, Lighthouse y que AIOSEO no emita duplicados.
 
+## Descuento por transferencia (plugin Fan Deco Core)
+WooCommerce → **Descuento por transferencia**. Vos definís: activar/desactivar, **porcentaje**, texto, **métodos de pago** que lo reciben (por defecto transferencia bancaria `bacs`) y **a qué productos aplica: todos, ciertas categorías (incluye subcategorías) o ciertos productos** (las variaciones cuentan por su producto padre).
+- **Cómo se calcula:** porcentaje × suma de los productos elegibles **después de cupones y sin envío ni otros cargos**. Se registra como un cargo negativo estándar de WooCommerce: aparece en carrito/checkout, pedido, emails y reportes. Se recalcula al cambiar de método de pago. Solo aplica en el checkout (en el carrito todavía no hay método elegido).
+- **Seguridad:** viene **desactivado**; si detecta activo el plugin “Payment Gateway Based Fees and Discounts” **no se aplica** hasta que lo desactives y lo confirmes (para no descontar dos veces). Porcentaje limitado a 0–99,99.
+- **Impuestos:** por defecto el cargo es gravado cuando WooCommerce tiene impuestos activos (reduce también el IVA incluido en el precio). **Confirmar con el contador** y probar un pedido real.
+- **Alcance:** checkout **clásico** (shortcode). No cubre el Checkout por bloques. Los productos en oferta entran en el descuento; los cupones se descuentan antes.
+- **Verificado:** lógica de cálculo y gancho con carrito/sesión simulados (25 pruebas). **No verificado en WooCommerce real:** que el total recalculado y el pedido guardado coincidan con lo mostrado, el comportamiento con Mercado Pago/Andreani y con cupones reales, y la pantalla de ajustes.
+- El snippet `precio_con_cuotas` muestra un 10 % fijo: si cambiás el porcentaje acá, hay que actualizarlo allá (el valor vigente está en `FanDeco_Transfer_Discount::percent()`), o se muestran precios distintos.
+
 ## Compatibilidad con funciones propias del sitio
 - **Sin Preflight de Tailwind:** el reinicio de estilos está acotado a los componentes del tema (header, footer, secciones), para no alterar el marcado de shortcodes y snippets existentes (configurador de chapitas, cuotas) ni de WPForms/Elementor.
 - **Checkout clásico** (shortcodes) estilizado sin cambiar su estructura; carrito/checkout/Mi cuenta usan siempre el contenedor del tema.

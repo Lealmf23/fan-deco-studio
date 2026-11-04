@@ -253,3 +253,6 @@
 /* Sin Preflight: los enlaces de tarjetas/listados no deben subrayarse por defecto */
 .woocommerce ul.products li.product a:not(.button), .woocommerce ul.products li.product a:not(.button):hover { text-decoration: none; color: inherit; }
 .woocommerce-MyAccount-navigation a, .woocommerce-pagination a, .fd-breadcrumb a { text-decoration: none; }
+
+/* Etiqueta "X% OFF" junto al método de pago (plugin Fan Deco Core) */
+.fd-pay-badge { display: inline-block; margin-left: 0.5rem; padding: 0.15rem 0.6rem; border-radius: 999px; background: var(--color-fd-wine); color: #fff; font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; vertical-align: middle; }
