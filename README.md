@@ -89,7 +89,7 @@ Rediseño **solo con CSS y dos añadidos por ganchos oficiales** (`woocommerce_b
 - Etiquetas en mayúsculas con tracking eliminadas; el color y el estilo editorial siguen la paleta del brief.
 
 ## Experiencia móvil (tipo app, hasta 767 px)
-- **Barra inferior fija** (Inicio, Tienda, Carrito con contador, Cuenta) y **buscador de productos siempre visible**; el header queda con logo y menú. En la ficha de producto, el carrito vuelve al header y la barra se oculta; también se oculta en carrito y checkout.
+- **Barra inferior fija** (Inicio, Tienda, Carrito con contador, Cuenta). El **header** móvil lleva el logo, un **ícono de búsqueda que despliega el panel** (con buscador en vivo y atajos a categorías), el **carrito con contador** y el menú. En la ficha de producto, el carrito vuelve al header y la barra se oculta; también se oculta en carrito y checkout.
 - **Home:** hero en tarjeta (texto a la izquierda, imagen a la derecha), categorías en una fila horizontal con ícono, productos destacados en carrusel con botón “+” junto al precio.
 - **Listados:** tarjetas compactas; los colores disponibles aparecen como puntos sobre la imagen.
 - **Ficha:** foto a pantalla completa con miniaturas flotando a la derecha, y una hoja blanca con esquinas redondeadas con título, precio, cuotas, selectores y botón grande de compra.

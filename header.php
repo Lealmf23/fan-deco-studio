@@ -90,17 +90,6 @@ $sticky       = (bool) fandeco_option( 'sticky_header', true );
 	</div>
 </header>
 
-<form role="search" method="get" class="fd-mobile-search" action="<?php echo esc_url( home_url( '/' ) ); ?>">
-	<div class="fd-container">
-		<label class="fd-mobile-search__field">
-			<?php echo fandeco_icon( 'search' ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
-			<span class="screen-reader-text"><?php esc_html_e( 'Buscar productos', 'fan-deco-studio' ); ?></span>
-			<input type="search" name="s" placeholder="<?php esc_attr_e( 'Buscar lámparas, mascotas, regalos…', 'fan-deco-studio' ); ?>" autocomplete="off">
-		</label>
-		<?php if ( fandeco_has_woocommerce() ) : ?><input type="hidden" name="post_type" value="product"><?php endif; ?>
-	</div>
-</form>
-
 <div class="fd-drawer" id="fd-drawer" data-fd-drawer inert aria-label="<?php esc_attr_e( 'Menú', 'fan-deco-studio' ); ?>" role="dialog" aria-modal="true">
 	<div class="fd-drawer__panel">
 		<div class="fd-drawer__head">

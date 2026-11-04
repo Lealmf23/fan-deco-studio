@@ -151,7 +151,7 @@ foreach ( array( 'header.php', 'footer.php' ) as $tpl ) {
 	if ( 'header.php' === $tpl ) {
 		check( str_contains( $out, 'fd-cart-count' ) && str_contains( $out, 'aria-controls="fd-drawer"' ), 'header: carrito con contador y botón de menú accesible' );
 		check( str_contains( $out, 'fd-logo__fan' ), 'header: logo tipográfico de reserva (fan / DECO)' );
-		check( str_contains( $out, 'fd-mobile-search' ) && str_contains( $out, 'name="post_type" value="product"' ), 'header: buscador móvil de productos' );
+		check( ! str_contains( $out, 'fd-mobile-search' ) && str_contains( $out, 'data-fd-search-toggle' ) && str_contains( $out, 'id="fd-search-panel"' ) && str_contains( $out, 'name="post_type" value="product"' ), 'header: buscador como ícono que despliega el panel (también en móvil), sin barra fija' );
 		check( str_contains( $out, 'fd-drawer-search' ) && str_contains( $out, 'fd-menu fd-menu--mobile' ) && str_contains( $out, 'fd-drawer__extras' ), 'header: menú a pantalla completa con buscador, menú móvil y accesos' );
 		check( str_contains( $out, 'fd-search-hint' ) && str_contains( $out, 'fd-chips' ), 'header: panel de búsqueda con atajos a categorías' );
 		check( str_contains( $out, 'fd-search-label' ), 'header: buscador con etiqueta visible en escritorio' );
