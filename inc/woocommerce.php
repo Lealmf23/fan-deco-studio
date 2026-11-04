@@ -284,3 +284,29 @@ add_action(
 	},
 	20
 );
+
+/* ---- Indicador de pasos (solo visual): Carrito -> Datos y pago -> Listo ----
+ * Se agrega con ganchos de WooCommerce; no modifica el flujo, los campos ni las pasarelas.
+ */
+function fandeco_checkout_steps( int $current ): void {
+	$steps = array(
+		1 => __( 'Carrito', 'fan-deco-studio' ),
+		2 => __( 'Datos y pago', 'fan-deco-studio' ),
+		3 => __( 'Listo', 'fan-deco-studio' ),
+	);
+	echo '<ol class="fd-stepper" aria-label="' . esc_attr__( 'Progreso de la compra', 'fan-deco-studio' ) . '">';
+	foreach ( $steps as $n => $label ) {
+		$state = $n < $current ? 'is-done' : ( $n === $current ? 'is-current' : '' );
+		printf(
+			'<li class="fd-stepper__item %1$s"%2$s><span class="fd-stepper__dot" aria-hidden="true">%3$s</span><span class="fd-stepper__label">%4$s</span></li>',
+			esc_attr( $state ),
+			$n === $current ? ' aria-current="step"' : '',
+			$n < $current ? fandeco_icon( 'check' ) : (int) $n, // phpcs:ignore WordPress.Security.EscapeOutput
+			esc_html( $label )
+		);
+	}
+	echo '</ol>';
+}
+add_action( 'woocommerce_before_cart', static fn() => fandeco_checkout_steps( 1 ), 5 );
+add_action( 'woocommerce_before_checkout_form', static fn() => fandeco_checkout_steps( 2 ), 5 );
+add_action( 'woocommerce_before_thankyou', static fn() => fandeco_checkout_steps( 3 ), 5 );

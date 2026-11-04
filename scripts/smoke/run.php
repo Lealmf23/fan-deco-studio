@@ -87,6 +87,12 @@ check( substr_count( $sz, 'fd-swatch--button' ) === 2 && ! str_contains( $sz, '-
 check( $f( $sel, array( 'attribute' => 'pa_otro', 'options' => array( 'x' ) ) ) === $sel, 'swatches: atributos tipo select no se tocan' );
 check( $f( $sel, array( 'attribute' => 'color-personalizado', 'options' => array( 'x' ) ) ) === $sel, 'swatches: atributos no globales no se tocan' );
 
+echo "Indicador de pasos\n";
+foreach ( array( 1, 2, 3 ) as $n ) {
+	ob_start(); fandeco_checkout_steps( $n ); $st = ob_get_clean();
+	check( substr_count( $st, 'fd-stepper__item' ) === 3 && substr_count( $st, 'aria-current="step"' ) === 1 && substr_count( $st, 'is-done' ) === $n - 1, "pasos: paso $n actual, " . ( $n - 1 ) . ' completados, accesible' );
+}
+
 echo "Plantillas\n";
 foreach ( array( 'header.php', 'footer.php' ) as $tpl ) {
 	ob_start();
