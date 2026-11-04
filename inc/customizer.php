@@ -18,7 +18,7 @@ add_action(
 			)
 		);
 
-		$text = static function ( string $section, string $id, string $label, string $type = 'text', string $sanitize = 'sanitize_text_field', string $default = '' ) use ( $wp_customize ) {
+		$text = static function ( string $section, string $id, string $label, string $type = 'text', callable|string $sanitize = 'sanitize_text_field', string $default = '' ) use ( $wp_customize ) {
 			$wp_customize->add_setting(
 				"fandeco_{$id}",
 				array(
