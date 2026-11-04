@@ -1,0 +1,65 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "fandeco/featured-products",
+  "title": "Fan Deco: Productos destacados",
+  "category": "fandeco",
+  "icon": "products",
+  "description": "Productos reales de WooCommerce en grilla o carrusel.",
+  "textdomain": "fan-deco-studio",
+  "attributes": {
+    "source": {
+      "type": "string",
+      "enum": [
+        "featured",
+        "latest",
+        "sale",
+        "category",
+        "manual"
+      ],
+      "default": "featured"
+    },
+    "categoryId": {
+      "type": "integer",
+      "default": 0
+    },
+    "productIds": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      },
+      "default": []
+    },
+    "count": {
+      "type": "integer",
+      "default": 8
+    },
+    "layout": {
+      "type": "string",
+      "enum": [
+        "grid",
+        "carousel"
+      ],
+      "default": "carousel"
+    },
+    "showAddToCart": {
+      "type": "boolean",
+      "default": true
+    },
+    "animate": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "supports": {
+    "html": false,
+    "spacing": {
+      "margin": [
+        "top",
+        "bottom"
+      ]
+    }
+  },
+  "editorScript": "file:./index.js",
+  "render": "file:./render.php"
+}

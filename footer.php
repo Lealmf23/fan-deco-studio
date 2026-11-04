@@ -1,0 +1,127 @@
+<?php
+/**
+ * Footer del sitio. Los datos provienen de menús y del Customizer.
+ *
+ * @package FanDecoStudio
+ */
+
+defined( 'ABSPATH' ) || exit;
+
+$social   = fandeco_social_links();
+$email    = (string) fandeco_option( 'email', '' );
+$phone    = (string) fandeco_option( 'phone', '' );
+$whatsapp = (string) fandeco_option( 'whatsapp', '' );
+$address  = (string) fandeco_option( 'address', '' );
+$hours    = (string) fandeco_option( 'hours', '' );
+$about    = (string) fandeco_option( 'footer_about', '' );
+$payments = array_filter( array_map( 'trim', explode( "\n", (string) fandeco_option( 'payment_methods', '' ) ) ) );
+$shipping = (string) fandeco_option( 'shipping_info', '' );
+$cats     = array();
+if ( fandeco_has_woocommerce() ) {
+	$terms = get_terms(
+		array(
+			'taxonomy'   => 'product_cat',
+			'parent'     => 0,
+			'number'     => 6,
+			'hide_empty' => true,
+			'exclude'    => (int) get_option( 'default_product_cat' ),
+		)
+	);
+	$cats  = is_wp_error( $terms ) ? array() : $terms;
+}
+?>
+<footer class="fd-footer">
+	<div class="fd-container">
+		<div class="fd-footer__grid">
+			<div class="fd-footer__brand">
+				<?php echo fandeco_logo( 'light' ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
+				<?php if ( $about ) : ?>
+					<p><?php echo esc_html( $about ); ?></p>
+				<?php endif; ?>
+				<?php if ( $social ) : ?>
+					<ul class="fd-footer__social" aria-label="<?php esc_attr_e( 'Redes sociales', 'fan-deco-studio' ); ?>">
+						<?php foreach ( $social as $label => $url ) : ?>
+							<li><a href="<?php echo esc_url( $url ); ?>" rel="noopener" target="_blank"><?php echo esc_html( $label ); ?></a></li>
+						<?php endforeach; ?>
+					</ul>
+				<?php endif; ?>
+			</div>
+
+			<nav class="fd-footer__col" aria-label="<?php esc_attr_e( 'Navegación del footer', 'fan-deco-studio' ); ?>">
+				<h2 class="fd-footer__title"><?php esc_html_e( 'Navegación', 'fan-deco-studio' ); ?></h2>
+				<?php
+				wp_nav_menu(
+					array(
+						'theme_location' => 'footer',
+						'container'      => false,
+						'menu_class'     => 'fd-footer__list',
+						'fallback_cb'    => false,
+						'depth'          => 1,
+					)
+				);
+				?>
+			</nav>
+
+			<?php if ( $cats ) : ?>
+				<div class="fd-footer__col">
+					<h2 class="fd-footer__title"><?php esc_html_e( 'Categorías', 'fan-deco-studio' ); ?></h2>
+					<ul class="fd-footer__list">
+						<?php foreach ( $cats as $cat ) : ?>
+							<li><a href="<?php echo esc_url( get_term_link( $cat ) ); ?>"><?php echo esc_html( $cat->name ); ?></a></li>
+						<?php endforeach; ?>
+					</ul>
+				</div>
+			<?php endif; ?>
+
+			<div class="fd-footer__col">
+				<h2 class="fd-footer__title"><?php esc_html_e( 'Contacto', 'fan-deco-studio' ); ?></h2>
+				<ul class="fd-footer__list">
+					<?php if ( $email ) : ?><li><a href="mailto:<?php echo esc_attr( antispambot( $email ) ); ?>"><?php echo esc_html( antispambot( $email ) ); ?></a></li><?php endif; ?>
+					<?php if ( $whatsapp ) : ?><li><a href="<?php echo esc_url( 'https://wa.me/' . $whatsapp ); ?>" rel="noopener" target="_blank">WhatsApp</a></li><?php endif; ?>
+					<?php if ( $phone ) : ?><li><?php echo esc_html( $phone ); ?></li><?php endif; ?>
+					<?php if ( $address ) : ?><li><?php echo esc_html( $address ); ?></li><?php endif; ?>
+					<?php if ( $hours ) : ?><li><?php echo esc_html( $hours ); ?></li><?php endif; ?>
+				</ul>
+				<?php if ( $shipping ) : ?>
+					<h2 class="fd-footer__title fd-footer__title--spaced"><?php esc_html_e( 'Envíos', 'fan-deco-studio' ); ?></h2>
+					<p class="fd-footer__text"><?php echo esc_html( $shipping ); ?></p>
+				<?php endif; ?>
+			</div>
+		</div>
+
+		<?php if ( $payments ) : ?>
+			<div class="fd-footer__payments">
+				<span class="fd-footer__title"><?php esc_html_e( 'Medios de pago', 'fan-deco-studio' ); ?></span>
+				<ul>
+					<?php foreach ( $payments as $method ) : ?>
+						<li><?php echo esc_html( $method ); ?></li>
+					<?php endforeach; ?>
+				</ul>
+			</div>
+		<?php endif; ?>
+
+		<div class="fd-footer__bottom">
+			<p>
+				<?php
+				$legal = (string) fandeco_option( 'copyright', '' );
+				echo esc_html( $legal ? $legal : sprintf( '© %1$s %2$s', gmdate( 'Y' ), get_bloginfo( 'name' ) ) );
+				?>
+			</p>
+			<?php
+			wp_nav_menu(
+				array(
+					'theme_location' => 'footer_legal',
+					'container'      => false,
+					'menu_class'     => 'fd-footer__legal',
+					'fallback_cb'    => false,
+					'depth'          => 1,
+				)
+			);
+			?>
+			<!-- Suscripción a novedades: funcionalidad futura (no implementada en el MVP). -->
+		</div>
+	</div>
+</footer>
+<?php wp_footer(); ?>
+</body>
+</html>
