@@ -6,7 +6,8 @@ Basado en lo leído (solo lectura) del sitio real. **Nada de esto se ejecutó**:
 - [ ] Respaldo completo (Duplicator o copias de hPanel).
 - [ ] Páginas nuevas listas en **borrador** (portada, mascotas, contacto) con los archivos de `docs/migracion/`.
 - [ ] Miniaturas de las 4 categorías cargadas (Productos > Categorías).
-- [ ] Decidido: **cuotas** en la ficha (activar `fan-deco-core` y apagar el fragmento `precio_con_cuotas`, o dejarlo como está) y qué pasa con el plugin **Checkout Fees** frente al descuento por transferencia.
+- [x] Decidido: **cuotas y descuento por transferencia con `fan-deco-core`** (se configuran en WooCommerce; ver abajo).
+- [x] **Checkout Fees for WooCommerce** no tiene reglas guardadas (solo su número de versión), así que no aplica ningún descuento ni recargo hoy: no hay doble descuento. Se puede dejar instalado o desactivarlo.
 
 ## Configurador de chapitas: apagado temporal (decidido)
 Hacerlo **a la vez** que se desactiva Elementor:
@@ -14,6 +15,17 @@ Hacerlo **a la vez** que se desactiva Elementor:
 - [ ] Página **"Elementor #1074"** (solo tiene `[configurador_chapita]`): pasar a **Borrador**.
 - [ ] Fragmento **`configurador_chapita`**: desactivar (opcional; sin el shortcode no hace nada y los pedidos viejos conservan sus datos).
 - La plantilla Elementor 1085 (categoría "Chapitas nombres") desaparece sola.
+
+## Configurar `fan-deco-core` (cuotas y descuento por transferencia)
+`fan-deco-core` viene con todo **apagado** y, mientras AIOSEO esté activo, **no toca el SEO** (se aparta solo). Después de activarlo:
+1. [ ] **WooCommerce > Precio y cuotas:** tildar "Mostrar precio con cuotas", cargar la cantidad de cuotas sin interés (tu fragmento actual muestra 3 cuotas de Mercado Pago) y tildar "Listados / tarjetas de producto" si las querés en la tienda.
+2. [ ] **Desactivar el fragmento `precio_con_cuotas`** en Fragmentos de código, para no mostrar las cuotas dos veces.
+3. [ ] **WooCommerce > Descuento por transferencia:** tildar "Aplicar el descuento", poner el porcentaje (tu barra superior dice 10%), elegir si vale para todos los productos, algunas categorías o algunos productos. El descuento no incluye el envío.
+4. [ ] Probar un pedido por **transferencia** (debe mostrar el descuento) y uno por **Mercado Pago** (no debe aplicarlo).
+5. [ ] Tu barra superior anuncia "10% OFF pagando por transferencia": el porcentaje cargado tiene que coincidir.
+
+## Dato a revisar de Transferencia bancaria
+En WooCommerce > Ajustes > Pagos > Transferencia bancaria, la lista de **cuentas bancarias está vacía**. Si los datos para transferir (CBU, alias) solo están en el texto de la descripción, confirmá que se vean bien en el checkout y en la página de pedido recibido.
 
 ## El día del cambio
 1. [ ] Desactivar juntos **Elementor**, **pro-elements** e **ht-slider-for-elementor** (desactivar, no borrar).
