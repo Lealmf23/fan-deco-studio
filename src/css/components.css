@@ -1,6 +1,9 @@
 /* ========== Logo ========== */
 .fd-logo { display: inline-flex; align-items: center; color: inherit; }
-.fd-logo__img { display: block; height: 2.75rem; width: auto; }
+/* Doble clase: gana a las reglas de WooCommerce (".woocommerce img { height: auto }"), que hacían el logo enorme en tienda y fichas. */
+.fd-logo .fd-logo__img { display: block; height: var(--fd-logo-h, 2.75rem); width: auto; max-width: none; }
+.fd-footer .fd-logo .fd-logo__img { height: var(--fd-logo-h-footer, 3rem); }
+.fd-drawer .fd-logo .fd-logo__img { height: var(--fd-logo-h-drawer, 2.5rem); }
 .fd-logo--text { flex-direction: column; align-items: flex-start; line-height: 1; }
 .fd-logo__fan { font-family: var(--font-script); font-weight: 700; font-size: 2.2rem; line-height: 0.75; margin-left: 0.1em; }
 .fd-logo__deco { font-weight: 700; font-size: 0.8rem; letter-spacing: 0.34em; padding-left: 0.1em; }

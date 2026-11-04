@@ -150,6 +150,13 @@ foreach ( glob( FANDECO_DIR . '/src/blocks/*/block.json' ) ?: array() as $bj ) {
 }
 check( ! $missing, 'bloques: todos declaran editorScript y tienen su index.js compilado (aparecen en el insertor del editor)' . ( $missing ? ' - faltan: ' . implode( ', ', $missing ) : '' ) );
 
+$m = static fn( $id, $name, $slug, $count ) => (object) array( 'term_id' => $id, 'name' => $name, 'slug' => $slug, 'count' => $count );
+$menus = array( $m( 42, 'Footer Menu 3', 'footer-menu-3', 6 ), $m( 28, 'Main Menu', 'main-menu', 5 ) );
+check( 28 === fandeco_pick_menu( 'primary', $menus ) && 28 === fandeco_pick_menu( 'footer', $menus ), 'menús: principal y navegación del pie usan "Main Menu"' );
+check( 42 === fandeco_pick_menu( 'footer_legal', $menus ), 'menús: las políticas legales usan el menú del pie' );
+check( 0 === fandeco_pick_menu( 'footer_legal', array( $m( 28, 'Main Menu', 'main-menu', 5 ) ) ) && 0 === fandeco_pick_menu( 'primary', array( $m( 1, 'Vacío', 'vacio', 0 ) ) ), 'menús: sin buena opción devuelve 0 (queda el menú de reserva)' );
+check( 7 === fandeco_pick_menu( 'primary', array( $m( 7, 'Otro menú', 'otro', 3 ), $m( 42, 'Footer', 'footer', 6 ) ) ), 'menús: sin menú "principal" toma el primero con elementos que no sea del pie' );
+
 echo "Plantillas\n";
 foreach ( array( 'header.php', 'footer.php' ) as $tpl ) {
 	ob_start();

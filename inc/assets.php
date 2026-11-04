@@ -101,3 +101,13 @@ add_action(
 		}
 	}
 );
+
+
+/* Marca de versión en el HTML (para saber qué zip está instalado: ver el código fuente de la página). */
+add_action(
+	'wp_head',
+	static function () {
+		echo '<!-- Fan Deco Studio ' . esc_html( FANDECO_VERSION ) . ' -->' . "\n";
+	},
+	0
+);

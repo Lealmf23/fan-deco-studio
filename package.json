@@ -1,6 +1,6 @@
 {
   "name": "fan-deco-studio",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "description": "Tema WordPress + WooCommerce para Fan Deco",
   "type": "module",
@@ -16,6 +16,7 @@
     "lint:php": "node scripts/lint-php.mjs",
     "test": "node scripts/smoke-test.mjs",
     "package": "npm run build && node scripts/package.mjs",
+    "bump": "node scripts/version.mjs",
     "seo:snapshot": "node scripts/seo-snapshot.mjs",
     "seo:diff": "node scripts/seo-diff.mjs"
   },
