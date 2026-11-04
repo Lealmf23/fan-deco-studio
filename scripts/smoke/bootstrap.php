@@ -61,7 +61,7 @@ function get_block_wrapper_attributes( $extra = array() ) {
 }
 function get_template_part( $slug, $name = null, $args = array() ) { include FANDECO_DIR . '/' . $slug . '.php'; }
 function wp_nav_menu( $a ) {
-	if ( ! empty( $a['fallback_cb'] ) && is_callable( $a['fallback_cb'] ) ) { ( $a['fallback_cb'] )(); return; }
+	if ( ! empty( $a['fallback_cb'] ) && is_callable( $a['fallback_cb'] ) ) { ( $a['fallback_cb'] )( $a ); return; }
 	echo '<ul class="' . esc_attr( $a['menu_class'] ?? '' ) . '"><li class="menu-item"><a href="/">Inicio</a></li></ul>';
 }
 function wp_page_menu() {}

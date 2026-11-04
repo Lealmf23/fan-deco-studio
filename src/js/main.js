@@ -16,9 +16,21 @@ function boot() {
 	initQuantity();
 	initBuybar();
 	initHeroLight();
+	loadSearch();
 	loadSwatches();
 	loadVariationEvents();
 	loadAnimations();
+}
+
+/** El buscador en vivo se descarga recién cuando alguien enfoca un campo de búsqueda. */
+function loadSearch() {
+	const onFocus = ( e ) => {
+		if ( e.target instanceof HTMLInputElement && e.target.type === 'search' ) {
+			document.removeEventListener( 'focusin', onFocus );
+			import( './search.js' ).then( ( m ) => m.initSearch() );
+		}
+	};
+	document.addEventListener( 'focusin', onFocus );
 }
 
 function loadSwatches() {

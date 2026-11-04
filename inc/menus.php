@@ -23,12 +23,13 @@ add_action(
 /**
  * Fallback del menú principal cuando todavía no se asignó uno: Inicio + Tienda (si hay WooCommerce).
  */
-function fandeco_menu_fallback(): void {
+function fandeco_menu_fallback( $args = array() ): void {
 	$items = array( home_url( '/' ) => __( 'Inicio', 'fan-deco-studio' ) );
 	if ( fandeco_has_woocommerce() ) {
 		$items[ wc_get_page_permalink( 'shop' ) ] = __( 'Tienda', 'fan-deco-studio' );
 	}
-	echo '<ul class="fd-menu">';
+	$class = is_array( $args ) && ! empty( $args['menu_class'] ) ? $args['menu_class'] : 'fd-menu';
+	echo '<ul class="' . esc_attr( $class ) . '">';
 	foreach ( $items as $url => $label ) {
 		printf( '<li class="menu-item"><a href="%s">%s</a></li>', esc_url( $url ), esc_html( $label ) );
 	}

@@ -14,22 +14,29 @@
     "isDynamicEntry": true
   },
   "src/js/main.js": {
-    "file": "assets/main-C92MUjUv.js",
+    "file": "assets/main-DCQhjn8y.js",
     "name": "main",
     "src": "src/js/main.js",
     "isEntry": true,
     "dynamicImports": [
+      "src/js/search.js",
       "src/js/swatches.js",
       "src/js/variations.js",
       "src/js/animations.js"
     ],
     "css": [
-      "assets/main-DPc7h1E9.css"
+      "assets/main-BdRftSlO.css"
     ],
     "assets": [
       "assets/bricolage-grotesque-latin-wght-normal-DLoelf7F.woff2",
       "assets/caveat-latin-700-normal-D8_1Nw6V.woff2"
     ]
+  },
+  "src/js/search.js": {
+    "file": "assets/search-DPLDpQqA.js",
+    "name": "search",
+    "src": "src/js/search.js",
+    "isDynamicEntry": true
   },
   "src/js/swatches.js": {
     "file": "assets/swatches-DYOGxgem.js",

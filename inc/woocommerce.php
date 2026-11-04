@@ -352,3 +352,15 @@ add_action(
 	},
 	20
 );
+
+/* Búsqueda sin resultados: atajos a categorías debajo del aviso de WooCommerce. */
+add_action(
+	'woocommerce_no_products_found',
+	static function () {
+		$chips = fandeco_category_chips( 'fd-chips fd-chips--center' );
+		if ( $chips ) {
+			echo '<div class="fd-empty-extra"><p>' . esc_html__( 'Probá con una categoría:', 'fan-deco-studio' ) . '</p>' . $chips . '</div>'; // phpcs:ignore WordPress.Security.EscapeOutput -- escapado en la función.
+		}
+	},
+	20
+);

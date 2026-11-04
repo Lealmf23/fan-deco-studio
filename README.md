@@ -142,6 +142,13 @@ Atributos globales de tipo **color** (círculos) y **button** (botones con texto
 ## Estilos de WooCommerce
 Hay estilos de marca para archivo de tienda/categorías, producto (galería, variaciones, pestañas, relacionados), carrito, checkout (2 columnas en desktop), pedido recibido y Mi cuenta (login/registro, direcciones, pedidos), más ajustes básicos para los bloques de Carrito/Checkout de WooCommerce. Se revisaron en Chromium sobre markup típico de WooCommerce (no sobre WooCommerce real) a 375 y 1280 px; falta confirmarlos con WooCommerce, pasarelas y plugins reales.
 
+## Menú a pantalla completa, buscador en vivo y 404
+- **Menú móvil:** pantalla completa oscura con la textura de líneas de capa, buscador arriba, enlaces grandes con aparición escalonada, y accesos a Mi cuenta/WhatsApp/correo/redes. Es un diálogo (`role="dialog"`, `aria-modal`, `inert` al cerrar, Esc cierra y devuelve el foco). Si el menú principal no está asignado, el fallback (Inicio + Tienda) respeta el estilo móvil.
+- **Buscador en vivo** (`src/js/search.js`, se descarga recién al enfocar un campo de búsqueda): hasta 5 productos con foto y precio desde la Store API pública de WooCommerce (`/wc/store/v1/products`). Combobox ARIA con flechas/Enter/Esc, debounce de 220 ms, mínimo 2 caracteres; si la API falla, el formulario busca normalmente. Solo actúa en formularios de productos.
+- **Panel de búsqueda de escritorio** con atajos a categorías; **404** y **“sin resultados”** con buscador y categorías sugeridas.
+- Verificado en Chromium con la API simulada (interceptada) y markup de muestra, en 1360 y 390 px, sin desbordes. **No probado con la Store API ni el catálogo reales.**
+- Corregido durante esta revisión: la carga perezosa del buscador se consumía con el primer foco de cualquier elemento (`once`), por lo que nunca se activaba; y el fallback del menú ignoraba la clase móvil.
+
 ## Qué está verificado y qué no
 **Verificado aquí (sin WordPress real; el entorno no puede descargar WordPress/WooCommerce):**
 - Sintaxis PHP de los 41 archivos (`php -l`, PHP 8.3).

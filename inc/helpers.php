@@ -203,3 +203,34 @@ function fandeco_block_attrs( string $name, array $attributes, string $extra_cla
 		)
 	);
 }
+
+
+/** Categorías de producto principales (con productos) para atajos de búsqueda/404. Vacío si no hay WooCommerce. */
+function fandeco_top_categories( int $limit = 6 ): array {
+	if ( ! fandeco_has_woocommerce() ) {
+		return array();
+	}
+	$terms = get_terms(
+		array(
+			'taxonomy'   => 'product_cat',
+			'parent'     => 0,
+			'number'     => $limit,
+			'hide_empty' => true,
+			'exclude'    => (int) get_option( 'default_product_cat' ),
+			'orderby'    => 'menu_order',
+		)
+	);
+	return is_wp_error( $terms ) ? array() : $terms;
+}
+
+/** Atajos a categorías como lista de enlaces. */
+function fandeco_category_chips( string $class = 'fd-chips' ): string {
+	$out = '';
+	foreach ( fandeco_top_categories() as $term ) {
+		$link = get_term_link( $term );
+		if ( ! is_wp_error( $link ) ) {
+			$out .= sprintf( '<li><a href="%s">%s</a></li>', esc_url( $link ), esc_html( $term->name ) );
+		}
+	}
+	return $out ? '<ul class="' . esc_attr( $class ) . '">' . $out . '</ul>' : '';
+}

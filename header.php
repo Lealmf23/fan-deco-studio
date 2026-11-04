@@ -80,6 +80,11 @@ $sticky       = (bool) fandeco_option( 'sticky_header', true );
 				<?php endif; ?>
 				<button type="submit" class="fd-btn fd-btn--primary"><?php esc_html_e( 'Buscar', 'fan-deco-studio' ); ?></button>
 			</form>
+			<?php $fd_chips = fandeco_category_chips( 'fd-chips' ); ?>
+			<?php if ( $fd_chips ) : ?>
+				<p class="fd-search-hint"><?php esc_html_e( 'O explorá por categoría', 'fan-deco-studio' ); ?></p>
+				<?php echo $fd_chips; // phpcs:ignore WordPress.Security.EscapeOutput -- escapado en la función. ?>
+			<?php endif; ?>
 		</div>
 	</div>
 </header>
@@ -103,6 +108,14 @@ $sticky       = (bool) fandeco_option( 'sticky_header', true );
 				<?php echo fandeco_icon( 'close' ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
 			</button>
 		</div>
+		<form role="search" method="get" class="fd-drawer-search" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+			<label class="fd-drawer-search__field">
+				<?php echo fandeco_icon( 'search' ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
+				<span class="screen-reader-text"><?php esc_html_e( 'Buscar productos', 'fan-deco-studio' ); ?></span>
+				<input type="search" name="s" placeholder="<?php esc_attr_e( 'Buscar…', 'fan-deco-studio' ); ?>" autocomplete="off">
+			</label>
+			<?php if ( fandeco_has_woocommerce() ) : ?><input type="hidden" name="post_type" value="product"><?php endif; ?>
+		</form>
 		<nav class="fd-drawer__nav" aria-label="<?php esc_attr_e( 'Menú móvil', 'fan-deco-studio' ); ?>">
 			<?php
 			wp_nav_menu(
@@ -116,6 +129,26 @@ $sticky       = (bool) fandeco_option( 'sticky_header', true );
 			);
 			?>
 		</nav>
+		<?php
+		$fd_wa      = (string) fandeco_option( 'whatsapp', '' );
+		$fd_mail    = (string) fandeco_option( 'email', '' );
+		$fd_social  = fandeco_social_links();
+		$fd_account = fandeco_has_woocommerce() ? wc_get_page_permalink( 'myaccount' ) : '';
+		?>
+		<div class="fd-drawer__extras">
+			<ul class="fd-drawer__quick">
+				<?php if ( $fd_account ) : ?><li><a href="<?php echo esc_url( $fd_account ); ?>"><?php echo fandeco_icon( 'user' ); // phpcs:ignore WordPress.Security.EscapeOutput ?> <?php esc_html_e( 'Mi cuenta', 'fan-deco-studio' ); ?></a></li><?php endif; ?>
+				<?php if ( $fd_wa ) : ?><li><a href="<?php echo esc_url( 'https://wa.me/' . $fd_wa ); ?>" target="_blank" rel="noopener">WhatsApp</a></li><?php endif; ?>
+				<?php if ( $fd_mail ) : ?><li><a href="mailto:<?php echo esc_attr( antispambot( $fd_mail ) ); ?>"><?php echo esc_html( antispambot( $fd_mail ) ); ?></a></li><?php endif; ?>
+			</ul>
+			<?php if ( $fd_social ) : ?>
+				<ul class="fd-drawer__social" aria-label="<?php esc_attr_e( 'Redes sociales', 'fan-deco-studio' ); ?>">
+					<?php foreach ( $fd_social as $label => $url ) : ?>
+						<li><a href="<?php echo esc_url( $url ); ?>" target="_blank" rel="noopener"><?php echo esc_html( $label ); ?></a></li>
+					<?php endforeach; ?>
+				</ul>
+			<?php endif; ?>
+		</div>
 	</div>
 	<div class="fd-drawer__backdrop" data-fd-menu-close></div>
 </div>

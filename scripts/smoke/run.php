@@ -107,6 +107,8 @@ foreach ( array( 'header.php', 'footer.php' ) as $tpl ) {
 		check( str_contains( $out, 'fd-cart-count' ) && str_contains( $out, 'aria-controls="fd-drawer"' ), 'header: carrito con contador y botón de menú accesible' );
 		check( str_contains( $out, 'fd-logo__fan' ), 'header: logo tipográfico de reserva (fan / DECO)' );
 		check( str_contains( $out, 'fd-mobile-search' ) && str_contains( $out, 'name="post_type" value="product"' ), 'header: buscador móvil de productos' );
+		check( str_contains( $out, 'fd-drawer-search' ) && str_contains( $out, 'fd-menu fd-menu--mobile' ) && str_contains( $out, 'fd-drawer__extras' ), 'header: menú a pantalla completa con buscador, menú móvil y accesos' );
+		check( str_contains( $out, 'fd-search-hint' ) && str_contains( $out, 'fd-chips' ), 'header: panel de búsqueda con atajos a categorías' );
 		$header_out = $out;
 	} else {
 		check( str_contains( $out, 'class="fd-tabbar"' ) && substr_count( $out, 'class="fd-tab' ) >= 4, 'footer: barra inferior móvil con 4 accesos' );
