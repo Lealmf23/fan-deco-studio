@@ -231,3 +231,21 @@
 .wpforms-container .wpforms-submit-container button, .wpforms-container button.wpforms-submit { min-height: 3rem; padding: 0 1.75rem; border: 0; border-radius: 999px; background: var(--color-fd-wine); color: #fff; font: 600 0.9375rem/1 var(--font-sans); cursor: pointer; }
 .wpforms-container button.wpforms-submit:hover { background: var(--color-fd-wine-dark); }
 .fd-elementor-page { width: 100%; }
+
+/* Selectores visuales de variaciones (color / botón) */
+.fd-swatches-wrap { display: grid; gap: 0.5rem; }
+.fd-swatches { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+.fd-swatch { position: relative; cursor: pointer; font: inherit; transition: box-shadow var(--duration-fd-fast), transform var(--duration-fd-fast), background-color var(--duration-fd-fast), color var(--duration-fd-fast); }
+.fd-swatch--color { width: 2.75rem; height: 2.75rem; padding: 0; border-radius: 50%; border: 1.5px solid rgb(22 41 69 / 0.25); background: var(--fd-swatch); }
+.fd-swatch--color:hover { transform: scale(1.08); }
+.fd-swatch--color[aria-checked="true"] { box-shadow: 0 0 0 2px var(--color-fd-cream), 0 0 0 4px var(--color-fd-wine); }
+.fd-swatch--button { min-height: 2.75rem; padding: 0 1.1rem; border-radius: 999px; border: 1.5px solid var(--color-fd-line); background: #fff; color: var(--color-fd-blue); font-weight: 500; font-size: 0.9375rem; }
+.fd-swatch--button:hover { border-color: var(--color-fd-blue); }
+.fd-swatch--button[aria-checked="true"] { background: var(--color-fd-blue); border-color: var(--color-fd-blue); color: #fff; }
+.fd-swatch.is-unavailable { opacity: 0.35; cursor: not-allowed; }
+.fd-swatch.is-unavailable::after { content: ""; position: absolute; inset: 50% -2px auto; height: 1.5px; background: var(--color-fd-ink); transform: rotate(-45deg); }
+.fd-swatch--color.is-unavailable::after { inset: 50% 4px auto; }
+.fd-swatches__current { min-height: 1.25rem; font-size: 0.875rem; color: var(--color-fd-muted); }
+.fd-dot { width: 1rem; height: 1rem; padding: 0 !important; border-radius: 50%; border: 1px solid rgb(22 41 69 / 0.25) !important; background: var(--fd-swatch); }
+.fd-swatch--button.is-unavailable { overflow: hidden; }
+.fd-swatch--button.is-unavailable::after { inset: 50% 0 auto; }

@@ -8,7 +8,14 @@ function boot() {
 	initHeader();
 	initCarousels();
 	initCartFeedback();
+	loadSwatches();
 	loadAnimations();
+}
+
+function loadSwatches() {
+	if ( document.querySelector( '[data-fd-swatches]' ) ) {
+		import( './swatches.js' ).then( ( m ) => m.initSwatches() );
+	}
 }
 
 function loadAnimations() {

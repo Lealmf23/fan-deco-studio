@@ -16,7 +16,7 @@ $show_cart = ! empty( $args['show_cart'] );
 $link      = $product->get_permalink();
 $image_id  = $product->get_image_id();
 $badges    = fandeco_product_badges( $product );
-$options   = fandeco_variation_options( $product );
+$options   = fandeco_variation_swatch_data( $product );
 $max_chips = 4;
 ?>
 <article class="fd-product-card" data-fd-reveal>
@@ -42,7 +42,11 @@ $max_chips = 4;
 		<?php if ( $options ) : ?>
 			<ul class="fd-product-card__options" aria-label="<?php esc_attr_e( 'Variaciones disponibles', 'fan-deco-studio' ); ?>">
 				<?php foreach ( array_slice( $options, 0, $max_chips ) as $option ) : ?>
-					<li><?php echo esc_html( $option ); ?></li>
+					<?php if ( $option['color'] ) : ?>
+						<li class="fd-dot" style="--fd-swatch:<?php echo esc_attr( $option['color'] ); ?>" title="<?php echo esc_attr( $option['name'] ); ?>"><span class="screen-reader-text"><?php echo esc_html( $option['name'] ); ?></span></li>
+					<?php else : ?>
+						<li><?php echo esc_html( $option['name'] ); ?></li>
+					<?php endif; ?>
 				<?php endforeach; ?>
 				<?php if ( count( $options ) > $max_chips ) : ?>
 					<li>+<?php echo (int) ( count( $options ) - $max_chips ); ?></li>

@@ -41,7 +41,8 @@ function wp_head() { echo "<script>document.documentElement.classList.add('js');
 function wp_footer() { echo '<script type="module" src="' . esc_attr( $GLOBALS['fd_js'] ?? '' ) . '"></script>'; }
 function add_theme_support() {}
 function add_action() {}
-function add_filter() {}
+function add_filter( $tag, $cb ) { $GLOBALS['fd_filters'][ $tag ][] = $cb; }
+function apply_filters( $tag, $value ) { foreach ( $GLOBALS['fd_filters'][ $tag ] ?? array() as $cb ) { $value = $cb( ...array_slice( func_get_args(), 1 ) ); } return $value; }
 function remove_action() {}
 function get_option( $k, $d = false ) { return array( 'woocommerce_enable_ajax_add_to_cart' => 'yes', 'default_product_cat' => 15 )[ $k ] ?? $d; }
 function wp_attachment_is_image( $id ) { return $id > 0 && $id < 100; }
@@ -89,6 +90,7 @@ class WC_Product {
 }
 class WC_Product_Variable extends WC_Product {
 	public function get_variation_attributes() { return array( 'pa_color' => $this->opts ); }
+	public function get_id_stub() {}
 }
 function fd_products() {
 	return array(
@@ -117,10 +119,20 @@ function get_terms( $a ) {
 	return $t;
 }
 function sanitize_title_stub( $n ) { return strtolower( preg_replace( '/[^a-z]/i', '', iconv( 'UTF-8', 'ASCII//TRANSLIT', $n ) ) ); }
-function get_term_meta( $id ) { return $id - 19 <= 4 && $id >= 20 ? ( $id - 19 ) : 0; }
+function get_term_meta( $id, $key = '', $single = true ) {
+	if ( 'fandeco_swatch_color' === $key ) { return 101 === $id ? '#111111' : ''; }
+	if ( 'blocksy_taxonomy_meta_options' === $key ) { return 103 === $id ? array( 'x' => array( 'accent_color' => array( 'default' => array( 'color' => '#AA0000' ) ) ) ) : ''; }
+	return $id - 19 <= 4 && $id >= 20 ? ( $id - 19 ) : 0;
+}
 function get_term_link( $t ) { return '/categoria/' . $t->slug; }
 function taxonomy_exists( $t ) { return true; }
-function get_term_by( $f, $v, $t ) { return (object) array( 'name' => ucfirst( $v ) ); }
+function get_term_by( $f, $v, $t ) { static $ids = array( 'negro' => 101, 'blanco' => 102, 'rojo' => 103, 'lila-raro' => 104, 'chico' => 105, 'grande' => 106 ); return isset( $ids[ $v ] ) ? (object) array( 'term_id' => $ids[ $v ], 'name' => ( 'lila-raro' === $v ? 'Lila <b>raro</b>' : ucfirst( $v ) ), 'slug' => $v ) : false; }
+function remove_accents( $s ) { return iconv( 'UTF-8', 'ASCII//TRANSLIT', $s ); }
+function sanitize_title( $s ) { return trim( strtolower( preg_replace( '/[^a-z0-9]+/i', '-', $s ) ), '-' ); }
+function wc_attribute_taxonomy_id_by_name( $n ) { return array( 'pa_color' => 1, 'pa_base' => 2, 'pa_tamano' => 3, 'pa_otro' => 4 )[ $n ] ?? 0; }
+function wc_get_attribute( $id ) { return (object) array( 'type' => array( 1 => 'color', 2 => 'color', 3 => 'button', 4 => 'select' )[ $id ] ); }
+function wc_attribute_label( $n ) { return array( 'pa_color' => 'Color', 'pa_tamano' => 'Tamaño' )[ $n ] ?? $n; }
+function sanitize_hex_color( $c ) { return preg_match( '/^#[0-9a-f]{6}$/i', (string) $c ) ? $c : ''; }
 function is_wp_error( $x ) { return false; }
 function get_term( $id ) { return (object) array( 'slug' => 'lamparas', 'name' => 'Lámparas' ); }
 
@@ -128,6 +140,7 @@ function get_term( $id ) { return (object) array( 'slug' => 'lamparas', 'name' =
 require FANDECO_DIR . '/inc/helpers.php';
 require FANDECO_DIR . '/inc/menus.php';
 require FANDECO_DIR . '/inc/woocommerce.php';
+require FANDECO_DIR . '/inc/swatches.php';
 
 /** Render directo de un bloque con sus atributos por defecto de block.json + overrides. */
 function fd_render_block( string $name, array $override = array() ): string {

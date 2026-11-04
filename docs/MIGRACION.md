@@ -2,6 +2,34 @@
 
 Base: auditoría de solo lectura del 4/11/2026 (WordPress 7.1.4, PHP 8.3.36, tema Blocksy 2.1.55, 21 plugins). Los datos del inventario provienen de esa auditoría; **no pude consultar el sitio desde este entorno**.
 
+## 0. Datos confirmados en el sitio (consulta posterior a la auditoría)
+- WooCommerce 11.2.1, Blocksy 2.1.55, PHP 8.3.36.
+- Páginas existentes (**no se tocan ni se renombran; sus URLs se conservan**): Home **838**, Productos **68**, Carrito **69**, Checkout **70**, Mi cuenta **71**, Contacto **547**, Tu mascota en 3D **1229**.
+- Atributos globales de WooCommerce: `pa_base` (tipo *color*), `pa_color` (tipo *color*), `pa_tamano` (tipo *button*).
+
+### Requisitos acordados y cómo se cumplen
+| # | Requisito | Estado |
+|---|---|---|
+| 1 | Conservar páginas, productos, pedidos y URLs | El tema no escribe en la base de datos de contenido ni cambia permalinks. La Home actual (838) sigue mostrando su contenido de Elementor hasta que se decida cambiarla (ver abajo) |
+| 2 | Selectores visuales de color y tamaño compatibles con variaciones | Implementado (`inc/swatches.php`, `src/js/swatches.js`). **Probado con una simulación**, falta probarlo con WooCommerce real |
+| 3 | No depender de Blocksy para variaciones | El tipo del atributo (*color*/*button*) queda guardado en WooCommerce y el tema lo interpreta solo. Los colores salen de un campo propio (`fandeco_swatch_color`), de datos heredados de Blocksy si existen, o del nombre |
+| 4 | Mantener AIOSEO en la primera migración | Fan Deco Core **no imprime nada** mientras AIOSEO esté activo; el tema también cede. No se importa ni desactiva nada |
+| 5 | No modificar pagos, descuentos ni envíos | Nada en el tema/plugin toca precios, cargos, pasarelas ni envíos; los selectores solo cambian el valor del `<select>` y dejan que WooCommerce calcule |
+| 6 | Snippets, plantillas Elementor y configuración comercial = **pendientes de validación** | Ver sección “Pendientes de validación” |
+| 7 | No activar en producción hasta completar staging | Ver sección 3; el ZIP solo debe instalarse en staging primero |
+
+### Cómo se cambia la Home sin riesgo (página 838)
+No se modifica la página 838. En staging: crear una página nueva “Inicio (nuevo)”, insertar el patrón **Fan Deco: Portada completa**, previsualizar y probar; recién cuando staging esté aprobado, en Ajustes → Lectura apuntar la portada a la nueva página (la 838 queda intacta como respaldo y se puede volver atrás en un clic).
+
+### Colores de los selectores (sobre `pa_color` y `pa_base`)
+- Se resuelven en este orden: campo “Color del selector” del término (Productos → Atributos → *Configurar términos*) → color que haya dejado Blocksy (búsqueda tolerante en el meta `blocksy_taxonomy_meta_options`; **estructura no verificada**) → nombre conocido (negro, blanco, rojo, bordó, etc.) → si nada aplica, botón con el nombre (siempre usable).
+- Después de instalar en staging: revisar cada término de `pa_color`/`pa_base`; los que no muestren el color correcto, fijarlos con el campo propio. Para saber qué guardó Blocksy, pedir por WPVibe el `get_term_meta` de esos términos.
+
+### Pendientes de validación (no asumir que funcionan)
+- Code Snippets activos (lógica de WooCommerce o hooks de Blocksy).
+- Plantillas y páginas de Elementor (incluida **Tu mascota en 3D, 1229**: puede usar widgets/JS propios).
+- Checkout, Mercado Pago, Andreani y descuentos por método de pago.
+
 ## 1. Decisión por plugin
 
 | Grupo | Plugin | Decisión | Nota |
@@ -18,7 +46,7 @@ Base: auditoría de solo lectura del 4/11/2026 (WordPress 7.1.4, PHP 8.3.36, tem
 | IA | WPVibe | Conservar mientras dure la migración | |
 
 ## 2. Riesgos concretos al cambiar de tema (lo que **no** viene solo)
-1. **Variaciones con swatches (colores/formas):** si hoy se muestran como bolitas/botones, probablemente lo da **Blocksy Companion Pro**. Con Fan Deco Studio quedan como selector desplegable estándar de WooCommerce hasta que construyamos swatches propios (pendiente; es importante para una tienda de lámparas por color).
+1. **Variaciones con swatches (colores/tamaños):** hoy los aporta Blocksy Companion Pro. Fan Deco Studio trae los suyos (ver sección 0); falta confirmar en staging que los colores de `pa_color`/`pa_base` se vean bien.
 2. **Páginas de Elementor:** siguen renderizando mientras Elementor esté activo (el tema las muestra a ancho completo y sin título), pero con tipografía y colores de Elementor. Header/footer hechos con el Theme Builder de PRO Elements **no** se usarán: el tema trae los suyos.
 3. **Ajustes del Personalizador de Blocksy** (logo, colores, menús, widgets, CSS adicional) no se heredan. Logo y menús hay que reasignarlos; el CSS adicional hay que revisarlo.
 4. **Code Snippets** que usen hooks `blocksy_*` dejarán de ejecutarse; los de WooCommerce siguen funcionando.
@@ -42,6 +70,7 @@ Base: auditoría de solo lectura del 4/11/2026 (WordPress 7.1.4, PHP 8.3.36, tem
 
 ## 5. Checklist de pruebas en staging
 - [ ] Producto simple y variable: precio, variación, stock, agregar al carrito (AJAX y página).
+- [ ] **Swatches:** elegir color y tamaño; el precio/stock/imagen se actualizan; combinaciones inexistentes quedan tachadas; “Borrar” funciona; los colores de cada término son correctos; probar con teclado y en móvil.
 - [ ] **Descuento por transferencia:** elegir transferencia en checkout → el descuento aparece; cambiar a tarjeta → desaparece (sin recargar a mano).
 - [ ] **Mercado Pago:** pago de prueba (credenciales de prueba), retorno y estado del pedido.
 - [ ] **Andreani:** cotización por código postal en carrito y checkout; costo y etiqueta.

@@ -60,6 +60,9 @@ El SEO vive en un **plugin propio** (`plugins/fan-deco-core/`, ZIP en `release/f
 - No se tocan permalinks ni redirecciones. Sitemaps y robots.txt: los gestiona AIOSEO/WordPress.
 - **Pendiente validar** en staging: Rich Results Test (producto/migas), Search Console, Lighthouse y que AIOSEO no emita duplicados.
 
+## Selectores visuales de variaciones
+Atributos globales de tipo **color** (círculos) y **button** (botones con texto) se muestran como selectores visuales; el `<select>` original de WooCommerce se conserva oculto y es la fuente de verdad (precio, stock e imagen los sigue calculando WooCommerce). Accesibles (radiogroup, teclado), con combinaciones no disponibles tachadas. Color por término: campo propio → datos heredados de Blocksy → nombre conocido → botón con texto. No depende de Blocksy. Atributos personalizados (no globales) y de tipo *select* no se modifican.
+
 ## Estilos de WooCommerce
 Hay estilos de marca para archivo de tienda/categorías, producto (galería, variaciones, pestañas, relacionados), carrito, checkout (2 columnas en desktop), pedido recibido y Mi cuenta (login/registro, direcciones, pedidos), más ajustes básicos para los bloques de Carrito/Checkout de WooCommerce. Se revisaron en Chromium sobre markup típico de WooCommerce (no sobre WooCommerce real) a 375 y 1280 px; falta confirmarlos con WooCommerce, pasarelas y plugins reales.
 
@@ -77,7 +80,7 @@ Hay estilos de marca para archivo de tienda/categorías, producto (galería, var
 - Mercado Pago, Andreani, variaciones, cupones, impuestos, stock: **no probados**; el tema no toca esa lógica, pero hay que testear en staging.
 - Compatibilidad con AIOSEO (el tema usa `title-tag` y no imprime metadatos SEO propios), Core Web Vitals, accesibilidad con lectores de pantalla.
 - Traducciones JS (`languages/` vacío).
-- Swatches de variaciones (hoy Blocksy Companion probablemente los aporta): pendiente de construir.
+- Swatches de variaciones con WooCommerce real (implementados y probados solo con una simulación del comportamiento de WooCommerce).
 
 ## Contenido por defecto (revisar antes de publicar)
 Los textos del hero/mascotas/proceso son los del brief. Los beneficios por defecto incluyen **“10% OFF con transferencia bancaria”** como texto editorial (no aplica ni modifica ningún descuento). No se incluyen productos, precios ni imágenes de demostración: sin imagen se muestra un degradé de marca.

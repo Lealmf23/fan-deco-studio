@@ -56,6 +56,24 @@ check( substr_count( $bad, 'fd-benefit"' ) === 1, 'benefits: ítems inválidos i
 $head = fd_render_block( 'section-heading', array( 'title' => 'Hola', 'level' => 3, 'linkText' => 'Ver', 'linkUrl' => '/x' ) );
 check( str_contains( $head, '<h3' ), 'section-heading: nivel configurable' );
 
+echo "Selectores de variaciones\n";
+check( fandeco_find_hex( array( 'a' => array( 'b' => '#AbC' ) ) ) === '#AbC', 'find_hex: busca anidado' );
+check( fandeco_find_hex( 'var(--x)' ) === '' && fandeco_find_hex( 'red' ) === '', 'find_hex: ignora valores no hexadecimales' );
+$sel = '<select id="pa_color" name="attribute_pa_color"><option value="">Elegir</option><option value="negro">Negro</option></select>';
+$f = $GLOBALS['fd_filters']['woocommerce_dropdown_variation_attribute_options_html'][0];
+$out = $f( $sel, array( 'attribute' => 'pa_color', 'options' => array( 'negro', 'blanco', 'rojo', 'lila-raro' ), 'selected' => 'blanco', 'product' => null ) );
+check( str_contains( $out, '<select id="pa_color"' ) && str_contains( $out, 'fd-swatch-source" hidden' ), 'swatches: conserva el <select> original (oculto)' );
+check( str_contains( $out, '--fd-swatch:#111111' ), 'swatches: color desde el campo propio' );
+check( str_contains( $out, '--fd-swatch:#ffffff' ), 'swatches: color deducido del nombre (blanco)' );
+check( str_contains( $out, '--fd-swatch:#AA0000' ), 'swatches: color heredado de Blocksy (búsqueda tolerante)' );
+check( preg_match( '/data-value="blanco"[^>]*>/', $out ) && str_contains( $out, 'aria-checked="true" data-value="blanco"' ), 'swatches: opción seleccionada marcada' );
+check( str_contains( $out, 'fd-swatch--button' ) && str_contains( $out, 'Lila &lt;b&gt;raro&lt;/b&gt;' ), 'swatches: color desconocido cae a botón con texto escapado' );
+check( str_contains( $out, 'role="radiogroup"' ) && str_contains( $out, 'aria-label="Color"' ), 'swatches: radiogroup accesible con etiqueta' );
+$sz = $f( '<select></select>', array( 'attribute' => 'pa_tamano', 'options' => array( 'chico', 'grande' ), 'selected' => '', 'product' => null ) );
+check( substr_count( $sz, 'fd-swatch--button' ) === 2 && ! str_contains( $sz, '--fd-swatch' ), 'swatches: atributo tipo botón (tamaño)' );
+check( $f( $sel, array( 'attribute' => 'pa_otro', 'options' => array( 'x' ) ) ) === $sel, 'swatches: atributos tipo select no se tocan' );
+check( $f( $sel, array( 'attribute' => 'color-personalizado', 'options' => array( 'x' ) ) ) === $sel, 'swatches: atributos no globales no se tocan' );
+
 echo "Plantillas\n";
 foreach ( array( 'header.php', 'footer.php' ) as $tpl ) {
 	ob_start();

@@ -114,28 +114,6 @@ function fandeco_product_badges( WC_Product $product ): array {
 	return $badges;
 }
 
-/**
- * Valores del primer atributo usado para variaciones (p. ej. colores) de un producto variable.
- *
- * @return string[] Nombres legibles.
- */
-function fandeco_variation_options( WC_Product $product ): array {
-	if ( ! $product instanceof WC_Product_Variable ) {
-		return array();
-	}
-	$attrs = $product->get_variation_attributes();
-	$first = reset( $attrs );
-	$key   = key( $attrs );
-	if ( ! $first || ! $key ) {
-		return array();
-	}
-	$out = array();
-	foreach ( $first as $value ) {
-		$out[] = taxonomy_exists( $key ) && ( $term = get_term_by( 'slug', $value, $key ) ) ? $term->name : $value; // phpcs:ignore Generic.CodeAnalysis.AssignmentInCondition
-	}
-	return $out;
-}
-
 // Barra de herramientas del archivo: resultado + orden en una fila.
 add_action( 'woocommerce_before_shop_loop', static fn() => print( '<div class="fd-shop-toolbar">' ), 15 );
 add_action( 'woocommerce_before_shop_loop', static fn() => print( '</div>' ), 35 );
