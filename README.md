@@ -164,6 +164,10 @@ Hay estilos de marca para archivo de tienda/categorías, producto (galería, var
 - **Sin cambios a propósito:** “Productos relacionados” no deja hueco cuando no hay (WooCommerce no imprime la sección) y las direcciones sin cargar siguen usando el texto estándar de WooCommerce.
 - Verificado en Chromium con el marcado de WooCommerce reproducido a mano; **los selectores de Mi cuenta dependen de la versión de WooCommerce y deben revisarse en staging**.
 
+## Probar la portada sin activar el tema
+- Las páginas que contienen bloques `fandeco/*` se muestran **a ancho completo**, sin título ni contenedor (`page.php`). `docs/portada-prueba.html` tiene el contenido de la portada completa para pegar en el **Editor de código** de una página en borrador y verla con la Vista previa en vivo del tema, sin activarlo.
+- Limitación: la Vista previa en vivo carga todos los plugins activos (Elementor, Blocksy, snippets); para aislarlos se usa el modo de solución de problemas de Health Check. **No verificado en un WordPress real.**
+
 ## Qué está verificado y qué no
 **Verificado aquí (sin WordPress real; el entorno no puede descargar WordPress/WooCommerce):**
 - Sintaxis PHP de los 41 archivos (`php -l`, PHP 8.3).

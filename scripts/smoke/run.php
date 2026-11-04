@@ -97,6 +97,8 @@ echo "Mi cuenta (ganchos)\n";
 check( str_contains( file_get_contents( FANDECO_DIR . '/inc/woocommerce.php' ), "'woocommerce_before_customer_login_form'" ) && str_contains( file_get_contents( FANDECO_DIR . '/inc/woocommerce.php' ), "'woocommerce_account_dashboard'" ), 'cuenta: panel de bienvenida y accesos rápidos por ganchos oficiales (sin sobrescribir plantillas)' );
 check( ! is_dir( FANDECO_DIR . '/woocommerce' ), 'tema: no sobrescribe plantillas de WooCommerce (carpeta woocommerce/ ausente)' );
 
+check( str_contains( file_get_contents( FANDECO_DIR . '/page.php' ), "<!-- wp:fandeco/" ) && str_contains( file_get_contents( FANDECO_DIR . '/docs/portada-prueba.html' ), 'wp:fandeco/hero' ), 'page.php: páginas con bloques Fan Deco a ancho completo y contenido de prueba disponible' );
+
 echo "Plantillas\n";
 foreach ( array( 'header.php', 'footer.php' ) as $tpl ) {
 	ob_start();
