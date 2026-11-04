@@ -3,6 +3,10 @@
 Cada archivo que se entrega lleva su versión: `fan-deco-studio-X.Y.Z.zip` y `fan-deco-core-X.Y.Z.zip`.
 La versión del tema también figura en Apariencia > Temas, en `style.css` y como comentario `<!-- Fan Deco Studio X.Y.Z -->` en el código fuente de cada página.
 
+## 0.3.1
+### Corregido
+- Galería de la ficha de producto: las columnas ya no pueden ensancharse ni correrse por el contenido de la galería de WooCommerce (FlexSlider, zoom, miniaturas); se reforzó con `minmax(0, …)` y reglas de contención.
+
 ## 0.3.0
 ### Agregado
 - **Personalización completa** (Apariencia > Personalizar > Fan Deco Studio): 51 ajustes en 5 secciones nuevas con vista previa en vivo y botón de restablecer en cada uno. Ver `docs/PERSONALIZAR.md`.

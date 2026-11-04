@@ -41,7 +41,7 @@
 .woocommerce div.product div.images { border-radius: var(--radius-fd-lg); overflow: hidden; background: #fff; }
 .woocommerce div.product .woocommerce-tabs, .woocommerce div.product .related, .woocommerce div.product .upsells { grid-column: 1 / -1; }
 @media (min-width: 1024px) {
-	.woocommerce div.product { grid-template-columns: 1.1fr 1fr; gap: 4rem; align-items: start; }
+	.woocommerce div.product { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 4rem; align-items: start; }
 	.woocommerce div.product div.summary { position: sticky; top: 7rem; }
 }
 .woocommerce div.product p.price, .woocommerce div.product span.price { font-size: 1.6rem; font-weight: 600; color: var(--color-fd-blue); }
