@@ -114,7 +114,7 @@ foreach ( array( 'header.php', 'footer.php' ) as $tpl ) {
 	} else {
 		check( str_contains( $out, 'class="fd-tabbar"' ) && substr_count( $out, 'class="fd-tab' ) >= 4, 'footer: barra inferior móvil con 4 accesos' );
 		check( str_contains( $out, 'fd-tab-cart' ), 'footer: carrito con fragmento propio (no pisa el del header)' );
-		check( str_contains( $out, 'fd-footer__cta' ) && str_contains( $out, 'mailto:hola@example.com' ) && ! str_contains( $out, 'Escribinos por WhatsApp</a>' ), 'footer: franja de invitación con email (sin WhatsApp no muestra su botón)' );
+		check( ! str_contains( $out, 'fd-footer__cta' ), 'footer: sin WhatsApp ni email no muestra la franja de invitación' );
 		$footer_out = $out;
 	}
 }
@@ -131,6 +131,7 @@ if ( ! empty( $opts['html'] ) ) {
 	$GLOBALS['fd_mods'] = array( 'fandeco_announcement' => '10% OFF con transferencia bancaria', 'fandeco_email' => 'hola@example.com', 'fandeco_social_instagram' => 'https://instagram.com/x', 'fandeco_payment_methods' => "Mercado Pago\nTransferencia", 'fandeco_shipping_info' => 'Texto de envíos de ejemplo', 'fandeco_footer_about' => 'Diseñamos y fabricamos objetos decorativos con impresión 3D.' );
 	ob_start(); include FANDECO_DIR . '/header.php'; $h = ob_get_clean();
 	ob_start(); echo '<main id="main" class="fd-main fd-home" tabindex="-1">' . $home . '</main>'; include FANDECO_DIR . '/footer.php'; $f = ob_get_clean();
+	check( str_contains( $f, 'fd-footer__cta' ) && str_contains( $f, 'mailto:hola@example.com' ) && ! str_contains( $f, 'Escribinos por WhatsApp</a>' ), 'footer: franja con email y sin botón de WhatsApp cuando no hay número' );
 	file_put_contents( $opts['html'], $h . $f );
 	echo "HTML: {$opts['html']}\n";
 }
