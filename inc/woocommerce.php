@@ -310,3 +310,45 @@ function fandeco_checkout_steps( int $current ): void {
 add_action( 'woocommerce_before_cart', static fn() => fandeco_checkout_steps( 1 ), 5 );
 add_action( 'woocommerce_before_checkout_form', static fn() => fandeco_checkout_steps( 2 ), 5 );
 add_action( 'woocommerce_before_thankyou', static fn() => fandeco_checkout_steps( 3 ), 5 );
+
+/* ---- Mi cuenta: añadidos visuales por ganchos oficiales (no se tocan formularios ni plantillas) ---- */
+
+/** Panel de bienvenida sobre los formularios de acceso/registro. */
+add_action(
+	'woocommerce_before_customer_login_form',
+	static function () {
+		echo '<div class="fd-account-intro"><h2 class="fd-account-intro__title">' . esc_html__( 'Tu cuenta Fan Deco', 'fan-deco-studio' ) . '</h2><p>' . esc_html__( 'Seguí tus pedidos, guardá tus direcciones y comprá más rápido.', 'fan-deco-studio' ) . '</p></div>';
+	},
+	5
+);
+
+/** Accesos rápidos del escritorio de la cuenta, a partir de los endpoints reales y habilitados. */
+add_action(
+	'woocommerce_account_dashboard',
+	static function () {
+		$items = function_exists( 'wc_get_account_menu_items' ) ? wc_get_account_menu_items() : array();
+		$wanted = array(
+			'orders'       => array( 'package', __( 'Ver mis pedidos y su estado', 'fan-deco-studio' ) ),
+			'downloads'    => array( 'tag', __( 'Tus descargas', 'fan-deco-studio' ) ),
+			'edit-address' => array( 'pin', __( 'Direcciones de envío y facturación', 'fan-deco-studio' ) ),
+			'edit-account' => array( 'user', __( 'Datos de la cuenta y contraseña', 'fan-deco-studio' ) ),
+		);
+		$cards = '';
+		foreach ( $wanted as $endpoint => $meta ) {
+			if ( ! isset( $items[ $endpoint ] ) ) {
+				continue;
+			}
+			$cards .= sprintf(
+				'<a class="fd-account-card" href="%1$s"><span class="fd-account-card__icon" aria-hidden="true">%2$s</span><strong>%3$s</strong><span>%4$s</span></a>',
+				esc_url( wc_get_account_endpoint_url( $endpoint ) ),
+				fandeco_icon( $meta[0], 'fd-icon' ), // phpcs:ignore WordPress.Security.EscapeOutput
+				esc_html( $items[ $endpoint ] ),
+				esc_html( $meta[1] )
+			);
+		}
+		if ( $cards ) {
+			echo '<div class="fd-account-cards">' . $cards . '</div>'; // phpcs:ignore WordPress.Security.EscapeOutput -- escapado arriba.
+		}
+	},
+	20
+);

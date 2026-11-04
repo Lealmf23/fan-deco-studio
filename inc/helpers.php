@@ -68,6 +68,7 @@ function fandeco_icon( string $name, string $class = 'fd-icon' ): string {
 			'close'       => '<path d="M18 6 6 18M6 6l12 12"/>',
 			'arrow-right' => '<path d="M5 12h14M12 5l7 7-7 7"/>',
 			'check'       => '<path d="m5 12 5 5 9-10"/>',
+			'pin'         => '<path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/>',
 			'home'        => '<path d="m3 10.5 9-7.5 9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/>',
 			'grid'        => '<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>',
 			'chevron-l'   => '<path d="m15 18-6-6 6-6"/>',

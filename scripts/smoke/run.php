@@ -93,6 +93,10 @@ foreach ( array( 1, 2, 3 ) as $n ) {
 	check( substr_count( $st, 'fd-stepper__item' ) === 3 && substr_count( $st, 'aria-current="step"' ) === 1 && substr_count( $st, 'is-done' ) === $n - 1, "pasos: paso $n actual, " . ( $n - 1 ) . ' completados, accesible' );
 }
 
+echo "Mi cuenta (ganchos)\n";
+check( str_contains( file_get_contents( FANDECO_DIR . '/inc/woocommerce.php' ), "'woocommerce_before_customer_login_form'" ) && str_contains( file_get_contents( FANDECO_DIR . '/inc/woocommerce.php' ), "'woocommerce_account_dashboard'" ), 'cuenta: panel de bienvenida y accesos rápidos por ganchos oficiales (sin sobrescribir plantillas)' );
+check( ! is_dir( FANDECO_DIR . '/woocommerce' ), 'tema: no sobrescribe plantillas de WooCommerce (carpeta woocommerce/ ausente)' );
+
 echo "Plantillas\n";
 foreach ( array( 'header.php', 'footer.php' ) as $tpl ) {
 	ob_start();

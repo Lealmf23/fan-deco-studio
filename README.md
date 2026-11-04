@@ -67,6 +67,12 @@ Rediseño **solo con CSS y un indicador de pasos** (Carrito → Datos y pago →
 - **Pedido recibido:** resumen del pedido en una fila y, para transferencias, los **datos bancarios** en un panel azul bien visible.
 - **Verificado:** en Chromium, sobre marcado clásico de WooCommerce de muestra, desktop y móvil, sin desbordes; pruebas del indicador de pasos. **No verificado con WooCommerce real:** el marcado que inyectan Mercado Pago (botones, iframes, selector de cuotas), Andreani (métodos y calculadora de envío) y otros plugins dentro de la caja de pago; el botón fijo del pie en móvil con esos campos; cupones y mensajes de error reales. Probar un pedido completo por cada medio de pago en staging.
 
+## Mi cuenta y acceso
+Rediseño **solo con CSS y dos añadidos por ganchos oficiales** (`woocommerce_before_customer_login_form`: panel de bienvenida; `woocommerce_account_dashboard`: accesos rápidos a Pedidos/Descargas/Direcciones/Detalles, generados desde los endpoints **reales y habilitados** de WooCommerce). No se sobrescribe ninguna plantilla.
+- **Sin sesión:** panel de marca (azul con líneas de capa) junto a los formularios de acceso y registro como paneles; campo de contraseña con ojo, “Recuérdame” y recuperar contraseña con el mismo estilo.
+- **Con sesión:** menú lateral con íconos (en móvil, pestañas horizontales), saludo grande, accesos rápidos, **pedidos con estado por color** (en móvil, como tarjetas), direcciones en tarjetas y formulario de datos/contraseña.
+- **Verificado:** en Chromium sobre marcado clásico de muestra, desktop y móvil, sin desbordes. **No verificado con WooCommerce real:** mensajes de error de acceso, plugins que agregan pestañas a Mi cuenta (aparecen sin ícono propio), pedidos con muchos productos, y la página de “ver pedido” (hereda estilos del pedido recibido).
+
 ## Home: dirección “encendé la luz”
 - **Idea central:** el hero es una habitación al atardecer y el visitante **enciende la lámpara**: un interruptor (accesible, `role="switch"`) pasa toda la portada —fondo, titular, botón, header y barra superior— de día a noche con la foto encendida. Lo dispara el visitante (no hay animación automática) y respeta “reducir movimiento”. **Requiere dos fotos reales** con el mismo encuadre (apagada y encendida), cargadas en el bloque Hero (*Imágenes → Imagen con la luz encendida*); sin la foto encendida **no hay interruptor** (no se simula). Opción “empezar con la luz encendida”.
 - **Textura:** líneas horizontales finas como las capas de una impresión 3D, solo en secciones oscuras.
