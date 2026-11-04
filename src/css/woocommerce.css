@@ -224,3 +224,10 @@
 .woocommerce table.shop_table { width: 100%; }
 .woocommerce-cart .fd-prose, .woocommerce-checkout .fd-prose, .woocommerce-account .fd-prose { max-width: none; }
 .woocommerce-cart .fd-prose > * + *, .woocommerce-checkout .fd-prose > * + *, .woocommerce-account .fd-prose > * + * { margin-top: 0; }
+
+/* Formularios WPForms (plugin ya instalado en el sitio) con la estética del tema */
+.wpforms-container .wpforms-field input[type="text"], .wpforms-container .wpforms-field input[type="email"], .wpforms-container .wpforms-field input[type="tel"], .wpforms-container .wpforms-field select, .wpforms-container .wpforms-field textarea { min-height: 3rem; padding: 0.5rem 1rem; border: 1.5px solid var(--color-fd-line); border-radius: var(--radius-fd-sm); background: #fff; font: inherit; max-width: 100%; }
+.wpforms-container .wpforms-field textarea { min-height: 8rem; }
+.wpforms-container .wpforms-submit-container button, .wpforms-container button.wpforms-submit { min-height: 3rem; padding: 0 1.75rem; border: 0; border-radius: 999px; background: var(--color-fd-wine); color: #fff; font: 600 0.9375rem/1 var(--font-sans); cursor: pointer; }
+.wpforms-container button.wpforms-submit:hover { background: var(--color-fd-wine-dark); }
+.fd-elementor-page { width: 100%; }

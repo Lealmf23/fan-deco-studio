@@ -13,6 +13,13 @@ get_header();
 	<?php
 	while ( have_posts() ) :
 		the_post();
+		// Páginas hechas con Elementor (durante la migración): ancho completo, sin título ni contenedor del tema.
+		if ( 'builder' === get_post_meta( get_the_ID(), '_elementor_edit_mode', true ) ) {
+			?>
+			<article <?php post_class( 'fd-elementor-page' ); ?>><?php the_content(); ?></article>
+			<?php
+			continue;
+		}
 		?>
 		<article <?php post_class( 'fd-container fd-prose-wrap' ); ?>>
 			<header class="fd-page-head"><h1 class="fd-page-title"><?php the_title(); ?></h1></header>

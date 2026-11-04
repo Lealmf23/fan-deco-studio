@@ -19,6 +19,17 @@ define( 'FANDECO_CORE_FILE', __FILE__ );
 define( 'FANDECO_CORE_DIR', plugin_dir_path( __FILE__ ) );
 define( 'FANDECO_CORE_URL', plugin_dir_url( __FILE__ ) );
 
+// El plugin no toca pedidos ni el checkout: se declara compatible con HPOS y con Carrito/Checkout por bloques.
+add_action(
+	'before_woocommerce_init',
+	static function () {
+		if ( class_exists( '\\Automattic\\WooCommerce\\Utilities\\FeaturesUtil' ) ) {
+			\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', FANDECO_CORE_FILE, true );
+			\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'cart_checkout_blocks', FANDECO_CORE_FILE, true );
+		}
+	}
+);
+
 require_once FANDECO_CORE_DIR . 'includes/class-text.php';
 require_once FANDECO_CORE_DIR . 'includes/class-redirect-rules.php';
 require_once FANDECO_CORE_DIR . 'includes/class-settings.php';
