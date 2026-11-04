@@ -6,10 +6,10 @@
 .fd-bancar { padding-block: clamp(1.5rem, 3.5vw, 3rem); }
 .fd-bancar__frame { position: relative; }
 .fd-bancar__track { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); gap: 1rem; margin: 0; padding: 0; list-style: none; }
-.fd-bancar__slide { position: relative; overflow: hidden; border-radius: 1.5rem; background: var(--color-fd-sand); }
+.fd-bancar__slide { position: relative; overflow: hidden; border-radius: var(--radius-fd-lg, 1.5rem); background: var(--color-fd-sand); }
 .fd-bancar__slide img { display: block; width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: cover; -webkit-user-drag: none; }
 .fd-bancar__link { display: block; }
-.fd-bancar__link:focus-visible { outline: 3px solid var(--color-fd-wine); outline-offset: -3px; border-radius: 1.5rem; }
+.fd-bancar__link:focus-visible { outline: 3px solid var(--color-fd-wine); outline-offset: -3px; border-radius: var(--radius-fd-lg, 1.5rem); }
 
 /* --- Modo pila (cuando el JS está listo) --- */
 .fd-bancar.is-ready { overflow-x: clip; } /* las tarjetas de los extremos llegan al borde de la pantalla sin generar scroll horizontal */
@@ -38,7 +38,7 @@
 
 /* --- Texto del banner --- */
 .fd-bancar__text { display: flex; flex-direction: column; align-items: center; margin-bottom: clamp(1.75rem, 4vw, 2.5rem); text-align: center; }
-.fd-bancar__title { margin: 0; font-size: clamp(2.6rem, 11vw, 3.75rem); }
+.fd-bancar__title { margin: 0; font-size: calc(clamp(2.6rem, 11vw, 3.75rem) * var(--fd-title-scale, 1)); }
 .fd-bancar__desc { max-width: 34rem; margin: 1.1rem 0 0; font-size: clamp(1rem, 1.2vw + 0.6rem, 1.25rem); line-height: 1.55; color: var(--color-fd-olive); }
 .fd-bancar__cta { margin-top: 1.75rem; }
 
@@ -47,7 +47,7 @@
 	.fd-bancar--split { padding-block: clamp(2.5rem, 5vw, 4.5rem); }
 	.fd-bancar--split .fd-bancar__layout { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); align-items: center; gap: clamp(2rem, 4vw, 4rem); }
 	.fd-bancar--split .fd-bancar__text { align-items: flex-start; margin: 0; text-align: left; }
-	.fd-bancar--split .fd-bancar__title { font-size: clamp(3.25rem, 5.4vw, 5.5rem); }
+	.fd-bancar--split .fd-bancar__title { font-size: calc(clamp(3.25rem, 5.4vw, 5.5rem) * var(--fd-title-scale, 1)); }
 	.fd-bancar--split.is-ready .fd-bancar__track { --card: min(30rem, 34vw); margin-inline: 0; }
 	.fd-bancar--split.is-ready .fd-bancar__slide { left: 6%; margin-left: 0; }
 	.fd-bancar--split .fd-bancar__controls { justify-content: flex-start; padding-left: 6%; }

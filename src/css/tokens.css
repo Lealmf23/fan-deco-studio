@@ -43,6 +43,6 @@
 
 	/* Espaciado */
 	--spacing-fd-gutter: clamp(1rem, 4vw, 2rem);
-	--spacing-fd-section: clamp(3rem, 7vw, 6rem);
+	--spacing-fd-section: calc(clamp(3rem, 7vw, 6rem) * var(--fd-section-scale, 1));
 	--container-fd: 80rem;
 }

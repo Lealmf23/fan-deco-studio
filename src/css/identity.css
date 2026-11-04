@@ -5,22 +5,22 @@
    ===================================================================== */
 .fd-hero__title, .fd-section-heading__title, .fd-banner__title, .fd-process__title, .fd-bancar__title {
 	display: flex; flex-direction: column; align-items: flex-start;
-	font-family: var(--font-sans); font-weight: 400; line-height: 0.92; letter-spacing: -0.05em;
+	font-family: var(--font-display); font-weight: var(--fd-title-weight, 400); line-height: var(--fd-title-lh, 0.92); letter-spacing: var(--fd-title-ls, -0.05em);
 }
 .fd-section-heading--center .fd-section-heading__title { align-items: center; }
-.fd-hero__title strong, .fd-section-heading__title strong, .fd-banner__title strong, .fd-process__title strong, .fd-bancar__title strong { font-weight: 700; }
+.fd-hero__title strong, .fd-section-heading__title strong, .fd-banner__title strong, .fd-process__title strong, .fd-bancar__title strong { font-weight: var(--fd-title-strong, 700); }
 .fd-hero__title em, .fd-section-heading__title em, .fd-banner__title em, .fd-process__title em, .fd-bancar__title em {
-	margin-block: 0.04em; font-family: var(--font-serif); font-style: italic; font-weight: 500;
+	margin-block: 0.04em; font-family: var(--font-serif); font-style: var(--fd-em-style, italic); font-weight: var(--fd-em-weight, 500);
 	font-size: 1.08em; line-height: 0.88; letter-spacing: -0.04em; color: var(--color-fd-olive);
 }
 /* Sobre fondos oscuros el oliva claro mantiene el contraste. */
 .fd-banner--dark .fd-banner__title em, .fd-banner--wine .fd-banner__title em, .fd-banner--immersive .fd-banner__title em,
 .fd-hero--immersive .fd-hero__title em, .fd-hero--overlay .fd-hero__title em { color: var(--color-fd-steel); }
 /* Títulos de las secciones: tamaño editorial. */
-.fd-section-heading__title { font-size: clamp(2.25rem, 4.4vw + 0.5rem, 4rem); }
-.fd-process__title { font-size: clamp(2.25rem, 4vw + 0.5rem, 3.75rem); }
+.fd-section-heading__title { font-size: calc(clamp(2.25rem, 4.4vw + 0.5rem, 4rem) * var(--fd-title-scale, 1)); }
+.fd-process__title { font-size: calc(clamp(2.25rem, 4vw + 0.5rem, 3.75rem) * var(--fd-title-scale, 1)); }
 /* Sobretítulo: línea delante, mayúsculas espaciadas. */
-.fd-eyebrow { display: flex; align-items: center; gap: 0.85rem; font-weight: 500; letter-spacing: 0.22em; color: var(--color-fd-wine); }
+.fd-eyebrow { display: flex; align-items: center; gap: 0.85rem; font-weight: 500; letter-spacing: var(--fd-eyebrow-ls, 0.22em); text-transform: var(--fd-eyebrow-case, uppercase); color: var(--color-fd-wine); }
 .fd-eyebrow::before { content: ""; display: block; flex: none; width: 1.25rem; height: 1px; background: currentColor; }
 .fd-section-heading--center .fd-eyebrow { justify-content: center; }
 .fd-section-heading--center .fd-eyebrow::before { display: none; }

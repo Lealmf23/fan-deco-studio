@@ -19,7 +19,7 @@
 .fd-hero--immersive .fd-hero__media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to right, rgb(245 242 237 / 0.94) 0%, rgb(245 242 237 / 0.6) 36%, transparent 64%); transition: opacity 900ms var(--ease-fd); }
 .fd-hero--immersive.is-lit .fd-hero__media::after { background: linear-gradient(to right, rgb(15 29 51 / 0.9) 0%, rgb(15 29 51 / 0.5) 38%, transparent 66%); }
 .fd-hero--immersive .fd-hero__content { position: relative; z-index: 2; max-width: 44rem; }
-.fd-hero--immersive .fd-hero__title { font-size: clamp(3.75rem, 8.2vw, 9.25rem); line-height: 0.9; letter-spacing: -0.055em; font-weight: 600; transition: color 800ms var(--ease-fd); }
+.fd-hero--immersive .fd-hero__title { font-size: calc(clamp(3.75rem, 8.2vw, 9.25rem) * var(--fd-title-scale, 1)); line-height: var(--fd-title-lh, 0.9); letter-spacing: var(--fd-title-ls, -0.055em); font-weight: var(--fd-title-weight, 600); transition: color 800ms var(--ease-fd); }
 .fd-hero--immersive .fd-hero__desc { max-width: 30rem; font-size: 1.25rem; transition: color 800ms var(--ease-fd); }
 .fd-hero--immersive .fd-eyebrow { transition: color 800ms var(--ease-fd); }
 .fd-hero--immersive.is-lit { background: var(--fd-night); }
@@ -57,7 +57,7 @@
 	.fd-cats--mosaic.fd-cats--n4 .fd-cat-grid__item:nth-child(4) { grid-column: 10 / 13; grid-row: 2 / 3; }
 	.fd-cats--mosaic.fd-cats--n3 .fd-cat-grid__item:nth-child(2) { grid-column: 7 / 13; grid-row: 1 / 2; }
 	.fd-cats--mosaic.fd-cats--n3 .fd-cat-grid__item:nth-child(3) { grid-column: 7 / 13; grid-row: 2 / 3; }
-	.fd-cats--mosaic .fd-cat-card { position: relative; display: block; height: 100%; overflow: hidden; border-radius: 1.5rem; }
+	.fd-cats--mosaic .fd-cat-card { position: relative; display: block; height: 100%; overflow: hidden; border-radius: var(--radius-fd-lg, 1.5rem); }
 	.fd-cats--mosaic .fd-cat-card__media { position: absolute; inset: 0; height: 100%; aspect-ratio: auto; border-radius: 0; }
 	.fd-cats--mosaic .fd-cat-card__body { position: absolute; inset: auto 0 0 0; padding: 4rem 1.5rem 1.4rem; color: #fff; background: linear-gradient(to top, rgb(15 29 51 / 0.78), transparent); }
 	.fd-cats--mosaic .fd-cat-card__title { color: #fff; font-size: 1.625rem; font-weight: 600; letter-spacing: -0.02em; }
@@ -69,20 +69,20 @@
 @media (min-width: 1024px) {
 	.fd-featured__split { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: 4rem; align-items: start; }
 	.fd-featured__side { position: sticky; top: 7rem; display: grid; gap: 1.25rem; padding-top: 0.5rem; }
-	.fd-featured__title { margin: 0; font-size: clamp(2.5rem, 3.6vw, 4rem); line-height: 0.98; letter-spacing: -0.045em; }
+	.fd-featured__title { margin: 0; font-size: calc(clamp(2.5rem, 3.6vw, 4rem) * var(--fd-title-scale, 1)); line-height: var(--fd-title-lh, 0.98); letter-spacing: var(--fd-title-ls, -0.045em); }
 	.fd-featured__desc { margin: 0; max-width: 24rem; color: var(--color-fd-muted); }
 	.fd-featured--editorial .fd-carousel__track { margin-inline: 0; padding-inline: 0; scroll-padding-inline: 0; }
 	.fd-featured--editorial .fd-carousel__track .fd-product-grid__item { flex-basis: calc((100% - 2rem) / 2.4); }
 }
 @media (max-width: 1023px) {
 	.fd-featured__side { margin-bottom: 1rem; }
-	.fd-featured__title { margin: 0 0 0.5rem; font-size: 1.75rem; letter-spacing: -0.03em; }
+	.fd-featured__title { margin: 0 0 0.5rem; font-size: calc(1.75rem * var(--fd-title-scale, 1)); letter-spacing: var(--fd-title-ls, -0.03em); }
 	.fd-featured__desc { margin: 0 0 0.75rem; color: var(--color-fd-muted); }
 }
 
 /* ---------- Proceso: índice sobre azul con líneas de capa ---------- */
 .fd-process--index { background-color: var(--color-fd-blue); background-image: var(--fd-layers); color: #fff; padding-block: clamp(3.5rem, 8vw, 7rem); }
-.fd-process--index .fd-process__title { margin: 0; color: #fff; font-size: clamp(2.5rem, 3.6vw, 4rem); line-height: 0.98; letter-spacing: -0.045em; }
+.fd-process--index .fd-process__title { margin: 0; color: #fff; font-size: calc(clamp(2.5rem, 3.6vw, 4rem) * var(--fd-title-scale, 1)); line-height: var(--fd-title-lh, 0.98); letter-spacing: var(--fd-title-ls, -0.045em); }
 .fd-process--index .fd-process__desc { margin: 1.25rem 0 0; max-width: 24rem; color: rgb(255 255 255 / 0.72); }
 .fd-process--index .fd-steps { display: grid; grid-template-columns: 1fr; gap: 0; }
 .fd-process--index .fd-step { display: grid; grid-template-columns: 4.5rem minmax(0, 1fr); column-gap: 1rem; align-items: baseline; padding: 1.75rem 0; border-top: 1px solid rgb(255 255 255 / 0.2); transition: background-color var(--duration-fd-base); }
@@ -106,7 +106,7 @@
 .fd-banner--immersive .fd-banner__media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .fd-banner--immersive .fd-banner__card::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(to right, rgb(98 101 69 / 0.88) 0%, rgb(98 101 69 / 0.45) 42%, transparent 70%); }
 .fd-banner--immersive .fd-banner__content { max-width: 36rem; padding: clamp(1.75rem, 5vw, 4.5rem); }
-.fd-banner--immersive .fd-banner__title { color: #fff; font-size: clamp(2.5rem, 4.4vw, 4.75rem); line-height: 0.95; letter-spacing: -0.045em; }
+.fd-banner--immersive .fd-banner__title { color: #fff; font-size: calc(clamp(2.5rem, 4.4vw, 4.75rem) * var(--fd-title-scale, 1)); line-height: var(--fd-title-lh, 0.95); letter-spacing: var(--fd-title-ls, -0.045em); }
 .fd-banner--immersive .fd-eyebrow { color: rgb(255 255 255 / 0.8); }
 @media (min-width: 1024px) { .fd-banner--immersive .fd-banner__card { grid-template-columns: 1fr; } .fd-banner--immersive.fd-banner--img-left .fd-banner__media { order: 0; } }
 
@@ -116,7 +116,7 @@
 .fd-home .fd-section-heading { padding-top: clamp(2.75rem, 5.2vw, 5rem); }
 .fd-home .fd-hero { padding-block: 0; }
 .fd-home .fd-benefits { padding-block: 0; }
-.fd-home .fd-section-heading__title { font-size: clamp(2.25rem, 3.6vw, 4rem); letter-spacing: -0.045em; line-height: 0.98; }
+.fd-home .fd-section-heading__title { font-size: calc(clamp(2.25rem, 3.6vw, 4rem) * var(--fd-title-scale, 1)); letter-spacing: var(--fd-title-ls, -0.045em); line-height: var(--fd-title-lh, 0.98); }
 
 /* ---------- Footer: isotipo tipográfico gigante (solo si no hay logo cargado) ---------- */
 .fd-footer { position: relative; overflow: hidden; }

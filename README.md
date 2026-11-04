@@ -190,6 +190,9 @@ Según los ajustes del sitio real (leídos en modo solo lectura), Blocksy Pro te
 - **Bloque `fandeco/marquee`:** franja carbón con palabras en mayúsculas espaciadas separadas por ✦, que se desplazan en bucle solo con CSS; se pausa al pasar el cursor y queda quieta (una sola vez cada palabra) con “reducir movimiento”.
 - Verificado en Chromium con markup de muestra; **no probado en el editor de bloques de un WordPress real**.
 
+## Personalización completa
+Apariencia > Personalizar > Fan Deco Studio tiene 51 ajustes de colores, tipografía, espaciado, header/logo, botones y tarjetas, con vista previa en vivo. Guía completa en `docs/PERSONALIZAR.md` (se genera con `php scripts/gen-design-docs.php`). Arquitectura: un esquema único en `inc/design.php` genera los controles, el CSS (`<style id="fd-design">`, solo lo modificado) y la vista previa (`assets/js/design-preview.js`); `scripts/design-parity.mjs` comprueba que PHP y JS generen lo mismo. El CSS del tema lee las variables con valor de reserva. **No probado en el Personalizador de un WordPress real** (solo con simulaciones y midiendo en Chromium el efecto de los valores).
+
 ## Qué está verificado y qué no
 **Verificado aquí (sin WordPress real; el entorno no puede descargar WordPress/WooCommerce):**
 - Sintaxis PHP de los 41 archivos (`php -l`, PHP 8.3).

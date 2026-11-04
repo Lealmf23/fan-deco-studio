@@ -3,6 +3,20 @@
 Cada archivo que se entrega lleva su versión: `fan-deco-studio-X.Y.Z.zip` y `fan-deco-core-X.Y.Z.zip`.
 La versión del tema también figura en Apariencia > Temas, en `style.css` y como comentario `<!-- Fan Deco Studio X.Y.Z -->` en el código fuente de cada página.
 
+## 0.3.0
+### Agregado
+- **Personalización completa** (Apariencia > Personalizar > Fan Deco Studio): 51 ajustes en 5 secciones nuevas con vista previa en vivo y botón de restablecer en cada uno. Ver `docs/PERSONALIZAR.md`.
+  - **Colores:** fondo, superficies, texto, títulos y secciones oscuras, líneas, acento (y su hover y versión clara), color de la palabra en cursiva, y colores propios de botones, header, barra superior y footer.
+  - **Tipografía:** fuente del texto, de los títulos y de la palabra destacada (la incluida o fuentes del sistema), estilo y peso de la cursiva, tamaño base, interlineado, tamaño de títulos para escritorio y móvil, pesos, interlineado y espaciado de letras de títulos, sobretítulos.
+  - **Diseño y espaciado:** ancho del contenido, margen lateral, espacio entre secciones, esquinas de tarjetas y fotos, forma y alto de botones.
+  - **Header, menú y logo:** alto del logo (escritorio, móvil y footer), alto del header, tamaño, separación y peso del menú.
+  - **Tarjetas de producto:** proporción de la foto y mostrar u ocultar vista rápida, etiquetas y puntos de color.
+- Solo se imprime en la página lo que se cambió; sin cambios, el sitio se ve idéntico.
+- Prueba de paridad que verifica que el CSS de PHP y el de la vista previa en vivo sean idénticos.
+
+### Corregido
+- Menú del header y del menú móvil mostraban solo "Inicio" y "Tienda": ahora usan los menús existentes si no se asignaron (ver 0.2.0).
+
 ## 0.2.0
 Primera versión numerada de las entregas. Reúne todo lo construido desde 0.1.0.
 

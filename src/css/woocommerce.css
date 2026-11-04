@@ -2,7 +2,7 @@
 .fd-woo { padding-bottom: var(--spacing-fd-section); }
 .fd-breadcrumb { padding-block: 1.5rem 0.5rem; font-size: 0.8125rem; color: var(--color-fd-muted); }
 .fd-breadcrumb a { text-decoration: none; }
-.woocommerce-products-header__title, .product_title { font-size: clamp(2rem, 3vw + 1rem, 3.25rem); margin: 0.5rem 0 1rem; }
+.woocommerce-products-header__title, .product_title { font-size: calc(clamp(2rem, 3vw + 1rem, 3.25rem) * var(--fd-title-scale, 1)); margin: 0.5rem 0 1rem; }
 .woocommerce-result-count { float: none; margin: 0 0 1rem; color: var(--color-fd-muted); font-size: 0.875rem; }
 .woocommerce-ordering { float: none; margin: 0 0 1.5rem; }
 .woocommerce-ordering select, .woocommerce select, .woocommerce input[type="text"], .woocommerce input[type="email"], .woocommerce input[type="tel"], .woocommerce input[type="password"], .woocommerce input[type="number"], .woocommerce textarea, .woocommerce-page input.input-text {
@@ -27,11 +27,11 @@
 
 /* Botones de WooCommerce con estética de marca */
 .woocommerce a.button, .woocommerce button.button, .woocommerce input.button, .woocommerce #respond input#submit, .woocommerce-page a.button, .wc-block-components-button:not(.is-link) {
-	display: inline-flex; align-items: center; justify-content: center; min-height: 3rem; padding: 0 1.5rem; border: 1.5px solid var(--color-fd-blue); border-radius: 999px; background: transparent; color: var(--color-fd-blue); font: 600 0.9375rem/1 var(--font-sans); text-decoration: none; cursor: pointer; transition: background-color var(--duration-fd-fast), color var(--duration-fd-fast), transform var(--duration-fd-fast);
+	display: inline-flex; align-items: center; justify-content: center; min-height: var(--fd-btn-h, 3rem); padding: 0 1.5rem; border: 1.5px solid var(--color-fd-blue); border-radius: var(--fd-btn-radius, 999px); background: transparent; color: var(--color-fd-blue); font: 600 0.9375rem/1 var(--font-sans); text-decoration: none; cursor: pointer; transition: background-color var(--duration-fd-fast), color var(--duration-fd-fast), transform var(--duration-fd-fast);
 }
 .woocommerce a.button:hover, .woocommerce button.button:hover, .woocommerce input.button:hover { background: var(--color-fd-blue); color: #fff; }
-.woocommerce a.button.alt, .woocommerce button.button.alt, .woocommerce input.button.alt, .woocommerce #place_order, .woocommerce a.button.checkout-button { background: var(--color-fd-wine); border-color: var(--color-fd-wine); color: #fff; }
-.woocommerce a.button.alt:hover, .woocommerce button.button.alt:hover, .woocommerce #place_order:hover, .woocommerce a.button.checkout-button:hover { background: var(--color-fd-wine-dark); border-color: var(--color-fd-wine-dark); }
+.woocommerce a.button.alt, .woocommerce button.button.alt, .woocommerce input.button.alt, .woocommerce #place_order, .woocommerce a.button.checkout-button { background: var(--fd-btn-bg, var(--color-fd-wine)); border-color: var(--fd-btn-bg, var(--color-fd-wine)); color: var(--fd-btn-text, #fff); }
+.woocommerce a.button.alt:hover, .woocommerce button.button.alt:hover, .woocommerce #place_order:hover, .woocommerce a.button.checkout-button:hover { background: var(--fd-btn-bg, var(--color-fd-wine-dark)); border-color: var(--fd-btn-bg, var(--color-fd-wine-dark)); }
 .woocommerce a.button.loading, .woocommerce button.button.loading { opacity: 0.6; }
 .woocommerce #place_order, .woocommerce a.button.checkout-button { width: 100%; min-height: 3.5rem; }
 

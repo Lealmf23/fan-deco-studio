@@ -9,6 +9,7 @@
 	html {
 		scroll-behavior: smooth;
 		-webkit-text-size-adjust: 100%;
+		font-size: var(--fd-font-size, 100%);
 	}
 	@media (prefers-reduced-motion: reduce) {
 		html { scroll-behavior: auto; }
@@ -24,7 +25,7 @@
 		color: var(--color-fd-ink);
 		font-family: var(--font-sans);
 		font-size: 1rem;
-		line-height: 1.6;
+		line-height: var(--fd-line, 1.6);
 		overflow-x: clip;
 		-webkit-font-smoothing: antialiased;
 	}
@@ -72,7 +73,7 @@
 }
 .fd-main { min-height: 50vh; }
 .fd-page-head { padding-block: clamp(2rem, 5vw, 4rem) 1.5rem; }
-.fd-page-title { margin: 0; font-size: clamp(2rem, 4vw + 1rem, 3.5rem); }
+.fd-page-title { margin: 0; font-size: calc(clamp(2rem, 4vw + 1rem, 3.5rem) * var(--fd-title-scale, 1)); }
 .fd-page-meta { color: var(--color-fd-muted); }
 .fd-prose-wrap { padding-bottom: var(--spacing-fd-section); }
 .fd-prose { max-width: 46rem; }

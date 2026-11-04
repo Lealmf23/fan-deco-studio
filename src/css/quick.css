@@ -13,7 +13,7 @@
 }
 
 /* ---------- Diálogos ---------- */
-.fd-qv, .fd-cartpanel { padding: 0; border: 0; border-radius: 1.5rem; background: var(--color-fd-cream); color: var(--color-fd-ink); box-shadow: 0 40px 80px -30px rgb(10 20 40 / 0.6); }
+.fd-qv, .fd-cartpanel { padding: 0; border: 0; border-radius: var(--radius-fd-lg, 1.5rem); background: var(--color-fd-cream); color: var(--color-fd-ink); box-shadow: 0 40px 80px -30px rgb(10 20 40 / 0.6); }
 .fd-qv::backdrop, .fd-cartpanel::backdrop { background: rgb(10 20 40 / 0.55); backdrop-filter: blur(3px); }
 .fd-qv { width: min(56rem, calc(100vw - 2rem)); max-height: calc(100dvh - 2rem); overflow: auto; }
 .fd-qv[open], .fd-cartpanel[open] { animation: fd-pop 260ms var(--ease-fd); }
@@ -53,7 +53,7 @@
 .fd-cartpanel__actions .fd-btn { justify-content: center; text-align: center; }
 .fd-cartpanel__more { padding: 0.5rem; border: 0; background: none; color: var(--color-fd-muted); font: inherit; text-decoration: underline; text-underline-offset: 0.25em; cursor: pointer; }
 @media (max-width: 767px) {
-	.fd-cartpanel { inset: auto 0 0 0; width: 100%; max-width: none; border-radius: 1.5rem 1.5rem 0 0; padding-bottom: calc(1.25rem + env(safe-area-inset-bottom)); }
+	.fd-cartpanel { inset: auto 0 0 0; width: 100%; max-width: none; border-radius: var(--radius-fd-lg, 1.5rem) 1.5rem 0 0; padding-bottom: calc(1.25rem + env(safe-area-inset-bottom)); }
 }
 
 /* ---------- Compartir ---------- */

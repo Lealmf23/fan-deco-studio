@@ -55,7 +55,7 @@
 /* ---------- 404 ---------- */
 .fd-404 { padding-block: clamp(3rem, 8vw, 7rem); text-align: center; }
 .fd-404__code { margin: 0; font-family: var(--font-display); font-size: clamp(7rem, 24vw, 20rem); font-weight: 800; line-height: 0.8; letter-spacing: -0.06em; color: var(--color-fd-sand); user-select: none; }
-.fd-404__title { margin: -1.5rem 0 0.75rem; font-size: clamp(2.25rem, 5vw, 4rem); letter-spacing: -0.045em; line-height: 1; }
+.fd-404__title { margin: -1.5rem 0 0.75rem; font-size: calc(clamp(2.25rem, 5vw, 4rem) * var(--fd-title-scale, 1)); letter-spacing: var(--fd-title-ls, -0.045em); line-height: var(--fd-title-lh, 1); }
 .fd-404__text { margin: 0 auto 1.75rem; max-width: 28rem; color: var(--color-fd-muted); }
 .fd-404__search { position: relative; display: flex; gap: 0.6rem; max-width: 36rem; margin: 0 auto; }
 .fd-404__search input[type="search"] { flex: 1; min-width: 0; min-height: 3.5rem; padding: 0 1.5rem; border-radius: 999px; border: 1.5px solid var(--color-fd-line); background: #fff; font: inherit; font-size: 1.0625rem; }
