@@ -69,6 +69,10 @@ function fandeco_icon( string $name, string $class = 'fd-icon' ): string {
 			'arrow-right' => '<path d="M5 12h14M12 5l7 7-7 7"/>',
 			'check'       => '<path d="m5 12 5 5 9-10"/>',
 			'pin'         => '<path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/>',
+			'mail'        => '<rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/>',
+			'phone'       => '<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/>',
+			'clock'       => '<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>',
+			'chat'        => '<path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/>',
 			'home'        => '<path d="m3 10.5 9-7.5 9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/>',
 			'grid'        => '<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>',
 			'chevron-l'   => '<path d="m15 18-6-6 6-6"/>',
@@ -233,4 +237,36 @@ function fandeco_category_chips( string $class = 'fd-chips' ): string {
 		}
 	}
 	return $out ? '<ul class="' . esc_attr( $class ) . '">' . $out . '</ul>' : '';
+}
+
+
+/**
+ * Medios de contacto configurados en Personalizar > Fan Deco > Contacto. Solo devuelve los que tienen dato.
+ *
+ * @return array<int, array{icon:string,label:string,value:string,url:string}>
+ */
+function fandeco_contact_methods(): array {
+	$out      = array();
+	$whatsapp = preg_replace( '/\D+/', '', (string) fandeco_option( 'whatsapp', '' ) );
+	if ( $whatsapp ) {
+		$msg   = (string) fandeco_option( 'whatsapp_message', 'Hola, quiero consultar por un producto' );
+		$out[] = array( 'icon' => 'chat', 'label' => __( 'WhatsApp', 'fan-deco-studio' ), 'value' => __( 'Escribinos y te respondemos', 'fan-deco-studio' ), 'url' => 'https://wa.me/' . $whatsapp . '?text=' . rawurlencode( $msg ) );
+	}
+	$email = sanitize_email( (string) fandeco_option( 'email', '' ) );
+	if ( $email ) {
+		$out[] = array( 'icon' => 'mail', 'label' => __( 'Email', 'fan-deco-studio' ), 'value' => $email, 'url' => 'mailto:' . $email );
+	}
+	$phone = trim( (string) fandeco_option( 'phone', '' ) );
+	if ( $phone ) {
+		$out[] = array( 'icon' => 'phone', 'label' => __( 'Teléfono', 'fan-deco-studio' ), 'value' => $phone, 'url' => 'tel:' . preg_replace( '/[^\d+]/', '', $phone ) );
+	}
+	$address = trim( (string) fandeco_option( 'address', '' ) );
+	if ( $address ) {
+		$out[] = array( 'icon' => 'pin', 'label' => __( 'Ubicación', 'fan-deco-studio' ), 'value' => $address, 'url' => '' );
+	}
+	$hours = trim( (string) fandeco_option( 'hours', '' ) );
+	if ( $hours ) {
+		$out[] = array( 'icon' => 'clock', 'label' => __( 'Horarios', 'fan-deco-studio' ), 'value' => $hours, 'url' => '' );
+	}
+	return $out;
 }

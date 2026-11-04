@@ -149,6 +149,11 @@ Hay estilos de marca para archivo de tienda/categorías, producto (galería, var
 - Verificado en Chromium con la API simulada (interceptada) y markup de muestra, en 1360 y 390 px, sin desbordes. **No probado con la Store API ni el catálogo reales.**
 - Corregido durante esta revisión: la carga perezosa del buscador se consumía con el primer foco de cualquier elemento (`once`), por lo que nunca se activaba; y el fallback del menú ignoraba la clase móvil.
 
+## Página de Contacto
+- `page-contacto.php` se aplica sola a la página con slug `contacto` (la actual, ID 547): hero oscuro con las líneas de capa, lista de medios (WhatsApp, email, teléfono, ubicación, horarios) tomada de Personalizar > Fan Deco > Contacto —solo se muestra lo que tenga dato—, el contenido de la página (tu formulario actual, con campos estilizados) bajo “Escribinos”, y redes.
+- El tema **no procesa formularios propios**: el envío sigue en el plugin que ya uses. Si la página está hecha con Elementor, su contenido se muestra igual dentro de “Escribinos”; vaciá el contenido si preferís solo los datos de contacto.
+- Verificado en Chromium (1360 y 390 px) con markup de muestra; **no probado con el formulario real**. Blog: todavía no existe, queda para cuando se publique.
+
 ## Qué está verificado y qué no
 **Verificado aquí (sin WordPress real; el entorno no puede descargar WordPress/WooCommerce):**
 - Sintaxis PHP de los 41 archivos (`php -l`, PHP 8.3).

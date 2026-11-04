@@ -133,5 +133,14 @@ if ( ! empty( $opts['html'] ) ) {
 	echo "HTML: {$opts['html']}\n";
 }
 
+// Medios de contacto: solo los configurados, enlaces seguros.
+$GLOBALS['fd_mods'] = array( 'fandeco_whatsapp' => '+54 9 11 5555-1234', 'fandeco_email' => 'hola@fandeco.com.ar', 'fandeco_phone' => '+54 11 5555-1234', 'fandeco_address' => '', 'fandeco_hours' => '' );
+$cm = fandeco_contact_methods();
+check( 4 === count( $cm ) + 1 && 3 === count( $cm ), 'contacto: solo aparecen los medios con dato (3 de 5)' );
+check( 'https://wa.me/5491155551234?text=' === substr( $cm[0]['url'], 0, 33 ), 'contacto: WhatsApp solo con dígitos' );
+check( 'tel:+541155551234' === $cm[2]['url'] && 'mailto:hola@fandeco.com.ar' === $cm[1]['url'], 'contacto: enlaces tel: y mailto: limpios' );
+$GLOBALS['fd_mods'] = array();
+check( array() === fandeco_contact_methods(), 'contacto: sin datos no muestra nada' );
+
 echo $fail ? "\n$fail verificación(es) fallaron\n" : "\nTodas las verificaciones pasaron\n";
 exit( $fail ? 1 : 0 );

@@ -20,9 +20,10 @@ function esc_attr_e( $t ) { echo htmlspecialchars( $t, ENT_QUOTES ); }
 function _n( $s, $p, $n ) { return 1 === $n ? $s : $p; }
 function esc_html( $t ) { return htmlspecialchars( (string) $t, ENT_QUOTES ); }
 function esc_attr( $t ) { return htmlspecialchars( (string) $t, ENT_QUOTES ); }
-function esc_url( $u ) { $u = trim( (string) $u ); return preg_match( '#^(https?:|mailto:|/|\#)#i', $u ) ? htmlspecialchars( $u, ENT_QUOTES ) : ''; }
+function esc_url( $u ) { $u = trim( (string) $u ); return preg_match( '#^(https?:|mailto:|tel:|/|\#)#i', $u ) ? htmlspecialchars( $u, ENT_QUOTES ) : ''; }
 function esc_url_raw( $u ) { return esc_url( $u ); }
 function sanitize_text_field( $t ) { return trim( strip_tags( (string) $t ) ); }
+function sanitize_email( $e ) { $e = trim( (string) $e ); return filter_var( $e, FILTER_VALIDATE_EMAIL ) ? $e : ''; }
 function sanitize_textarea_field( $t ) { return trim( strip_tags( (string) $t ) ); }
 function wp_kses_post( $t ) { return preg_replace( '#<script.*?</script>#is', '', (string) $t ); }
 function wp_strip_all_tags( $t ) { return strip_tags( (string) $t ); }
