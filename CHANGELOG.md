@@ -3,6 +3,10 @@
 Cada archivo que se entrega lleva su versión: `fan-deco-studio-X.Y.Z.zip` y `fan-deco-core-X.Y.Z.zip`.
 La versión del tema también figura en Apariencia > Temas, en `style.css` y como comentario `<!-- Fan Deco Studio X.Y.Z -->` en el código fuente de cada página.
 
+## Tema 0.3.9 / Blocks 0.3.9 / Core 0.3.9
+### Corregido
+- Icono del carrito: el dibujo quedaba ~1,5 px corrido a la izquierda dentro del círculo (la caja estaba centrada, pero el carrito tiene el manubrio de un solo lado). Se compensó en el dibujo; ahora queda centrado a la vista. También en las tarjetas de Blocksy.
+
 ## Tema 0.3.8 / Blocks 0.3.8 / Core 0.3.8
 ### Cambiado
 - Tarjetas: el cambio a la foto de una variante (puntos de color) ahora es un **fundido suave** de 0,45 s sobre la foto principal, con precarga para que no parpadee; vuelve con fundido al salir. El cambio de foto al pasar el mouse ya era con fundido.
