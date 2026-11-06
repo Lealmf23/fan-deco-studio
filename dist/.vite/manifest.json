@@ -24,7 +24,7 @@
     "isDynamicEntry": true
   },
   "src/js/main.js": {
-    "file": "assets/main-DwM5nN8M.js",
+    "file": "assets/main-ryfiqDOx.js",
     "name": "main",
     "src": "src/js/main.js",
     "isEntry": true,
@@ -37,7 +37,7 @@
       "src/js/animations.js"
     ],
     "css": [
-      "assets/main-Bcxd4S4E.css"
+      "assets/main-CfvTpZEP.css"
     ],
     "assets": [
       "assets/dm-sans-latin-wght-normal-Xz1IZZA0.woff2",

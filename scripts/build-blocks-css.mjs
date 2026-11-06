@@ -11,7 +11,7 @@ for ( const f of [ ...globSync( 'src/blocks/*/render.php' ), 'template-parts/com
 		used.add( m[ 0 ] );
 	}
 }
-const bases = new Set( [ 'fd-section', 'fd-container', 'fd-eyebrow', 'fd-btn', 'fd-link-arrow', 'fd-icon', 'fd-notice', 'fd-media-placeholder', 'fd-product-grid', 'fd-carousel', 'fd-dot', 'fd-dots-more', 'fd-installments', 'fd-pay-badge' ] );
+const bases = new Set( [ 'fd-section', 'fd-container', 'fd-eyebrow', 'fd-btn', 'fd-link-arrow', 'fd-icon', 'fd-notice', 'fd-media-placeholder', 'fd-product-grid', 'fd-carousel', 'fd-dot', 'fd-dots-more', 'fd-installments', 'fd-pay-badge', 'fd-related' ] );
 for ( const c of used ) bases.add( c.replace( /(__|--).*$/, '' ) );
 const WANT = new RegExp( `\\.(?:${ [ ...bases ].map( ( b ) => b.replace( /-/g, '\\-' ) ).sort( ( a, b ) => b.length - a.length ).join( '|' ) })(?![a-z0-9])` );
 const DENY = /\.fd-(?:header|footer|drawer|announcement|tabbar|mobile-search|main|woo|quickview|qv|cartpanel|share|buybar|stepper|live|search)\b|\.woocommerce|\bbody\b|\bhtml\b|\.admin-bar|\.single-product|\.is-scrolled/;

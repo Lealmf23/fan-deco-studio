@@ -3,6 +3,13 @@
 Cada archivo que se entrega lleva su versión: `fan-deco-studio-X.Y.Z.zip` y `fan-deco-core-X.Y.Z.zip`.
 La versión del tema también figura en Apariencia > Temas, en `style.css` y como comentario `<!-- Fan Deco Studio X.Y.Z -->` en el código fuente de cada página.
 
+## Tema 0.3.10 / Blocks 0.3.10 / Core 0.3.10
+### Agregado
+- **Fan Deco Blocks: productos relacionados en la ficha** con el estilo de las tarjetas de Fan Deco (carrusel, puntos de color, foto al pasar el mouse, precio con transferencia, botón con carrito). Reemplaza la sección de relacionados del tema (deja vacía la lista de WooCommerce y dibuja la propia después del resumen del producto). Título "Productos relacionados" y hasta 8 productos.
+- Ajustes por código: `fandeco_blocks_related` (apagarlo), `fandeco_blocks_related_count`, `fandeco_blocks_related_title`.
+### Sin verificar en el sitio real
+- Que Blocksy dispare `woocommerce_after_single_product_summary` en tu ficha y que el carrusel quede a buen ancho dentro de su contenedor; si en Blocksy está apagado el interruptor "Relacionados y ventas dirigidas", igual aparece el nuestro (se apaga con el filtro).
+
 ## Tema 0.3.9 / Blocks 0.3.9 / Core 0.3.9
 ### Corregido
 - Icono del carrito: el dibujo quedaba ~1,5 px corrido a la izquierda dentro del círculo (la caja estaba centrada, pero el carrito tiene el manubrio de un solo lado). Se compensó en el dibujo; ahora queda centrado a la vista. También en las tarjetas de Blocksy.

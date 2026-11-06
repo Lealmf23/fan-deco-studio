@@ -43,5 +43,9 @@ foreach ( array( 'dist/blocks.css', 'dist/blocks.js', 'patterns/home.php', 'temp
 $css = (string) file_get_contents( FANDECO_DIR . '/dist/blocks.css' );
 check( str_contains( $css, '.fd-bancar' ) && str_contains( $css, '.fd-marquee' ) && ! str_contains( $css, '.fd-header' ) && ! str_contains( $css, '.fd-footer' ) && ! preg_match( '/(^|\})\s*(html|body)\s*[,{]/', $css ), 'CSS del plugin: trae los bloques y NO toca header, footer, html ni body del otro tema' );
 check( strlen( $css ) < 80000, 'CSS del plugin liviano (' . round( strlen( $css ) / 1024 ) . ' kB)' );
+
+$rel = (string) file_get_contents( dirname( __DIR__, 2 ) . '/plugins/fan-deco-blocks/includes/related.php' );
+check( str_contains( $rel, 'woocommerce_after_single_product_summary' ) && str_contains( $rel, "'woocommerce_related_products'" ) && str_contains( $rel, 'fandeco/featured-products' ) && str_contains( $rel, 'fandeco_blocks_related' ), 'relacionados en la ficha: reemplazan a los del tema con las tarjetas de Fan Deco y se pueden apagar con un filtro' );
+check( str_contains( (string) file_get_contents( dirname( __DIR__, 2 ) . '/plugins/fan-deco-blocks/fan-deco-blocks.php' ), 'includes/related.php' ), 'el plugin carga los relacionados' );
 echo $fail ? "\n$fail verificación(es) fallaron\n" : "\nTodas las verificaciones pasaron\n";
 exit( $fail ? 1 : 0 );

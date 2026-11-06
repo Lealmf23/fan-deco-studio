@@ -437,6 +437,8 @@
 .fd-product-card__add .fd-product-card__go:focus-visible { outline: 2px solid var(--color-fd-wine); outline-offset: 2px; }
 .fd-product-card__add .fd-product-card__go { display: flex; align-items: center; justify-content: center; }
 .fd-product-card__add .fd-product-card__go::before { flex: none; display: block; width: 1.25rem; height: 1.25rem; }
+.fd-related { margin-top: 3rem; }
+.fd-related__title { margin: 0 0 0.5rem; font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; letter-spacing: -0.02em; text-align: left; }
 
 /* ---- banners.css ---- */
 
