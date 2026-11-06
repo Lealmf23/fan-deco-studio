@@ -19,7 +19,7 @@ final class FanDeco_Installments {
 		add_action( 'admin_init', array( __CLASS__, 'register' ) );
 		add_action( 'woocommerce_single_product_summary', array( __CLASS__, 'render_single' ), 11 );
 		if ( 'blocksy' === get_template() ) {
-			add_action( 'blocksy:woocommerce:product-card:price:after', array( __CLASS__, 'render_loop' ) ); // tarjetas de Blocksy (no usan el gancho de WooCommerce)
+			add_filter( 'blocksy:woocommerce:product-card:price', array( __CLASS__, 'blocksy_price' ) ); // tarjetas de Blocksy (no usan el gancho de WooCommerce; el filtro vale para sus tipos 1 y 2)
 		} else {
 			add_action( 'woocommerce_after_shop_loop_item_title', array( __CLASS__, 'render_loop' ), 11 );
 		}
@@ -140,6 +140,13 @@ final class FanDeco_Installments {
 		if ( self::options()['show_single'] ) {
 			echo self::html( $product, 'single' ); // phpcs:ignore WordPress.Security.EscapeOutput -- escapado dentro de html().
 		}
+	}
+
+	/** Blocksy: agrega las cuotas / el precio con transferencia a continuación del precio de la tarjeta. */
+	public static function blocksy_price( $html ) {
+		ob_start();
+		self::render_loop();
+		return $html . ob_get_clean();
 	}
 
 	public static function render_loop(): void {

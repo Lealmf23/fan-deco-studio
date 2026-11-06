@@ -3,6 +3,10 @@
 Cada archivo que se entrega lleva su versión: `fan-deco-studio-X.Y.Z.zip` y `fan-deco-core-X.Y.Z.zip`.
 La versión del tema también figura en Apariencia > Temas, en `style.css` y como comentario `<!-- Fan Deco Studio X.Y.Z -->` en el código fuente de cada página.
 
+## Tema 0.3.5 / Blocks 0.3.5 / Core 0.3.5
+### Corregido
+- Core con Blocksy: las cuotas y el precio con transferencia se agregan ahora con el filtro `blocksy:woocommerce:product-card:price`. Antes usaban el gancho `...price:after`, que Blocksy no dispara cuando la tarjeta es de **tipo 2** ("Añadir al carrito y precio" en una sola pieza, como en este sitio). Verificado leyendo el código de Blocksy; sin probar en el sitio real.
+
 ## Tema 0.3.4 / Blocks 0.3.4 / Core 0.3.4
 ### Cambiado
 - Tarjetas de Blocksy: el botón "Seleccionar opciones" / "Añadir al carrito" pasa a ser un círculo oliva con icono (flecha en productos con opciones, "+" en los simples, tilde al agregar) abajo a la derecha de la tarjeta, junto a los precios. El texto sigue disponible para lectores de pantalla. Probado con maqueta.
