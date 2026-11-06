@@ -12,6 +12,55 @@ export { ICON_OPTIONS } from './icons.js';
 
 const TEXT_DOMAIN = 'fan-deco-studio';
 
+/*
+ * Vista previa en el editor: cada bloque pide su dibujo al servidor (una petición por bloque). Una página con 10 o más bloques
+ * dispara todas a la vez y, en hostings compartidos, varias fallan o se quedan cargando. Esta cola las hace de a 2, reintenta
+ * las que fallan y recuerda las ya dibujadas.
+ */
+const SSR_MAX = 2;
+const ssrQueue = [];
+const ssrCache = new Map();
+let ssrActive = 0;
+const ssrPump = () => {
+	while ( ssrActive < SSR_MAX && ssrQueue.length ) {
+		const job = ssrQueue.shift();
+		ssrActive++;
+		job().finally( () => {
+			ssrActive--;
+			ssrPump();
+		} );
+	}
+};
+apiFetch.use( ( options, next ) => {
+	const target = String( options.path || options.url || '' );
+	if ( ! /block-renderer\/fandeco\//.test( target ) ) {
+		return next( options );
+	}
+	const key = target + '|' + ( options.data ? JSON.stringify( options.data ) : '' );
+	if ( ssrCache.has( key ) ) {
+		return Promise.resolve( ssrCache.get( key ) );
+	}
+	return new Promise( ( resolve, reject ) => {
+		ssrQueue.push( async () => {
+			for ( let attempt = 0; ; attempt++ ) {
+				try {
+					const res = await next( options );
+					ssrCache.set( key, res );
+					resolve( res );
+					return;
+				} catch ( e ) {
+					if ( attempt >= 2 ) {
+						reject( e );
+						return;
+					}
+					await new Promise( ( r ) => setTimeout( r, 700 * ( attempt + 1 ) ) );
+				}
+			}
+		} );
+		ssrPump();
+	} );
+} );
+
 /**
  * Registra un bloque dinámico: vista previa = el mismo render PHP del frontend (ServerSideRender),
  * controles en la barra lateral. `save` devuelve null (se renderiza en PHP).

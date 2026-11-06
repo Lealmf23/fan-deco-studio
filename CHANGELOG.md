@@ -3,6 +3,10 @@
 Cada archivo que se entrega lleva su versión: `fan-deco-studio-X.Y.Z.zip` y `fan-deco-core-X.Y.Z.zip`.
 La versión del tema también figura en Apariencia > Temas, en `style.css` y como comentario `<!-- Fan Deco Studio X.Y.Z -->` en el código fuente de cada página.
 
+## Tema 0.3.13 / Blocks 0.3.13 / Core 0.3.13
+### Cambiado
+- Editor: la vista previa de los bloques ahora se pide al servidor **de a 2 por vez**, con **2 reintentos** y recordando lo ya dibujado. Antes, una página con 10 o más bloques disparaba todas las peticiones a la vez y en hostings compartidos varias fallaban ("No se pudo mostrar la vista previa") o quedaban cargando. Causa probable, no confirmada: sobrecarga por peticiones simultáneas (el servidor dibuja cada bloque bien por separado).
+
 ## Tema 0.3.12 / Blocks 0.3.12 / Core 0.3.12
 ### Cambiado
 - Editor: si la vista previa de un bloque falla, ya no muestra "Error al cargar el bloque: [object Object]". Muestra un aviso de que el bloque se puede editar igual y el **detalle real del error** (código y mensaje), para poder diagnosticarlo.
