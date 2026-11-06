@@ -3,6 +3,10 @@
 Cada archivo que se entrega lleva su versión: `fan-deco-studio-X.Y.Z.zip` y `fan-deco-core-X.Y.Z.zip`.
 La versión del tema también figura en Apariencia > Temas, en `style.css` y como comentario `<!-- Fan Deco Studio X.Y.Z -->` en el código fuente de cada página.
 
+## Tema 0.3.4 / Blocks 0.3.4 / Core 0.3.4
+### Cambiado
+- Tarjetas de Blocksy: el botón "Seleccionar opciones" / "Añadir al carrito" pasa a ser un círculo oliva con icono (flecha en productos con opciones, "+" en los simples, tilde al agregar) abajo a la derecha de la tarjeta, junto a los precios. El texto sigue disponible para lectores de pantalla. Probado con maqueta.
+
 ## Tema 0.3.3 / Fan Deco Blocks 0.3.3 / Fan Deco Core 0.3.3 (tarjetas de producto con segunda foto)
 Las versiones de los tres paquetes ahora suben juntas.
 ### Agregado

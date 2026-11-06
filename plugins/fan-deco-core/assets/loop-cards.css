@@ -52,22 +52,57 @@ body .products .product > .price {
 body .products .product .price del { color: var(--fd-c-muted); font-weight: 400; }
 body .products .product .price ins { text-decoration: none; color: var(--fd-c-accent); }
 
-/* Botón: discreto, debajo de los precios */
+/* Botón: círculo con icono abajo a la derecha de la tarjeta (el texto queda para lectores de pantalla) */
+body .products .product {
+	--fd-c-i-plus: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 5v14M5 12h14'/%3E%3C/svg%3E");
+	--fd-c-i-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M13 6l6 6-6 6'/%3E%3C/svg%3E");
+	--fd-c-i-check: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7'/%3E%3C/svg%3E");
+	position: relative;
+}
+body .products .product .ct-woo-card-actions { padding-right: 3.4rem; min-height: 2.8rem; }
 body .products .product .ct-woo-card-actions .button,
 body .products .product > .button {
-	margin: 0.6rem 0 0;
-	padding: 0.5rem 1.1rem;
-	border: 1px solid var(--fd-c-accent);
-	border-radius: 999px;
-	background: transparent;
-	color: var(--fd-c-accent);
-	font-size: 0.85rem;
-	font-weight: 600;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 2.7rem;
+	height: 2.7rem;
 	min-height: 0;
-	transition: background-color 0.2s ease, color 0.2s ease;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	border: 0;
+	border-radius: 50%;
+	background: var(--fd-c-accent);
+	color: #fff;
+	font-size: 0;
+	line-height: 0;
+	box-shadow: none;
+	transition: background-color 0.2s ease, transform 0.2s ease;
 }
+body .products .product .ct-woo-card-actions .button::before,
+body .products .product > .button::before {
+	content: "";
+	flex: none;
+	display: block;
+	width: 1.2rem;
+	height: 1.2rem;
+	background: currentColor;
+	-webkit-mask: var(--fd-c-i-plus) center / contain no-repeat;
+	mask: var(--fd-c-i-plus) center / contain no-repeat;
+}
+body .products .product .button.product_type_variable::before,
+body .products .product .button.product_type_grouped::before,
+body .products .product .button.product_type_external::before { -webkit-mask-image: var(--fd-c-i-arrow); mask-image: var(--fd-c-i-arrow); }
+body .products .product .button.added::before { -webkit-mask-image: var(--fd-c-i-check); mask-image: var(--fd-c-i-check); }
+body .products .product .button.loading { opacity: 0.7; pointer-events: none; }
 body .products .product .ct-woo-card-actions .button:hover,
-body .products .product > .button:hover { background: var(--fd-c-accent); color: #fff; }
+body .products .product > .button:hover { background: var(--fd-c-accent-dark, #4d5036); color: #fff; transform: scale(1.06); }
+body .products .product .button:focus-visible { outline: 2px solid var(--fd-c-accent); outline-offset: 2px; }
+body .products .product .added_to_cart { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
 
 /* Precio de lista chico cuando hay precio con transferencia (el bloque de Fan Deco Core viene después del precio) */
 body .products .product .ct-woo-card-actions:has([data-fd-transfer-line]:not([hidden])) .price { color: var(--fd-c-muted); font-size: 0.9rem; }

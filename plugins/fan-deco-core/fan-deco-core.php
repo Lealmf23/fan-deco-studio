@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Fan Deco Core
  * Description: Motor SEO propio (reemplazo de AIOSEO), redirecciones e importador para la tienda Fan Deco. Funciona con cualquier tema; pensado para Fan Deco Studio.
- * Version: 0.3.3
+ * Version: 0.3.4
  * Requires at least: 6.5
  * Requires PHP: 8.0
  * Author: Fan Deco
@@ -14,7 +14,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'FANDECO_CORE_VERSION', '0.3.3' );
+define( 'FANDECO_CORE_VERSION', '0.3.4' );
 define( 'FANDECO_CORE_FILE', __FILE__ );
 define( 'FANDECO_CORE_DIR', plugin_dir_path( __FILE__ ) );
 define( 'FANDECO_CORE_URL', plugin_dir_url( __FILE__ ) );

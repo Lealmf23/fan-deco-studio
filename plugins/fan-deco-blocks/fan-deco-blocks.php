@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Fan Deco Blocks
  * Description: Bloques de diseño de Fan Deco (pila de banners, hero con interruptor de luz, franja de mensajes, categorías, productos destacados, banner editorial, pasos y beneficios) para usar sobre cualquier tema, como Blocksy. Con el tema Fan Deco Studio activo no hace nada (el tema ya los incluye).
- * Version: 0.3.3
+ * Version: 0.3.4
  * Requires at least: 6.5
  * Requires PHP: 8.0
  * Author: Fan Deco
@@ -14,7 +14,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'FANDECO_BLOCKS_VERSION', '0.3.3' );
+define( 'FANDECO_BLOCKS_VERSION', '0.3.4' );
 define( 'FANDECO_BLOCKS_DIR', plugin_dir_path( __FILE__ ) );
 define( 'FANDECO_BLOCKS_URL', plugin_dir_url( __FILE__ ) );
 
