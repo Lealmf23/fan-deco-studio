@@ -83,8 +83,18 @@ final class FanDeco_Installments {
 		return 'none';
 	}
 
-	public static function html( $product, string $context = 'single' ): string {
-		$o = self::options();
+	/**
+	 * @param WC_Product $product Producto.
+	 * @param string     $context 'single' | 'loop'.
+	 * @param string     $parts   'all' (cuotas + transferencia) o 'transfer' (solo el precio con transferencia, sin cuotas).
+	 */
+	public static function html( $product, string $context = 'single', string $parts = 'all' ): string {
+		$o            = self::options();
+		$only_transfer = 'transfer' === $parts;
+		if ( $only_transfer ) {
+			$o['enabled']       = 1; // el precio con transferencia no depende de que estén activas las cuotas
+			$o['show_transfer'] = 1;
+		}
 		if ( ! $o['enabled'] || ! $product instanceof WC_Product || ! $product->is_purchasable() ) {
 			return '';
 		}
@@ -97,7 +107,7 @@ final class FanDeco_Installments {
 		$n        = max( 1, min( 12, (int) $o['installments'] ) );
 		$percent  = ( $o['show_transfer'] && class_exists( 'FanDeco_Transfer_Discount' ) ) ? FanDeco_Transfer_Discount::percent() : 0.0;
 		$elig     = $percent > 0 ? self::eligibility( $product ) : 'none';
-		$show_cuo = $price >= (float) $o['min_total'];
+		$show_cuo = ! $only_transfer && $price >= (float) $o['min_total'];
 		$show_tr  = 'all' === $elig; // con variaciones puntuales elegibles, se muestra recién al elegir una de ellas
 		if ( ! $show_cuo && ! $show_tr && ! $variable ) {
 			return '';
@@ -224,4 +234,9 @@ final class FanDeco_Installments {
 /** Para temas/plantillas: HTML de cuotas de un producto ('' si está desactivado). */
 function fandeco_installments_html( $product, string $context = 'loop' ): string {
 	return FanDeco_Installments::html( $product, $context );
+}
+
+/** Para tarjetas: solo el precio con transferencia (sin cuotas); '' si el descuento no está activo o el producto no califica. */
+function fandeco_transfer_price_html( $product, string $context = 'loop' ): string {
+	return FanDeco_Installments::html( $product, $context, 'transfer' );
 }

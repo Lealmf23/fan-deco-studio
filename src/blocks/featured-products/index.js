@@ -43,7 +43,15 @@ function Controls( { attributes, setAttributes } ) {
 						<TextControl label={ __( 'URL del enlace', 'fan-deco-studio' ) } type="url" value={ attributes.linkUrl } onChange={ ( linkUrl ) => setAttributes( { linkUrl } ) } />
 					</>
 				) }
-				<ToggleControl label={ __( 'Mostrar botón de agregar al carrito', 'fan-deco-studio' ) } checked={ attributes.showAddToCart } onChange={ ( showAddToCart ) => setAttributes( { showAddToCart } ) } />
+			</PanelBody>
+			<PanelBody title={ __( 'Tarjetas', 'fan-deco-studio' ) } initialOpen={ false }>
+				<ToggleControl label={ __( 'Botón "Ver producto" (lleva a la ficha)', 'fan-deco-studio' ) } checked={ attributes.showAddToCart } onChange={ ( showAddToCart ) => setAttributes( { showAddToCart } ) } />
+				<ToggleControl label={ __( 'Puntos de color (solo si tiene variantes de color)', 'fan-deco-studio' ) } checked={ attributes.showSwatches } onChange={ ( showSwatches ) => setAttributes( { showSwatches } ) } />
+				<ToggleControl label={ __( 'Cambiar de foto al pasar el mouse', 'fan-deco-studio' ) } checked={ attributes.hoverSwap } onChange={ ( hoverSwap ) => setAttributes( { hoverSwap } ) } />
+				<ToggleControl label={ __( 'Mostrar también el precio con transferencia', 'fan-deco-studio' ) } help={ __( 'Se ve solo si el descuento por transferencia está activo en Fan Deco Core. Las cuotas no se muestran en las tarjetas.', 'fan-deco-studio' ) } checked={ attributes.showTransfer } onChange={ ( showTransfer ) => setAttributes( { showTransfer } ) } />
+				<SelectControl label={ __( 'Letra del título', 'fan-deco-studio' ) } value={ attributes.titleFont } options={ [ { value: 'default', label: __( 'La del sitio', 'fan-deco-studio' ) }, { value: 'sans', label: __( 'DM Sans', 'fan-deco-studio' ) }, { value: 'serif', label: __( 'Georgia cursiva', 'fan-deco-studio' ) } ] } onChange={ ( titleFont ) => setAttributes( { titleFont } ) } />
+				<RangeControl label={ __( 'Tamaño del título (px, 0 = automático)', 'fan-deco-studio' ) } min={ 0 } max={ 48 } value={ attributes.titleSize } onChange={ ( titleSize ) => setAttributes( { titleSize: titleSize || 0 } ) } />
+				<RangeControl label={ __( 'Tamaño del precio (px, 0 = automático)', 'fan-deco-studio' ) } min={ 0 } max={ 40 } value={ attributes.priceSize } onChange={ ( priceSize ) => setAttributes( { priceSize: priceSize || 0 } ) } />
 			</PanelBody>
 		</>
 	);

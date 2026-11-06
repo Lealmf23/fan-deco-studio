@@ -58,10 +58,18 @@ function fandeco_swatch_color( $term ): string {
 	if ( is_string( $own ) && '' !== fandeco_find_hex( $own ) ) {
 		return fandeco_find_hex( $own );
 	}
-	// Blocksy guarda opciones de término en un meta serializado; clave/estructura no documentadas: búsqueda tolerante.
-	$legacy = fandeco_find_hex( get_term_meta( $term->term_id, 'blocksy_taxonomy_meta_options', true ) );
-	if ( '' !== $legacy ) {
-		return $legacy;
+	// Blocksy (Variation Swatches, Shop Extra) guarda el color en el meta del término; la clave exacta cambia entre versiones,
+	// así que se revisan los metas del término cuyo nombre sugiere Blocksy, color o muestra, buscando el primer color hexadecimal.
+	foreach ( (array) get_term_meta( $term->term_id ) as $meta_key => $values ) {
+		if ( 'fandeco_swatch_color' === $meta_key || ! preg_match( '/blocksy|color|swatch/i', (string) $meta_key ) ) {
+			continue;
+		}
+		foreach ( (array) $values as $raw ) {
+			$found = fandeco_find_hex( maybe_unserialize( $raw ) );
+			if ( '' !== $found ) {
+				return $found;
+			}
+		}
 	}
 	$key   = sanitize_title( remove_accents( (string) $term->name ) );
 	$names = fandeco_color_names();
@@ -160,11 +168,21 @@ function fandeco_variation_swatch_data( WC_Product $product ): array {
 	}
 	$is_color = taxonomy_exists( $key ) && 'color' === fandeco_swatch_type( $key );
 	$out      = array();
+	// Foto de cada variación según el valor del primer atributo (la primera que tenga imagen propia).
+	$images = array();
+	foreach ( (array) $product->get_children() as $child_id ) {
+		$val = (string) get_post_meta( (int) $child_id, 'attribute_' . $key, true );
+		$img = (int) get_post_thumbnail_id( (int) $child_id );
+		if ( '' !== $val && $img && ! isset( $images[ $val ] ) ) {
+			$images[ $val ] = $img;
+		}
+	}
 	foreach ( $first as $value ) {
 		$term  = taxonomy_exists( $key ) ? get_term_by( 'slug', $value, $key ) : null;
 		$out[] = array(
-			'name'  => $term ? (string) $term->name : (string) $value,
-			'color' => ( $is_color && $term ) ? fandeco_swatch_color( $term ) : '',
+			'name'     => $term ? (string) $term->name : (string) $value,
+			'color'    => ( $is_color && $term ) ? fandeco_swatch_color( $term ) : '',
+			'image_id' => (int) ( $images[ $value ] ?? 0 ),
 		);
 	}
 	return $out;

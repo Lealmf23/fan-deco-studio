@@ -108,6 +108,7 @@
 .fd-installments--loop .fd-installments__how { display: inline; margin-left: 0.25rem; font-size: 0.8rem; font-weight: 600; color: var(--color-fd-wine-dark); }
 .fd-installments--loop .fd-pay-badge { display: none; }
 .fd-installments--loop .fd-installments__line { color: var(--color-fd-muted); }
+.fd-product-card .fd-installments--loop .fd-installments__transfer strong { font-size: calc(var(--fd-card-price-size, 1rem) * 1.35); }
 
 /* ---- woocommerce.css ---- */
 

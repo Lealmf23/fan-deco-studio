@@ -18,7 +18,11 @@ $link      = $product->get_permalink();
 $image_id  = $product->get_image_id();
 $badges    = fandeco_product_badges( $product );
 $options   = fandeco_variation_swatch_data( $product );
-$max_dots  = 5;
+$max_dots  = 8;
+$opts      = is_array( $args['opts'] ?? null ) ? $args['opts'] : array();
+$show_dots = ! isset( $opts['swatches'] ) || ! empty( $opts['swatches'] );
+$show_alt  = ! isset( $opts['swap'] ) || ! empty( $opts['swap'] );
+$show_tr   = ! isset( $opts['transfer'] ) || ! empty( $opts['transfer'] );
 
 // Segunda foto para alternar al pasar el mouse: la foto "encendida" (si hay) o la primera de la galería.
 $alt_id = 0;
@@ -31,7 +35,7 @@ if ( $image_id ) {
 	}
 }
 $alt_id  = (int) apply_filters( 'fandeco_card_hover_image_id', $alt_id, $product );
-$alt_id  = ( $alt_id && (int) $alt_id !== (int) $image_id && wp_attachment_is_image( $alt_id ) ) ? $alt_id : 0;
+$alt_id  = ( $show_alt && $alt_id && (int) $alt_id !== (int) $image_id && wp_attachment_is_image( $alt_id ) ) ? $alt_id : 0;
 $alt_lit = (bool) apply_filters( 'fandeco_card_hover_is_lit', false, $product, $alt_id );
 ?>
 <article class="fd-product-card">
@@ -48,12 +52,6 @@ $alt_lit = (bool) apply_filters( 'fandeco_card_hover_is_lit', false, $product, $
 			}
 			?>
 		</a>
-		<?php if ( $alt_id ) : ?>
-			<div class="fd-product-card__photos<?php echo $alt_lit ? ' is-lit' : ''; ?>" role="group" aria-label="<?php esc_attr_e( 'Fotos del producto', 'fan-deco-studio' ); ?>">
-				<button type="button" class="fd-photo-dot" data-fd-photo="0" aria-label="<?php esc_attr_e( 'Ver la primera foto', 'fan-deco-studio' ); ?>"></button>
-				<button type="button" class="fd-photo-dot" data-fd-photo="1" aria-label="<?php echo esc_attr( $alt_lit ? __( 'Ver el producto encendido', 'fan-deco-studio' ) : __( 'Ver la segunda foto', 'fan-deco-studio' ) ); ?>"></button>
-			</div>
-		<?php endif; ?>
 		<?php if ( $badges ) : ?>
 			<ul class="fd-product-card__badges">
 				<?php foreach ( $badges as $badge ) : ?>
@@ -62,12 +60,13 @@ $alt_lit = (bool) apply_filters( 'fandeco_card_hover_is_lit', false, $product, $
 			</ul>
 		<?php endif; ?>
 		<?php
-		$fd_dots = array_values( array_filter( $options, static fn( $o ) => ! empty( $o['color'] ) ) );
-		if ( $fd_dots ) : // solo variaciones de color; se muestran como puntos dentro de la imagen
+		$fd_dots = $show_dots ? array_values( array_filter( $options, static fn( $o ) => ! empty( $o['color'] ) ) ) : array();
+		if ( $fd_dots ) : // un punto por cada variante de color; al pasar el mouse (o tocar) se ve la foto de esa variante
 			?>
 			<ul class="fd-product-card__options" aria-label="<?php esc_attr_e( 'Colores disponibles', 'fan-deco-studio' ); ?>">
 				<?php foreach ( array_slice( $fd_dots, 0, $max_dots ) as $option ) : ?>
-					<li class="fd-dot" style="--fd-swatch:<?php echo esc_attr( $option['color'] ); ?>" title="<?php echo esc_attr( $option['name'] ); ?>"><span class="screen-reader-text"><?php echo esc_html( $option['name'] ); ?></span></li>
+					<?php $dot_img = ! empty( $option['image_id'] ) ? wp_get_attachment_image_url( (int) $option['image_id'], 'fandeco-card' ) : ''; ?>
+					<li class="fd-dot" style="--fd-swatch:<?php echo esc_attr( $option['color'] ); ?>" title="<?php echo esc_attr( $option['name'] ); ?>"<?php echo $dot_img ? ' data-fd-img="' . esc_url( $dot_img ) . '" tabindex="0" role="button"' : ''; ?>><span class="screen-reader-text"><?php echo esc_html( $option['name'] ); ?></span></li>
 				<?php endforeach; ?>
 				<?php if ( count( $fd_dots ) > $max_dots ) : ?>
 					<li class="fd-dots-more">+<?php echo (int) ( count( $fd_dots ) - $max_dots ); ?></li>
@@ -78,15 +77,15 @@ $alt_lit = (bool) apply_filters( 'fandeco_card_hover_is_lit', false, $product, $
 		<button type="button" class="fd-quickview" data-fd-quickview="<?php echo (int) $product->get_id(); ?>" data-href="<?php echo esc_url( $link ); ?>" aria-haspopup="dialog" aria-label="<?php echo esc_attr( sprintf( /* translators: %s: nombre del producto */ __( 'Vista rápida: %s', 'fan-deco-studio' ), $product->get_name() ) ); ?>"><?php echo fandeco_icon( 'eye' ); // phpcs:ignore WordPress.Security.EscapeOutput ?><span><?php esc_html_e( 'Vista rápida', 'fan-deco-studio' ); ?></span></button>
 		<?php endif; ?>
 	</div>
-		<?php if ( $show_cart ) : ?>
-			<div class="fd-product-card__add"><?php echo fandeco_loop_add_to_cart_html( $product ); // phpcs:ignore WordPress.Security.EscapeOutput -- salida oficial de WooCommerce. ?></div>
+		<?php if ( $show_cart ) : // botón circular que lleva a la ficha del producto (no agrega al carrito) ?>
+			<div class="fd-product-card__add"><a class="button fd-product-card__go product_type_variable" href="<?php echo esc_url( $link ); ?>" aria-label="<?php echo esc_attr( sprintf( /* translators: %s: nombre del producto */ __( 'Ver producto: %s', 'fan-deco-studio' ), $product->get_name() ) ); ?>"><?php esc_html_e( 'Ver producto', 'fan-deco-studio' ); ?></a></div>
 		<?php endif; ?>
 	<div class="fd-product-card__body">
 		<h3 class="fd-product-card__title"><a href="<?php echo esc_url( $link ); ?>"><?php echo esc_html( $product->get_name() ); ?></a></h3>
 		<div class="fd-product-card__price"><?php echo wp_kses_post( $product->get_price_html() ); ?></div>
 		<?php
-		if ( function_exists( 'fandeco_installments_html' ) ) { // plugin Fan Deco Core (solo si está activado en sus ajustes)
-			echo fandeco_installments_html( $product, 'loop' ); // phpcs:ignore WordPress.Security.EscapeOutput -- escapado en el plugin.
+		if ( $show_tr && function_exists( 'fandeco_transfer_price_html' ) ) { // plugin Fan Deco Core: solo el precio con transferencia, sin cuotas
+			echo fandeco_transfer_price_html( $product, 'loop' ); // phpcs:ignore WordPress.Security.EscapeOutput -- escapado en el plugin.
 		}
 		?>
 	</div>

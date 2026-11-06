@@ -47,6 +47,35 @@
       "type": "boolean",
       "default": true
     },
+    "showSwatches": {
+      "type": "boolean",
+      "default": true
+    },
+    "hoverSwap": {
+      "type": "boolean",
+      "default": true
+    },
+    "showTransfer": {
+      "type": "boolean",
+      "default": true
+    },
+    "titleSize": {
+      "type": "integer",
+      "default": 0
+    },
+    "titleFont": {
+      "type": "string",
+      "enum": [
+        "default",
+        "sans",
+        "serif"
+      ],
+      "default": "default"
+    },
+    "priceSize": {
+      "type": "integer",
+      "default": 0
+    },
     "animate": {
       "type": "boolean",
       "default": true

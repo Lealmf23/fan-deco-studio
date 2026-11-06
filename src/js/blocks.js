@@ -3,6 +3,7 @@ import '../css/blocks.generated.css';
 import { initCarousels } from './carousel.js';
 import { initHeroLight } from './hero-light.js';
 import { initBannerCarousels } from './banner-carousel.js';
+import './card-dots.js';
 
 const boot = () => {
 	initCarousels();

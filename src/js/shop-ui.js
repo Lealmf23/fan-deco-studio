@@ -4,6 +4,7 @@
  * WooCommerce. Nunca se inserta HTML de la API: todo se escribe con textContent. Si la API falla, el enlace al
  * producto sigue funcionando y no se rompe nada.
  */
+import './card-dots.js';
 import { apiUrl, decode, plainText, formatMoney, getJson } from './store-api.js';
 
 const el = ( tag, cls, text ) => {
@@ -216,16 +217,3 @@ export function initShopUi() {
 	initCartPanel();
 }
 
-/* Puntos de fotos de la tarjeta de producto: tocar alterna entre la primera foto y la segunda (en pantallas táctiles no hay "hover"). */
-document.addEventListener( 'click', ( e ) => {
-	const dot = e.target.closest( '.fd-photo-dot' );
-	if ( ! dot ) {
-		return;
-	}
-	e.preventDefault();
-	const win = dot.closest( '.fd-product-card__window' );
-	if ( win ) {
-		win.classList.toggle( 'is-alt', '1' === dot.dataset.fdPhoto );
-		win.classList.remove( 'has-alt' ); // una vez elegida a mano, manda el toque y no el hover
-	}
-} );

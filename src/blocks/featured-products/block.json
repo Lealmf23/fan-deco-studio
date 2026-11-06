@@ -1,82 +1,111 @@
 {
-	"$schema": "https://schemas.wp.org/trunk/block.json",
-	"apiVersion": 3,
-	"name": "fandeco/featured-products",
-	"title": "Fan Deco: Productos destacados",
-	"category": "fandeco",
-	"icon": "products",
-	"description": "Productos reales de WooCommerce en grilla o carrusel.",
-	"textdomain": "fan-deco-studio",
-	"attributes": {
-		"source": {
-			"type": "string",
-			"enum": [
-				"featured",
-				"latest",
-				"sale",
-				"category",
-				"manual"
-			],
-			"default": "featured"
-		},
-		"categoryId": {
-			"type": "integer",
-			"default": 0
-		},
-		"productIds": {
-			"type": "array",
-			"items": {
-				"type": "integer"
-			},
-			"default": []
-		},
-		"count": {
-			"type": "integer",
-			"default": 8
-		},
-		"layout": {
-			"type": "string",
-			"enum": [
-				"grid",
-				"carousel",
-				"editorial"
-			],
-			"default": "carousel"
-		},
-		"showAddToCart": {
-			"type": "boolean",
-			"default": true
-		},
-		"animate": {
-			"type": "boolean",
-			"default": true
-		},
-		"title": {
-			"type": "string",
-			"default": ""
-		},
-		"description": {
-			"type": "string",
-			"default": ""
-		},
-		"linkText": {
-			"type": "string",
-			"default": ""
-		},
-		"linkUrl": {
-			"type": "string",
-			"default": ""
-		}
-	},
-	"supports": {
-		"html": false,
-		"spacing": {
-			"margin": [
-				"top",
-				"bottom"
-			]
-		}
-	},
-	"editorScript": "file:./index.js",
-	"render": "file:./render.php"
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "fandeco/featured-products",
+  "title": "Fan Deco: Productos destacados",
+  "category": "fandeco",
+  "icon": "products",
+  "description": "Productos reales de WooCommerce en grilla o carrusel.",
+  "textdomain": "fan-deco-studio",
+  "attributes": {
+    "source": {
+      "type": "string",
+      "enum": [
+        "featured",
+        "latest",
+        "sale",
+        "category",
+        "manual"
+      ],
+      "default": "featured"
+    },
+    "categoryId": {
+      "type": "integer",
+      "default": 0
+    },
+    "productIds": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      },
+      "default": []
+    },
+    "count": {
+      "type": "integer",
+      "default": 8
+    },
+    "layout": {
+      "type": "string",
+      "enum": [
+        "grid",
+        "carousel",
+        "editorial"
+      ],
+      "default": "carousel"
+    },
+    "showAddToCart": {
+      "type": "boolean",
+      "default": true
+    },
+    "showSwatches": {
+      "type": "boolean",
+      "default": true
+    },
+    "hoverSwap": {
+      "type": "boolean",
+      "default": true
+    },
+    "showTransfer": {
+      "type": "boolean",
+      "default": true
+    },
+    "titleSize": {
+      "type": "integer",
+      "default": 0
+    },
+    "titleFont": {
+      "type": "string",
+      "enum": [
+        "default",
+        "sans",
+        "serif"
+      ],
+      "default": "default"
+    },
+    "priceSize": {
+      "type": "integer",
+      "default": 0
+    },
+    "animate": {
+      "type": "boolean",
+      "default": true
+    },
+    "title": {
+      "type": "string",
+      "default": ""
+    },
+    "description": {
+      "type": "string",
+      "default": ""
+    },
+    "linkText": {
+      "type": "string",
+      "default": ""
+    },
+    "linkUrl": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "supports": {
+    "html": false,
+    "spacing": {
+      "margin": [
+        "top",
+        "bottom"
+      ]
+    }
+  },
+  "editorScript": "file:./index.js",
+  "render": "file:./render.php"
 }

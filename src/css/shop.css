@@ -73,12 +73,6 @@
 }
 @media (prefers-reduced-motion: reduce) { .fd-product-card__add .button.loading::before { animation: none; } }
 
-/* Ritmo asimétrico en desktop: columnas desfasadas */
-@media (min-width: 1024px) {
-	.woocommerce ul.products > li:nth-child(4n + 2) { margin-top: 2.75rem; }
-	.woocommerce ul.products > li:nth-child(4n + 4) { margin-top: 1.25rem; }
-	.fd-product-grid > li:nth-child(4n + 2) { margin-top: 2rem; }
-}
 
 /* Los ítems de WooCommerce ya no son cajas */
 .woocommerce ul.products li.product, .woocommerce-page ul.products li.product { background: none; box-shadow: none; border-radius: 0; padding: 0; overflow: visible; transform: none; align-self: start; }
@@ -224,21 +218,7 @@ form.cart.is-attention { animation: fd-attention 1.1s var(--ease-fd); }
 /* Tarjeta: al pasar el mouse (o tocar los puntos) se alterna entre las fotos */
 .fd-product-card__media { position: relative; }
 .fd-product-card__alt { position: absolute; inset: 0; opacity: 0; transition: opacity 450ms var(--ease-fd), transform 900ms var(--ease-fd); }
-.fd-product-card__window.is-alt .fd-product-card__alt { opacity: 1; }
 @media (hover: hover) { .fd-product-card__window.has-alt:hover .fd-product-card__alt { opacity: 1; } }
-.fd-product-card__photos { position: absolute; z-index: 3; top: 0.85rem; right: 0.85rem; display: flex; gap: 0.15rem; padding: 0.2rem 0.3rem; border-radius: 999px; background: rgb(41 40 36 / 0.62); backdrop-filter: blur(6px); }
-.fd-photo-dot { position: relative; width: 1.1rem; height: 1.1rem; padding: 0; border: 0; background: none; cursor: pointer; }
-.fd-photo-dot::before { content: ""; position: absolute; inset: 0.2rem; border-radius: 50%; background: #d8d6cc; transition: box-shadow 200ms ease, background-color 200ms ease; }
-.fd-product-card__photos.is-lit .fd-photo-dot:last-child::before { background: #e9a73b; }
-.fd-photo-dot:first-child::before { box-shadow: 0 0 0 1.5px #fff; }
-.fd-product-card__window.is-alt .fd-photo-dot:first-child::before { box-shadow: none; }
-.fd-product-card__window.is-alt .fd-photo-dot:last-child::before { box-shadow: 0 0 0 1.5px #fff; }
-@media (hover: hover) {
-	.fd-product-card__window.has-alt:hover .fd-photo-dot:first-child::before { box-shadow: none; }
-	.fd-product-card__window.has-alt:hover .fd-photo-dot:last-child::before { box-shadow: 0 0 0 1.5px #fff; }
-}
-.fd-photo-dot:focus-visible { outline: 2px solid #fff; outline-offset: 1px; border-radius: 50%; }
-
 /* Precios de la tarjeta: precio de lista chico y, debajo, el precio con transferencia grande */
 .fd-product-card__body:has([data-fd-transfer-line]:not([hidden])) .fd-product-card__price { color: var(--color-fd-muted); font-size: 0.9rem; font-weight: 600; }
 .fd-installments--loop { display: grid; gap: 0.1rem; }
@@ -247,3 +227,24 @@ form.cart.is-attention { animation: fd-attention 1.1s var(--ease-fd); }
 .fd-installments--loop .fd-installments__how { display: inline; margin-left: 0.25rem; font-size: 0.8rem; font-weight: 600; color: var(--color-fd-wine-dark); }
 .fd-installments--loop .fd-pay-badge { display: none; }
 .fd-installments--loop .fd-installments__line { color: var(--color-fd-muted); }
+
+/* Puntos de color de la tarjeta: arriba a la derecha, uno por variante de color */
+.fd-product-card__options { top: 0.85rem; right: 0.85rem; left: auto; bottom: auto; gap: 0.3rem; padding: 0.35rem 0.5rem; background: rgb(41 40 36 / 0.6); }
+.fd-product-card__options .fd-dots-more { color: #fff; }
+.fd-product-card__options .fd-dot { border-radius: 50%; background: var(--fd-swatch); cursor: default; box-shadow: 0 0 0 1px rgb(255 255 255 / 0.55); }
+.fd-product-card__options .fd-dot[data-fd-img] { cursor: pointer; }
+.fd-product-card__options .fd-dot.is-active { box-shadow: 0 0 0 2px #fff; }
+.fd-product-card__window.is-variant .fd-product-card__alt { opacity: 0 !important; }
+
+/* Alineación: todas las tarjetas de una fila miden lo mismo y los precios quedan a la misma altura */
+.fd-carousel__track, .fd-product-grid { align-items: stretch; }
+.fd-product-grid__item { display: flex; flex-direction: column; }
+.fd-product-grid__item > .fd-product-card { flex: 1; align-content: start; grid-template-rows: auto 1fr; }
+.fd-product-card__body { align-content: start; grid-template-rows: auto 1fr; }
+.fd-product-card__body > .fd-product-card__price { align-self: end; }
+
+/* Título y precio ajustables desde el bloque (variables) y a salvo de los estilos de títulos del otro tema */
+.fd-product-card .fd-product-card__title { font-family: var(--fd-card-title-font, inherit); font-style: var(--fd-card-title-style, normal); font-size: var(--fd-card-title-size, 1.125rem); font-weight: var(--fd-card-title-weight, 600); line-height: 1.2; color: var(--color-fd-blue); }
+.fd-product-card .fd-product-card__title a { font: inherit; color: inherit; }
+.fd-product-card .fd-product-card__price { font-size: var(--fd-card-price-size, 1rem); }
+.fd-product-card .fd-installments--loop .fd-installments__transfer strong { font-size: calc(var(--fd-card-price-size, 1rem) * 1.35); }

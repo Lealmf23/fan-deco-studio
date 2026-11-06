@@ -71,8 +71,8 @@ check( str_contains( $cats, 'Mascotas' ) && str_contains( $cats, 'href="/categor
 $prods = fd_render_block( 'featured-products' );
 check( substr_count( $prods, 'fd-product-card"' ) === 4 || substr_count( $prods, 'class="fd-product-card"' ) === 4, 'featured-products: 4 tarjetas' );
 check( str_contains( $prods, 'data-fd-carousel' ), 'featured-products: carrusel por defecto' );
-check( str_contains( $prods, 'ajax_add_to_cart' ), 'featured-products: AJAX add to cart en simples' );
-check( str_contains( $prods, 'Elegir opciones' ), 'featured-products: variable enlaza a elegir opciones' );
+check( ! str_contains( $prods, 'ajax_add_to_cart' ) && str_contains( $prods, 'fd-product-card__go' ), 'featured-products: el botón lleva a la ficha (no agrega al carrito)' );
+check( str_contains( $prods, 'Ver producto' ), 'featured-products: botón "Ver producto"' );
 check( str_contains( $prods, 'fd-product-card__options' ) && str_contains( $prods, 'class="fd-dot"' ), 'featured-products: puntos de color dentro de la imagen' );
 check( ! str_contains( $prods, '<li>negro</li>' ), 'featured-products: ya no hay chips de texto bajo el precio' );
 check( str_contains( $prods, 'fd-product-card__window' ) && str_contains( $prods, 'fd-product-card__add' ), 'featured-products: ventana de producto y botón de compra' );

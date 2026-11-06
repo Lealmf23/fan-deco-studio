@@ -201,13 +201,13 @@ function fandeco_button( string $label, string $url, string $variant = 'primary'
 }
 
 /** Atributos comunes del contenedor de un bloque (wrapper + animación). */
-function fandeco_block_attrs( string $name, array $attributes, string $extra_class = '' ): string {
+function fandeco_block_attrs( string $name, array $attributes, string $extra_class = '', string $style = '' ): string {
 	$animate = ! isset( $attributes['animate'] ) || ! empty( $attributes['animate'] );
 	return get_block_wrapper_attributes(
 		array(
 			'class'           => trim( 'fd-section fd-' . $name . ' ' . $extra_class ),
 			'data-fd-animate' => $animate ? 'true' : 'false',
-		)
+		) + ( '' !== $style ? array( 'style' => $style ) : array() )
 	);
 }
 

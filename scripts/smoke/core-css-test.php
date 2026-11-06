@@ -47,6 +47,6 @@ check( str_contains( $lt, 'blocksy:woocommerce:product-card:thumbnail:gallery-im
 $ins = (string) file_get_contents( $root . '/includes/class-installments.php' );
 check( str_contains( $ins, "'blocksy:woocommerce:product-card:price'" ), 'cuotas y transferencia también en las tarjetas de Blocksy' );
 $card = (string) file_get_contents( dirname( __DIR__, 2 ) . '/template-parts/components/product-card.php' );
-check( str_contains( $card, 'fd-product-card__alt' ) && str_contains( $card, 'data-fd-photo' ), 'la tarjeta de Fan Deco trae segunda foto y puntos' );
+check( str_contains( $card, 'fd-product-card__alt' ) && str_contains( $card, 'data-fd-img' ) && ! str_contains( $card, 'fd-product-card__photos' ) && str_contains( $card, 'fandeco_transfer_price_html' ) && ! str_contains( $card, 'fandeco_installments_html' ) && ! str_contains( $card, 'woocommerce_template_loop_add_to_cart' ), 'la tarjeta: segunda foto al pasar el mouse, puntos solo de variantes de color, botón a la ficha y solo transferencia (sin cuotas)' );
 echo $fail ? "\n$fail verificación(es) fallaron\n" : "\nTodas las verificaciones pasaron\n";
 exit( $fail ? 1 : 0 );

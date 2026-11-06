@@ -101,7 +101,7 @@
 	.fd-product-card__body { padding: 0 3.25rem 0 0.15rem; min-height: 3.25rem; }
 	.fd-product-card__title { font-size: 0.875rem; font-weight: 500; line-height: 1.25; }
 	.fd-product-card__price { font-size: 0.9375rem; font-weight: 700; letter-spacing: -0.01em; }
-	.fd-product-card__options { left: 0.5rem; bottom: 0.5rem; padding: 0.3rem 0.5rem; }
+	.fd-product-card__options { top: 0.5rem; right: 0.5rem; padding: 0.3rem 0.45rem; }
 	.fd-product-card__add { grid-row: 2; justify-self: end; align-self: end; margin: 0 0.1rem 0.1rem 0; }
 	.fd-product-card__add .button, .woocommerce .fd-product-card__add a.button { width: 2.5rem; height: 2.5rem; background: var(--color-fd-wine); color: #fff; box-shadow: none; }
 	.fd-product-card__add .button::before, .woocommerce .fd-product-card__add a.button::before { width: 1.15rem; height: 1.15rem; }

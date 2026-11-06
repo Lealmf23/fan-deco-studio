@@ -69,6 +69,27 @@ if ( ! $products ) {
 	return;
 }
 $show_cart = ! empty( $attributes['showAddToCart'] );
+$card_opts = array(
+	'swatches' => ! isset( $attributes['showSwatches'] ) || ! empty( $attributes['showSwatches'] ),
+	'swap'     => ! isset( $attributes['hoverSwap'] ) || ! empty( $attributes['hoverSwap'] ),
+	'transfer' => ! isset( $attributes['showTransfer'] ) || ! empty( $attributes['showTransfer'] ),
+);
+// Tamaños y tipografía de las tarjetas (valores numéricos y lista cerrada: sin CSS libre).
+$card_style = '';
+$t_size     = max( 0, min( 48, absint( $attributes['titleSize'] ?? 0 ) ) );
+$p_size     = max( 0, min( 40, absint( $attributes['priceSize'] ?? 0 ) ) );
+$t_font     = fandeco_enum( $attributes['titleFont'] ?? '', array( 'default', 'sans', 'serif' ), 'default' );
+if ( $t_size ) {
+	$card_style .= '--fd-card-title-size:' . $t_size . 'px;';
+}
+if ( $p_size ) {
+	$card_style .= '--fd-card-price-size:' . $p_size . 'px;';
+}
+if ( 'sans' === $t_font ) {
+	$card_style .= "--fd-card-title-font:var(--font-sans,'DM Sans Variable','DM Sans',sans-serif);--fd-card-title-style:normal;";
+} elseif ( 'serif' === $t_font ) {
+	$card_style .= '--fd-card-title-font:Georgia,serif;--fd-card-title-style:italic;--fd-card-title-weight:500;';
+}
 ?>
 <?php
 $f_title = sanitize_text_field( $attributes['title'] ?? '' );
@@ -80,7 +101,7 @@ if ( $editorial ) {
 	$layout = 'carousel';
 }
 ?>
-<section <?php echo fandeco_block_attrs( 'featured-products', $attributes, 'fd-featured--' . ( $editorial ? 'editorial' : $layout ) ); // phpcs:ignore WordPress.Security.EscapeOutput ?>>
+<section <?php echo fandeco_block_attrs( 'featured-products', $attributes, 'fd-featured--' . ( $editorial ? 'editorial' : $layout ), $card_style ); // phpcs:ignore WordPress.Security.EscapeOutput ?>>
 	<div class="fd-container<?php echo $editorial ? ' fd-featured__split' : ''; ?>">
 		<?php if ( $editorial ) : ?>
 			<div class="fd-featured__side">
@@ -102,7 +123,7 @@ if ( $editorial ) {
 		<?php endif; ?>
 			<?php foreach ( $products as $product ) : ?>
 				<li class="fd-product-grid__item">
-					<?php get_template_part( 'template-parts/components/product-card', null, array( 'product' => $product, 'show_cart' => $show_cart ) ); ?>
+					<?php get_template_part( 'template-parts/components/product-card', null, array( 'product' => $product, 'show_cart' => $show_cart, 'opts' => $card_opts ) ); ?>
 				</li>
 			<?php endforeach; ?>
 			</ul>

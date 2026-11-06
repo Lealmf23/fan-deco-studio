@@ -91,6 +91,7 @@ class WC_Product {
 	public function get_sku() { return ''; }
 }
 class WC_Product_Variable extends WC_Product {
+	public function get_children() { return array(); }
 	public function get_variation_attributes() { return array( 'pa_color' => $this->opts ); }
 	public function get_id_stub() {}
 }
@@ -121,7 +122,11 @@ function get_terms( $a ) {
 	return $t;
 }
 function sanitize_title_stub( $n ) { return strtolower( preg_replace( '/[^a-z]/i', '', iconv( 'UTF-8', 'ASCII//TRANSLIT', $n ) ) ); }
+function get_post_thumbnail_id( $id = 0 ) { return 0; }
+function get_post_meta( $id = 0, $key = '', $single = false ) { return ''; }
+function maybe_unserialize( $v ) { return is_string( $v ) && str_starts_with( $v, 'a:' ) ? unserialize( $v ) : $v; }
 function get_term_meta( $id, $key = '', $single = true ) {
+	if ( '' === $key ) { return 103 === $id ? array( 'blocksy_taxonomy_options' => array( serialize( array( 'x' => array( 'accent_color' => array( 'default' => array( 'color' => '#AA0000' ) ) ) ) ) ), 'otro' => array( 'sin color' ) ) : array(); }
 	if ( 'fandeco_swatch_color' === $key ) { return 101 === $id ? '#111111' : ''; }
 	if ( 'blocksy_taxonomy_meta_options' === $key ) { return 103 === $id ? array( 'x' => array( 'accent_color' => array( 'default' => array( 'color' => '#AA0000' ) ) ) ) : ''; }
 	return $id - 19 <= 4 && $id >= 20 ? ( $id - 19 ) : 0;

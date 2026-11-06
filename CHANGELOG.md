@@ -3,6 +3,20 @@
 Cada archivo que se entrega lleva su versión: `fan-deco-studio-X.Y.Z.zip` y `fan-deco-core-X.Y.Z.zip`.
 La versión del tema también figura en Apariencia > Temas, en `style.css` y como comentario `<!-- Fan Deco Studio X.Y.Z -->` en el código fuente de cada página.
 
+## Tema 0.3.6 / Blocks 0.3.6 / Core 0.3.6 (tarjetas del bloque "Productos destacados")
+### Cambiado
+- **Puntos de color**: solo aparecen si el producto tiene variantes de color, uno por variante (hasta 8), arriba a la derecha. Al pasar el mouse (o tocar) se ve la foto de esa variante, si la variación tiene foto propia. Se quitaron los puntos de "foto 1 / foto 2".
+- **Colores**: se toman del atributo de tipo "color" (Blocksy Variation Swatches). Como la clave exacta con que Blocksy guarda el color no está verificada, se revisan los metas del término cuyo nombre sugiere Blocksy, color o swatch y se toma el primer color hexadecimal; si no hay, se usa el campo "Color del selector" propio o el nombre del color. Sin verificar con tus datos reales.
+- **Botón**: ahora es un círculo con flecha que **lleva a la ficha del producto**; ya no agrega al carrito.
+- **Precios**: se ve el precio de lista y, si querés, también el precio con transferencia (nunca cuotas). Requiere el descuento por transferencia activo en Fan Deco Core.
+- **Alineación**: todas las tarjetas de una fila quedan a la misma altura, con la foto alineada arriba y los precios alineados abajo (se quitó el escalonado que bajaba una de cada cuatro).
+- **Título del producto**: ya no hereda el tamaño enorme de los títulos de Blocksy.
+### Agregado
+- En el bloque, panel **Tarjetas**: botón "Ver producto", puntos de color, cambio de foto al pasar el mouse, precio con transferencia, **letra del título** (la del sitio, DM Sans o Georgia cursiva), **tamaño del título** y **tamaño del precio** (px).
+- Core: `fandeco_transfer_price_html()` (solo el precio con transferencia).
+### Sin verificar en el sitio real
+- Todo probado con maqueta (escritorio y móvil), no con tus productos.
+
 ## Tema 0.3.5 / Blocks 0.3.5 / Core 0.3.5
 ### Corregido
 - Core con Blocksy: las cuotas y el precio con transferencia se agregan ahora con el filtro `blocksy:woocommerce:product-card:price`. Antes usaban el gancho `...price:after`, que Blocksy no dispara cuando la tarjeta es de **tipo 2** ("Añadir al carrito y precio" en una sola pieza, como en este sitio). Verificado leyendo el código de Blocksy; sin probar en el sitio real.
