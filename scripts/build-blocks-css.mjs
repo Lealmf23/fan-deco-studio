@@ -52,7 +52,8 @@ function filterRoot( root, fromFile ) {
 	return out;
 }
 
-const tokens = readFileSync( 'src/css/tokens.css', 'utf8' ).replace( /@theme static\s*\{/, ':root {' );
+// En el plugin, "DM Sans" va primero: si el sitio (Blocksy, Google Fonts o fuentes locales) ya trae DM Sans, no se descarga la copia propia (ahorra ~36 kB y una petición).
+const tokens = readFileSync( 'src/css/tokens.css', 'utf8' ).replace( /@theme static\s*\{/, ':root {' ).replaceAll( '"DM Sans Variable", system-ui', '"DM Sans", "DM Sans Variable", system-ui' );
 const files = [ 'fonts.css', 'base.css', 'components.css', 'home.css', 'home2.css', 'shop.css', 'banners.css', 'marquee.css', 'photos.css', 'identity.css', 'mobile.css' ];
 let css = '/* GENERADO por scripts/build-blocks-css.mjs a partir del CSS del tema Fan Deco Studio. No editar a mano. */\n' + tokens + '\n';
 for ( const f of files ) {

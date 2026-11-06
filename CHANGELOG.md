@@ -3,6 +3,12 @@
 Cada archivo que se entrega lleva su versión: `fan-deco-studio-X.Y.Z.zip` y `fan-deco-core-X.Y.Z.zip`.
 La versión del tema también figura en Apariencia > Temas, en `style.css` y como comentario `<!-- Fan Deco Studio X.Y.Z -->` en el código fuente de cada página.
 
+## Tema 0.4.4 / Blocks 0.4.4 / Core 0.4.4
+### Rendimiento
+- Fan Deco Blocks: la familia tipográfica empieza por **"DM Sans"** y recién después por la copia propia. Si el sitio ya carga DM Sans (por Blocksy y Google Fonts, o por fuentes locales), el navegador **no descarga la copia del plugin** (36 kB y una petición menos); si no, se usa la propia como antes. Verificado en el navegador con una página de prueba.
+### Medición de la home (en vivo, celular simulado)
+- 61 peticiones y ~731 kB transferidos en total: 23 hojas de estilos (57 kB), 18 scripts (66 kB), 15 imágenes (482 kB), 3 fuentes (88 kB, DM Sans repetida), 1 petición de carrito de WooCommerce y 5 pedidos a Google Fonts.
+
 ## Tema 0.4.3 / Blocks 0.4.3 / Core 0.4.3
 ### Seguridad
 - Al leer el color de los swatches de Blocksy se deserializa el meta del término **sin permitir objetos** (`allowed_classes => false`). Antes se usaba `maybe_unserialize`, que acepta objetos; el riesgo era bajo (solo un administrador escribe esos datos) pero se cierra.
