@@ -1,7 +1,7 @@
 import { __ } from '@wordpress/i18n';
 import { registerBlockType } from '@wordpress/blocks';
 import { InspectorControls, MediaUpload, MediaUploadCheck, useBlockProps } from '@wordpress/block-editor';
-import { Button, PanelBody, SelectControl, TextControl, TextareaControl, ToggleControl, Spinner } from '@wordpress/components';
+import { Button, PanelBody, SelectControl, TextControl, TextareaControl, ToggleControl, Spinner, Placeholder } from '@wordpress/components';
 import { useSelect } from '@wordpress/data';
 import { useState, useEffect } from '@wordpress/element';
 import apiFetch from '@wordpress/api-fetch';
@@ -16,6 +16,27 @@ const TEXT_DOMAIN = 'fan-deco-studio';
  * Registra un bloque dinámico: vista previa = el mismo render PHP del frontend (ServerSideRender),
  * controles en la barra lateral. `save` devuelve null (se renderiza en PHP).
  */
+/** Si la vista previa del editor falla, el bloque sigue siendo editable y se muestra el detalle real del error (no "[object Object]"). */
+function PreviewError( { title, error } ) {
+	let detail = '';
+	if ( error ) {
+		if ( typeof error === 'string' ) {
+			detail = error;
+		} else {
+			try {
+				detail = JSON.stringify( error.message && typeof error.message === 'string' ? { code: error.code, message: error.message } : error );
+			} catch ( e ) {
+				detail = String( error );
+			}
+		}
+	}
+	return (
+		<Placeholder label={ title } instructions={ __( 'No se pudo mostrar la vista previa en el editor. El bloque se puede editar con normalidad desde el panel de la derecha y en la página publicada se ve igual.', TEXT_DOMAIN ) }>
+			{ detail && <code style={ { display: 'block', maxWidth: '100%', overflowWrap: 'anywhere', fontSize: 12 } }>{ detail }</code> }
+		</Placeholder>
+	);
+}
+
 export function registerFandecoBlock( metadata, Controls ) {
 	function Edit( { attributes, setAttributes } ) {
 		const blockProps = useBlockProps();
@@ -39,6 +60,7 @@ export function registerFandecoBlock( metadata, Controls ) {
 						block={ metadata.name }
 						attributes={ attributes }
 						LoadingResponsePlaceholder={ () => <Spinner /> }
+						ErrorResponsePlaceholder={ ( { response } ) => <PreviewError title={ metadata.title } error={ response && response.errorMsg } /> }
 					/>
 				</div>
 			</>

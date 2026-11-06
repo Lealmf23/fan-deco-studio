@@ -3,6 +3,12 @@
 Cada archivo que se entrega lleva su versión: `fan-deco-studio-X.Y.Z.zip` y `fan-deco-core-X.Y.Z.zip`.
 La versión del tema también figura en Apariencia > Temas, en `style.css` y como comentario `<!-- Fan Deco Studio X.Y.Z -->` en el código fuente de cada página.
 
+## Tema 0.3.12 / Blocks 0.3.12 / Core 0.3.12
+### Cambiado
+- Editor: si la vista previa de un bloque falla, ya no muestra "Error al cargar el bloque: [object Object]". Muestra un aviso de que el bloque se puede editar igual y el **detalle real del error** (código y mensaje), para poder diagnosticarlo.
+### Diagnóstico
+- Leyendo el sitio (solo lectura): el servidor dibuja bien los bloques por la API del editor (probé la franja de mensajes y productos destacados) y `debug.log` no tiene errores recientes; el fallo es del lado del navegador/la petición. Causa aún sin confirmar.
+
 ## Tema 0.3.11 / Blocks 0.3.11 / Core 0.3.11 (rendimiento en móvil)
 ### Cambiado
 - En celulares y pantallas táctiles se quitan los efectos más pesados de dibujar: la mezcla de luz de las fotos de las tarjetas (`mix-blend-mode`), el desenfoque de fondo (`backdrop-filter`) de las pastillas y botones, y el filtro de saturación de la pila de banners (ahora las fotos de atrás se atenúan con opacidad).
