@@ -146,8 +146,17 @@ final class FanDeco_Lights {
 		} else { // solo hay fotos por variación: el elemento se completa al elegir una
 			$img = '<img class="fd-lit-img" alt="" aria-hidden="true" decoding="async" data-fd-lit hidden src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">';
 		}
-		$pos = strrpos( (string) $html, '</div>' );
-		return false === $pos ? $html . $img : substr_replace( (string) $html, $img, $pos, 0 );
+		$html = (string) $html;
+		// Blocksy: la galería es un slider con miniaturas; la foto encendida va DENTRO de la imagen principal (no al final de todo,
+		// donde taparía las miniaturas).
+		if ( false !== strpos( $html, 'ct-media-container' ) ) {
+			$fig = strpos( $html, '</figure>' );
+			if ( false !== $fig ) {
+				return substr_replace( $html, $img, $fig, 0 );
+			}
+		}
+		$pos = strrpos( $html, '</div>' );
+		return false === $pos ? $html . $img : substr_replace( $html, $img, $pos, 0 );
 	}
 
 	/** Interruptor accesible (role="switch"). Se ubica sobre la galería. */

@@ -52,3 +52,25 @@ const pout = `release/${ PLUGIN }-${ coreVersion }.zip`;
 rmSync( pout, { force: true } );
 pzip.writeZip( pout );
 console.log( `OK: ${ pout } (${ pzip.getEntries().length } archivos)` );
+
+// ---- Plugin Fan Deco Blocks ----
+const BLOCKS = 'fan-deco-blocks';
+const blocksVersion = /\* Version:\s*(\d+\.\d+\.\d+)/.exec( readFileSync( `plugins/${ BLOCKS }/${ BLOCKS }.php`, 'utf8' ) )?.[ 1 ] ?? '0.0.0';
+for ( const need of [ `plugins/${ BLOCKS }/dist/blocks.css`, `plugins/${ BLOCKS }/dist/blocks.js`, `plugins/${ BLOCKS }/build/blocks` ] ) {
+	if ( ! existsSync( need ) ) {
+		console.error( `Falta ${ need }. Ejecutá "npm run build" primero.` );
+		process.exit( 1 );
+	}
+}
+const bzip = new AdmZip();
+( function addDir( dir ) {
+	for ( const n of readdirSync( dir ) ) {
+		const path = join( dir, n );
+		if ( statSync( path ).isDirectory() ) addDir( path );
+		else if ( ! n.endsWith( '.DS_Store' ) ) bzip.addLocalFile( path, `${ BLOCKS }/${ dir.replace( `plugins/${ BLOCKS }`, '' ).replace( /^[\\/]/, '' ).replace( /\\/g, '/' ) }`.replace( /\/$/, '' ) );
+	}
+} )( `plugins/${ BLOCKS }` );
+const bout = `release/${ BLOCKS }-${ blocksVersion }.zip`;
+rmSync( bout, { force: true } );
+bzip.writeZip( bout );
+console.log( `OK: ${ bout } (${ bzip.getEntries().length } archivos)` );

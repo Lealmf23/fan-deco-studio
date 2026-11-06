@@ -1,0 +1,62 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "fandeco/banner-carousel",
+  "title": "Fan Deco: Pila de banners",
+  "category": "fandeco",
+  "icon": "images-alt2",
+  "description": "Pila de capas con texto opcional: en escritorio el texto va a la izquierda y las fotos a la derecha; en móvil, el texto arriba y las fotos abajo. Flechas, puntos, pausa, deslizamiento táctil y teclado.",
+  "textdomain": "fan-deco-studio",
+  "attributes": {
+    "eyebrow": {
+      "type": "string",
+      "default": ""
+    },
+    "title": {
+      "type": "string",
+      "default": ""
+    },
+    "description": {
+      "type": "string",
+      "default": ""
+    },
+    "buttonText": {
+      "type": "string",
+      "default": ""
+    },
+    "buttonUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "level": {
+      "type": "integer",
+      "enum": [
+        1,
+        2
+      ],
+      "default": 1
+    },
+    "slides": {
+      "type": "array",
+      "default": []
+    },
+    "autoplay": {
+      "type": "boolean",
+      "default": true
+    },
+    "interval": {
+      "type": "integer",
+      "default": 5
+    },
+    "animate": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "supports": {
+    "html": false,
+    "align": false
+  },
+  "render": "file:./render.php",
+  "editorScript": "file:./index.js"
+}

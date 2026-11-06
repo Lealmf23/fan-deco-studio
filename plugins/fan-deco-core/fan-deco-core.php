@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Fan Deco Core
  * Description: Motor SEO propio (reemplazo de AIOSEO), redirecciones e importador para la tienda Fan Deco. Funciona con cualquier tema; pensado para Fan Deco Studio.
- * Version: 0.2.0
+ * Version: 0.3.0
  * Requires at least: 6.5
  * Requires PHP: 8.0
  * Author: Fan Deco
@@ -14,7 +14,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'FANDECO_CORE_VERSION', '0.2.0' );
+define( 'FANDECO_CORE_VERSION', '0.3.0' );
 define( 'FANDECO_CORE_FILE', __FILE__ );
 define( 'FANDECO_CORE_DIR', plugin_dir_path( __FILE__ ) );
 define( 'FANDECO_CORE_URL', plugin_dir_url( __FILE__ ) );
@@ -45,6 +45,21 @@ require_once FANDECO_CORE_DIR . 'includes/class-installments.php';
 require_once FANDECO_CORE_DIR . 'includes/class-lights.php';
 require_once FANDECO_CORE_DIR . 'includes/class-pinfo-parse.php';
 require_once FANDECO_CORE_DIR . 'includes/class-product-info.php';
+
+// Estilos de lo que el plugin agrega en la ficha y el checkout (cuotas, transferencia, garantías, tarjetas, especificaciones).
+// Con el tema Fan Deco Studio no hacen falta: ya los trae.
+add_action(
+	'wp_enqueue_scripts',
+	static function () {
+		if ( 'fan-deco-studio' === get_template() || ! function_exists( 'is_product' ) ) {
+			return;
+		}
+		if ( ( is_product() || is_checkout() ) && is_readable( FANDECO_CORE_DIR . 'assets/core.css' ) ) {
+			wp_enqueue_style( 'fandeco-core', FANDECO_CORE_URL . 'assets/core.css', array(), FANDECO_CORE_VERSION );
+		}
+	},
+	5
+);
 
 add_action(
 	'plugins_loaded',

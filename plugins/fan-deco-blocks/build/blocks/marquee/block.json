@@ -1,0 +1,30 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "fandeco/marquee",
+  "title": "Fan Deco: Franja de mensajes",
+  "category": "fandeco",
+  "icon": "minus",
+  "description": "Franja oscura con palabras separadas por ✦ que se desplazan despacio. Se queda quieta si el visitante prefiere menos movimiento.",
+  "textdomain": "fan-deco-studio",
+  "attributes": {
+    "items": {
+      "type": "string",
+      "default": "DISEÑO\nCOLOR\nPERSONALIDAD\nHECHO PARA VOS"
+    },
+    "speed": {
+      "type": "integer",
+      "default": 30
+    },
+    "animate": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "supports": {
+    "html": false,
+    "align": false
+  },
+  "render": "file:./render.php",
+  "editorScript": "file:./index.js"
+}

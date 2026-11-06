@@ -48,6 +48,15 @@ $sw = out( array( 'FanDeco_Lights', 'switch_button' ) );
 t( 'interruptor role=switch, apagado y visible', str_contains( $sw, 'role="switch"' ) && str_contains( $sw, 'aria-checked="false"' ) && ! str_contains( $sw, ' hidden' ), true );
 t( 'guarda el id de la imagen principal', str_contains( $sw, 'data-main-id="5"' ), true );
 
+echo "Galería de Blocksy (slider con miniaturas)\n";
+$GLOBALS['meta'][9]['_fandeco_lit_image'] = 7;
+$GLOBALS['product'] = new WC_Product( 9 );
+$bl = '<div class="flexy-container"><div class="flexy-items"><div class="flexy-item"><figure class="ct-media-container"><img src="/m.jpg"></figure></div><div class="flexy-item"><figure class="ct-media-container"><img src="/m2.jpg"></figure></div></div><div class="flexy-pills"><span></span></div></div>';
+$r = FanDeco_Lights::main_image( $bl, 5 );
+t( 'la foto encendida va dentro de la primera imagen, antes de su cierre', substr_count( $r, 'fd-lit-img' ) === 1 && strpos( $r, 'fd-lit-img' ) < strpos( $r, '</figure>' ), true );
+t( 'no queda al final de la galería (no tapa las miniaturas)', strpos( $r, 'fd-lit-img' ) < strpos( $r, 'flexy-pills' ), true );
+t( 'el resto del marcado de Blocksy queda intacto', str_replace( preg_replace( '/<img class="fd-lit-img"[^>]*>/', '', $r ), '', $bl ), '' );
+
 echo "Solo variaciones con foto encendida\n";
 $v = new WC_Product_Variable( 3 ); $v->kids = array( 31, 32 ); $GLOBALS['meta'][32]['_fandeco_lit_image'] = 8; $GLOBALS['product'] = $v;
 $r = FanDeco_Lights::main_image( $html, 5 );

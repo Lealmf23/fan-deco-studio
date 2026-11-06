@@ -3,6 +3,28 @@
 Cada archivo que se entrega lleva su versión: `fan-deco-studio-X.Y.Z.zip` y `fan-deco-core-X.Y.Z.zip`.
 La versión del tema también figura en Apariencia > Temas, en `style.css` y como comentario `<!-- Fan Deco Studio X.Y.Z -->` en el código fuente de cada página.
 
+## Fan Deco Core 0.3.0 (adaptado a Blocksy)
+Verificado leyendo el código real de Blocksy instalado en el sitio (solo lectura).
+### Agregado
+- `assets/core.css` (8 kB, generado desde el CSS del tema): estilos de lo que el plugin agrega en la ficha y el checkout (cuotas, precio con transferencia, garantías, tarjetas, características y tabla de especificaciones). Sin esto, con Blocksy esas piezas salían sin diseño. Se carga solo en ficha y checkout, y no con el tema Fan Deco Studio.
+- Foto encendida: con la galería de Blocksy, la foto va dentro de la imagen principal (antes, al final de toda la galería, tapando las miniaturas); el interruptor se ubica arriba y respeta las miniaturas a la izquierda.
+### Confirmado sin cambios
+- Las piezas de la ficha caen donde se diseñaron: Blocksy reubica lo que se engancha en `woocommerce_single_product_summary` según la prioridad (11 después del precio, 25 después de la descripción corta, 35 y 36 después del botón de compra).
+- Cuotas y foto encendida usan eventos estándar de WooCommerce (`found_variation`, `reset_data`), que Blocksy conserva. El descuento por transferencia es independiente del tema.
+### Sin verificar en el sitio real
+- Aspecto de la foto encendida y del interruptor sobre la galería de Blocksy, y cuotas dentro de las tarjetas del listado.
+
+## Fan Deco Blocks 0.1.0 (plugin nuevo) / tema 0.3.2
+### Agregado
+- **Plugin `fan-deco-blocks`**: los 9 bloques de diseño (pila de banners, franja de mensajes, hero con interruptor de luz, categorías, productos destacados, banner editorial, pasos, beneficios y encabezado de sección) como plugin, para usarlos sobre **Blocksy** (o cualquier tema) sin depender del tema Fan Deco Studio.
+  - Estilos y scripts propios (41 kB de CSS), con DM Sans incluida; solo se cargan en las páginas que usan un bloque y no tocan el header, el footer ni el body del otro tema.
+  - Las secciones se abren a todo el ancho aunque el tema las ponga en una columna angosta.
+  - Tarjeta de producto propia, sin vista rápida (ya la ofrece Blocksy Pro) y patrón "Fan Deco: Portada completa".
+  - Con el tema Fan Deco Studio activo, el plugin se aparta solo.
+  - Se genera desde el mismo código del tema (`npm run build:plugin`): funciones, CSS y bloques salen de una única fuente.
+- Guía `docs/migracion/PORTADA-CON-BLOCKSY.md`.
+- Tema: la tarjeta de producto admite ocultar la vista rápida.
+
 ## 0.3.1
 ### Corregido
 - Galería de la ficha de producto: las columnas ya no pueden ensancharse ni correrse por el contenido de la galería de WooCommerce (FlexSlider, zoom, miniaturas); se reforzó con `minmax(0, …)` y reglas de contención.

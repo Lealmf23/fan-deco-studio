@@ -1,6 +1,7 @@
 /* Interruptor de luz (Fan Deco Core). Neutral respecto del tema: usa variables con valores de respaldo. */
 .woocommerce-product-gallery { position: relative; }
 .woocommerce-product-gallery__image { position: relative; }
+.woocommerce-product-gallery .ct-media-container { position: relative; } /* Blocksy */
 .fd-lit-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; pointer-events: none; transition: opacity 600ms ease; }
 .fd-lit-img[hidden] { display: none; }
 .woocommerce-product-gallery.is-lit .fd-lit-img { opacity: 1; }
@@ -19,3 +20,7 @@
 .fd-light-switch[aria-checked="true"] .fd-light-switch__thumb { transform: translateX(1.15rem); background: #fff8e1; }
 .fd-light-switch:focus-visible { outline: 2px solid var(--color-fd-wine, #626545); outline-offset: 3px; }
 @media (prefers-reduced-motion: reduce) { .fd-lit-img, .fd-light-switch__track, .fd-light-switch__thumb, .woocommerce-product-gallery.is-lit .flex-viewport { transition: none; } }
+
+/* Blocksy: el interruptor va arriba (abajo quedaría sobre las miniaturas) y, con miniaturas a la izquierda, después de ellas. */
+.woocommerce-product-gallery[data-thumbs] .fd-light-switch { top: 1rem; bottom: auto; }
+.woocommerce-product-gallery[data-thumbs="left"] .fd-light-switch { left: calc(var(--thumbs-width, 0px) + 1.5rem); }

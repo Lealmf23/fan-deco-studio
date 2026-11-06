@@ -193,6 +193,9 @@ Según los ajustes del sitio real (leídos en modo solo lectura), Blocksy Pro te
 ## Personalización completa
 Apariencia > Personalizar > Fan Deco Studio tiene 51 ajustes de colores, tipografía, espaciado, header/logo, botones y tarjetas, con vista previa en vivo. Guía completa en `docs/PERSONALIZAR.md` (se genera con `php scripts/gen-design-docs.php`). Arquitectura: un esquema único en `inc/design.php` genera los controles, el CSS (`<style id="fd-design">`, solo lo modificado) y la vista previa (`assets/js/design-preview.js`); `scripts/design-parity.mjs` comprueba que PHP y JS generen lo mismo. El CSS del tema lee las variables con valor de reserva. **No probado en el Personalizador de un WordPress real** (solo con simulaciones y midiendo en Chromium el efecto de los valores).
 
+## Plugin Fan Deco Blocks (para usar los bloques sobre Blocksy)
+`plugins/fan-deco-blocks` contiene los 9 bloques con su CSS/JS propios, para un sitio que sigue con Blocksy. `npm run build:plugin` genera `dist/blocks.css|js` (solo las reglas de los bloques, extraídas del CSS del tema con `scripts/build-blocks-css.mjs`), sincroniza las funciones de apoyo (`includes/theme-shared.php`, generado desde el tema por `scripts/sync-blocks-plugin.mjs`), los bloques compilados, la tarjeta y el patrón. Si el tema Fan Deco Studio está activo, el plugin no hace nada. Guía: `docs/migracion/PORTADA-CON-BLOCKSY.md`. Verificado con una página de otro tema simulada (Chromium, 1360 y 390 px) y una prueba que carga el plugin sin ningún archivo del tema; **no probado dentro de Blocksy real**.
+
 ## Qué está verificado y qué no
 **Verificado aquí (sin WordPress real; el entorno no puede descargar WordPress/WooCommerce):**
 - Sintaxis PHP de los 41 archivos (`php -l`, PHP 8.3).

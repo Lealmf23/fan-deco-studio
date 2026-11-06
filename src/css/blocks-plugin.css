@@ -1,0 +1,16 @@
+
+/* ---- Ajustes propios del plugin (conviven con cualquier tema, p. ej. Blocksy) ---- */
+:where(.fd-section) { font-family: var(--font-sans); color: var(--color-fd-ink); line-height: 1.6; } /* especificidad 0: nunca pisa el color propio de cada bloque */
+.fd-section *, .fd-section *::before, .fd-section *::after { box-sizing: border-box; }
+.fd-section :where(h1, h2, h3, h4, p, ul, ol, figure) { margin-block: 0; }
+.fd-section :where(ul, ol) { padding: 0; list-style: none; }
+.fd-section :where(img, svg, picture) { display: block; }
+.fd-section :where(a) { text-underline-offset: 0.2em; }
+:where(.fd-section) :where(h1, h2, h3, h4) { font-family: var(--font-display); color: var(--color-fd-blue); }
+
+/* Secciones a todo el ancho aunque el tema las ponga dentro de una columna angosta (Blocksy: "Normal" o "Angosto"). */
+:is(.entry-content, .wp-block-post-content, .is-layout-constrained, .is-layout-flow) > .fd-section {
+	width: 100vw; max-width: 100vw; margin-inline: calc(50% - 50vw) !important;
+}
+html:has(.fd-section) { overflow-x: clip; }
+@media (prefers-reduced-motion: reduce) { .fd-section * { scroll-behavior: auto; } }

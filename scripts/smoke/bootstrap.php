@@ -6,7 +6,7 @@
  */
 define( 'ABSPATH', __DIR__ . '/' );
 define( 'FANDECO_VERSION', 'test' );
-define( 'FANDECO_DIR', dirname( __DIR__, 2 ) );
+define( 'FANDECO_DIR', defined( 'FD_PLUGIN_ONLY' ) ? dirname( __DIR__, 2 ) . '/plugins/fan-deco-blocks' : dirname( __DIR__, 2 ) );
 define( 'FANDECO_URI', '/theme' );
 
 $GLOBALS['fd_mods']    = array();
@@ -60,7 +60,7 @@ function get_block_wrapper_attributes( $extra = array() ) {
 	foreach ( $extra as $k => $v ) { if ( 'class' !== $k ) { $parts[] = $k . '="' . esc_attr( $v ) . '"'; } }
 	return implode( ' ', $parts );
 }
-function get_template_part( $slug, $name = null, $args = array() ) { include FANDECO_DIR . '/' . $slug . '.php'; }
+if ( ! function_exists( 'get_template_part' ) ) { function get_template_part( $slug, $name = null, $args = array() ) { include FANDECO_DIR . '/' . $slug . '.php'; } }
 function wp_nav_menu( $a ) {
 	if ( ! empty( $a['fallback_cb'] ) && is_callable( $a['fallback_cb'] ) ) { ( $a['fallback_cb'] )( $a ); return; }
 	echo '<ul class="' . esc_attr( $a['menu_class'] ?? '' ) . '"><li class="menu-item"><a href="/">Inicio</a></li></ul>';
@@ -143,11 +143,13 @@ function is_account_page() { return false; }
 function is_wp_error( $x ) { return false; }
 function get_term( $id ) { return (object) array( 'slug' => 'lamparas', 'name' => 'Lámparas' ); }
 
-// Tema (carga real, no stub).
-require FANDECO_DIR . '/inc/helpers.php';
-require FANDECO_DIR . '/inc/menus.php';
-require FANDECO_DIR . '/inc/woocommerce.php';
-require FANDECO_DIR . '/inc/swatches.php';
+// Tema (carga real, no stub). Con FD_PLUGIN_ONLY solo se carga el plugin fan-deco-blocks (sin ningún archivo del tema).
+if ( ! defined( 'FD_PLUGIN_ONLY' ) ) {
+	require FANDECO_DIR . '/inc/helpers.php';
+	require FANDECO_DIR . '/inc/menus.php';
+	require FANDECO_DIR . '/inc/woocommerce.php';
+	require FANDECO_DIR . '/inc/swatches.php';
+}
 
 /** Render directo de un bloque con sus atributos por defecto de block.json + overrides. */
 function fd_render_block( string $name, array $override = array() ): string {

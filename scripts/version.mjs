@@ -1,13 +1,14 @@
 // Sube la versión del tema (y opcionalmente del plugin) en todos los lugares a la vez.
-// Uso: npm run bump -- minor|patch|major|X.Y.Z [--core]   (--core también sube fan-deco-core)
+// Uso: npm run bump -- minor|patch|major|X.Y.Z [--core] [--blocks]   (--core también sube fan-deco-core)
 import { readFileSync, writeFileSync } from 'node:fs';
 
 const args = process.argv.slice( 2 );
 const target = args.find( ( a ) => ! a.startsWith( '--' ) );
 const withCore = args.includes( '--core' );
+const withBlocks = args.includes( '--blocks' );
 const cur = /Version:\s*(\d+\.\d+\.\d+)/.exec( readFileSync( 'style.css', 'utf8' ) )?.[ 1 ];
 if ( ! target || ! cur ) {
-	console.error( 'Uso: npm run bump -- minor|patch|major|X.Y.Z [--core]' );
+	console.error( 'Uso: npm run bump -- minor|patch|major|X.Y.Z [--core] [--blocks]' );
 	process.exit( 1 );
 }
 const bump = ( v, how ) => {
@@ -33,5 +34,10 @@ if ( withCore ) {
 	edit( 'plugins/fan-deco-core/fan-deco-core.php', /(\* Version:\s*)\d+\.\d+\.\d+/, `$1${ next }` );
 	edit( 'plugins/fan-deco-core/fan-deco-core.php', /(define\( 'FANDECO_CORE_VERSION', ')\d+\.\d+\.\d+/, `$1${ next }` );
 	console.log( `Plugin: -> ${ next }` );
+}
+if ( withBlocks ) {
+	edit( 'plugins/fan-deco-blocks/fan-deco-blocks.php', /(\* Version:\s*)\d+\.\d+\.\d+/, `$1${ next }` );
+	edit( 'plugins/fan-deco-blocks/fan-deco-blocks.php', /(define\( 'FANDECO_BLOCKS_VERSION', ')\d+\.\d+\.\d+/, `$1${ next }` );
+	console.log( `Plugin de bloques: -> ${ next }` );
 }
 console.log( 'Recordá anotar los cambios en CHANGELOG.md y correr "npm run package".' );

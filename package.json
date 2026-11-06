@@ -1,6 +1,6 @@
 {
   "name": "fan-deco-studio",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "private": true,
   "description": "Tema WordPress + WooCommerce para Fan Deco",
   "type": "module",
@@ -11,7 +11,8 @@
     "dev": "vite",
     "build:front": "vite build",
     "build:blocks": "wp-scripts build --webpack-src-dir=src/blocks --output-path=build/blocks",
-    "build": "npm run build:front && npm run build:blocks",
+    "build:plugin": "node scripts/build-core-css.mjs && node scripts/build-blocks-css.mjs && vite build --config vite.blocks.config.js && node scripts/sync-blocks-plugin.mjs",
+    "build": "npm run build:front && npm run build:blocks && npm run build:plugin",
     "dev:blocks": "wp-scripts start --webpack-src-dir=src/blocks --output-path=build/blocks",
     "lint:php": "node scripts/lint-php.mjs",
     "test": "node scripts/smoke-test.mjs",
