@@ -3,6 +3,13 @@
 Cada archivo que se entrega lleva su versión: `fan-deco-studio-X.Y.Z.zip` y `fan-deco-core-X.Y.Z.zip`.
 La versión del tema también figura en Apariencia > Temas, en `style.css` y como comentario `<!-- Fan Deco Studio X.Y.Z -->` en el código fuente de cada página.
 
+## Tema 0.3.11 / Blocks 0.3.11 / Core 0.3.11 (rendimiento en móvil)
+### Cambiado
+- En celulares y pantallas táctiles se quitan los efectos más pesados de dibujar: la mezcla de luz de las fotos de las tarjetas (`mix-blend-mode`), el desenfoque de fondo (`backdrop-filter`) de las pastillas y botones, y el filtro de saturación de la pila de banners (ahora las fotos de atrás se atenúan con opacidad).
+- El autoplay de la pila de banners solo corre mientras el banner se ve en pantalla; la franja de mensajes se pausa cuando está fuera de pantalla.
+### Sin verificar
+- No pude medir el scroll en un celular real: son las causas más probables según el código, no un diagnóstico confirmado. Si sigue trabándose, hace falta saber en qué parte de la página pasa.
+
 ## Tema 0.3.10 / Blocks 0.3.10 / Core 0.3.10
 ### Agregado
 - **Fan Deco Blocks: productos relacionados en la ficha** con el estilo de las tarjetas de Fan Deco (carrusel, puntos de color, foto al pasar el mouse, precio con transferencia, botón con carrito). Reemplaza la sección de relacionados del tema (deja vacía la lista de WooCommerce y dibuja la propia después del resumen del producto). Título "Productos relacionados" y hasta 8 productos.

@@ -611,6 +611,18 @@
 	.fd-swatch--color { width: 2.75rem; height: 2.75rem; }
 	.fd-swatch--button { min-width: 3rem; height: 3rem; padding: 0 1rem; border-radius: 999px; background: var(--color-fd-cream); border-color: transparent; }
 }
+@media (hover: none), (max-width: 767px) {
+	.fd-product-card__window::after { display: none; }
+	.fd-product-card .fd-product-card__options { backdrop-filter: none; background: rgb(41 40 36 / 0.7); }
+	.fd-product-card__add .fd-product-card__go { backdrop-filter: none; background: #fff; }
+	.fd-hero-switch, .fd-product-card__options { backdrop-filter: none; }
+	.fd-bancar.is-ready .fd-bancar__slide img { filter: none; transition: opacity 400ms ease; }
+	.fd-bancar.is-ready .fd-bancar__slide:not(.is-active) img { opacity: 0.82; }
+	.fd-bancar.is-ready .fd-bancar__slide.is-active img { opacity: 1; }
+	.fd-product-card__media img { transition: none; }
+}
+.fd-marquee.is-offscreen .fd-marquee__track { animation-play-state: paused; }
+.fd-marquee__track { will-change: transform; }
 
 
 /* ---- Ajustes propios del plugin (conviven con cualquier tema, p. ej. Blocksy) ---- */

@@ -26,6 +26,7 @@ export function initBannerCarousels() {
 		let userPaused = false;
 		let hover = false;
 		let focus = false;
+		let inView = true; // el autoplay solo corre mientras el banner se ve en pantalla (no gasta mientras se scrollea otra parte)
 
 		const dots = slides.map( ( _, i ) => {
 			const b = document.createElement( 'button' );
@@ -104,7 +105,7 @@ export function initBannerCarousels() {
 		};
 		const play = () => {
 			stop();
-			if ( root.dataset.autoplay !== '1' || reduce.matches || userPaused || hover || focus || document.hidden ) {
+			if ( root.dataset.autoplay !== '1' || reduce.matches || userPaused || hover || focus || ! inView || document.hidden ) {
 				return;
 			}
 			const ms = Math.max( 3, Number( root.dataset.interval ) || 5 ) * 1000;
@@ -175,6 +176,12 @@ export function initBannerCarousels() {
 		root.addEventListener( 'mouseleave', () => { hover = false; play(); } );
 		root.addEventListener( 'focusin', () => { focus = true; play(); } );
 		root.addEventListener( 'focusout', () => { focus = false; play(); } );
+		if ( 'IntersectionObserver' in window ) {
+			new IntersectionObserver( ( entries ) => {
+				inView = entries[ entries.length - 1 ].isIntersecting;
+				play();
+			}, { threshold: 0.2 } ).observe( root );
+		}
 		document.addEventListener( 'visibilitychange', play );
 		reduce.addEventListener( 'change', play );
 		window.matchMedia( '(min-width: 1024px)' ).addEventListener( 'change', layout );

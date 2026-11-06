@@ -4,11 +4,13 @@ import { initCarousels } from './carousel.js';
 import { initHeroLight } from './hero-light.js';
 import { initBannerCarousels } from './banner-carousel.js';
 import './card-dots.js';
+import { initOffscreenPause } from './perf.js';
 
 const boot = () => {
 	initCarousels();
 	initHeroLight();
 	initBannerCarousels();
+	initOffscreenPause();
 };
 if ( document.readyState === 'loading' ) {
 	document.addEventListener( 'DOMContentLoaded', boot );

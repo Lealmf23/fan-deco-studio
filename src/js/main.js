@@ -6,6 +6,7 @@ import { initTicker } from './ticker.js';
 import { initQuantity } from './quantity.js';
 import { initBuybar } from './buybar.js';
 import { initHeroLight } from './hero-light.js';
+import { initOffscreenPause } from './perf.js';
 
 /** Nota: el JS crítico es mínimo y sin dependencias. GSAP se carga bajo demanda (ver animations.js). */
 function boot() {
@@ -16,6 +17,7 @@ function boot() {
 	initQuantity();
 	initBuybar();
 	initHeroLight();
+	initOffscreenPause();
 	loadSearch();
 	loadShopUi();
 	loadBannerCarousel();
