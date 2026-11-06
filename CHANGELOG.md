@@ -3,6 +3,12 @@
 Cada archivo que se entrega lleva su versión: `fan-deco-studio-X.Y.Z.zip` y `fan-deco-core-X.Y.Z.zip`.
 La versión del tema también figura en Apariencia > Temas, en `style.css` y como comentario `<!-- Fan Deco Studio X.Y.Z -->` en el código fuente de cada página.
 
+## Tema 0.3.8 / Blocks 0.3.8 / Core 0.3.8
+### Cambiado
+- Tarjetas: el cambio a la foto de una variante (puntos de color) ahora es un **fundido suave** de 0,45 s sobre la foto principal, con precarga para que no parpadee; vuelve con fundido al salir. El cambio de foto al pasar el mouse ya era con fundido.
+- Botón del carrito: más chico (2,6 rem), de vidrio claro con aro fino, icono bien centrado y se llena de oliva al pasar el mouse.
+- Los puntos de color tienen su pastilla oscura translúcida (antes quedaban sueltos sobre la foto).
+
 ## Tema 0.3.7 / Blocks 0.3.7 / Core 0.3.7
 ### Cambiado
 - El botón de las tarjetas (que lleva a la ficha) ahora usa el icono de **carrito de compras** en lugar de la flecha; también en las tarjetas de Blocksy con opciones.

@@ -7,7 +7,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'FANDECO_VERSION', '0.3.7' );
+define( 'FANDECO_VERSION', '0.3.8' );
 define( 'FANDECO_DIR', get_template_directory() );
 define( 'FANDECO_URI', get_template_directory_uri() );
 

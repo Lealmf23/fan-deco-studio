@@ -1,25 +1,42 @@
 /* Puntos de color de la tarjeta: al pasar el mouse (o tocar/foco) se ve la foto de esa variante; al salir vuelve la foto elegida. */
 ( () => {
+	// La foto de la variante es una capa encima de la foto principal: aparece y se va con fundido (sin saltos).
+	const layerOf = ( win ) => {
+		const media = win.querySelector( '.fd-product-card__media' );
+		if ( ! media ) {
+			return null;
+		}
+		let layer = media.querySelector( '.fd-product-card__variant' );
+		if ( ! layer ) {
+			layer = document.createElement( 'img' );
+			layer.className = 'fd-product-card__variant';
+			layer.alt = '';
+			layer.decoding = 'async';
+			media.appendChild( layer );
+		}
+		return layer;
+	};
 	const swap = ( win, url ) => {
-		const img = win.querySelector( '.fd-product-card__media img:not(.fd-product-card__alt)' );
-		if ( ! img ) {
+		const layer = layerOf( win );
+		if ( ! layer ) {
 			return;
 		}
-		if ( ! img.dataset.fdOrigSrc ) {
-			img.dataset.fdOrigSrc = img.currentSrc || img.src;
-			img.dataset.fdOrigSrcset = img.getAttribute( 'srcset' ) || '';
+		if ( ! url ) {
+			layer.classList.remove( 'is-on' );
+			return;
 		}
-		if ( url ) {
-			img.removeAttribute( 'srcset' );
-			img.src = url;
-			win.classList.add( 'is-variant' );
-		} else {
-			if ( img.dataset.fdOrigSrcset ) {
-				img.setAttribute( 'srcset', img.dataset.fdOrigSrcset );
-			}
-			img.src = img.dataset.fdOrigSrc;
-			win.classList.remove( 'is-variant' );
+		const show = () => layer.classList.add( 'is-on' );
+		if ( layer.getAttribute( 'src' ) === url && layer.complete ) {
+			show();
+			return;
 		}
+		layer.classList.remove( 'is-on' );
+		const loader = new Image();
+		loader.onload = () => {
+			layer.src = url; // ya en caché: el fundido arranca sin parpadeo
+			requestAnimationFrame( show );
+		};
+		loader.src = url;
 	};
 	const dotOf = ( e ) => e.target.closest && e.target.closest( '.fd-dot[data-fd-img]' );
 	const preview = ( e ) => {
