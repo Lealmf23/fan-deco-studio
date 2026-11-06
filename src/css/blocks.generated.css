@@ -666,5 +666,5 @@
 	width: 100vw; max-width: 100vw; margin-inline: calc(50% - 50vw) !important;
 	margin-block: 0; /* sin el espacio blanco que el tema pone entre bloques (el margen que se defina en el bloque sigue valiendo) */
 }
-html:has(.fd-section) { overflow-x: clip; }
+/* Sin reglas de overflow en <html>: si html no es "visible", el overflow-x:hidden del <body> del tema deja de pasar al viewport y el body se vuelve un contenedor de scroll anidado (en iPhone/iPad el scroll se traba). */
 @media (prefers-reduced-motion: reduce) { .fd-section * { scroll-behavior: auto; } }

@@ -3,6 +3,12 @@
 Cada archivo que se entrega lleva su versión: `fan-deco-studio-X.Y.Z.zip` y `fan-deco-core-X.Y.Z.zip`.
 La versión del tema también figura en Apariencia > Temas, en `style.css` y como comentario `<!-- Fan Deco Studio X.Y.Z -->` en el código fuente de cada página.
 
+## Tema 0.4.5 / Blocks 0.4.5 / Core 0.4.5
+### Corregido
+- **Scroll que se traba en celulares y iPad** (causa probable, hallada midiendo la home real): Fan Deco Blocks ponía `overflow-x: clip` en `<html>` en toda página con bloques. Con eso, el `overflow-x: hidden` que Blocksy pone en `<body>` dejaba de pasar a la ventana y el `<body>` se volvía un contenedor de scroll anidado (se vio en la home: `html clip/visible`, `body hidden/auto`). En Safari de iPhone/iPad un scroll dentro de otro scroll es una fuente conocida de gestos que "se pierden" hasta tocar varias veces. Se quitó la regla. Pasaba solo en páginas con bloques, como la home.
+### Sin verificar
+- No tengo Safari de iPhone/iPad para reproducirlo; en Chromium simulado el scroll llegaba al final tanto antes como ahora.
+
 ## Tema 0.4.4 / Blocks 0.4.4 / Core 0.4.4
 ### Rendimiento
 - Fan Deco Blocks: la familia tipográfica empieza por **"DM Sans"** y recién después por la copia propia. Si el sitio ya carga DM Sans (por Blocksy y Google Fonts, o por fuentes locales), el navegador **no descarga la copia del plugin** (36 kB y una petición menos); si no, se usa la propia como antes. Verificado en el navegador con una página de prueba.
