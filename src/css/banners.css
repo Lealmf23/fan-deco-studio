@@ -26,16 +26,8 @@
 	cursor: pointer;
 }
 .fd-bancar.is-ready .fd-bancar__slide.is-active { cursor: default; }
-.fd-bancar.is-ready .fd-bancar__slide img { height: 100%; transition: filter 700ms var(--ease-fd); filter: saturate(0.55) contrast(0.96); }
-.fd-bancar.is-ready .fd-bancar__slide.is-active img { filter: none; }
-/* Rayas de capa: se ven en las fotos "todavía imprimiéndose" y se disuelven al llegar al frente. */
-.fd-bancar.is-ready .fd-bancar__slide::after {
-	content: ""; position: absolute; inset: 0; pointer-events: none;
-	background: repeating-linear-gradient(to bottom, transparent 0, transparent 5px, rgb(245 242 237 / 0.5) 5px, rgb(245 242 237 / 0.5) 6px);
-	opacity: 1; transition: opacity 700ms var(--ease-fd);
-}
-.fd-bancar.is-ready .fd-bancar__slide.is-active::after { opacity: 0; }
-
+.fd-bancar.is-ready .fd-bancar__slide img { height: 100%; opacity: 0.55; transition: opacity 700ms var(--ease-fd); }
+.fd-bancar.is-ready .fd-bancar__slide.is-active img { opacity: 1; }
 /* --- Texto del banner --- */
 .fd-bancar__text { display: flex; flex-direction: column; align-items: center; margin-bottom: clamp(1.75rem, 4vw, 2.5rem); text-align: center; }
 .fd-bancar__title { margin: 0; font-size: calc(clamp(2.6rem, 11vw, 3.75rem) * var(--fd-title-scale, 1)); }
@@ -67,6 +59,9 @@
 .fd-bancar__arrow:focus-visible, .fd-bancar__pause:focus-visible, .fd-bancar__dot:focus-visible { outline: 2px solid var(--color-fd-wine); outline-offset: 2px; }
 @media (max-width: 639px) { .fd-bancar__arrow { display: none; } }
 @media (prefers-reduced-motion: reduce) {
-	.fd-bancar.is-ready .fd-bancar__slide, .fd-bancar.is-ready .fd-bancar__slide img, .fd-bancar.is-ready .fd-bancar__slide::after, .fd-bancar__dot { transition: none; }
+	.fd-bancar.is-ready .fd-bancar__slide, .fd-bancar.is-ready .fd-bancar__slide img, .fd-bancar__dot { transition: none; }
 }
 html:not(.js) .fd-bancar__controls { display: none; }
+
+/* Espacio de arriba y abajo definido desde el bloque */
+.fd-section.fd-bancar.fd-bancar--space { padding-top: var(--fd-b-top); padding-bottom: var(--fd-b-bottom); }

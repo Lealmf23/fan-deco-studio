@@ -3,6 +3,17 @@
 Cada archivo que se entrega lleva su versión: `fan-deco-studio-X.Y.Z.zip` y `fan-deco-core-X.Y.Z.zip`.
 La versión del tema también figura en Apariencia > Temas, en `style.css` y como comentario `<!-- Fan Deco Studio X.Y.Z -->` en el código fuente de cada página.
 
+## Tema 0.4.1 / Blocks 0.4.1 / Core 0.4.1
+### Agregado
+- **Color de fondo en todos los bloques**: cada sección tiene ahora el panel "Color > Fondo" del editor (se usa el de WordPress, con paleta y selector libre).
+- **Banner principal (pila de banners)**: espacio de arriba y de abajo ajustable (panel "Espacios", en px).
+- **Encabezado de sección**: tamaño del título y de la descripción (px; en celulares el título se reduce solo) y espacio de arriba y de abajo (panel "Tamaños y espacios").
+### Cambiado
+- **Banner**: se quitaron las rayas de las fotos de atrás; ahora solo se ven opacas.
+- **Tarjetas**: el botón usa un icono SVG propio de carrito (antes una máscara CSS que en tu sitio no se veía) y su color queda fijo; los puntos de color vuelven a estar siempre a la vista (antes solo al pasar el mouse).
+### Sin verificar en el sitio real
+- El color de fondo usa el soporte nativo de WordPress; probado solo en las pruebas automáticas y maqueta, no en el editor real.
+
 ## Tema 0.4.0 / Blocks 0.4.0 / Core 0.4.0
 ### Agregado
 - **Bloque "Fan Deco: Carrusel de fotos"** (`fandeco/photo-carousel`): carrusel de solo fotos con flechas y deslizamiento táctil. Cada foto puede tener texto (aparece con fundido al pasar el mouse; siempre visible en pantallas táctiles) y enlace. Ajustes: fotos visibles en escritorio (2 a 5), proporción (3:4, 4:5, cuadrada, 16:9), flechas, textos y el efecto de zoom suave con leve elevación.

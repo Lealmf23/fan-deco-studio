@@ -82,6 +82,11 @@
         "top",
         "bottom"
       ]
+    },
+    "color": {
+      "background": true,
+      "text": false,
+      "link": false
     }
   },
   "editorScript": "file:./index.js",

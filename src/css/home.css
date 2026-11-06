@@ -105,3 +105,12 @@
 .fd-step__icon { display: grid; place-items: center; width: 3.25rem; height: 3.25rem; margin-bottom: 1rem; border-radius: 50%; background: #fff; color: var(--color-fd-blue); box-shadow: var(--shadow-fd-card); }
 .fd-step__title { margin: 0 0 0.5rem; font-size: 1.4rem; }
 .fd-step__text { margin: 0; color: var(--color-fd-muted); }
+
+/* Encabezado de sección: tamaños y espacios ajustables desde el bloque (valores en px; en celulares el título se reduce) */
+.fd-section.fd-section-heading--t .fd-section-heading__title { font-size: var(--fd-sh-title); }
+.fd-section.fd-section-heading--d .fd-section-heading__desc { font-size: var(--fd-sh-desc); }
+.fd-section.fd-section-heading.fd-section-heading--space { padding-top: var(--fd-sh-top); padding-bottom: var(--fd-sh-bottom); }
+@media (max-width: 767px) {
+	.fd-section.fd-section-heading--t .fd-section-heading__title { font-size: max(1.25rem, calc(var(--fd-sh-title) * 0.62)); }
+	.fd-section.fd-section-heading--d .fd-section-heading__desc { font-size: max(0.9rem, calc(var(--fd-sh-desc) * 0.9)); }
+}

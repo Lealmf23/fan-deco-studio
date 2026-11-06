@@ -11,5 +11,5 @@
 		'wp-server-side-render',
 		'wp-url'
 	),
-	'version' => '54d53648d80aa745a72d'
+	'version' => '1f45be21630c5c6e8249'
 );

@@ -1,4 +1,5 @@
 import { __ } from '@wordpress/i18n';
+import { RangeControl } from '@wordpress/components';
 import { registerFandecoBlock, Repeater, ImageField, ButtonFields, TextFields, PanelBody, SelectControl, TextControl, ToggleControl } from '../shared/index.js';
 import metadata from './block.json';
 
@@ -27,6 +28,15 @@ registerFandecoBlock( metadata, ( { attributes, setAttributes } ) => (
 					</>
 				) }
 			/>
+		</PanelBody>
+		<PanelBody title={ __( 'Espacios', 'fan-deco-studio' ) } initialOpen={ false }>
+			<ToggleControl label={ __( 'Definir el espacio de arriba y de abajo', 'fan-deco-studio' ) } help={ __( 'Apagado, se usa el espacio automático del diseño. El color de fondo se cambia en el panel "Color".', 'fan-deco-studio' ) } checked={ !! attributes.customSpace } onChange={ ( customSpace ) => setAttributes( { customSpace } ) } />
+			{ attributes.customSpace && (
+				<>
+					<RangeControl label={ __( 'Espacio de arriba (px)', 'fan-deco-studio' ) } min={ 0 } max={ 240 } value={ attributes.spaceTop } onChange={ ( spaceTop ) => setAttributes( { spaceTop: spaceTop || 0 } ) } />
+					<RangeControl label={ __( 'Espacio de abajo (px)', 'fan-deco-studio' ) } min={ 0 } max={ 240 } value={ attributes.spaceBottom } onChange={ ( spaceBottom ) => setAttributes( { spaceBottom: spaceBottom || 0 } ) } />
+				</>
+			) }
 		</PanelBody>
 		<PanelBody title={ __( 'Movimiento', 'fan-deco-studio' ) } initialOpen={ false }>
 			<ToggleControl label={ __( 'Avanzar solo', 'fan-deco-studio' ) } help={ __( 'Se pausa al pasar el cursor o enfocar, y no se mueve si el visitante prefiere menos movimiento.', 'fan-deco-studio' ) } checked={ !! attributes.autoplay } onChange={ ( autoplay ) => setAttributes( { autoplay } ) } />

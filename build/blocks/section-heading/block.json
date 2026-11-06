@@ -48,6 +48,26 @@
     "animate": {
       "type": "boolean",
       "default": true
+    },
+    "titleSize": {
+      "type": "integer",
+      "default": 0
+    },
+    "descSize": {
+      "type": "integer",
+      "default": 0
+    },
+    "customSpace": {
+      "type": "boolean",
+      "default": false
+    },
+    "spaceTop": {
+      "type": "integer",
+      "default": 0
+    },
+    "spaceBottom": {
+      "type": "integer",
+      "default": 0
     }
   },
   "supports": {
@@ -57,6 +77,11 @@
         "top",
         "bottom"
       ]
+    },
+    "color": {
+      "background": true,
+      "text": false,
+      "link": false
     }
   },
   "editorScript": "file:./index.js",

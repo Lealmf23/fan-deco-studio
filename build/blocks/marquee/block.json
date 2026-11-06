@@ -23,7 +23,12 @@
   },
   "supports": {
     "html": false,
-    "align": false
+    "align": false,
+    "color": {
+      "background": true,
+      "text": false,
+      "link": false
+    }
   },
   "render": "file:./render.php",
   "editorScript": "file:./index.js"

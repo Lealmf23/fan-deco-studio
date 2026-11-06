@@ -86,7 +86,7 @@ $alt_lit = (bool) apply_filters( 'fandeco_card_hover_is_lit', false, $product, $
 		<?php endif; ?>
 	</div>
 		<?php if ( $show_cart ) : // botón circular que lleva a la ficha del producto (no agrega al carrito) ?>
-			<div class="fd-product-card__add"><a class="button fd-product-card__go product_type_variable" href="<?php echo esc_url( $link ); ?>" aria-label="<?php echo esc_attr( sprintf( /* translators: %s: nombre del producto */ __( 'Ver producto: %s', 'fan-deco-studio' ), $product->get_name() ) ); ?>"><?php esc_html_e( 'Ver producto', 'fan-deco-studio' ); ?></a></div>
+			<div class="fd-product-card__add"><a class="button fd-product-card__go product_type_variable" href="<?php echo esc_url( $link ); ?>" aria-label="<?php echo esc_attr( sprintf( /* translators: %s: nombre del producto */ __( 'Ver producto: %s', 'fan-deco-studio' ), $product->get_name() ) ); ?>"><?php echo fandeco_icon( 'cart' ); // phpcs:ignore WordPress.Security.EscapeOutput ?><span class="fd-go-label"><?php esc_html_e( 'Ver producto', 'fan-deco-studio' ); ?></span></a></div>
 		<?php endif; ?>
 	<div class="fd-product-card__body">
 		<h3 class="fd-product-card__title"><a href="<?php echo esc_url( $link ); ?>"><?php echo esc_html( $product->get_name() ); ?></a></h3>

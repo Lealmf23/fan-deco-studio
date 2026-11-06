@@ -275,12 +275,17 @@ form.cart.is-attention { animation: fd-attention 1.1s var(--ease-fd); }
 .fd-related { margin-top: 3rem; }
 .fd-related__title { margin: 0 0 0.5rem; font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; letter-spacing: -0.02em; text-align: left; }
 
-/* Al pasar el mouse: la tarjeta se eleva un poco, la foto hace zoom lento, la segunda foto aparece con fundido y los puntos de color se muestran */
+/* Al pasar el mouse: la tarjeta se eleva un poco, la foto hace zoom lento, la segunda foto aparece con fundido y los puntos de color siguen a la vista */
 .fd-product-card__alt { transition: opacity 700ms var(--ease-fd), transform 1.2s var(--ease-fd); }
 .fd-product-card { transition: transform 500ms var(--ease-fd); }
 @media (hover: hover) {
 	.fd-product-card:hover { transform: translateY(-4px); }
-	.fd-product-card .fd-product-card__options { opacity: 0; transition: opacity 500ms var(--ease-fd); }
-	.fd-product-card:hover .fd-product-card__options, .fd-product-card:focus-within .fd-product-card__options { opacity: 1; }
 }
 @media (prefers-reduced-motion: reduce) { .fd-product-card, .fd-product-card__alt, .fd-product-card__media img { transition: none; } .fd-product-card:hover { transform: none; } }
+
+/* Botón de la tarjeta con icono SVG propio (no depende de máscaras CSS) y color fijo a salvo de los estilos del otro tema */
+.fd-product-card .fd-product-card__add a.fd-product-card__go { color: var(--color-fd-blue, #292824); }
+.fd-product-card .fd-product-card__add a.fd-product-card__go:hover { color: #fff; }
+.fd-product-card__go::before { content: none !important; }
+.fd-product-card__go .fd-icon { display: block; width: 1.2rem; height: 1.2rem; flex: none; }
+.fd-product-card__go .fd-go-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }

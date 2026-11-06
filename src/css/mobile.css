@@ -171,9 +171,7 @@
 	.fd-product-card .fd-product-card__options { backdrop-filter: none; background: rgb(41 40 36 / 0.7); }
 	.fd-product-card__add .fd-product-card__go, .woocommerce .fd-product-card__add a.fd-product-card__go { backdrop-filter: none; background: #fff; }
 	.fd-hero-switch, .fd-product-card__options { backdrop-filter: none; }
-	.fd-bancar.is-ready .fd-bancar__slide img { filter: none; transition: opacity 400ms ease; }
-	.fd-bancar.is-ready .fd-bancar__slide:not(.is-active) img { opacity: 0.82; }
-	.fd-bancar.is-ready .fd-bancar__slide.is-active img { opacity: 1; }
+	.fd-bancar.is-ready .fd-bancar__slide img { transition: opacity 400ms ease; }
 	.fd-product-card__media img { transition: none; }
 }
 .fd-marquee.is-offscreen .fd-marquee__track { animation-play-state: paused; }

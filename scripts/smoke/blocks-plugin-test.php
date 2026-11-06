@@ -56,5 +56,16 @@ check( ! str_contains( fd_render_block( 'photo-carousel', array( 'photos' => arr
 $GLOBALS['fd_img'] = array_fill_keys( range( 1, 9 ), '/img/x.jpg' );
 $fpc = fd_render_block( 'featured-products', array( 'layout' => 'grid' ) );
 check( str_contains( $fpc, 'data-src=' ) && ! preg_match( '/<img[^>]*fd-product-card__alt[^>]*\ssrc=/', $fpc ), 'tarjetas: la segunda foto no se descarga hasta pasar el mouse' );
+
+$sh = fd_render_block( 'section-heading', array( 'title' => 'Hola', 'titleSize' => 500, 'descSize' => 24, 'customSpace' => true, 'spaceTop' => 40, 'spaceBottom' => 9999 ) );
+check( str_contains( $sh, '--fd-sh-title:96px' ) && str_contains( $sh, '--fd-sh-desc:24px' ) && str_contains( $sh, '--fd-sh-top:40px' ) && str_contains( $sh, '--fd-sh-bottom:240px' ) && str_contains( $sh, 'fd-section-heading--space' ), 'encabezado: tamaños y espacios ajustables, con límites' );
+check( ! str_contains( fd_render_block( 'section-heading', array( 'title' => 'Hola' ) ), '--fd-sh-' ), 'encabezado: sin ajustes usa el diseño automático' );
+$bs = fd_render_block( 'banner-carousel', array( 'slides' => array( array( 'imageId' => 1 ) ), 'customSpace' => true, 'spaceTop' => 12, 'spaceBottom' => 80 ) );
+check( str_contains( $bs, '--fd-b-top:12px' ) && str_contains( $bs, '--fd-b-bottom:80px' ) && str_contains( $bs, 'fd-bancar--space' ), 'banner: espacio de arriba y abajo ajustable' );
+foreach ( glob( dirname( __DIR__, 2 ) . '/src/blocks/*/block.json' ) as $bj ) {
+	$j = json_decode( (string) file_get_contents( $bj ), true );
+	if ( empty( $j['supports']['color']['background'] ) ) { check( false, 'fondo editable en ' . basename( dirname( $bj ) ) ); }
+}
+check( ! str_contains( (string) file_get_contents( dirname( __DIR__, 2 ) . '/src/css/banners.css' ), 'repeating-linear-gradient' ), 'banner: sin rayas en las fotos de atrás' );
 echo $fail ? "\n$fail verificación(es) fallaron\n" : "\nTodas las verificaciones pasaron\n";
 exit( $fail ? 1 : 0 );

@@ -38,8 +38,15 @@ $has_text = '' !== $title || '' !== $desc || '' !== $eyebrow;
 $total    = count( $slides );
 $autoplay = ! empty( $attributes['autoplay'] ) && $total > 1;
 $interval = max( 3, min( 8, (int) ( $attributes['interval'] ?? 5 ) ) );
+// Espacio de arriba y de abajo ajustable (px; apagado = automático).
+$space_class = '';
+$space_style = '';
+if ( ! empty( $attributes['customSpace'] ) ) {
+	$space_class = ' fd-bancar--space';
+	$space_style = '--fd-b-top:' . max( 0, min( 240, absint( $attributes['spaceTop'] ?? 0 ) ) ) . 'px;--fd-b-bottom:' . max( 0, min( 240, absint( $attributes['spaceBottom'] ?? 0 ) ) ) . 'px;';
+}
 ?>
-<section <?php echo fandeco_block_attrs( 'bancar', $attributes, $has_text ? 'fd-bancar--split' : '' ); // phpcs:ignore WordPress.Security.EscapeOutput ?> data-fd-bancar data-autoplay="<?php echo $autoplay ? '1' : '0'; ?>" data-interval="<?php echo (int) $interval; ?>" role="region" aria-roledescription="<?php esc_attr_e( 'carrusel', 'fan-deco-studio' ); ?>" aria-label="<?php esc_attr_e( 'Banners destacados', 'fan-deco-studio' ); ?>">
+<section <?php echo fandeco_block_attrs( 'bancar', $attributes, ( $has_text ? 'fd-bancar--split' : '' ) . $space_class, $space_style ); // phpcs:ignore WordPress.Security.EscapeOutput ?> data-fd-bancar data-autoplay="<?php echo $autoplay ? '1' : '0'; ?>" data-interval="<?php echo (int) $interval; ?>" role="region" aria-roledescription="<?php esc_attr_e( 'carrusel', 'fan-deco-studio' ); ?>" aria-label="<?php esc_attr_e( 'Banners destacados', 'fan-deco-studio' ); ?>">
 	<div class="fd-container fd-bancar__layout">
 		<?php if ( $has_text ) : ?>
 			<div class="fd-bancar__text">

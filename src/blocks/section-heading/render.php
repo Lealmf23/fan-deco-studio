@@ -18,8 +18,26 @@ $link_tx = trim( (string) ( $attributes['linkText'] ?? '' ) );
 if ( '' === $title ) {
 	return;
 }
+// Tamaños y espaciados ajustables (números acotados; 0 = automático).
+$t_size = max( 0, min( 96, absint( $attributes['titleSize'] ?? 0 ) ) );
+$d_size = max( 0, min( 40, absint( $attributes['descSize'] ?? 0 ) ) );
+$custom = ! empty( $attributes['customSpace'] );
+$extra  = '';
+$style  = '';
+if ( $t_size ) {
+	$extra .= ' fd-section-heading--t';
+	$style .= '--fd-sh-title:' . $t_size . 'px;';
+}
+if ( $d_size ) {
+	$extra .= ' fd-section-heading--d';
+	$style .= '--fd-sh-desc:' . $d_size . 'px;';
+}
+if ( $custom ) {
+	$extra .= ' fd-section-heading--space';
+	$style .= '--fd-sh-top:' . max( 0, min( 240, absint( $attributes['spaceTop'] ?? 0 ) ) ) . 'px;--fd-sh-bottom:' . max( 0, min( 240, absint( $attributes['spaceBottom'] ?? 0 ) ) ) . 'px;';
+}
 ?>
-<div <?php echo fandeco_block_attrs( 'section-heading', $attributes, "fd-section-heading--{$align}" ); // phpcs:ignore WordPress.Security.EscapeOutput ?>>
+<div <?php echo fandeco_block_attrs( 'section-heading', $attributes, "fd-section-heading--{$align}{$extra}", $style ); // phpcs:ignore WordPress.Security.EscapeOutput ?>>
 	<div class="fd-container fd-section-heading__inner">
 		<div class="fd-section-heading__text">
 			<?php if ( $eyebrow ) : ?><p class="fd-eyebrow" data-fd-reveal><?php echo esc_html( $eyebrow ); ?></p><?php endif; ?>
