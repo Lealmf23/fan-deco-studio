@@ -124,6 +124,7 @@ function get_terms( $a ) {
 function sanitize_title_stub( $n ) { return strtolower( preg_replace( '/[^a-z]/i', '', iconv( 'UTF-8', 'ASCII//TRANSLIT', $n ) ) ); }
 function get_post_thumbnail_id( $id = 0 ) { return 0; }
 function get_post_meta( $id = 0, $key = '', $single = false ) { return ''; }
+function is_serialized( $v ) { return is_string( $v ) && str_starts_with( $v, 'a:' ); }
 function maybe_unserialize( $v ) { return is_string( $v ) && str_starts_with( $v, 'a:' ) ? unserialize( $v ) : $v; }
 function get_term_meta( $id, $key = '', $single = true ) {
 	if ( '' === $key ) { return 103 === $id ? array( 'blocksy_taxonomy_options' => array( serialize( array( 'x' => array( 'accent_color' => array( 'default' => array( 'color' => '#AA0000' ) ) ) ) ) ), 'otro' => array( 'sin color' ) ) : array(); }

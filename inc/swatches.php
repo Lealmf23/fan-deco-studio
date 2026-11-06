@@ -65,7 +65,7 @@ function fandeco_swatch_color( $term ): string {
 			continue;
 		}
 		foreach ( (array) $values as $raw ) {
-			$found = fandeco_find_hex( maybe_unserialize( $raw ) );
+			$found = fandeco_find_hex( is_string( $raw ) && is_serialized( $raw ) ? @unserialize( $raw, array( 'allowed_classes' => false ) ) : $raw ); // sin objetos: solo datos
 			if ( '' !== $found ) {
 				return $found;
 			}

@@ -3,6 +3,10 @@
 Cada archivo que se entrega lleva su versión: `fan-deco-studio-X.Y.Z.zip` y `fan-deco-core-X.Y.Z.zip`.
 La versión del tema también figura en Apariencia > Temas, en `style.css` y como comentario `<!-- Fan Deco Studio X.Y.Z -->` en el código fuente de cada página.
 
+## Tema 0.4.3 / Blocks 0.4.3 / Core 0.4.3
+### Seguridad
+- Al leer el color de los swatches de Blocksy se deserializa el meta del término **sin permitir objetos** (`allowed_classes => false`). Antes se usaba `maybe_unserialize`, que acepta objetos; el riesgo era bajo (solo un administrador escribe esos datos) pero se cierra.
+
 ## Tema 0.4.2 / Blocks 0.4.2 / Core 0.4.2
 ### Cambiado
 - **Espacios blancos entre bloques**: las secciones que van directo en el contenido de la página ya no heredan el margen vertical del tema (Blocksy los separaba con una franja blanca). El margen que definas en el bloque sigue valiendo. El espacio blanco de **arriba del primer bloque** lo pone Blocksy en las opciones de la página ("Espaciado vertical del área de contenido": elegir "sin espaciado").
