@@ -121,12 +121,12 @@ final class FanDeco_Installments {
 			esc_html( FanDeco_Installments_Calc::money( FanDeco_Installments_Calc::per_installment( $price, $n, $fmt['dec'] ), $fmt ) )
 		);
 		$out .= sprintf(
-			'<p class="fd-installments__transfer" data-fd-transfer-line%s>%s<strong data-fd-transfer-amount>%s</strong> %s <span class="fd-pay-badge">%s%% OFF</span></p>',
+			'<p class="fd-installments__transfer" data-fd-transfer-line%s>%s<strong data-fd-transfer-amount>%s</strong> <span class="fd-pay-badge">%s%% OFF</span> <span class="fd-installments__how">%s</span></p>',
 			$show_tr ? '' : ' hidden',
 			$prefix ? '<span data-fd-inst-prefix>' . $prefix . '</span>' : '',
 			esc_html( FanDeco_Installments_Calc::money( FanDeco_Installments_Calc::transfer_price( $price, $percent, $fmt['dec'] ), $fmt ) ),
-			esc_html__( 'con transferencia', 'fan-deco-core' ),
-			esc_html( $pct )
+			esc_html( $pct ),
+			esc_html__( 'pagando con transferencia', 'fan-deco-core' )
 		);
 		return $out . '</div>';
 	}

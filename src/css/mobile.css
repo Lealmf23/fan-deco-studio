@@ -130,8 +130,6 @@
 	}
 	.woocommerce div.product .product_title { font-size: calc(1.625rem * var(--fd-title-scale, 1)); letter-spacing: var(--fd-title-ls, -0.03em); margin-bottom: 0.5rem; }
 	.woocommerce div.product p.price, .woocommerce div.product span.price { font-size: 1.5rem; color: var(--color-fd-wine); margin-bottom: 1rem; }
-	.fd-installments { background: var(--color-fd-cream); }
-	.fd-installments p::before { background-color: #fff; }
 	.woocommerce div.product .woocommerce-product-details__short-description { color: var(--color-fd-muted); font-size: 0.9375rem; }
 	.fd-swatches { gap: 0.75rem; }
 	.fd-swatch--color { width: 2.75rem; height: 2.75rem; }

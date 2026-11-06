@@ -3,6 +3,14 @@
 Cada archivo que se entrega lleva su versión: `fan-deco-studio-X.Y.Z.zip` y `fan-deco-core-X.Y.Z.zip`.
 La versión del tema también figura en Apariencia > Temas, en `style.css` y como comentario `<!-- Fan Deco Studio X.Y.Z -->` en el código fuente de cada página.
 
+## Fan Deco Core 0.3.2 (precio más claro en la ficha)
+### Cambiado
+- Cuotas y transferencia ya no van en una tarjeta con iconos: ahora el precio con transferencia es grande, con el descuento al lado y "pagando con transferencia" debajo; las cuotas quedan en una línea con un icono chico de tarjeta.
+- Si hay precio con transferencia, el precio normal pasa a ser la referencia chica de arriba ("precio de lista"). Usa `:has()` (navegadores actuales); si no aplica, el precio queda como estaba.
+- El texto "con transferencia" pasa a "pagando con transferencia" (y el descuento es un elemento aparte, `.fd-pay-badge`, sin fondo).
+### Sin verificar en el sitio real
+- Probado con una maqueta, no con el tema Blocksy: falta ver que el precio de Blocksy quede justo antes del bloque (si hay algo en el medio, el precio de lista no se achica).
+
 ## Fan Deco Core 0.3.1 (cotizador de Andreani integrado)
 ### Agregado
 - `assets/andreani-skin.css` (solo CSS, no toca el HTML ni el JS de Andreani): el cotizador de envío de la ficha deja de verse como un widget rojo aparte. Cerrado es una fila más ("Calcular envío a tu código postal"); al tocarla se abre en el lugar, sin rebote ni tarjeta flotante, con el campo, el botón y los resultados en la paleta del sitio.
