@@ -38,5 +38,15 @@ foreach ( array( 'andreani-calc-bubble', 'andreani-calc-content', 'andreani-calc
 check( str_contains( $sk, '--andreani-calc-primary: var(--fd-a-accent)' ) && ! str_contains( $sk, '#d71920' ), 'recolorea a la paleta del sitio (sin el rojo de Andreani)' );
 check( str_contains( $sk, ':not(.andreani-calc-widget--floating)' ), 'el modo flotante no se rediseña, solo se recolorea' );
 check( str_contains( $main, 'andreani-skin.css' ) && str_contains( $main, "class_exists( 'Andreani_Cotizador_Widget' )" ) && str_contains( $main, 'fandeco_core_andreani_skin' ), 'se carga solo en la ficha, solo con Andreani activo y se puede apagar con un filtro' );
+
+$lc = (string) @file_get_contents( $root . '/assets/loop-cards.css' );
+check( str_contains( $lc, 'woocommerce-loop-product__title' ) && str_contains( $lc, 'ct-woo-card-actions' ), 'loop-cards.css estiliza las tarjetas de Blocksy' );
+check( str_contains( $main, 'loop-cards.css' ) && str_contains( $main, 'fandeco_core_loop_cards_skin' ) && str_contains( $main, "'blocksy' !== get_template()" ), 'las tarjetas solo se rediseñan con Blocksy y se pueden apagar con un filtro' );
+$lt = (string) file_get_contents( $root . '/includes/class-lights.php' );
+check( str_contains( $lt, 'blocksy:woocommerce:product-card:thumbnail:gallery-images' ) && str_contains( $lt, 'fandeco_card_hover_image_id' ), 'la foto encendida es la segunda foto de la tarjeta' );
+$ins = (string) file_get_contents( $root . '/includes/class-installments.php' );
+check( str_contains( $ins, 'blocksy:woocommerce:product-card:price:after' ), 'cuotas y transferencia también en las tarjetas de Blocksy' );
+$card = (string) file_get_contents( dirname( __DIR__, 2 ) . '/template-parts/components/product-card.php' );
+check( str_contains( $card, 'fd-product-card__alt' ) && str_contains( $card, 'data-fd-photo' ), 'la tarjeta de Fan Deco trae segunda foto y puntos' );
 echo $fail ? "\n$fail verificación(es) fallaron\n" : "\nTodas las verificaciones pasaron\n";
 exit( $fail ? 1 : 0 );

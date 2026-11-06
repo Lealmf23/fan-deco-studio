@@ -102,6 +102,12 @@
 .fd-pinfo-specs th { width: 40%; font-weight: 500; color: var(--color-fd-muted); }
 .fd-pinfo-specs td { font-weight: 500; text-align: right; }
 @keyframes fd-attention { 0%, 100% { box-shadow: 0 0 0 0 transparent; } 30% { box-shadow: 0 0 0 6px rgb(98 101 69 / 0.18); border-radius: 1rem; } }
+.fd-installments--loop { display: grid; gap: 0.1rem; }
+.fd-installments--loop .fd-installments__transfer { order: -1; }
+.fd-installments--loop .fd-installments__transfer strong { font-size: 1.4rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.15; color: var(--color-fd-wine); }
+.fd-installments--loop .fd-installments__how { display: inline; margin-left: 0.25rem; font-size: 0.8rem; font-weight: 600; color: var(--color-fd-wine-dark); }
+.fd-installments--loop .fd-pay-badge { display: none; }
+.fd-installments--loop .fd-installments__line { color: var(--color-fd-muted); }
 
 /* ---- woocommerce.css ---- */
 
@@ -124,7 +130,9 @@
 
 
 @media (max-width: 767px) {
-	.fd-installments--loop { display: none; }
+	.fd-installments--loop .fd-installments__line { display: none; }
+	.fd-installments--loop .fd-installments__transfer strong { font-size: 1.15rem; }
+	.fd-installments--loop .fd-installments__how { display: block; margin: 0; font-size: 0.75rem; }
 }
 
 @media (max-width: 767px) {

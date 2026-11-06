@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Fan Deco Core
  * Description: Motor SEO propio (reemplazo de AIOSEO), redirecciones e importador para la tienda Fan Deco. Funciona con cualquier tema; pensado para Fan Deco Studio.
- * Version: 0.3.2
+ * Version: 0.3.3
  * Requires at least: 6.5
  * Requires PHP: 8.0
  * Author: Fan Deco
@@ -14,7 +14,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'FANDECO_CORE_VERSION', '0.3.2' );
+define( 'FANDECO_CORE_VERSION', '0.3.3' );
 define( 'FANDECO_CORE_FILE', __FILE__ );
 define( 'FANDECO_CORE_DIR', plugin_dir_path( __FILE__ ) );
 define( 'FANDECO_CORE_URL', plugin_dir_url( __FILE__ ) );
@@ -54,11 +54,26 @@ add_action(
 		if ( 'fan-deco-studio' === get_template() || ! function_exists( 'is_product' ) ) {
 			return;
 		}
-		if ( ( is_product() || is_checkout() ) && is_readable( FANDECO_CORE_DIR . 'assets/core.css' ) ) {
+		// En la ficha y el checkout, y también en los listados/tarjetas (tienda, relacionados, portada).
+		if ( is_readable( FANDECO_CORE_DIR . 'assets/core.css' ) ) {
 			wp_enqueue_style( 'fandeco-core', FANDECO_CORE_URL . 'assets/core.css', array(), FANDECO_CORE_VERSION );
 		}
 	},
 	5
+);
+
+// Tarjetas de producto de Blocksy con el estilo de Fan Deco (solo CSS).
+add_action(
+	'wp_enqueue_scripts',
+	static function () {
+		if ( 'blocksy' !== get_template() || ! class_exists( 'WooCommerce' ) || ! apply_filters( 'fandeco_core_loop_cards_skin', true ) ) {
+			return;
+		}
+		if ( is_readable( FANDECO_CORE_DIR . 'assets/loop-cards.css' ) ) {
+			wp_enqueue_style( 'fandeco-loop-cards', FANDECO_CORE_URL . 'assets/loop-cards.css', array(), FANDECO_CORE_VERSION );
+		}
+	},
+	30
 );
 
 // Cotizador de envío de Andreani: lo integra al estilo del sitio (solo CSS). Se carga solo si Andreani está activo.

@@ -18,7 +18,11 @@ final class FanDeco_Installments {
 		add_action( 'admin_menu', array( __CLASS__, 'menu' ) );
 		add_action( 'admin_init', array( __CLASS__, 'register' ) );
 		add_action( 'woocommerce_single_product_summary', array( __CLASS__, 'render_single' ), 11 );
-		add_action( 'woocommerce_after_shop_loop_item_title', array( __CLASS__, 'render_loop' ), 11 );
+		if ( 'blocksy' === get_template() ) {
+			add_action( 'blocksy:woocommerce:product-card:price:after', array( __CLASS__, 'render_loop' ) ); // tarjetas de Blocksy (no usan el gancho de WooCommerce)
+		} else {
+			add_action( 'woocommerce_after_shop_loop_item_title', array( __CLASS__, 'render_loop' ), 11 );
+		}
 		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'assets' ) );
 		add_shortcode( 'fandeco_cuotas', array( __CLASS__, 'shortcode' ) );
 	}

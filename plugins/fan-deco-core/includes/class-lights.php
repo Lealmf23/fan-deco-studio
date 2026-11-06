@@ -22,6 +22,38 @@ final class FanDeco_Lights {
 		add_action( 'woocommerce_product_thumbnails', array( __CLASS__, 'switch_button' ), 25 );
 		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'assets' ) );
 		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'admin_assets' ) );
+		// Tarjetas de los listados: la foto encendida es la que aparece al pasar el mouse.
+		add_filter( 'blocksy:woocommerce:product-card:thumbnail:gallery-images', array( __CLASS__, 'card_gallery' ), 20 );
+		add_filter( 'fandeco_card_hover_image_id', array( __CLASS__, 'card_hover_id' ), 10, 2 );
+		add_filter( 'fandeco_card_hover_is_lit', array( __CLASS__, 'card_hover_is_lit' ), 10, 3 );
+	}
+
+	/** Blocksy: pone la foto encendida como segunda imagen de la tarjeta (la usa su efecto "cambiar imagen" al pasar el mouse). */
+	public static function card_gallery( $images ) {
+		global $product;
+		if ( ! is_array( $images ) || ! $images || ! $product instanceof WC_Product || ! apply_filters( 'fandeco_core_card_lit_hover', true ) ) {
+			return $images;
+		}
+		$lit = self::product_lit_id( $product );
+		if ( ! $lit || (int) $images[0] === $lit ) {
+			return $images;
+		}
+		return array_values( array_merge( array( $images[0], $lit ), array_diff( array_slice( $images, 1 ), array( $lit ) ) ) );
+	}
+
+	/** Tema/bloques de Fan Deco: segunda foto de la tarjeta. */
+	public static function card_hover_id( $id, $product ) {
+		if ( $product instanceof WC_Product && apply_filters( 'fandeco_core_card_lit_hover', true ) ) {
+			$lit = self::product_lit_id( $product );
+			if ( $lit ) {
+				return $lit;
+			}
+		}
+		return $id;
+	}
+
+	public static function card_hover_is_lit( $is_lit, $product, $alt_id ) {
+		return ( $product instanceof WC_Product && $alt_id && self::product_lit_id( $product ) === (int) $alt_id ) ? true : $is_lit;
 	}
 
 	/* ---------------- Datos ---------------- */

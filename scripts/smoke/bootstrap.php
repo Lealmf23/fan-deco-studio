@@ -78,6 +78,7 @@ class WC_Product {
 	public function get_name() { return $this->name; }
 	public function get_permalink() { return '/producto/' . $this->id; }
 	public function get_image_id() { return $this->id <= 8 ? $this->id : 0; }
+	public function get_gallery_image_ids() { return $this->id <= 8 ? array( $this->id + 1 ) : array(); }
 	public function get_price_html() { return $this->sale ? '<del>$20.000</del> <ins>' . $this->price . '</ins>' : $this->price; }
 	public function is_on_sale() { return $this->sale; }
 	public function is_featured() { return $this->featured; }

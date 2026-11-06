@@ -19,9 +19,23 @@ $image_id  = $product->get_image_id();
 $badges    = fandeco_product_badges( $product );
 $options   = fandeco_variation_swatch_data( $product );
 $max_dots  = 5;
+
+// Segunda foto para alternar al pasar el mouse: la foto "encendida" (si hay) o la primera de la galería.
+$alt_id = 0;
+if ( $image_id ) {
+	foreach ( $product->get_gallery_image_ids() as $gid ) {
+		if ( (int) $gid !== (int) $image_id ) {
+			$alt_id = (int) $gid;
+			break;
+		}
+	}
+}
+$alt_id  = (int) apply_filters( 'fandeco_card_hover_image_id', $alt_id, $product );
+$alt_id  = ( $alt_id && (int) $alt_id !== (int) $image_id && wp_attachment_is_image( $alt_id ) ) ? $alt_id : 0;
+$alt_lit = (bool) apply_filters( 'fandeco_card_hover_is_lit', false, $product, $alt_id );
 ?>
 <article class="fd-product-card">
-	<div class="fd-product-card__window">
+	<div class="fd-product-card__window<?php echo $alt_id ? ' has-alt' : ''; ?>">
 		<a class="fd-product-card__media" href="<?php echo esc_url( $link ); ?>" tabindex="-1" aria-hidden="true">
 			<?php
 			if ( $image_id ) {
@@ -29,8 +43,17 @@ $max_dots  = 5;
 			} else {
 				echo wc_placeholder_img( 'fandeco-card' ); // phpcs:ignore WordPress.Security.EscapeOutput
 			}
+			if ( $alt_id ) {
+				echo wp_get_attachment_image( $alt_id, 'fandeco-card', false, array( 'class' => 'fd-product-card__alt', 'loading' => 'lazy', 'decoding' => 'async', 'alt' => '', 'sizes' => '(max-width: 767px) 50vw, (max-width: 1023px) 33vw, 25vw' ) ); // phpcs:ignore WordPress.Security.EscapeOutput
+			}
 			?>
 		</a>
+		<?php if ( $alt_id ) : ?>
+			<div class="fd-product-card__photos<?php echo $alt_lit ? ' is-lit' : ''; ?>" role="group" aria-label="<?php esc_attr_e( 'Fotos del producto', 'fan-deco-studio' ); ?>">
+				<button type="button" class="fd-photo-dot" data-fd-photo="0" aria-label="<?php esc_attr_e( 'Ver la primera foto', 'fan-deco-studio' ); ?>"></button>
+				<button type="button" class="fd-photo-dot" data-fd-photo="1" aria-label="<?php echo esc_attr( $alt_lit ? __( 'Ver el producto encendido', 'fan-deco-studio' ) : __( 'Ver la segunda foto', 'fan-deco-studio' ) ); ?>"></button>
+			</div>
+		<?php endif; ?>
 		<?php if ( $badges ) : ?>
 			<ul class="fd-product-card__badges">
 				<?php foreach ( $badges as $badge ) : ?>

@@ -105,7 +105,9 @@
 	.fd-product-card__add { grid-row: 2; justify-self: end; align-self: end; margin: 0 0.1rem 0.1rem 0; }
 	.fd-product-card__add .button, .woocommerce .fd-product-card__add a.button { width: 2.5rem; height: 2.5rem; background: var(--color-fd-wine); color: #fff; box-shadow: none; }
 	.fd-product-card__add .button::before, .woocommerce .fd-product-card__add a.button::before { width: 1.15rem; height: 1.15rem; }
-	.fd-installments--loop { display: none; }
+	.fd-installments--loop .fd-installments__line { display: none; }
+	.fd-installments--loop .fd-installments__transfer strong { font-size: 1.15rem; }
+	.fd-installments--loop .fd-installments__how { display: block; margin: 0; font-size: 0.75rem; }
 
 	/* Tienda */
 	.woocommerce-products-header__title.page-title { font-size: calc(2.25rem * var(--fd-title-scale, 1)); letter-spacing: var(--fd-title-ls, -0.035em); margin-top: 0; }

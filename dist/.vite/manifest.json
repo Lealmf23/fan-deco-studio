@@ -24,7 +24,7 @@
     "isDynamicEntry": true
   },
   "src/js/main.js": {
-    "file": "assets/main-CHJhP7Rs.js",
+    "file": "assets/main-pURJ8fp5.js",
     "name": "main",
     "src": "src/js/main.js",
     "isEntry": true,
@@ -37,7 +37,7 @@
       "src/js/animations.js"
     ],
     "css": [
-      "assets/main-BLosrzev.css"
+      "assets/main-DQlCJboY.css"
     ],
     "assets": [
       "assets/dm-sans-latin-wght-normal-Xz1IZZA0.woff2",
@@ -54,7 +54,7 @@
     ]
   },
   "src/js/shop-ui.js": {
-    "file": "assets/shop-ui-Cr10-t8k.js",
+    "file": "assets/shop-ui-ChnxkRSh.js",
     "name": "shop-ui",
     "src": "src/js/shop-ui.js",
     "isDynamicEntry": true,

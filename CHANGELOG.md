@@ -3,6 +3,19 @@
 Cada archivo que se entrega lleva su versión: `fan-deco-studio-X.Y.Z.zip` y `fan-deco-core-X.Y.Z.zip`.
 La versión del tema también figura en Apariencia > Temas, en `style.css` y como comentario `<!-- Fan Deco Studio X.Y.Z -->` en el código fuente de cada página.
 
+## Tema 0.3.3 / Fan Deco Blocks 0.3.3 / Fan Deco Core 0.3.3 (tarjetas de producto con segunda foto)
+Las versiones de los tres paquetes ahora suben juntas.
+### Agregado
+- **Tarjeta de Fan Deco (bloque "Productos destacados" y tema)**: al pasar el mouse cambia a una segunda foto, con una pastilla de puntos arriba a la derecha (el segundo punto es ámbar si es la foto "encendida"); en pantallas táctiles se tocan los puntos. La segunda foto es la "encendida" cargada en Fan Deco Core o, si no hay, la primera de la galería.
+- **Core con Blocksy, tarjetas del listado y de relacionados** (`assets/loop-cards.css`, solo CSS): foto en ventana de esquinas suaves, título a la izquierda en la tipografía del sitio, precios alineados y botón discreto. Apagable con el filtro `fandeco_core_loop_cards_skin`.
+- **Core con Blocksy**: la foto encendida pasa a ser la segunda imagen de la tarjeta, y el precio con transferencia / cuotas ahora se muestran también en sus tarjetas (usa el gancho propio de Blocksy `blocksy:woocommerce:product-card:price:after`, verificado en su código).
+- Precio en tarjetas: el precio de lista queda chico arriba y, debajo, el precio con transferencia grande ("pagando con transferencia"). En móvil se ocultan las cuotas para que no se amontone.
+- `core.css` ahora también se carga en tienda, relacionados y portada (antes solo ficha y checkout).
+### Importante
+- El cambio de foto al pasar el mouse en las tarjetas de **Blocksy** lo hace Blocksy: hay que activarlo en Personalizar > WooCommerce > Tarjeta de producto (efecto de la imagen al pasar el mouse: "cambiar imagen"; el nombre exacto del menú no está verificado). Core solo le entrega la foto encendida como segunda imagen.
+### Sin verificar en el sitio real
+- Los estilos de las tarjetas de Blocksy se escribieron a partir de su código PHP (no de su HTML final) y se probaron con una maqueta; pueden necesitar un ajuste al verlos reales.
+
 ## Fan Deco Core 0.3.2 (precio más claro en la ficha)
 ### Cambiado
 - Cuotas y transferencia ya no van en una tarjeta con iconos: ahora el precio con transferencia es grande, con el descuento al lado y "pagando con transferencia" debajo; las cuotas quedan en una línea con un icono chico de tarjeta.

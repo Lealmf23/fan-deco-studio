@@ -215,3 +215,17 @@ export function initShopUi() {
 	initQuickView();
 	initCartPanel();
 }
+
+/* Puntos de fotos de la tarjeta de producto: tocar alterna entre la primera foto y la segunda (en pantallas táctiles no hay "hover"). */
+document.addEventListener( 'click', ( e ) => {
+	const dot = e.target.closest( '.fd-photo-dot' );
+	if ( ! dot ) {
+		return;
+	}
+	e.preventDefault();
+	const win = dot.closest( '.fd-product-card__window' );
+	if ( win ) {
+		win.classList.toggle( 'is-alt', '1' === dot.dataset.fdPhoto );
+		win.classList.remove( 'has-alt' ); // una vez elegida a mano, manda el toque y no el hover
+	}
+} );
