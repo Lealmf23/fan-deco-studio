@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Fan Deco Core
  * Description: Motor SEO propio (reemplazo de AIOSEO), redirecciones e importador para la tienda Fan Deco. Funciona con cualquier tema; pensado para Fan Deco Studio.
- * Version: 0.3.0
+ * Version: 0.3.1
  * Requires at least: 6.5
  * Requires PHP: 8.0
  * Author: Fan Deco
@@ -14,7 +14,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'FANDECO_CORE_VERSION', '0.3.0' );
+define( 'FANDECO_CORE_VERSION', '0.3.1' );
 define( 'FANDECO_CORE_FILE', __FILE__ );
 define( 'FANDECO_CORE_DIR', plugin_dir_path( __FILE__ ) );
 define( 'FANDECO_CORE_URL', plugin_dir_url( __FILE__ ) );
@@ -59,6 +59,21 @@ add_action(
 		}
 	},
 	5
+);
+
+// Cotizador de envío de Andreani: lo integra al estilo del sitio (solo CSS). Se carga solo si Andreani está activo.
+add_action(
+	'wp_enqueue_scripts',
+	static function () {
+		if ( ! function_exists( 'is_product' ) || ! is_product() || ! class_exists( 'Andreani_Cotizador_Widget' ) ) {
+			return;
+		}
+		if ( ! apply_filters( 'fandeco_core_andreani_skin', true ) || ! is_readable( FANDECO_CORE_DIR . 'assets/andreani-skin.css' ) ) {
+			return;
+		}
+		wp_enqueue_style( 'fandeco-andreani-skin', FANDECO_CORE_URL . 'assets/andreani-skin.css', array(), FANDECO_CORE_VERSION );
+	},
+	30
 );
 
 add_action(

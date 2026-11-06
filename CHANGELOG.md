@@ -3,6 +3,13 @@
 Cada archivo que se entrega lleva su versión: `fan-deco-studio-X.Y.Z.zip` y `fan-deco-core-X.Y.Z.zip`.
 La versión del tema también figura en Apariencia > Temas, en `style.css` y como comentario `<!-- Fan Deco Studio X.Y.Z -->` en el código fuente de cada página.
 
+## Fan Deco Core 0.3.1 (cotizador de Andreani integrado)
+### Agregado
+- `assets/andreani-skin.css` (solo CSS, no toca el HTML ni el JS de Andreani): el cotizador de envío de la ficha deja de verse como un widget rojo aparte. Cerrado es una fila más ("Calcular envío a tu código postal"); al tocarla se abre en el lugar, sin rebote ni tarjeta flotante, con el campo, el botón y los resultados en la paleta del sitio.
+- Se carga solo en la ficha y solo si el plugin de Andreani está activo. Para apagarlo: `add_filter( 'fandeco_core_andreani_skin', '__return_false' );`. El modo "flotante" de Andreani solo se recolorea.
+### Sin verificar en el sitio real
+- Probado con una maqueta del HTML y CSS de Andreani (leídos del sitio, solo lectura) en escritorio y móvil; falta verla con el plugin real, también con la posición y el tema elegidos en sus ajustes.
+
 ## Fan Deco Core 0.3.0 (adaptado a Blocksy)
 Verificado leyendo el código real de Blocksy instalado en el sitio (solo lectura).
 ### Agregado

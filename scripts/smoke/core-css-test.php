@@ -28,5 +28,15 @@ $main = (string) file_get_contents( $root . '/fan-deco-core.php' );
 check( str_contains( $main, "assets/core.css" ) && str_contains( $main, "'fan-deco-studio' === get_template()" ), 'se carga en ficha y checkout, salvo con el tema Fan Deco Studio (que ya lo trae)' );
 $lights = (string) file_get_contents( $root . '/assets/lights.css' );
 check( str_contains( $lights, 'ct-media-container' ) && str_contains( $lights, 'data-thumbs' ), 'interruptor de luz: reglas para la galería de Blocksy' );
+
+// Cotizador de Andreani: solo CSS, solo con Andreani activo, no renombra su HTML y conserva los estados (abierto, cargando, resultados, error).
+$sk = (string) @file_get_contents( $root . '/assets/andreani-skin.css' );
+check( '' !== $sk && strlen( $sk ) < 12000, 'andreani-skin.css existe y es liviano (' . round( strlen( $sk ) / 1024, 1 ) . ' kB)' );
+foreach ( array( 'andreani-calc-bubble', 'andreani-calc-content', 'andreani-calc-widget--expanded', 'andreani-calc-rate', 'andreani-calc-button' ) as $cls ) {
+	check( str_contains( $sk, $cls ), "andreani-skin.css cubre .$cls" );
+}
+check( str_contains( $sk, '--andreani-calc-primary: var(--fd-a-accent)' ) && ! str_contains( $sk, '#d71920' ), 'recolorea a la paleta del sitio (sin el rojo de Andreani)' );
+check( str_contains( $sk, ':not(.andreani-calc-widget--floating)' ), 'el modo flotante no se rediseña, solo se recolorea' );
+check( str_contains( $main, 'andreani-skin.css' ) && str_contains( $main, "class_exists( 'Andreani_Cotizador_Widget' )" ) && str_contains( $main, 'fandeco_core_andreani_skin' ), 'se carga solo en la ficha, solo con Andreani activo y se puede apagar con un filtro' );
 echo $fail ? "\n$fail verificación(es) fallaron\n" : "\nTodas las verificaciones pasaron\n";
 exit( $fail ? 1 : 0 );
