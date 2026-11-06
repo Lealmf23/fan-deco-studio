@@ -3,6 +3,11 @@
 Cada archivo que se entrega lleva su versión: `fan-deco-studio-X.Y.Z.zip` y `fan-deco-core-X.Y.Z.zip`.
 La versión del tema también figura en Apariencia > Temas, en `style.css` y como comentario `<!-- Fan Deco Studio X.Y.Z -->` en el código fuente de cada página.
 
+## Tema 0.3.7 / Blocks 0.3.7 / Core 0.3.7
+### Cambiado
+- El botón de las tarjetas (que lleva a la ficha) ahora usa el icono de **carrito de compras** en lugar de la flecha; también en las tarjetas de Blocksy con opciones.
+- Móvil: el precio con transferencia ya no se parte en dos líneas.
+
 ## Tema 0.3.6 / Blocks 0.3.6 / Core 0.3.6 (tarjetas del bloque "Productos destacados")
 ### Cambiado
 - **Puntos de color**: solo aparecen si el producto tiene variantes de color, uno por variante (hasta 8), arriba a la derecha. Al pasar el mouse (o tocar) se ve la foto de esa variante, si la variación tiene foto propia. Se quitaron los puntos de "foto 1 / foto 2".
