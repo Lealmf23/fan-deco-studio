@@ -14,6 +14,10 @@ if ( ! $items ) {
 	return;
 }
 $speed = max( 10, min( 90, (int) ( $attributes['speed'] ?? 30 ) ) );
+// Alto (espacio de arriba y de abajo de las letras) y tamaño de letra en px; 0 = automático.
+$pad   = max( 0, min( 80, absint( $attributes['height'] ?? 0 ) ) );
+$fsz   = max( 0, min( 40, absint( $attributes['textSize'] ?? 0 ) ) );
+$mstyle = '--fd-marquee-speed:' . (int) $speed . 's;' . ( $pad ? '--fd-marquee-py:' . $pad . 'px;' : '' ) . ( $fsz ? '--fd-marquee-fs:' . $fsz . 'px;' : '' );
 // El grupo se repite hasta cubrir pantallas anchas; la copia exacta (aria-hidden) hace el bucle sin saltos.
 $group = '';
 for ( $i = 0; $i < 2; $i++ ) {
@@ -23,7 +27,7 @@ for ( $i = 0; $i < 2; $i++ ) {
 	}
 }
 ?>
-<section <?php echo fandeco_block_attrs( 'marquee', $attributes ); // phpcs:ignore WordPress.Security.EscapeOutput ?> style="--fd-marquee-speed:<?php echo (int) $speed; ?>s" aria-label="<?php echo esc_attr( implode( ', ', $items ) ); ?>" role="group">
+<section <?php echo fandeco_block_attrs( 'marquee', $attributes, '', $mstyle ); // phpcs:ignore WordPress.Security.EscapeOutput ?> aria-label="<?php echo esc_attr( implode( ', ', $items ) ); ?>" role="group">
 	<div class="fd-marquee__track" aria-hidden="true">
 		<div class="fd-marquee__group"><?php echo $group; // phpcs:ignore WordPress.Security.EscapeOutput -- construido con esc_html. ?></div>
 		<div class="fd-marquee__group"><?php echo $group; // phpcs:ignore WordPress.Security.EscapeOutput -- construido con esc_html. ?></div>

@@ -19,6 +19,14 @@
     "animate": {
       "type": "boolean",
       "default": true
+    },
+    "height": {
+      "type": "integer",
+      "default": 0
+    },
+    "textSize": {
+      "type": "integer",
+      "default": 0
     }
   },
   "supports": {

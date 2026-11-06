@@ -3,6 +3,13 @@
 Cada archivo que se entrega lleva su versión: `fan-deco-studio-X.Y.Z.zip` y `fan-deco-core-X.Y.Z.zip`.
 La versión del tema también figura en Apariencia > Temas, en `style.css` y como comentario `<!-- Fan Deco Studio X.Y.Z -->` en el código fuente de cada página.
 
+## Tema 0.4.2 / Blocks 0.4.2 / Core 0.4.2
+### Cambiado
+- **Espacios blancos entre bloques**: las secciones que van directo en el contenido de la página ya no heredan el margen vertical del tema (Blocksy los separaba con una franja blanca). El margen que definas en el bloque sigue valiendo. El espacio blanco de **arriba del primer bloque** lo pone Blocksy en las opciones de la página ("Espaciado vertical del área de contenido": elegir "sin espaciado").
+- **Franja de mensajes**: ya **no se detiene al pasar el mouse**. Solo se pausa cuando no está a la vista.
+### Agregado
+- **Franja de mensajes**: ajustes de **alto** (espacio de arriba y de abajo de las letras, px) y **tamaño de las letras** (px). El color de fondo ya se cambia en "Color > Fondo".
+
 ## Tema 0.4.1 / Blocks 0.4.1 / Core 0.4.1
 ### Agregado
 - **Color de fondo en todos los bloques**: cada sección tiene ahora el panel "Color > Fondo" del editor (se usa el de WordPress, con paleta y selector libre).

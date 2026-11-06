@@ -67,5 +67,9 @@ foreach ( glob( dirname( __DIR__, 2 ) . '/src/blocks/*/block.json' ) as $bj ) {
 	if ( empty( $j['supports']['color']['background'] ) ) { check( false, 'fondo editable en ' . basename( dirname( $bj ) ) ); }
 }
 check( ! str_contains( (string) file_get_contents( dirname( __DIR__, 2 ) . '/src/css/banners.css' ), 'repeating-linear-gradient' ), 'banner: sin rayas en las fotos de atrás' );
+
+$mq = fd_render_block( 'marquee', array( 'height' => 9, 'textSize' => 500 ) );
+check( str_contains( $mq, '--fd-marquee-py:9px' ) && str_contains( $mq, '--fd-marquee-fs:40px' ), 'franja: alto y tamaño de letra ajustables, con límites' );
+check( ! str_contains( (string) file_get_contents( dirname( __DIR__, 2 ) . '/src/css/marquee.css' ), 'hover' ), 'franja: no se detiene al pasar el mouse' );
 echo $fail ? "\n$fail verificación(es) fallaron\n" : "\nTodas las verificaciones pasaron\n";
 exit( $fail ? 1 : 0 );

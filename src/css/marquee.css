@@ -1,8 +1,7 @@
 /* Franja de mensajes: carbón con letras espaciadas; el recorrido es solo CSS. */
 .fd-marquee { padding: 0; overflow: hidden; background: var(--color-fd-blue); color: #fff; }
-.fd-marquee__track { display: flex; width: max-content; padding-block: clamp(1.1rem, 2.2vw, 1.5rem); animation: fd-marquee var(--fd-marquee-speed, 30s) linear infinite; }
-.fd-marquee:hover .fd-marquee__track { animation-play-state: paused; }
-.fd-marquee__group { display: flex; flex: none; align-items: center; gap: clamp(1.6rem, 3vw, 2.5rem); padding-right: clamp(1.6rem, 3vw, 2.5rem); font-size: clamp(0.75rem, 1.1vw, 0.9375rem); font-weight: 600; letter-spacing: 0.3em; white-space: nowrap; text-transform: uppercase; }
+.fd-marquee__track { display: flex; width: max-content; padding-block: var(--fd-marquee-py, clamp(1.1rem, 2.2vw, 1.5rem)); animation: fd-marquee var(--fd-marquee-speed, 30s) linear infinite; }
+.fd-marquee__group { display: flex; flex: none; align-items: center; gap: clamp(1.6rem, 3vw, 2.5rem); padding-right: clamp(1.6rem, 3vw, 2.5rem); font-size: var(--fd-marquee-fs, clamp(0.75rem, 1.1vw, 0.9375rem)); font-weight: 600; letter-spacing: 0.3em; white-space: nowrap; text-transform: uppercase; }
 .fd-marquee__group i { font-style: normal; opacity: 0.8; }
 @keyframes fd-marquee { to { transform: translateX(-50%); } }
 @media (prefers-reduced-motion: reduce) {
