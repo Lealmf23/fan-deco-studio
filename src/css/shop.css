@@ -24,8 +24,8 @@
 }
 .fd-product-card:hover .fd-product-card__window::after, .fd-product-card:focus-within .fd-product-card__window::after { opacity: 1; }
 .fd-product-card__media { display: block; width: 100%; height: 100%; }
-.fd-product-card__media img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 900ms var(--ease-fd); }
-.fd-product-card:hover .fd-product-card__media img { transform: scale(1.04); }
+.fd-product-card__media img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 1.2s var(--ease-fd); }
+.fd-product-card:hover .fd-product-card__media img { transform: scale(1.05); }
 .fd-product-card__badges { position: absolute; z-index: 2; top: 0.9rem; left: 0.9rem; display: flex; gap: 0.35rem; margin: 0; padding: 0; list-style: none; white-space: nowrap; }
 .fd-product-card__badges li { padding: 0.3rem 0.8rem; border-radius: 999px; background: var(--color-fd-wine); color: #fff; }
 .fd-product-card__window { grid-row: 1; grid-column: 1; }
@@ -274,3 +274,13 @@ form.cart.is-attention { animation: fd-attention 1.1s var(--ease-fd); }
 /* Relacionados en la ficha (plugin Fan Deco Blocks) */
 .fd-related { margin-top: 3rem; }
 .fd-related__title { margin: 0 0 0.5rem; font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; letter-spacing: -0.02em; text-align: left; }
+
+/* Al pasar el mouse: la tarjeta se eleva un poco, la foto hace zoom lento, la segunda foto aparece con fundido y los puntos de color se muestran */
+.fd-product-card__alt { transition: opacity 700ms var(--ease-fd), transform 1.2s var(--ease-fd); }
+.fd-product-card { transition: transform 500ms var(--ease-fd); }
+@media (hover: hover) {
+	.fd-product-card:hover { transform: translateY(-4px); }
+	.fd-product-card .fd-product-card__options { opacity: 0; transition: opacity 500ms var(--ease-fd); }
+	.fd-product-card:hover .fd-product-card__options, .fd-product-card:focus-within .fd-product-card__options { opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) { .fd-product-card, .fd-product-card__alt, .fd-product-card__media img { transition: none; } .fd-product-card:hover { transform: none; } }

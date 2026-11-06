@@ -1,5 +1,22 @@
 /* Puntos de color de la tarjeta: al pasar el mouse (o tocar/foco) se ve la foto de esa variante; al salir vuelve la foto elegida. */
 ( () => {
+	// Segunda foto: se descarga la primera vez que el mouse (o el teclado) llega a la tarjeta.
+	const mountAlt = ( e ) => {
+		const win = e.target.closest && e.target.closest( '.fd-product-card__window.has-alt' );
+		const alt = win && win.querySelector( '.fd-product-card__alt[data-src]' );
+		if ( ! alt ) {
+			return;
+		}
+		if ( alt.dataset.srcset ) {
+			alt.srcset = alt.dataset.srcset;
+		}
+		alt.src = alt.dataset.src;
+		alt.removeAttribute( 'data-src' );
+		alt.removeAttribute( 'data-srcset' );
+	};
+	document.addEventListener( 'mouseover', mountAlt );
+	document.addEventListener( 'focusin', mountAlt );
+
 	// La foto de la variante es una capa encima de la foto principal: aparece y se va con fundido (sin saltos).
 	const layerOf = ( win ) => {
 		const media = win.querySelector( '.fd-product-card__media' );

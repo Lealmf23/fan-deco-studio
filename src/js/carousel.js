@@ -6,8 +6,9 @@ export function initCarousels() {
 			return;
 		}
 		const step = () => {
-			const item = track.querySelector( '.fd-product-grid__item' );
-			return ( item ? item.getBoundingClientRect().width : track.clientWidth * 0.8 ) + 24;
+			const item = track.querySelector( '.fd-product-grid__item, .fd-photo-item' );
+			const gap = parseFloat( getComputedStyle( track ).columnGap ) || 24;
+			return ( item ? item.getBoundingClientRect().width : track.clientWidth * 0.8 ) + gap;
 		};
 		const go = ( dir ) => {
 			const reduce = window.matchMedia( '(prefers-reduced-motion: reduce)' ).matches;

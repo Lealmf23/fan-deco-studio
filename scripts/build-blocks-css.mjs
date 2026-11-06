@@ -53,7 +53,7 @@ function filterRoot( root, fromFile ) {
 }
 
 const tokens = readFileSync( 'src/css/tokens.css', 'utf8' ).replace( /@theme static\s*\{/, ':root {' );
-const files = [ 'fonts.css', 'base.css', 'components.css', 'home.css', 'home2.css', 'shop.css', 'banners.css', 'marquee.css', 'identity.css', 'mobile.css' ];
+const files = [ 'fonts.css', 'base.css', 'components.css', 'home.css', 'home2.css', 'shop.css', 'banners.css', 'marquee.css', 'photos.css', 'identity.css', 'mobile.css' ];
 let css = '/* GENERADO por scripts/build-blocks-css.mjs a partir del CSS del tema Fan Deco Studio. No editar a mano. */\n' + tokens + '\n';
 for ( const f of files ) {
 	const filtered = filterRoot( postcss.parse( readFileSync( `src/css/${ f }`, 'utf8' ) ), f );

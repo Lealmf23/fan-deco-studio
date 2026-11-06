@@ -95,7 +95,7 @@
 	.fd-carousel__track .fd-product-grid__item { flex-basis: 43vw; }
 	.fd-product-grid, .woocommerce ul.products { gap: 1.25rem 0.75rem; }
 	.fd-product-card { gap: 0.6rem; }
-	.fd-product-card__window { aspect-ratio: 1; background: radial-gradient(75% 60% at 50% 40%, #fff 0%, var(--color-fd-sand) 70%, #e7e2d6 100%); border-radius: 1.25rem; }
+	.fd-product-card__window { aspect-ratio: var(--fd-card-ratio, 1); background: radial-gradient(75% 60% at 50% 40%, #fff 0%, var(--color-fd-sand) 70%, #e7e2d6 100%); border-radius: 1.25rem; }
 	.fd-product-card__badges { top: 0.5rem; left: 0.5rem; }
 	.fd-product-card__badges li { padding: 0.2rem 0.55rem; font-size: 0.6875rem; }
 	.fd-product-card__body { padding: 0 3.25rem 0 0.15rem; min-height: 3.25rem; }

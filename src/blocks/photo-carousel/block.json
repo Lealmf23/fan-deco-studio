@@ -1,0 +1,25 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "fandeco/photo-carousel",
+	"title": "Fan Deco: Carrusel de fotos",
+	"category": "fandeco",
+	"icon": "format-gallery",
+	"description": "Carrusel de solo fotos, con zoom suave y leve elevación al pasar el mouse. Cada foto puede tener un texto y un enlace.",
+	"textdomain": "fan-deco-studio",
+	"attributes": {
+		"photos": { "type": "array", "default": [] },
+		"perView": { "type": "integer", "enum": [ 2, 3, 4, 5 ], "default": 4 },
+		"ratio": { "type": "string", "enum": [ "3/4", "4/5", "1/1", "16/9" ], "default": "3/4" },
+		"showCaptions": { "type": "boolean", "default": true },
+		"showArrows": { "type": "boolean", "default": true },
+		"hoverEffect": { "type": "boolean", "default": true },
+		"animate": { "type": "boolean", "default": true }
+	},
+	"supports": {
+		"html": false,
+		"spacing": { "margin": [ "top", "bottom" ] }
+	},
+	"editorScript": "file:./index.js",
+	"render": "file:./render.php"
+}

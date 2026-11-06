@@ -47,5 +47,14 @@ check( strlen( $css ) < 80000, 'CSS del plugin liviano (' . round( strlen( $css 
 $rel = (string) file_get_contents( dirname( __DIR__, 2 ) . '/plugins/fan-deco-blocks/includes/related.php' );
 check( str_contains( $rel, 'woocommerce_after_single_product_summary' ) && str_contains( $rel, "'woocommerce_related_products'" ) && str_contains( $rel, 'fandeco/featured-products' ) && str_contains( $rel, 'fandeco_blocks_related' ), 'relacionados en la ficha: reemplazan a los del tema con las tarjetas de Fan Deco y se pueden apagar con un filtro' );
 check( str_contains( (string) file_get_contents( dirname( __DIR__, 2 ) . '/plugins/fan-deco-blocks/fan-deco-blocks.php' ), 'includes/related.php' ), 'el plugin carga los relacionados' );
+
+$pc = fd_render_block( 'photo-carousel', array( 'photos' => array( array( 'imageId' => 1, 'alt' => 'Uno', 'caption' => 'Lámpara <b>Aura</b>', 'url' => '/producto/aura' ), array( 'imageId' => 2 ), array( 'imageId' => 0 ), array( 'imageId' => 999 ) ), 'perView' => 9, 'ratio' => '16/9' ) );
+check( 2 === substr_count( $pc, 'class="fd-photo-item"' ) && str_contains( $pc, 'data-fd-carousel-prev' ) && str_contains( $pc, '--fd-per:5' ) && str_contains( $pc, '--fd-photo-ratio:16 / 9' ), 'carrusel de fotos: descarta fotos inválidas, limita fotos por vista y trae flechas' );
+check( str_contains( $pc, 'href="/producto/aura"' ) && ! str_contains( $pc, '<b>' ) && str_contains( $pc, 'fd-photo__cap' ), 'carrusel de fotos: enlace y texto saneado' );
+check( ! str_contains( fd_render_block( 'photo-carousel', array( 'photos' => array() ) ), '<section' ), 'carrusel de fotos: sin fotos no imprime nada' );
+check( ! str_contains( fd_render_block( 'photo-carousel', array( 'photos' => array( array( 'imageId' => 1 ) ), 'ratio' => 'x" onload="1' ) ), 'onload' ), 'carrusel de fotos: proporción fuera de la lista se descarta' );
+$GLOBALS['fd_img'] = array_fill_keys( range( 1, 9 ), '/img/x.jpg' );
+$fpc = fd_render_block( 'featured-products', array( 'layout' => 'grid' ) );
+check( str_contains( $fpc, 'data-src=' ) && ! preg_match( '/<img[^>]*fd-product-card__alt[^>]*\ssrc=/', $fpc ), 'tarjetas: la segunda foto no se descarga hasta pasar el mouse' );
 echo $fail ? "\n$fail verificación(es) fallaron\n" : "\nTodas las verificaciones pasaron\n";
 exit( $fail ? 1 : 0 );

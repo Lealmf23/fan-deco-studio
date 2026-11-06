@@ -79,6 +79,10 @@ $card_style = '';
 $t_size     = max( 0, min( 48, absint( $attributes['titleSize'] ?? 0 ) ) );
 $p_size     = max( 0, min( 40, absint( $attributes['priceSize'] ?? 0 ) ) );
 $t_font     = fandeco_enum( $attributes['titleFont'] ?? '', array( 'default', 'sans', 'serif' ), 'default' );
+$ratio = fandeco_enum( (string) ( $attributes['ratio'] ?? '' ), array( '4/5', '3/4', '1/1' ), '4/5' );
+if ( '4/5' !== $ratio ) {
+	$card_style .= '--fd-card-ratio:' . str_replace( '/', ' / ', $ratio ) . ';';
+}
 if ( $t_size ) {
 	$card_style .= '--fd-card-title-size:' . $t_size . 'px;';
 }

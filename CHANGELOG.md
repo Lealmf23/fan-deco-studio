@@ -3,6 +3,16 @@
 Cada archivo que se entrega lleva su versión: `fan-deco-studio-X.Y.Z.zip` y `fan-deco-core-X.Y.Z.zip`.
 La versión del tema también figura en Apariencia > Temas, en `style.css` y como comentario `<!-- Fan Deco Studio X.Y.Z -->` en el código fuente de cada página.
 
+## Tema 0.4.0 / Blocks 0.4.0 / Core 0.4.0
+### Agregado
+- **Bloque "Fan Deco: Carrusel de fotos"** (`fandeco/photo-carousel`): carrusel de solo fotos con flechas y deslizamiento táctil. Cada foto puede tener texto (aparece con fundido al pasar el mouse; siempre visible en pantallas táctiles) y enlace. Ajustes: fotos visibles en escritorio (2 a 5), proporción (3:4, 4:5, cuadrada, 16:9), flechas, textos y el efecto de zoom suave con leve elevación.
+- **Bloque "Productos destacados"**: opción de proporción de la foto (4:5, 3:4, cuadrada).
+### Cambiado
+- **Efecto de las tarjetas al pasar el mouse** (inspirado en cómo se comporta una referencia que mostraste, con código propio y el estilo de Fan Deco): la tarjeta se eleva 4 px, la foto hace un zoom lento (1,2 s), la segunda foto aparece con fundido y los puntos de color se muestran recién al pasar el mouse (en pantallas táctiles quedan siempre visibles).
+- **Rendimiento**: la segunda foto de cada tarjeta ya no se descarga hasta que el mouse pasa por encima; en celulares nunca se descarga.
+### Sin verificar en el sitio real
+- Probado con maqueta. Se respetan `prefers-reduced-motion` y el foco por teclado.
+
 ## Tema 0.3.13 / Blocks 0.3.13 / Core 0.3.13
 ### Cambiado
 - Editor: la vista previa de los bloques ahora se pide al servidor **de a 2 por vez**, con **2 reintentos** y recordando lo ya dibujado. Antes, una página con 10 o más bloques disparaba todas las peticiones a la vez y en hostings compartidos varias fallaban ("No se pudo mostrar la vista previa") o quedaban cargando. Causa probable, no confirmada: sobrecarga por peticiones simultáneas (el servidor dibuja cada bloque bien por separado).

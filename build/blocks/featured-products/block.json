@@ -76,6 +76,15 @@
       "type": "integer",
       "default": 0
     },
+    "ratio": {
+      "type": "string",
+      "enum": [
+        "4/5",
+        "3/4",
+        "1/1"
+      ],
+      "default": "4/5"
+    },
     "animate": {
       "type": "boolean",
       "default": true

@@ -47,8 +47,16 @@ $alt_lit = (bool) apply_filters( 'fandeco_card_hover_is_lit', false, $product, $
 			} else {
 				echo wc_placeholder_img( 'fandeco-card' ); // phpcs:ignore WordPress.Security.EscapeOutput
 			}
-			if ( $alt_id ) {
-				echo wp_get_attachment_image( $alt_id, 'fandeco-card', false, array( 'class' => 'fd-product-card__alt', 'loading' => 'lazy', 'decoding' => 'async', 'alt' => '', 'sizes' => '(max-width: 767px) 50vw, (max-width: 1023px) 33vw, 25vw' ) ); // phpcs:ignore WordPress.Security.EscapeOutput
+			if ( $alt_id ) { // la segunda foto no se descarga hasta que el mouse pasa por encima (ahorra datos y velocidad)
+				$alt_src    = wp_get_attachment_image_url( $alt_id, 'fandeco-card' );
+				$alt_srcset = wp_get_attachment_image_srcset( $alt_id, 'fandeco-card' );
+				if ( $alt_src ) {
+					printf(
+						'<img class="fd-product-card__alt" alt="" decoding="async" data-src="%1$s"%2$s sizes="(max-width: 767px) 50vw, (max-width: 1023px) 33vw, 25vw">',
+						esc_url( $alt_src ),
+						$alt_srcset ? ' data-srcset="' . esc_attr( $alt_srcset ) . '"' : ''
+					);
+				}
 			}
 			?>
 		</a>
