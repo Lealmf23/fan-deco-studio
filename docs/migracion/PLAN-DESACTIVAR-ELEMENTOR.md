@@ -36,6 +36,26 @@ En WooCommerce > Ajustes > Pagos > Transferencia bancaria, la lista de **cuentas
 6. [ ] **Portada:** Ajustes > Lectura > página de inicio = la portada nueva (la 838 queda de respaldo).
 7. [ ] Páginas con texto de ejemplo de Blocksy: **Contacto (547)** reemplazar por la plantilla nueva y **Servicios (751)** y **About Us (621)** a borrador.
 
+## Inventario completo de lo que tiene datos de Elementor (leído del sitio, solo lectura)
+La etiqueta "— Elementor" en la lista de páginas aparece en toda página que se guardó con el editor de Elementor. Al desactivarlo, esas páginas **siguen existiendo y muestran la copia de texto que Elementor guarda en el contenido**, pero pierden su diseño.
+
+**Páginas publicadas**
+| ID | Página | Qué pasa sin Elementor |
+|---|---|---|
+| 838 | Home | Reemplazar por la home nueva (la de respaldo queda). |
+| 70 | **Finalizar compra** | Tiene datos de Elementor muy chicos (333 caracteres). **Verificar antes** que el contenido sea el shortcode `[woocommerce_checkout]` y que el checkout funcione sin Elementor. |
+| 547 | Contacto | Reemplazar por la plantilla nueva (tiene texto de ejemplo). |
+| 751 | Servicios | Texto de ejemplo: pasar a borrador. |
+| 1229 | Tu mascota en 3D | Reemplazar por `tu-mascota-en-3d.html`. |
+| 1317, 1322, 1331, 1336, 1340, 1352 | Términos, Reembolsos, Privacidad, Envíos, Cancelación, Aviso legal | Muestran su texto sin el diseño de Elementor; revisar a ojo. |
+| 1074 | Configurador de chapitas ("Elementor #1074") | Apagado temporal ya decidido (a borrador). |
+
+**Borradores:** 621 About Us, "Elementor #10".
+
+**Plantillas de Elementor (`elementor_library`)**: 983 template1, 1012 slide template, 1085 Chapitas Nombres, 1104 Single Product, 1134 Título Editorial, 1497 "En breve estaremos online..." (revisar que el modo mantenimiento de Elementor esté apagado), 9 Kit por defecto. Desaparecen solas sin Elementor.
+
+**HT Slider (`htslider_slider`)**: 981, 1015, 1025, 1027 (Slide 1 a 4). Ver dónde se usan antes de desactivar el plugin.
+
 ## Verificación
 - [ ] Portada, tienda, ficha de producto, carrito, checkout y Mi cuenta (escritorio y móvil).
 - [ ] Páginas legales (se ven con el contenedor del tema).
