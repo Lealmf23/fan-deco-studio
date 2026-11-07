@@ -1,0 +1,16 @@
+/* Fuente autoalojada (subset latino: cubre español completo). DM Sans para títulos y texto; la cursiva de los títulos usa Georgia (fuente del sistema). Sin llamadas a Google Fonts. */
+@font-face {
+	font-family: "DM Sans Variable";
+	font-style: normal;
+	font-display: swap;
+	font-weight: 100 1000;
+	src: url("../../node_modules/@fontsource-variable/dm-sans/files/dm-sans-latin-wght-normal.woff2") format("woff2-variations");
+}
+/* Solo para el logotipo de reserva ("fan"); se reemplaza al subir el logo oficial. */
+@font-face {
+	font-family: "Caveat";
+	font-style: normal;
+	font-display: swap;
+	font-weight: 700;
+	src: url("../../node_modules/@fontsource/caveat/files/caveat-latin-700-normal.woff2") format("woff2");
+}

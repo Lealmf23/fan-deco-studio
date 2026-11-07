@@ -1,0 +1,77 @@
+{
+  "_store-api-0ZdP6MvG.js": {
+    "file": "assets/store-api-0ZdP6MvG.js",
+    "name": "store-api"
+  },
+  "node_modules/@fontsource-variable/dm-sans/files/dm-sans-latin-wght-normal.woff2": {
+    "file": "assets/dm-sans-latin-wght-normal-Xz1IZZA0.woff2",
+    "src": "node_modules/@fontsource-variable/dm-sans/files/dm-sans-latin-wght-normal.woff2"
+  },
+  "node_modules/@fontsource/caveat/files/caveat-latin-700-normal.woff2": {
+    "file": "assets/caveat-latin-700-normal-D8_1Nw6V.woff2",
+    "src": "node_modules/@fontsource/caveat/files/caveat-latin-700-normal.woff2"
+  },
+  "src/js/animations.js": {
+    "file": "assets/animations-ecsRb2s9.js",
+    "name": "animations",
+    "src": "src/js/animations.js",
+    "isDynamicEntry": true
+  },
+  "src/js/banner-carousel.js": {
+    "file": "assets/banner-carousel-rtifAVzJ.js",
+    "name": "banner-carousel",
+    "src": "src/js/banner-carousel.js",
+    "isDynamicEntry": true
+  },
+  "src/js/main.js": {
+    "file": "assets/main-Ch2PDqXI.js",
+    "name": "main",
+    "src": "src/js/main.js",
+    "isEntry": true,
+    "dynamicImports": [
+      "src/js/search.js",
+      "src/js/banner-carousel.js",
+      "src/js/shop-ui.js",
+      "src/js/swatches.js",
+      "src/js/variations.js",
+      "src/js/animations.js"
+    ],
+    "css": [
+      "assets/main-21MKyuiv.css"
+    ],
+    "assets": [
+      "assets/dm-sans-latin-wght-normal-Xz1IZZA0.woff2",
+      "assets/caveat-latin-700-normal-D8_1Nw6V.woff2"
+    ]
+  },
+  "src/js/search.js": {
+    "file": "assets/search-DGp3wUWo.js",
+    "name": "search",
+    "src": "src/js/search.js",
+    "isDynamicEntry": true,
+    "imports": [
+      "_store-api-0ZdP6MvG.js"
+    ]
+  },
+  "src/js/shop-ui.js": {
+    "file": "assets/shop-ui-DeGs8ZKT.js",
+    "name": "shop-ui",
+    "src": "src/js/shop-ui.js",
+    "isDynamicEntry": true,
+    "imports": [
+      "_store-api-0ZdP6MvG.js"
+    ]
+  },
+  "src/js/swatches.js": {
+    "file": "assets/swatches-DYOGxgem.js",
+    "name": "swatches",
+    "src": "src/js/swatches.js",
+    "isDynamicEntry": true
+  },
+  "src/js/variations.js": {
+    "file": "assets/variations-C83Ql8I9.js",
+    "name": "variations",
+    "src": "src/js/variations.js",
+    "isDynamicEntry": true
+  }
+}

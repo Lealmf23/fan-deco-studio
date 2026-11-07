@@ -1,0 +1,89 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "fandeco/section-heading",
+  "title": "Fan Deco: Encabezado de sección",
+  "category": "fandeco",
+  "icon": "heading",
+  "description": "Título de sección con sobretítulo, descripción y enlace opcional.",
+  "textdomain": "fan-deco-studio",
+  "attributes": {
+    "eyebrow": {
+      "type": "string",
+      "default": ""
+    },
+    "title": {
+      "type": "string",
+      "default": "Título de la sección"
+    },
+    "description": {
+      "type": "string",
+      "default": ""
+    },
+    "align": {
+      "type": "string",
+      "enum": [
+        "left",
+        "center"
+      ],
+      "default": "left"
+    },
+    "level": {
+      "type": "integer",
+      "enum": [
+        1,
+        2,
+        3
+      ],
+      "default": 2
+    },
+    "linkText": {
+      "type": "string",
+      "default": ""
+    },
+    "linkUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "animate": {
+      "type": "boolean",
+      "default": true
+    },
+    "titleSize": {
+      "type": "integer",
+      "default": 0
+    },
+    "descSize": {
+      "type": "integer",
+      "default": 0
+    },
+    "customSpace": {
+      "type": "boolean",
+      "default": false
+    },
+    "spaceTop": {
+      "type": "integer",
+      "default": 0
+    },
+    "spaceBottom": {
+      "type": "integer",
+      "default": 0
+    }
+  },
+  "supports": {
+    "html": false,
+    "spacing": {
+      "margin": [
+        "top",
+        "bottom"
+      ]
+    },
+    "color": {
+      "background": true,
+      "text": false,
+      "link": false
+    }
+  },
+  "editorScript": "file:./index.js",
+  "render": "file:./render.php"
+}

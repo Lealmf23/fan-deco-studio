@@ -1,0 +1,35 @@
+/* =====================================================================
+   Página de Contacto: hero oscuro con líneas de capa + lista de medios + formulario existente.
+   ===================================================================== */
+.fd-contact__hero { background-color: var(--fd-night); background-image: var(--fd-layers); color: #f5f2ed; padding-block: clamp(3.5rem, 9vw, 7rem) clamp(2.5rem, 6vw, 4.5rem); }
+.fd-contact__hero .fd-eyebrow { color: var(--color-fd-steel); }
+.fd-contact__title { margin: 0; font-size: calc(clamp(3rem, 9vw, 7rem) * var(--fd-title-scale, 1)); line-height: var(--fd-title-lh, 0.92); letter-spacing: var(--fd-title-ls, -0.05em); color: #f5f2ed; }
+.fd-contact__lead { max-width: 34rem; margin: 1.25rem 0 0; font-size: 1.125rem; line-height: 1.55; color: rgb(245 242 237 / 0.75); }
+
+.fd-contact__body { padding-block: clamp(2rem, 5vw, 4rem) clamp(3rem, 7vw, 6rem); }
+.fd-contact__list { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr)); gap: 0; margin: 0 0 clamp(2.5rem, 6vw, 4.5rem); padding: 0; list-style: none; border-top: 1px solid var(--color-fd-line, rgb(41 40 36 / 0.15)); }
+.fd-contact__item { display: grid; grid-template-columns: auto 1fr; align-items: center; column-gap: 0.9rem; row-gap: 0.15rem; padding: 1.5rem 1.5rem 1.5rem 0; border-bottom: 1px solid var(--color-fd-line, rgb(41 40 36 / 0.15)); }
+.fd-contact__icon { grid-row: span 2; display: grid; place-items: center; width: 2.75rem; height: 2.75rem; border-radius: 50%; background: var(--color-fd-sand); color: var(--color-fd-wine); }
+.fd-contact__icon svg { width: 1.35rem; height: 1.35rem; }
+.fd-contact__label { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-fd-muted); }
+.fd-contact__value { font-size: 1.125rem; font-weight: 600; color: var(--color-fd-ink); text-decoration: none; overflow-wrap: anywhere; }
+a.fd-contact__value { text-underline-offset: 0.25em; }
+a.fd-contact__value:hover { color: var(--color-fd-wine); text-decoration: underline; }
+
+.fd-contact__form { max-width: 44rem; }
+.fd-contact__form h2 { margin: 0 0 1rem; font-size: clamp(1.75rem, 3vw, 2.5rem); letter-spacing: -0.04em; }
+.fd-contact__social { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; margin: clamp(2rem, 5vw, 3.5rem) 0 0; font-weight: 600; }
+.fd-contact__social span { color: var(--color-fd-muted); font-weight: 500; }
+.fd-contact__social a { color: var(--color-fd-ink); text-underline-offset: 0.25em; }
+.fd-contact__social a:hover { color: var(--color-fd-wine); }
+
+@media (max-width: 767px) {
+	.fd-contact__list { grid-template-columns: 1fr; }
+	.fd-contact__item { padding-right: 0; }
+}
+
+/* Campos del formulario existente (WPForms, CF7, etc.): aspecto coherente sin tocar su lógica. */
+.fd-contact__form :where(input[type="text"], input[type="email"], input[type="tel"], input[type="number"], textarea, select) { width: 100%; max-width: 100%; padding: 0.85rem 1rem; border: 1px solid var(--color-fd-line); border-radius: 0.75rem; background: #fff; font: inherit; color: var(--color-fd-ink); }
+.fd-contact__form :where(input, textarea, select):focus-visible { outline: 2px solid var(--color-fd-wine); outline-offset: 2px; }
+.fd-contact__form :where(textarea) { min-height: 9rem; }
+.fd-contact__form :where(button[type="submit"], input[type="submit"]) { padding: 0.9rem 1.75rem; border: 0; border-radius: 999px; background: var(--color-fd-wine); color: #fff; font: inherit; font-weight: 600; cursor: pointer; }

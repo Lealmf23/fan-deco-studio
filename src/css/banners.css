@@ -1,0 +1,67 @@
+/* =====================================================================
+   Pila de capas: las fotos se apilan como las capas de una impresión 3D.
+   La activa (al frente) va limpia; las de atrás asoman más chicas, inclinadas y con rayas de capa.
+   Sin JavaScript (o con una sola foto) se muestran en una grilla simple.
+   ===================================================================== */
+.fd-bancar { padding-block: clamp(1.5rem, 3.5vw, 3rem); }
+.fd-bancar__frame { position: relative; }
+.fd-bancar__track { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); gap: 1rem; margin: 0; padding: 0; list-style: none; }
+.fd-bancar__slide { position: relative; overflow: hidden; border-radius: var(--radius-fd-lg, 1.5rem); background: var(--color-fd-sand); }
+.fd-bancar__slide img { display: block; width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: cover; -webkit-user-drag: none; }
+.fd-bancar__link { display: block; }
+.fd-bancar__link:focus-visible { outline: 3px solid var(--color-fd-wine); outline-offset: -3px; border-radius: var(--radius-fd-lg, 1.5rem); }
+
+/* --- Modo pila (cuando el JS está listo) --- */
+.fd-bancar.is-ready { overflow-x: clip; } /* las tarjetas de los extremos llegan al borde de la pantalla sin generar scroll horizontal */
+.fd-bancar.is-ready .fd-bancar__frame { touch-action: pan-y; }
+.fd-bancar.is-ready .fd-bancar__track { --card: min(32rem, 74vw); display: block; position: relative; height: calc(var(--card) + 2.75rem); margin-inline: auto; user-select: none; }
+.fd-bancar.is-ready .fd-bancar__slide {
+	--x: 0; --s: 1; --r: 0deg; --z: 20; --o: 1;
+	position: absolute; top: 0; left: 50%; z-index: var(--z);
+	width: var(--card); aspect-ratio: 1 / 1; margin-left: calc(var(--card) / -2);
+	opacity: var(--o); transform: translateX(calc(var(--x) * 100%)) scale(var(--s)) rotate(var(--r)); transform-origin: 50% 70%;
+	/* borde en escalones: las capas apiladas debajo de cada foto */
+	box-shadow: 0 0.5rem 0 -0.25rem #d8d5c6, 0 1rem 0 -0.5rem #cbc8b7, 0 1.5rem 0 -0.75rem #bdbaa7, 0 2.2rem 2.6rem -1.2rem rgb(41 40 36 / 0.45);
+	transition: transform 700ms var(--ease-fd), opacity 500ms var(--ease-fd);
+	cursor: pointer;
+}
+.fd-bancar.is-ready .fd-bancar__slide.is-active { cursor: default; }
+.fd-bancar.is-ready .fd-bancar__slide img { height: 100%; opacity: 0.55; transition: opacity 700ms var(--ease-fd); }
+.fd-bancar.is-ready .fd-bancar__slide.is-active img { opacity: 1; }
+/* --- Texto del banner --- */
+.fd-bancar__text { display: flex; flex-direction: column; align-items: center; margin-bottom: clamp(1.75rem, 4vw, 2.5rem); text-align: center; }
+.fd-bancar__title { margin: 0; font-size: calc(clamp(2.6rem, 11vw, 3.75rem) * var(--fd-title-scale, 1)); }
+.fd-bancar__desc { max-width: 34rem; margin: 1.1rem 0 0; font-size: clamp(1rem, 1.2vw + 0.6rem, 1.25rem); line-height: 1.55; color: var(--color-fd-olive); }
+.fd-bancar__cta { margin-top: 1.75rem; }
+
+/* --- Escritorio con texto: texto a la izquierda, pila de fotos a la derecha (las fotos se abren hacia la derecha) --- */
+@media (min-width: 1024px) {
+	.fd-bancar--split { padding-block: clamp(2.5rem, 5vw, 4.5rem); }
+	.fd-bancar--split .fd-bancar__layout { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); align-items: center; gap: clamp(2rem, 4vw, 4rem); }
+	.fd-bancar--split .fd-bancar__text { align-items: flex-start; margin: 0; text-align: left; }
+	.fd-bancar--split .fd-bancar__title { font-size: calc(clamp(3.25rem, 5.4vw, 5.5rem) * var(--fd-title-scale, 1)); }
+	.fd-bancar--split.is-ready .fd-bancar__track { --card: min(30rem, 34vw); margin-inline: 0; }
+	.fd-bancar--split.is-ready .fd-bancar__slide { left: 6%; margin-left: 0; }
+	.fd-bancar--split .fd-bancar__controls { justify-content: flex-start; padding-left: 6%; }
+}
+
+/* --- Controles --- */
+.fd-bancar__controls { display: flex; align-items: center; justify-content: center; gap: 0.75rem; margin-top: 0.5rem; }
+.fd-bancar__controls[hidden] { display: none; }
+.fd-bancar__arrow, .fd-bancar__pause { display: grid; place-items: center; width: 2.5rem; height: 2.5rem; padding: 0; border: 1.5px solid var(--color-fd-line); border-radius: 50%; background: #fff; color: var(--color-fd-blue); cursor: pointer; transition: background-color 200ms, color 200ms, border-color 200ms; }
+.fd-bancar__arrow svg { width: 1.2rem; height: 1.2rem; }
+.fd-bancar__arrow:hover, .fd-bancar__pause:hover { background: var(--color-fd-blue); border-color: var(--color-fd-blue); color: #fff; }
+.fd-bancar__pause span { display: block; width: 0.7rem; height: 0.8rem; border-inline: 3px solid currentColor; }
+.fd-bancar__pause[aria-pressed="true"] span { width: 0; height: 0; border-inline: 0; border-block: 0.4rem solid transparent; border-left: 0.7rem solid currentColor; }
+.fd-bancar__dots { display: flex; gap: 0.5rem; }
+.fd-bancar__dot { width: 0.65rem; height: 0.65rem; padding: 0; border: 0; border-radius: 999px; background: color-mix(in srgb, var(--color-fd-blue) 22%, transparent); cursor: pointer; transition: width 250ms var(--ease-fd), background-color 250ms; }
+.fd-bancar__dot[aria-current="true"] { width: 1.6rem; background: var(--color-fd-wine); }
+.fd-bancar__arrow:focus-visible, .fd-bancar__pause:focus-visible, .fd-bancar__dot:focus-visible { outline: 2px solid var(--color-fd-wine); outline-offset: 2px; }
+@media (max-width: 639px) { .fd-bancar__arrow { display: none; } }
+@media (prefers-reduced-motion: reduce) {
+	.fd-bancar.is-ready .fd-bancar__slide, .fd-bancar.is-ready .fd-bancar__slide img, .fd-bancar__dot { transition: none; }
+}
+html:not(.js) .fd-bancar__controls { display: none; }
+
+/* Espacio de arriba y abajo definido desde el bloque */
+.fd-section.fd-bancar.fd-bancar--space { padding-top: var(--fd-b-top); padding-bottom: var(--fd-b-bottom); }

@@ -1,0 +1,153 @@
+/* GENERADO por scripts/build-core-css.mjs a partir del CSS del tema Fan Deco Studio. No editar a mano.
+   Estilos de lo que Fan Deco Core agrega en la ficha de producto y en el checkout; sirven con cualquier tema (p. ej. Blocksy). */
+/*
+ * Tokens de diseño. `static` => todas las variables se emiten aunque no se usen como utilidad.
+ * Mantener los colores sincronizados con theme.json (paleta del editor).
+ */
+:root {
+	/* Color de marca (identidad actual del sitio: verde oliva, carbón y crema) */
+	--color-fd-olive: #74784e; /* acento de títulos grandes en cursiva (para texto chico se usa --color-fd-wine) */
+	--color-fd-blue: #292824;
+	--color-fd-steel: #a6aa86;
+	--color-fd-wine: #626545;
+	--color-fd-cream: #f5f2ed;
+	--color-fd-white: #ffffff;
+	--color-fd-ink: #292824;
+	/* Derivados (propuestas de diseño, no colores oficiales) */
+	--color-fd-line: #e2dfd3;
+	--color-fd-muted: #6c6a5f;
+	--color-fd-wine-dark: #4d5036;
+	--color-fd-sand: #e9e6dc;
+
+	/* Tipografía */
+	
+	
+	
+	
+
+	/* Radios */
+	--radius-fd-sm: 0.5rem;
+	--radius-fd-md: 1rem;
+	--radius-fd-lg: 1.5rem;
+	--radius-fd-xl: 2rem;
+	/* Ventana de producto: esquinas suavemente redondeadas */
+	--radius-fd-window: 1.5rem;
+
+	/* Sombras */
+	--shadow-fd-card: 0 1px 2px rgb(41 40 36 / 0.05), 0 8px 24px -12px rgb(41 40 36 / 0.15);
+	--shadow-fd-lift: 0 2px 4px rgb(41 40 36 / 0.06), 0 18px 40px -16px rgb(41 40 36 / 0.28);
+
+	/* Movimiento */
+	--ease-fd: cubic-bezier(0.22, 1, 0.36, 1);
+	--duration-fd-fast: 180ms;
+	--duration-fd-base: 320ms;
+	--duration-fd-slow: 700ms;
+
+	/* Espaciado */
+	--spacing-fd-gutter: clamp(1rem, 4vw, 2rem);
+	--spacing-fd-section: calc(clamp(3rem, 7vw, 6rem) * var(--fd-section-scale, 1));
+	--container-fd: 80rem;
+}
+
+
+/* ---- shop.css ---- */
+
+.fd-pay-badge { text-transform: none; letter-spacing: 0; font-size: 0.8125rem; font-weight: 600; }
+@keyframes fd-spin { to { transform: rotate(360deg); } }
+:root {
+	--fd-icon-cart: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-1 0 24 24' fill='none' stroke='black' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='9' cy='20' r='1.4'/%3E%3Ccircle cx='18' cy='20' r='1.4'/%3E%3Cpath d='M2 3h3l2.6 12.2a1 1 0 0 0 1 .8h8.8a1 1 0 0 0 1-.8L20 7H6'/%3E%3C/svg%3E");
+	--fd-icon-plus: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M12 5v14M5 12h14'/%3E%3C/svg%3E");
+	--fd-icon-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M13 6l6 6-6 6'/%3E%3C/svg%3E");
+	--fd-icon-check: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5 12 5 5 9-10'/%3E%3C/svg%3E");
+	--fd-icon-dots: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round'%3E%3Cpath d='M12 3a9 9 0 1 0 9 9'/%3E%3C/svg%3E");
+	--fd-icon-card: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect width='20' height='14' x='2' y='5' rx='2'/%3E%3Cpath d='M2 10h20'/%3E%3C/svg%3E");
+	--fd-icon-bank: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect width='20' height='12' x='2' y='6' rx='2'/%3E%3Ccircle cx='12' cy='12' r='2'/%3E%3C/svg%3E");
+}
+.fd-installments:not(.fd-installments--loop) { display: flex; flex-direction: column; gap: 0.7rem; margin: 0.25rem 0 1.5rem; padding: 0; background: none; border-radius: 0; font-size: 1rem; }
+.fd-installments:not(.fd-installments--loop) p { display: block; min-height: 0; margin: 0; padding: 0; border: 0; line-height: 1.35; }
+.fd-installments:not(.fd-installments--loop) [hidden] { display: none; }
+.fd-installments__transfer { order: -1; }
+.fd-installments:not(.fd-installments--loop) .fd-installments__transfer strong { font-size: 2.1rem; font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; color: var(--color-fd-wine); }
+.fd-installments:not(.fd-installments--loop) .fd-pay-badge { margin-left: 0.5rem; padding: 0; background: none; color: var(--color-fd-wine-dark); font-size: 0.95rem; font-weight: 700; letter-spacing: 0; text-transform: none; }
+.fd-installments__how { display: block; margin-top: 0.2rem; color: var(--color-fd-ink); font-size: 1rem; }
+.fd-installments:not(.fd-installments--loop) .fd-installments__line strong { color: var(--color-fd-blue); font-weight: 700; }
+.fd-installments:not(.fd-installments--loop) .fd-installments__line::after { content: ""; display: inline-block; width: 1.15rem; height: 1.15rem; margin-left: 0.5rem; vertical-align: -0.2em; background: var(--fd-icon-card) center / contain no-repeat; opacity: 0.6; }
+.woocommerce div.product .price:has(+ .fd-installments--single [data-fd-transfer-line]:not([hidden])) { margin-bottom: 0.5rem; color: var(--color-fd-muted); font-size: 1rem; font-weight: 500; }
+.woocommerce div.product .price:has(+ .fd-installments--single [data-fd-transfer-line]:not([hidden]))::after { content: " precio de lista"; margin-left: 0.4rem; font-size: 0.85rem; font-weight: 400; }
+.fd-installments--loop { padding: 0; background: none; border-radius: 0; font-size: 0.8125rem; }
+.fd-installments--loop p { min-height: 0; gap: 0; }
+.fd-installments--loop p::before { content: none; }
+.fd-installments--loop p + p { border: 0; }
+.fd-installments .fd-pay-badge { flex: none; white-space: nowrap; }
+.fd-pinfo-icon { width: 1.25rem; height: 1.25rem; flex: none; }
+.fd-pinfo-features { display: grid; gap: 0.5rem; margin: 0 0 1.25rem; padding: 0; list-style: none; }
+.fd-pinfo-features li { display: flex; align-items: flex-start; gap: 0.6rem; }
+.fd-pinfo-features .fd-pinfo-icon { margin-top: 0.15rem; color: var(--color-fd-wine); }
+.fd-pinfo-trust { display: grid; gap: 0.85rem; margin: 1.5rem 0; padding: 0; list-style: none; }
+.fd-pinfo-trust li { display: flex; align-items: center; gap: 0.75rem; }
+.fd-pinfo-trust .fd-pinfo-icon { width: 1.5rem; height: 1.5rem; color: var(--color-fd-wine); }
+.fd-pinfo-trust li:has(.fd-pinfo-icon path[d^="m12 2"]) .fd-pinfo-icon { color: #d99a1e; fill: #f2b84b; }
+.fd-pinfo-trust a { text-decoration: none; color: inherit; }
+.fd-pinfo-cards { display: grid; gap: 0.75rem; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); margin: 1.5rem 0; }
+.fd-pinfo-card { display: flex; align-items: flex-start; gap: 0.85rem; padding: 1rem 1.1rem; border-radius: 1.25rem; background: var(--color-fd-sand); }
+.fd-pinfo-card > div { display: grid; gap: 0.15rem; font-size: 0.9375rem; }
+.fd-pinfo-card strong { font-size: 1rem; }
+.fd-pinfo-card .fd-pinfo-icon { width: 1.75rem; height: 1.75rem; padding: 0.4rem; box-sizing: content-box; border-radius: 50%; background: #fff; color: var(--color-fd-blue); }
+.fd-pinfo-card--green { background: #e5f3ea; color: #214c33; }
+.fd-pinfo-card--green .fd-pinfo-icon { color: #2f7a4b; }
+.fd-pinfo-card--wine { background: var(--color-fd-wine); color: #fff; }
+.fd-pinfo-card--wine strong { color: #fff; }
+.fd-pinfo-card--wine .fd-pinfo-icon { background: rgb(255 255 255 / 0.18); color: #fff; }
+.fd-pinfo-specs { width: 100%; max-width: 44rem; border-collapse: collapse; }
+.fd-pinfo-specs th, .fd-pinfo-specs td { padding: 1rem 0; border: 0; border-bottom: 1px solid var(--color-fd-line); text-align: left; vertical-align: top; }
+.fd-pinfo-specs th { width: 40%; font-weight: 500; color: var(--color-fd-muted); }
+.fd-pinfo-specs td { font-weight: 500; text-align: right; }
+@keyframes fd-attention { 0%, 100% { box-shadow: 0 0 0 0 transparent; } 30% { box-shadow: 0 0 0 6px rgb(98 101 69 / 0.18); border-radius: 1rem; } }
+.fd-installments--loop { display: grid; gap: 0.1rem; }
+.fd-installments--loop .fd-installments__transfer { order: -1; }
+.fd-installments--loop .fd-installments__transfer strong { font-size: 1.4rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.15; color: var(--color-fd-wine); }
+.fd-installments--loop .fd-installments__how { display: inline; margin-left: 0.25rem; font-size: 0.8rem; font-weight: 600; color: var(--color-fd-wine-dark); }
+.fd-installments--loop .fd-pay-badge { display: none; }
+.fd-installments--loop .fd-installments__line { color: var(--color-fd-muted); }
+.fd-product-card .fd-installments--loop .fd-installments__transfer strong { font-size: calc(var(--fd-card-price-size, 1rem) * 1.35); }
+.fd-installments--loop .fd-installments__transfer strong { white-space: nowrap; }
+@media (max-width: 767px) { .fd-product-card .fd-installments--loop .fd-installments__transfer strong { font-size: calc(var(--fd-card-price-size, 1rem) * 1.1); } }
+
+/* ---- woocommerce.css ---- */
+
+.fd-pay-badge { display: inline-block; margin-left: 0.5rem; padding: 0.15rem 0.6rem; border-radius: 999px; background: var(--color-fd-wine); color: #fff; font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; vertical-align: middle; }
+.fd-installments { display: grid; gap: 0.25rem; margin: 0.5rem 0 1rem; font-size: 0.9375rem; color: var(--color-fd-ink); }
+.fd-installments p { margin: 0; }
+.fd-installments strong { color: var(--color-fd-blue); }
+.fd-installments__transfer strong { color: var(--color-fd-wine); }
+.fd-installments .fd-pay-badge { margin-left: 0.25rem; }
+.fd-installments--loop { font-size: 0.8125rem; margin: 0; }
+.fd-installments [hidden] { display: none; }
+
+/* ---- checkout.css ---- */
+
+
+:root { --fd-field-h: 3.25rem; }
+.fd-stepper__dot .fd-pinfo-icon { width: 1rem; height: 1rem; }
+
+/* ---- mobile.css ---- */
+
+
+@media (max-width: 767px) {
+	.fd-installments--loop .fd-installments__line { display: none; }
+	.fd-installments--loop .fd-installments__transfer strong { font-size: 1.15rem; }
+	.fd-installments--loop .fd-installments__how { display: block; margin: 0; font-size: 0.75rem; }
+}
+
+@media (max-width: 767px) {
+	.fd-pinfo-cards { grid-template-columns: 1fr; }
+	.fd-pinfo-specs td { text-align: right; }
+}
+@media (max-width: 767px) {
+	.fd-product-card .fd-installments--loop { gap: 0; margin: 0; }
+	.fd-product-card .fd-installments--loop .fd-installments__transfer { line-height: 1.15; }
+	.fd-product-card .fd-installments--loop .fd-installments__transfer strong { font-size: calc(var(--fd-card-price-size, 1rem) * 1.15); letter-spacing: -0.02em; }
+	.fd-product-card .fd-installments--loop .fd-installments__how { display: block; margin: 0.05rem 0 0; font-size: 0.7rem; line-height: 1.15; font-weight: 600; }
+}
+
+.fd-installments, .fd-pinfo-trust, .fd-pinfo-cards, .fd-pinfo-features, .fd-pinfo-specs { font-family: var(--font-sans, inherit); }
