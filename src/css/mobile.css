@@ -176,3 +176,25 @@
 }
 .fd-marquee.is-offscreen .fd-marquee__track { animation-play-state: paused; }
 .fd-marquee__track { will-change: transform; }
+
+/* Tarjetas de producto en celular: más compactas y ordenadas (2 columnas) */
+@media (max-width: 767px) {
+	.fd-product-grid, .woocommerce ul.products { gap: 1.1rem 0.65rem; }
+	.fd-product-card { gap: 0.5rem; grid-template-rows: auto auto; }
+	.fd-product-grid__item > .fd-product-card { grid-template-rows: auto auto; }
+	.fd-product-card__window { aspect-ratio: var(--fd-card-ratio, 4 / 5); border-radius: 1.1rem; }
+	/* El botón vuelve a ser un círculo sobre la foto (en la esquina), así los precios usan todo el ancho */
+	.fd-product-card__add { grid-row: 1; grid-column: 1; justify-self: end; align-self: end; margin: 0 0.5rem 0.5rem 0; }
+	.fd-product-card .fd-product-card__add a.fd-product-card__go { width: 2.25rem; height: 2.25rem; background: #fff; box-shadow: 0 2px 8px rgb(41 40 36 / 0.28); }
+	.fd-product-card .fd-product-card__go .fd-icon { width: 1.05rem; height: 1.05rem; }
+	.fd-product-card .fd-product-card__body { grid-template-rows: none; align-content: start; gap: 0.12rem; padding: 0 0.1rem; min-height: 0; }
+	.fd-product-card__body > .fd-product-card__price { align-self: start; }
+	.fd-product-card .fd-product-card__title { font-size: calc(var(--fd-card-title-size, 1.125rem) * 0.8); font-weight: 600; line-height: 1.25; letter-spacing: -0.01em; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden; }
+	.fd-product-card .fd-product-card__price { font-size: calc(var(--fd-card-price-size, 1rem) * 0.8); font-weight: 500; line-height: 1.2; }
+	.fd-product-card .fd-installments--loop { gap: 0; margin: 0; }
+	.fd-product-card .fd-installments--loop .fd-installments__transfer { line-height: 1.15; }
+	.fd-product-card .fd-installments--loop .fd-installments__transfer strong { font-size: calc(var(--fd-card-price-size, 1rem) * 1.15); letter-spacing: -0.02em; }
+	.fd-product-card .fd-installments--loop .fd-installments__how { display: block; margin: 0.05rem 0 0; font-size: 0.7rem; line-height: 1.15; font-weight: 600; }
+	.fd-product-card .fd-product-card__options { top: 0.45rem; right: 0.45rem; gap: 0.25rem; padding: 0.28rem 0.4rem; }
+	.fd-product-card .fd-product-card__options .fd-dot { width: 0.8rem; height: 0.8rem; }
+}

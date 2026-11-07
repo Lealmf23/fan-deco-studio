@@ -143,5 +143,11 @@
 	.fd-pinfo-cards { grid-template-columns: 1fr; }
 	.fd-pinfo-specs td { text-align: right; }
 }
+@media (max-width: 767px) {
+	.fd-product-card .fd-installments--loop { gap: 0; margin: 0; }
+	.fd-product-card .fd-installments--loop .fd-installments__transfer { line-height: 1.15; }
+	.fd-product-card .fd-installments--loop .fd-installments__transfer strong { font-size: calc(var(--fd-card-price-size, 1rem) * 1.15); letter-spacing: -0.02em; }
+	.fd-product-card .fd-installments--loop .fd-installments__how { display: block; margin: 0.05rem 0 0; font-size: 0.7rem; line-height: 1.15; font-weight: 600; }
+}
 
 .fd-installments, .fd-pinfo-trust, .fd-pinfo-cards, .fd-pinfo-features, .fd-pinfo-specs { font-family: var(--font-sans, inherit); }
